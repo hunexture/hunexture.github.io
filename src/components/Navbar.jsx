@@ -43,7 +43,7 @@ const Navbar = () => {
         </div>
 
         <button
-          className="hamburger"
+          className={`hamburger ${menuOpen ? 'active' : ''}`}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >

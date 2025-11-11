@@ -177,9 +177,33 @@ a, button {
 }
 
 /* Responsive */
+@media (max-width: 968px) {
+  section {
+    padding: 80px 25px;
+  }
+
+  .container {
+    padding: 0 25px;
+  }
+}
+
 @media (max-width: 768px) {
   section {
-    padding: 60px 15px;
+    padding: 60px 20px;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  section {
+    padding: 50px 15px;
+  }
+
+  .container {
+    padding: 0 15px;
   }
 }
 

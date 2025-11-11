@@ -65,3 +65,62 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--bright-blue);
 }
+
+/* Better mobile responsiveness */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+
+  h4 {
+    font-size: 18px;
+  }
+
+  h5 {
+    font-size: 16px;
+  }
+
+  h6 {
+    font-size: 14px;
+  }
+}
+
+/* Touch-friendly elements */
+@media (hover: none) and (pointer: coarse) {
+  button,
+  a,
+  input,
+  textarea {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Prevent text size adjustment on mobile devices */
+html {
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Better font rendering on mobile */
+@media (max-width: 768px) {
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+}
