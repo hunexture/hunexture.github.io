@@ -12,7 +12,7 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   // WhatsApp number (with country code, no + or spaces)
-  const whatsappNumber = '919265053201'
+  const whatsappNumber = '919067262552'
 
   const handleChange = (e) => {
     setFormData({
@@ -74,8 +74,8 @@ const Contact = () => {
     {
       icon: <FaPhone />,
       title: 'Phone',
-      content: '+91 9265053201',
-      link: 'tel:+919265053201'
+      content: '+91 9067262552',
+      link: 'tel:+919067262552'
     },
     {
       icon: <FaMapMarkerAlt />,
