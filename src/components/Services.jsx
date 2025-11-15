@@ -1,40 +1,14 @@
 import React from 'react'
-import { FaBrain, FaCode, FaMobile, FaCloud, FaPaintBrush, FaArrowRight } from 'react-icons/fa'
+import { FaArrowRight } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
+import { servicesData } from '../data/servicesData'
 import './Services.css'
 
 const Services = () => {
-  const services = [
-    {
-      icon: <FaBrain />,
-      title: 'AI Solutions',
-      description: 'Harness the power of artificial intelligence with custom machine learning models, natural language processing, and intelligent automation systems.',
-      features: ['Machine Learning', 'Neural Networks', 'Predictive Analytics', 'Computer Vision']
-    },
-    {
-      icon: <FaCode />,
-      title: 'Web Development',
-      description: 'Build stunning, high-performance web applications with modern frameworks and cutting-edge technologies that scale with your business.',
-      features: ['React/Vue/Angular', 'Full-Stack Development', 'Progressive Web Apps', 'API Integration']
-    },
-    {
-      icon: <FaMobile />,
-      title: 'App Development',
-      description: 'Create powerful mobile experiences with native and cross-platform applications that deliver seamless performance across all devices.',
-      features: ['iOS & Android', 'React Native', 'Flutter', 'Native Performance']
-    },
-    {
-      icon: <FaCloud />,
-      title: 'Cloud Integration',
-      description: 'Transform your infrastructure with cloud-native solutions, ensuring scalability, reliability, and cost-efficiency for your applications.',
-      features: ['AWS/Azure/GCP', 'Microservices', 'DevOps & CI/CD', 'Serverless Architecture']
-    },
-    {
-      icon: <FaPaintBrush />,
-      title: 'UI/UX Design',
-      description: 'Craft beautiful, intuitive user experiences with human-centered design principles that engage users and drive conversions.',
-      features: ['User Research', 'Prototyping', 'Design Systems', 'Usability Testing']
-    }
-  ]
+  const services = servicesData.map(service => ({
+    ...service,
+    icon: <service.icon />
+  }))
 
   return (
     <section id="services" className="services">
@@ -67,10 +41,10 @@ const Services = () => {
                 ))}
               </ul>
 
-              <button className="service-cta">
+              <Link to={`/services/${service.slug}`} className="service-cta">
                 Learn More
                 <FaArrowRight className="cta-icon" />
-              </button>
+              </Link>
 
               <div className="card-glow"></div>
             </div>

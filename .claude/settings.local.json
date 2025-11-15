@@ -14,7 +14,13 @@
       "Bash(git stash:*)",
       "Bash(npm run deploy:*)",
       "Bash(npm install:*)",
-      "Bash(npm start)"
+      "Bash(npm start)",
+      "Bash(dir:*)",
+      "Bash(nul)",
+      "Bash(cat:*)",
+      "Bash(tree:*)",
+      "Bash(timeout /t 10)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []

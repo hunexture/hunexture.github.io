@@ -1,10 +1,34 @@
 import React from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { FaHeart, FaLinkedin, FaGithub, FaTwitter, FaInstagram, FaArrowUp } from 'react-icons/fa'
+import Logo from './Logo'
 import './Footer.css'
 
 const Footer = () => {
+  const navigate = useNavigate()
+  const location = useLocation()
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const handleLinkClick = (e, href) => {
+    e.preventDefault()
+
+    if (href.startsWith('#')) {
+      // Hash link - navigate to home if not already there
+      if (location.pathname !== '/') {
+        navigate('/' + href)
+      } else {
+        const element = document.querySelector(href)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }
+      }
+    } else {
+      // Regular route - navigate directly
+      navigate('/' + href)
+    }
   }
 
   const footerLinks = {
@@ -15,16 +39,16 @@ const Footer = () => {
       { name: 'Contact', href: '#contact' }
     ],
     services: [
-      { name: 'AI Solutions', href: '#services' },
-      { name: 'Web Development', href: '#services' },
-      { name: 'Mobile Apps', href: '#services' },
-      { name: 'Cloud Integration', href: '#services' }
+      { name: 'AI Solutions', href: 'services/ai-solutions' },
+      { name: 'Web Development', href: 'services/web-development' },
+      { name: 'Mobile Apps', href: 'services/app-development' },
+      { name: 'UI/UX Design', href: 'services/uiux-design'},
+      { name: 'Cloud Integration', href: 'services/cloud-integration' }
     ],
     legal: [
-      { name: 'Privacy Policy', href: '#' },
-      { name: 'Terms of Service', href: '#' },
-      { name: 'Cookie Policy', href: '#' },
-      { name: 'Sitemap', href: '#' }
+      { name: 'Privacy Policy', href: 'privacy-policy' },
+      { name: 'Terms of Service', href: 'terms-of-service' },
+      { name: 'Cookie Policy', href: 'cookie-policy' },
     ]
   }
 
@@ -40,7 +64,7 @@ const Footer = () => {
       <div className="footer-container">
         <div className="footer-content">
           <div className="footer-brand">
-            <h3 className="footer-logo">HUNEXTURE</h3>
+            <Logo size="large" variant="image" />
             <p className="footer-tagline">Building the Next Human Future</p>
             <p className="footer-description">
               Empowering businesses with cutting-edge AI solutions and innovative technology
@@ -67,7 +91,7 @@ const Footer = () => {
               <ul className="footer-links-list">
                 {footerLinks.company.map((link, index) => (
                   <li key={index}>
-                    <a href={link.href}>{link.name}</a>
+                    <a href={link.href} onClick={(e) => handleLinkClick(e, link.href)}>{link.name}</a>
                   </li>
                 ))}
               </ul>
@@ -78,7 +102,7 @@ const Footer = () => {
               <ul className="footer-links-list">
                 {footerLinks.services.map((link, index) => (
                   <li key={index}>
-                    <a href={link.href}>{link.name}</a>
+                    <a href={link.href} onClick={(e) => handleLinkClick(e, link.href)}>{link.name}</a>
                   </li>
                 ))}
               </ul>
@@ -89,7 +113,7 @@ const Footer = () => {
               <ul className="footer-links-list">
                 {footerLinks.legal.map((link, index) => (
                   <li key={index}>
-                    <a href={link.href}>{link.name}</a>
+                    <a href={link.href} onClick={(e) => handleLinkClick(e, link.href)}>{link.name}</a>
                   </li>
                 ))}
               </ul>

@@ -19,7 +19,7 @@
   align-items: center;
   gap: 10px;
   padding: 8px 20px;
-  background: rgba(0, 212, 255, 0.1);
+  background: var(--electric-blue-10);
   border: 1px solid var(--electric-blue);
   border-radius: 50px;
   color: var(--electric-blue);
@@ -52,7 +52,6 @@
 .gradient-text {
   background: var(--gradient-1);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
   display: inline-block;
 }
@@ -88,11 +87,13 @@
 }
 
 .btn-primary {
-  background: var(--gradient-1);
-  color: var(--dark-navy);
-  box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+  background: var(--electric-blue);
+  color: var(--navy-blue);
+  box-shadow: 0 10px 30px var(--electric-blue-30);
   position: relative;
   overflow: hidden;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 .btn-primary::before {
@@ -103,7 +104,7 @@
   width: 0;
   height: 0;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--electric-blue-30);
   transform: translate(-50%, -50%);
   transition: width 0.6s, height 0.6s;
 }
@@ -115,7 +116,8 @@
 
 .btn-primary:hover {
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 15px 40px rgba(0, 212, 255, 0.5);
+  box-shadow: 0 15px 50px var(--electric-blue-50);
+  filter: brightness(1.1);
 }
 
 .btn-secondary {
@@ -125,7 +127,7 @@
 }
 
 .btn-secondary:hover {
-  background: rgba(0, 212, 255, 0.1);
+  background: var(--electric-blue-10);
   transform: translateY(-3px);
 }
 
@@ -149,8 +151,8 @@
   align-items: center;
   gap: 15px;
   padding: 20px;
-  background: rgba(0, 212, 255, 0.05);
-  border: 1px solid rgba(0, 212, 255, 0.2);
+  background: var(--electric-blue-05);
+  border: 1px solid var(--electric-blue-20);
   border-radius: 15px;
   transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   animation: scaleIn 0.6s ease backwards;
@@ -162,10 +164,10 @@
 .stat-item:nth-child(3) { --index: 3; }
 
 .stat-item:hover {
-  background: rgba(0, 212, 255, 0.15);
+  background: var(--electric-blue-15);
   border-color: var(--electric-blue);
   transform: translateY(-10px) scale(1.05);
-  box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
+  box-shadow: 0 20px 40px var(--electric-blue-30);
 }
 
 .stat-icon {
@@ -212,14 +214,14 @@
 .hex-inner {
   width: 100%;
   height: 100%;
-  background: rgba(0, 212, 255, 0.1);
+  background: var(--electric-blue-10);
   border: 2px solid var(--electric-blue);
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   transition: all 0.3s ease;
 }
 
 .hexagon:hover .hex-inner {
-  background: rgba(0, 212, 255, 0.2);
+  background: var(--electric-blue-20);
   transform: scale(1.1);
 }
 

@@ -10,9 +10,9 @@
 }
 
 .navbar.scrolled {
-  background: rgba(10, 25, 47, 0.95);
+  background: var(--overlay-bg);
   backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px -10px rgba(0, 212, 255, 0.1);
+  box-shadow: 0 10px 30px -10px var(--electric-blue-10);
   padding: 15px 0;
 }
 
@@ -28,35 +28,41 @@
 .logo {
   text-decoration: none;
   position: relative;
-}
-
-.logo-text {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 24px;
-  font-weight: 800;
-  background: var(--gradient-1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: 2px;
-}
-
-.logo-underline {
-  height: 3px;
-  background: var(--gradient-1);
-  width: 0;
-  transition: width 0.3s ease;
-  margin-top: 2px;
-}
-
-.logo:hover .logo-underline {
-  width: 100%;
+  display: inline-block;
 }
 
 .nav-menu {
   display: flex;
   gap: 40px;
   align-items: center;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.theme-toggle {
+  background: none;
+  border: 2px solid var(--electric-blue);
+  color: var(--electric-blue);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 18px;
+}
+
+.theme-toggle:hover {
+  background: var(--electric-blue);
+  color: var(--navy-blue);
+  transform: rotate(180deg) scale(1.1);
+  box-shadow: 0 0 20px var(--electric-blue-50);
 }
 
 .nav-link {
@@ -111,6 +117,16 @@
     padding: 0 20px;
   }
 
+  .nav-actions {
+    gap: 15px;
+  }
+
+  .theme-toggle {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
   .hamburger {
     display: flex;
     z-index: 1001;
@@ -123,13 +139,13 @@
     height: 100vh;
     width: 70%;
     max-width: 300px;
-    background: rgba(10, 25, 47, 0.98);
+    background: var(--overlay-bg);
     backdrop-filter: blur(10px);
     flex-direction: column;
     justify-content: center;
     gap: 30px;
     transition: right 0.3s ease;
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+    box-shadow: -10px 0 30px var(--electric-blue-50);
   }
 
   .nav-menu.active {

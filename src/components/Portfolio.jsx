@@ -1,60 +1,13 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa'
+import { portfolioData } from '../data/portfolioData'
 import './Portfolio.css'
 
 const Portfolio = () => {
   const [filter, setFilter] = useState('all')
 
-  const projects = [
-    {
-      id: 1,
-      title: 'AI-Powered Analytics Platform',
-      category: 'ai',
-      description: 'Enterprise-level analytics platform with machine learning predictions and real-time insights.',
-      tags: ['Python', 'TensorFlow', 'React', 'AWS'],
-      image: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-    },
-    {
-      id: 2,
-      title: 'E-Commerce Mobile App',
-      category: 'mobile',
-      description: 'Cross-platform shopping app with AR product visualization and seamless checkout experience.',
-      tags: ['React Native', 'Node.js', 'MongoDB', 'Stripe'],
-      image: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'
-    },
-    {
-      id: 3,
-      title: 'Cloud Infrastructure Dashboard',
-      category: 'cloud',
-      description: 'Comprehensive monitoring and management dashboard for multi-cloud environments.',
-      tags: ['Vue.js', 'Docker', 'Kubernetes', 'Azure'],
-      image: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'
-    },
-    {
-      id: 4,
-      title: 'Healthcare Management System',
-      category: 'web',
-      description: 'HIPAA-compliant patient management platform with telemedicine capabilities.',
-      tags: ['React', 'GraphQL', 'PostgreSQL', 'WebRTC'],
-      image: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)'
-    },
-    {
-      id: 5,
-      title: 'Smart Home IoT Platform',
-      category: 'ai',
-      description: 'Intelligent home automation system with voice control and predictive learning.',
-      tags: ['IoT', 'Python', 'MQTT', 'React'],
-      image: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'
-    },
-    {
-      id: 6,
-      title: 'Financial Trading App',
-      category: 'mobile',
-      description: 'Real-time trading platform with advanced charting and portfolio management.',
-      tags: ['Flutter', 'WebSocket', 'Redis', 'Golang'],
-      image: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)'
-    }
-  ]
+  const projects = portfolioData
 
   const categories = [
     { id: 'all', label: 'All Projects' },
@@ -94,8 +47,9 @@ const Portfolio = () => {
 
         <div className="portfolio-grid">
           {filteredProjects.map((project, index) => (
-            <div
+            <Link
               key={project.id}
+              to={`/portfolio/${project.slug}`}
               className="portfolio-card"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
@@ -104,18 +58,35 @@ const Portfolio = () => {
                 style={{ background: project.image }}
               >
                 <div className="project-overlay">
-                  <button className="project-link">
-                    <FaExternalLinkAlt />
-                  </button>
-                  <button className="project-link">
-                    <FaGithub />
-                  </button>
+                  <div className="overlay-text">View Details</div>
+                  {project.liveUrl && (
+                    <button
+                      className="project-link"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.open(project.liveUrl, '_blank');
+                      }}
+                    >
+                      <FaExternalLinkAlt />
+                    </button>
+                  )}
+                  {project.githubUrl && (
+                    <button
+                      className="project-link"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.open(project.githubUrl, '_blank');
+                      }}
+                    >
+                      <FaGithub />
+                    </button>
+                  )}
                 </div>
               </div>
 
               <div className="project-content">
                 <h3 className="project-title">{project.title}</h3>
-                <p className="project-description">{project.description}</p>
+                <p className="project-description">{project.shortDescription}</p>
 
                 <div className="project-tags">
                   {project.tags.map((tag, idx) => (
@@ -123,7 +94,7 @@ const Portfolio = () => {
                   ))}
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

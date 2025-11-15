@@ -12,6 +12,13 @@ const AnimatedBackground = () => {
     let animationFrameId
     let particles = []
 
+    // Get CSS variable color for theme support
+    const getThemeColor = () => {
+      const styles = getComputedStyle(document.documentElement)
+      const electricBlue = styles.getPropertyValue('--electric-blue').trim()
+      return electricBlue
+    }
+
     const resizeCanvas = () => {
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
@@ -41,7 +48,19 @@ const AnimatedBackground = () => {
       draw() {
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2)
-        ctx.fillStyle = 'rgba(0, 212, 255, 0.5)'
+        const themeColor = getThemeColor()
+        // Convert hex to rgba for opacity support
+        const hexToRgba = (hex, alpha) => {
+          if (hex.startsWith('#')) {
+            const r = parseInt(hex.slice(1, 3), 16)
+            const g = parseInt(hex.slice(3, 5), 16)
+            const b = parseInt(hex.slice(5, 7), 16)
+            return `rgba(${r}, ${g}, ${b}, ${alpha})`
+          }
+          // If already rgb or rgba, use as is
+          return hex.replace(')', `, ${alpha})`).replace('rgb(', 'rgba(')
+        }
+        ctx.fillStyle = hexToRgba(themeColor, 0.5)
         ctx.fill()
       }
     }
@@ -61,6 +80,17 @@ const AnimatedBackground = () => {
       })
 
       // Draw connections
+      const themeColor = getThemeColor()
+      const hexToRgba = (hex, alpha) => {
+        if (hex.startsWith('#')) {
+          const r = parseInt(hex.slice(1, 3), 16)
+          const g = parseInt(hex.slice(3, 5), 16)
+          const b = parseInt(hex.slice(5, 7), 16)
+          return `rgba(${r}, ${g}, ${b}, ${alpha})`
+        }
+        return hex.replace(')', `, ${alpha})`).replace('rgb(', 'rgba(')
+      }
+
       particles.forEach((p1, i) => {
         particles.slice(i + 1).forEach(p2 => {
           const dx = p1.x - p2.x
@@ -71,7 +101,7 @@ const AnimatedBackground = () => {
             ctx.beginPath()
             ctx.moveTo(p1.x, p1.y)
             ctx.lineTo(p2.x, p2.y)
-            ctx.strokeStyle = `rgba(0, 212, 255, ${0.2 * (1 - distance / 150)})`
+            ctx.strokeStyle = hexToRgba(themeColor, 0.2 * (1 - distance / 150))
             ctx.lineWidth = 1
             ctx.stroke()
           }

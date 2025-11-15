@@ -110,14 +110,14 @@ section {
 
 @keyframes glowPulse {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3),
-                0 0 40px rgba(0, 212, 255, 0.2),
-                0 0 60px rgba(0, 212, 255, 0.1);
+    box-shadow: 0 0 20px var(--electric-blue-30),
+                0 0 40px var(--electric-blue-20),
+                0 0 60px var(--electric-blue-10);
   }
   50% {
-    box-shadow: 0 0 30px rgba(0, 212, 255, 0.5),
-                0 0 60px rgba(0, 212, 255, 0.3),
-                0 0 90px rgba(0, 212, 255, 0.2);
+    box-shadow: 0 0 30px var(--electric-blue-50),
+                0 0 60px var(--electric-blue-30),
+                0 0 90px var(--electric-blue-20);
   }
 }
 
@@ -132,23 +132,23 @@ section {
 
 @keyframes textGlow {
   0%, 100% {
-    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5),
-                 0 0 20px rgba(0, 212, 255, 0.3),
-                 0 0 30px rgba(0, 212, 255, 0.2);
+    text-shadow: 0 0 10px var(--electric-blue-50),
+                 0 0 20px var(--electric-blue-30),
+                 0 0 30px var(--electric-blue-20);
   }
   50% {
-    text-shadow: 0 0 20px rgba(0, 212, 255, 0.8),
-                 0 0 40px rgba(0, 212, 255, 0.5),
-                 0 0 60px rgba(0, 212, 255, 0.3);
+    text-shadow: 0 0 20px var(--electric-blue-80),
+                 0 0 40px var(--electric-blue-50),
+                 0 0 60px var(--electric-blue-30);
   }
 }
 
 @keyframes borderGlow {
   0%, 100% {
-    border-color: rgba(0, 212, 255, 0.3);
+    border-color: var(--electric-blue-30);
   }
   50% {
-    border-color: rgba(0, 212, 255, 0.8);
+    border-color: var(--electric-blue-80);
   }
 }
 

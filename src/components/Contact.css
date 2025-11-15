@@ -46,8 +46,8 @@
   align-items: center;
   gap: 20px;
   padding: 20px;
-  background: rgba(0, 212, 255, 0.05);
-  border: 1px solid rgba(0, 212, 255, 0.2);
+  background: var(--electric-blue-05);
+  border: 1px solid var(--electric-blue-20);
   border-radius: 15px;
   transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   text-decoration: none;
@@ -73,10 +73,10 @@
 }
 
 .info-item:hover {
-  background: rgba(0, 212, 255, 0.15);
+  background: var(--electric-blue-15);
   border-color: var(--electric-blue);
   transform: translateX(15px) scale(1.02);
-  box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+  box-shadow: 0 10px 30px var(--electric-blue-30);
 }
 
 .info-icon {
@@ -133,8 +133,8 @@
 
 .social-links {
   padding: 30px;
-  background: rgba(0, 212, 255, 0.05);
-  border: 1px solid rgba(0, 212, 255, 0.2);
+  background: var(--electric-blue-05);
+  border: 1px solid var(--electric-blue-20);
   border-radius: 15px;
 }
 
@@ -153,8 +153,8 @@
 .social-link {
   width: 45px;
   height: 45px;
-  background: rgba(0, 212, 255, 0.1);
-  border: 1px solid rgba(0, 212, 255, 0.3);
+  background: var(--electric-blue-10);
+  border: 1px solid var(--electric-blue-30);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -185,7 +185,7 @@
   background: var(--electric-blue);
   color: var(--dark-navy);
   transform: translateY(-8px) rotate(360deg) scale(1.2);
-  box-shadow: 0 10px 25px rgba(0, 212, 255, 0.5);
+  box-shadow: 0 10px 25px var(--electric-blue-50);
 }
 
 .social-link:hover::before {
@@ -212,8 +212,8 @@
 .form-group textarea {
   width: 100%;
   padding: 15px 20px;
-  background: rgba(0, 212, 255, 0.05);
-  border: 2px solid rgba(0, 212, 255, 0.2);
+  background: var(--electric-blue-05);
+  border: 2px solid var(--electric-blue-20);
   border-radius: 12px;
   color: var(--text-white);
   font-size: 15px;
@@ -231,9 +231,9 @@
 .form-group textarea:focus {
   outline: none;
   border-color: var(--electric-blue);
-  background: rgba(0, 212, 255, 0.08);
-  box-shadow: 0 0 30px rgba(0, 212, 255, 0.3),
-              0 0 60px rgba(0, 212, 255, 0.1);
+  background: var(--electric-blue-08);
+  box-shadow: 0 0 30px var(--electric-blue-30),
+              0 0 60px var(--electric-blue-10);
   transform: translateY(-2px);
 }
 
@@ -269,7 +269,7 @@
 .submit-btn {
   background: var(--gradient-1);
   color: var(--dark-navy);
-  box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+  box-shadow: 0 10px 30px var(--electric-blue-30);
 }
 
 .submit-btn:disabled {
@@ -305,7 +305,7 @@
 
 .submit-btn:hover {
   transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 20px 50px rgba(0, 212, 255, 0.6);
+  box-shadow: 0 20px 50px var(--electric-blue-60);
 }
 
 .whatsapp-btn:hover {

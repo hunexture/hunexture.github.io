@@ -1,6 +1,6 @@
 .footer {
   background: var(--navy-blue);
-  border-top: 1px solid rgba(0, 212, 255, 0.2);
+  border-top: 1px solid var(--electric-blue-20);
   position: relative;
   padding: 80px 20px 30px;
 }
@@ -21,24 +21,17 @@
   max-width: 400px;
 }
 
-.footer-logo {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 28px;
-  font-weight: 900;
-  background: var(--gradient-1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
+.footer-brand .hunexture-logo {
+  margin-bottom: 15px;
 }
 
 .footer-tagline {
-  font-size: 14px;
-  color: var(--electric-blue);
+  font-size: 15px;
+  color: var(--text-white);
   font-weight: 600;
   margin-bottom: 20px;
   font-family: 'Orbitron', sans-serif;
+  letter-spacing: 0.5px;
 }
 
 .footer-description {
@@ -56,8 +49,8 @@
 .footer-social-link {
   width: 40px;
   height: 40px;
-  background: rgba(0, 212, 255, 0.1);
-  border: 1px solid rgba(0, 212, 255, 0.3);
+  background: var(--electric-blue-10);
+  border: 1px solid var(--electric-blue-30);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -72,7 +65,7 @@
   background: var(--electric-blue);
   color: var(--dark-navy);
   transform: translateY(-5px) rotate(5deg);
-  box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
+  box-shadow: 0 10px 25px var(--electric-blue-40);
 }
 
 .footer-links-grid {
@@ -116,7 +109,7 @@
 
 .footer-bottom {
   padding-top: 30px;
-  border-top: 1px solid rgba(0, 212, 255, 0.1);
+  border-top: 1px solid var(--electric-blue-10);
   text-align: center;
 }
 
@@ -150,25 +143,27 @@
   position: fixed;
   bottom: 30px;
   right: 30px;
-  width: 50px;
-  height: 50px;
-  background: var(--gradient-1);
-  border: none;
+  width: 55px;
+  height: 55px;
+  background: var(--electric-blue);
+  border: 2px solid var(--electric-blue);
   border-radius: 50%;
-  color: var(--dark-navy);
-  font-size: 20px;
+  color: var(--navy-blue);
+  font-size: 22px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+  box-shadow: 0 10px 30px var(--electric-blue-40);
   z-index: 999;
 }
 
 .scroll-to-top:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0, 212, 255, 0.6);
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 15px 50px var(--electric-blue-60);
+  filter: brightness(1.15);
+  border-color: var(--electric-blue);
 }
 
 @media (max-width: 968px) {
