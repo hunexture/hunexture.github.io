@@ -268,7 +268,7 @@
 
 .submit-btn {
   background: var(--gradient-1);
-  color: var(--dark-navy);
+  color: var(--text-white);
   box-shadow: 0 10px 30px var(--electric-blue-30);
 }
 
