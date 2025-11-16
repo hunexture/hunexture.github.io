@@ -1,4 +1,4 @@
-import { FaBrain, FaMobile, FaCloud, FaLaptopCode, FaHome, FaChartLine, FaPython, FaReact, FaAws, FaNodeJs, FaVuejs, FaDocker, FaDatabase, FaFlask } from 'react-icons/fa';
+import { FaBrain, FaMobile, FaCloud, FaLaptopCode, FaHome, FaChartLine, FaPython, FaReact, FaAws, FaNodeJs, FaVuejs, FaDocker, FaDatabase } from 'react-icons/fa';
 import { SiTensorflow, SiMongodb, SiStripe, SiKubernetes, SiGraphql, SiPostgresql, SiWebrtc, SiMqtt, SiRedis, SiGo, SiFlutter } from 'react-icons/si';
 
 export const portfolioData = [
