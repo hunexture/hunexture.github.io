@@ -20,7 +20,8 @@
       "Bash(cat:*)",
       "Bash(tree:*)",
       "Bash(timeout /t 10)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(mkdir:*)"
     ],
     "deny": [],
     "ask": []
