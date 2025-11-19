@@ -10,7 +10,7 @@ export const portfolioData = [
     categoryLabel: 'AI Solutions',
     shortDescription: 'Enterprise-level analytics platform with machine learning predictions and real-time insights.',
     description: 'A comprehensive enterprise analytics platform that leverages machine learning to provide predictive insights and real-time data visualization. Built to handle millions of data points with advanced algorithms for pattern recognition and anomaly detection.',
-    image: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    image: `url(${process.env.PUBLIC_URL}/images/portfolio/ai-analytics.svg)`,
     tags: ['Python', 'TensorFlow', 'React', 'AWS'],
     icon: FaBrain,
 
@@ -88,7 +88,7 @@ export const portfolioData = [
     categoryLabel: 'Mobile Apps',
     shortDescription: 'Cross-platform shopping app with AR product visualization and seamless checkout experience.',
     description: 'An innovative mobile shopping experience featuring augmented reality product previews, personalized recommendations, and a frictionless checkout process. Built with React Native for both iOS and Android platforms.',
-    image: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+    image: `url(${process.env.PUBLIC_URL}/images/portfolio/ecommerce-app.svg)`,
     tags: ['React Native', 'Node.js', 'MongoDB', 'Stripe'],
     icon: FaMobile,
 
@@ -166,7 +166,7 @@ export const portfolioData = [
     categoryLabel: 'Cloud Services',
     shortDescription: 'Comprehensive monitoring and management dashboard for multi-cloud environments.',
     description: 'A unified dashboard for managing and monitoring infrastructure across AWS, Azure, and Google Cloud Platform. Features real-time metrics, cost optimization recommendations, and automated scaling controls.',
-    image: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+    image: `url(${process.env.PUBLIC_URL}/images/portfolio/cloud-dashboard.svg)`,
     tags: ['Vue.js', 'Docker', 'Kubernetes', 'Azure'],
     icon: FaCloud,
 
@@ -244,7 +244,7 @@ export const portfolioData = [
     categoryLabel: 'Web Apps',
     shortDescription: 'HIPAA-compliant patient management platform with telemedicine capabilities.',
     description: 'A comprehensive healthcare management system that enables healthcare providers to manage patient records, schedule appointments, and conduct virtual consultations. Built with strict HIPAA compliance and end-to-end encryption.',
-    image: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+    image: `url(${process.env.PUBLIC_URL}/images/portfolio/healthcare-system.svg)`,
     tags: ['React', 'GraphQL', 'PostgreSQL', 'WebRTC'],
     icon: FaLaptopCode,
 
@@ -322,7 +322,7 @@ export const portfolioData = [
     categoryLabel: 'AI Solutions',
     shortDescription: 'Intelligent home automation system with voice control and predictive learning.',
     description: 'An advanced IoT platform that connects and controls smart home devices with AI-powered automation. Features voice control, predictive behavior learning, and energy optimization to create a truly intelligent home environment.',
-    image: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+    image: `url(${process.env.PUBLIC_URL}/images/portfolio/smart-home.svg)`,
     tags: ['IoT', 'Python', 'MQTT', 'React'],
     icon: FaHome,
 
@@ -400,7 +400,7 @@ export const portfolioData = [
     categoryLabel: 'Mobile Apps',
     shortDescription: 'Real-time trading platform with advanced charting and portfolio management.',
     description: 'A high-performance mobile trading application with real-time market data, advanced charting tools, and comprehensive portfolio management. Built for speed and reliability with Flutter for cross-platform deployment.',
-    image: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
+    image: `url(${process.env.PUBLIC_URL}/images/portfolio/trading-app.svg)`,
     tags: ['Flutter', 'WebSocket', 'Redis', 'Golang'],
     icon: FaChartLine,
 

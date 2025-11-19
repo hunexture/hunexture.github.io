@@ -58,7 +58,10 @@ const Portfolio = () => {
                 style={{ background: project.image }}
               >
                 <div className="project-overlay">
-                  <div className="overlay-text">View Details</div>
+                  <div className="overlay-text">
+                    <img src="/images/icons/article.svg" alt="Read More" className="overlay-icon" />
+                    View Details
+                  </div>
                   {project.liveUrl && (
                     <button
                       className="project-link"

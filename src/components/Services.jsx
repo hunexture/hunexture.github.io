@@ -42,6 +42,7 @@ const Services = () => {
               </ul>
 
               <Link to={`/services/${service.slug}`} className="service-cta">
+                <img src="/images/icons/learn-more.svg" alt="Learn More" className="learn-icon" />
                 Learn More
                 <FaArrowRight className="cta-icon" />
               </Link>

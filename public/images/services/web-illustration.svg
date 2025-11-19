@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" fill="none">
+  <defs>
+    <linearGradient id="webServiceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="400" fill="url(#webServiceGrad)" opacity="0.1"/>
+
+  <!-- Browser window -->
+  <rect x="100" y="80" width="400" height="260" rx="10" fill="#fff" opacity="0.9" stroke="#4facfe" stroke-width="2"/>
+
+  <!-- Browser header -->
+  <rect x="100" y="80" width="400" height="30" rx="10" fill="#4facfe" opacity="0.8"/>
+  <circle cx="120" cy="95" r="4" fill="#fff"/>
+  <circle cx="135" cy="95" r="4" fill="#fff"/>
+  <circle cx="150" cy="95" r="4" fill="#fff"/>
+  <rect x="170" y="88" width="240" height="14" rx="7" fill="#fff" opacity="0.3"/>
+
+  <!-- Code brackets -->
+  <g stroke="#4facfe" stroke-width="3" fill="none" opacity="0.6">
+    <path d="M 140 150 L 120 170 L 140 190"/>
+    <path d="M 460 150 L 480 170 L 460 190"/>
+  </g>
+
+  <!-- HTML structure -->
+  <g opacity="0.7">
+    <rect x="130" y="140" width="120" height="30" rx="4" fill="#4facfe" opacity="0.3"/>
+    <text x="145" y="160" font-family="monospace" font-size="12" fill="#4facfe">&lt;header&gt;</text>
+
+    <rect x="130" y="185" width="340" height="60" rx="4" fill="#00f2fe" opacity="0.2"/>
+    <text x="145" y="205" font-family="monospace" font-size="12" fill="#4facfe">&lt;main&gt;</text>
+
+    <rect x="160" y="215" width="140" height="20" rx="3" fill="#4facfe" opacity="0.4"/>
+    <rect x="310" y="215" width="140" height="20" rx="3" fill="#4facfe" opacity="0.4"/>
+
+    <rect x="130" y="260" width="120" height="30" rx="4" fill="#00f2fe" opacity="0.3"/>
+    <text x="145" y="280" font-family="monospace" font-size="12" fill="#4facfe">&lt;footer&gt;</text>
+  </g>
+
+  <!-- Floating elements -->
+  <g opacity="0.3">
+    <rect x="50" y="120" width="30" height="30" rx="5" fill="#4facfe"/>
+    <circle cx="550" cy="150" r="20" fill="#00f2fe"/>
+    <path d="M 530 320 L 550 300 L 570 320 L 550 340 Z" fill="#4facfe"/>
+  </g>
+
+  <!-- Code lines animation -->
+  <g opacity="0.5">
+    <line x1="160" y1="160" x2="300" y2="160" stroke="#4facfe" stroke-width="2" stroke-dasharray="4,4">
+      <animate attributeName="stroke-dashoffset" values="0;-8" dur="1s" repeatCount="indefinite"/>
+    </line>
+    <line x1="160" y1="225" x2="290" y2="225" stroke="#00f2fe" stroke-width="2" stroke-dasharray="4,4">
+      <animate attributeName="stroke-dashoffset" values="0;-8" dur="0.8s" repeatCount="indefinite"/>
+    </line>
+  </g>
+</svg>

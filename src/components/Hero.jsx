@@ -4,7 +4,13 @@ import './Hero.css'
 
 const Hero = () => {
   return (
-    <section id="hero" className="hero">
+    <section
+      id="hero"
+      className="hero"
+      style={{
+        backgroundImage: `url(${process.env.PUBLIC_URL}/images/hero/tech-background.svg)`
+      }}
+    >
       <div className="hero-content">
         <div className="hero-badge">
           <span className="badge-dot"></span>

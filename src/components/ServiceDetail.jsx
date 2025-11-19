@@ -30,8 +30,44 @@ const ServiceDetail = () => {
 
   const IconComponent = service.icon;
 
+  // Define color schemes for each service
+  const colorSchemes = {
+    'ai-solutions': {
+      gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      primary: '#667eea',
+      secondary: '#764ba2',
+      glow: 'rgba(102, 126, 234, 0.3)'
+    },
+    'web-development': {
+      gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+      primary: '#4facfe',
+      secondary: '#00f2fe',
+      glow: 'rgba(79, 172, 254, 0.3)'
+    },
+    'app-development': {
+      gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+      primary: '#f093fb',
+      secondary: '#f5576c',
+      glow: 'rgba(240, 147, 251, 0.3)'
+    },
+    'cloud-integration': {
+      gradient: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
+      primary: '#30cfd0',
+      secondary: '#330867',
+      glow: 'rgba(48, 207, 208, 0.3)'
+    },
+    'uiux-design': {
+      gradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+      primary: '#fa709a',
+      secondary: '#fee140',
+      glow: 'rgba(250, 112, 154, 0.3)'
+    }
+  };
+
+  const serviceColors = colorSchemes[slug] || colorSchemes['ai-solutions'];
+
   return (
-    <div className="service-detail-container">
+    <div className="service-detail-container" data-service={slug}>
       {/* Hero Section */}
       <motion.section
         className="service-hero"
@@ -46,6 +82,7 @@ const ServiceDetail = () => {
 
           <motion.div
             className="service-hero-icon"
+            style={{ background: serviceColors.gradient, boxShadow: `0 10px 40px ${serviceColors.glow}` }}
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -77,7 +114,7 @@ const ServiceDetail = () => {
             transition={{ duration: 0.6, delay: 0.5 }}
           >
             {service.features.map((feature, index) => (
-              <span key={index} className="feature-badge">
+              <span key={index} className="feature-badge" style={{ borderColor: serviceColors.primary, color: serviceColors.primary }}>
                 <FaCheck /> {feature}
               </span>
             ))}

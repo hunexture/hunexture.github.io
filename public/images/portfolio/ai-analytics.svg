@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <defs>
+    <linearGradient id="aiGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#aiGrad)"/>
+
+  <!-- Dashboard mockup -->
+  <rect x="50" y="80" width="700" height="450" rx="10" fill="#fff" opacity="0.95"/>
+
+  <!-- Header -->
+  <rect x="70" y="100" width="660" height="50" rx="5" fill="#f7fafc"/>
+  <rect x="85" y="115" width="120" height="20" rx="3" fill="#667eea"/>
+  <circle cx="680" cy="125" r="15" fill="#e2e8f0"/>
+
+  <!-- Charts -->
+  <g opacity="0.8">
+    <!-- Line chart -->
+    <rect x="80" y="180" width="300" height="180" rx="5" fill="#f7fafc"/>
+    <polyline points="100,320 140,280 180,300 220,240 260,260 340,220" stroke="#667eea" stroke-width="3" fill="none"/>
+    <text x="100" y="210" font-family="Arial" font-size="12" fill="#4a5568">Revenue Prediction</text>
+
+    <!-- Bar chart -->
+    <rect x="410" y="180" width="300" height="180" rx="5" fill="#f7fafc"/>
+    <rect x="440" y="280" width="40" height="60" fill="#764ba2"/>
+    <rect x="500" y="250" width="40" height="90" fill="#667eea"/>
+    <rect x="560" y="270" width="40" height="70" fill="#764ba2"/>
+    <rect x="620" y="230" width="40" height="110" fill="#667eea"/>
+    <text x="440" y="210" font-family="Arial" font-size="12" fill="#4a5568">Performance Metrics</text>
+  </g>
+
+  <!-- Stats boxes -->
+  <rect x="80" y="390" width="140" height="60" rx="5" fill="#667eea" opacity="0.9"/>
+  <text x="95" y="415" font-family="Arial" font-size="14" font-weight="bold" fill="#fff">94%</text>
+  <text x="95" y="435" font-family="Arial" font-size="10" fill="#fff">Accuracy</text>
+
+  <rect x="240" y="390" width="140" height="60" rx="5" fill="#764ba2" opacity="0.9"/>
+  <text x="255" y="415" font-family="Arial" font-size="14" font-weight="bold" fill="#fff">50M+</text>
+  <text x="255" y="435" font-family="Arial" font-size="10" fill="#fff">Data Points</text>
+
+  <rect x="400" y="390" width="140" height="60" rx="5" fill="#667eea" opacity="0.9"/>
+  <text x="415" y="415" font-family="Arial" font-size="14" font-weight="bold" fill="#fff">10x</text>
+  <text x="415" y="435" font-family="Arial" font-size="10" fill="#fff">Faster</text>
+
+  <!-- AI brain icon -->
+  <circle cx="700" cy="500" r="35" fill="#667eea" opacity="0.2"/>
+  <path d="M 680 490 Q 700 470 720 490 Q 730 500 720 510 Q 700 530 680 510 Q 670 500 680 490 Z" fill="#fff" opacity="0.7"/>
+</svg>
