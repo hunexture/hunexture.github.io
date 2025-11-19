@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <defs>
+    <linearGradient id="homeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fa709a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fee140;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#homeGrad)"/>
+
+  <!-- House outline -->
+  <g opacity="0.2" fill="#fff">
+    <path d="M 150 350 L 150 500 L 350 500 L 350 350 Z"/>
+    <path d="M 120 350 L 250 220 L 380 350 Z"/>
+    <rect x="200" y="420" width="60" height="80"/>
+    <rect x="180" y="370" width="40" height="40"/>
+    <rect x="280" y="370" width="40" height="40"/>
+  </g>
+
+  <!-- Mobile app interface -->
+  <rect x="420" y="120" width="320" height="420" rx="25" fill="#1a202c"/>
+  <rect x="435" y="155" width="290" height="375" rx="10" fill="#fff"/>
+
+  <!-- Status bar -->
+  <rect x="445" y="165" width="270" height="20" fill="#f7fafc"/>
+
+  <!-- Header -->
+  <rect x="445" y="195" width="270" height="50" fill="#fa709a"/>
+  <text x="460" y="222" font-family="Arial" font-size="16" font-weight="bold" fill="#fff">Smart Home</text>
+  <circle cx="695" cy="220" r="15" fill="#fff" opacity="0.3"/>
+
+  <!-- Room controls -->
+  <g>
+    <!-- Living Room -->
+    <rect x="455" y="265" width="120" height="100" rx="8" fill="#fef5e7"/>
+    <text x="468" y="290" font-family="Arial" font-size="12" font-weight="bold" fill="#2d3748">Living Room</text>
+    <circle cx="495" cy="320" r="20" fill="#fee140"/>
+    <path d="M 490 315 L 495 310 L 500 315 L 500 325 L 490 325 Z" fill="#fff"/>
+    <text x="468" y="355" font-family="Arial" font-size="11" fill="#718096">72°F • ON</text>
+
+    <!-- Bedroom -->
+    <rect x="590" y="265" width="120" height="100" rx="8" fill="#e6f7ff"/>
+    <text x="603" y="290" font-family="Arial" font-size="12" font-weight="bold" fill="#2d3748">Bedroom</text>
+    <circle cx="630" cy="320" r="20" fill="#4facfe"/>
+    <circle cx="630" cy="320" r="12" fill="#fff"/>
+    <text x="603" y="355" font-family="Arial" font-size="11" fill="#718096">OFF</text>
+
+    <!-- Kitchen -->
+    <rect x="455" y="380" width="120" height="100" rx="8" fill="#e6ffed"/>
+    <text x="468" y="405" font-family="Arial" font-size="12" font-weight="bold" fill="#2d3748">Kitchen</text>
+    <circle cx="495" cy="435" r="20" fill="#48bb78"/>
+    <path d="M 488 435 L 495 428 L 502 435 L 495 442 Z" fill="#fff"/>
+    <text x="468" y="470" font-family="Arial" font-size="11" fill="#718096">Active</text>
+
+    <!-- Garage -->
+    <rect x="590" y="380" width="120" height="100" rx="8" fill="#fef5f5"/>
+    <text x="603" y="405" font-family="Arial" font-size="12" font-weight="bold" fill="#2d3748">Garage</text>
+    <circle cx="630" cy="435" r="20" fill="#fc8181"/>
+    <rect x="622" y="431" width="16" height="8" rx="2" fill="#fff"/>
+    <text x="603" y="470" font-family="Arial" font-size="11" fill="#718096">Locked</text>
+  </g>
+
+  <!-- Energy usage bar -->
+  <rect x="450" y="495" width="260" height="25" rx="12" fill="#f7fafc"/>
+  <rect x="455" y="500" width="180" height="15" rx="7" fill="#48bb78"/>
+  <text x="570" y="512" font-family="Arial" font-size="10" fill="#2d3748">72% Energy Saved</text>
+
+  <!-- Voice control icon -->
+  <circle cx="670" cy="140" r="30" fill="#fff" opacity="0.3"/>
+  <circle cx="670" cy="145" r="5" fill="#fa709a"/>
+  <ellipse cx="670" cy="155" rx="8" ry="10" fill="none" stroke="#fa709a" stroke-width="2"/>
+  <path d="M 662 165 L 670 170 L 678 165" stroke="#fa709a" stroke-width="2" fill="none"/>
+
+  <!-- Wireless signals -->
+  <g opacity="0.3" stroke="#fff" stroke-width="2" fill="none">
+    <path d="M 100 150 Q 120 130 140 150"/>
+    <path d="M 90 160 Q 120 120 150 160"/>
+    <path d="M 80 170 Q 120 110 160 170"/>
+  </g>
+</svg>
