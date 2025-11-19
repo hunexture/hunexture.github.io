@@ -21,7 +21,9 @@
       "Bash(tree:*)",
       "Bash(timeout /t 10)",
       "Bash(find:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)"
     ],
     "deny": [],
     "ask": []

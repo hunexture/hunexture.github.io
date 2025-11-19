@@ -63,14 +63,17 @@ const Hero = () => {
       </div>
 
       <div className="hero-visual">
-        <div className="floating-elements">
-          <div className="hex-grid">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className={`hexagon hex-${i + 1}`}>
-                <div className="hex-inner"></div>
-              </div>
-            ))}
-          </div>
+        <div className="hero-video-container">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="hero-video"
+          >
+            <source src={`${process.env.PUBLIC_URL}/video/ai-video-v3.mp4`} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
       </div>
 

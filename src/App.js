@@ -12,6 +12,7 @@ import BackgroundEffect from './components/BackgroundEffect'
 import AnimatedBackground from './components/AnimatedBackground'
 import ServiceDetail from './components/ServiceDetail'
 import ProjectDetail from './components/ProjectDetail'
+import IndustryDetail from './components/IndustryDetail'
 import PrivacyPolicy from './components/PrivacyPolicy'
 import TermsOfService from './components/TermsOfService'
 import CookiePolicy from './components/CookiePolicy'
@@ -33,6 +34,7 @@ const Layout = ({ children }) => {
   const location = useLocation()
   const isDetailPage = location.pathname.startsWith('/services/') ||
                        location.pathname.startsWith('/portfolio/') ||
+                       location.pathname.startsWith('/industries/') ||
                        location.pathname.startsWith('/privacy-policy') ||
                        location.pathname.startsWith('/terms-of-service') ||
                        location.pathname.startsWith('/cookie-policy')
@@ -57,6 +59,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/services/:slug" element={<ServiceDetail />} />
             <Route path="/portfolio/:slug" element={<ProjectDetail />} />
+            <Route path="/industries/:slug" element={<IndustryDetail />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/cookie-policy" element={<CookiePolicy />} />

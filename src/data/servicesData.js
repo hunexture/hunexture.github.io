@@ -1,4 +1,4 @@
-import { FaBrain, FaCode, FaMobile, FaCloud, FaPaintBrush, FaRobot, FaDatabase, FaChartLine, FaEye, FaReact, FaNodeJs, FaServer, FaAndroid, FaApple, FaCog, FaAws, FaDocker, FaGitAlt, FaFigma, FaPalette, FaUsers } from 'react-icons/fa';
+import { FaBrain, FaCode, FaMobile, FaCloud, FaPaintBrush, FaRobot, FaDatabase, FaChartLine, FaEye, FaReact, FaNodeJs, FaServer, FaAndroid, FaApple, FaCog, FaAws, FaDocker, FaGitAlt, FaFigma, FaPalette, FaUsers, FaTools, FaCamera, FaComments, FaShoppingCart, FaBuilding, FaLayerGroup, FaTruck, FaUserFriends, FaHeartbeat, FaBriefcase, FaCloudUploadAlt, FaCubes, FaCodeBranch, FaBolt, FaMagic, FaMobileAlt, FaSearchPlus } from 'react-icons/fa';
 
 export const servicesData = [
   {
@@ -46,19 +46,23 @@ export const servicesData = [
     useCases: [
       {
         title: 'Predictive Maintenance',
-        description: 'Forecast equipment failures before they happen, reducing downtime and costs'
+        description: 'Forecast equipment failures before they happen, reducing downtime and costs',
+        icon: FaTools
       },
       {
         title: 'Intelligent Automation',
-        description: 'Automate repetitive tasks with AI-powered decision making'
+        description: 'Automate repetitive tasks with AI-powered decision making',
+        icon: FaRobot
       },
       {
         title: 'Image Recognition',
-        description: 'Identify objects, faces, and patterns in images and videos'
+        description: 'Identify objects, faces, and patterns in images and videos',
+        icon: FaCamera
       },
       {
         title: 'Natural Language Processing',
-        description: 'Extract insights from text, enable chatbots, and automate document processing'
+        description: 'Extract insights from text, enable chatbots, and automate document processing',
+        icon: FaComments
       }
     ],
     faq: [
@@ -121,19 +125,23 @@ export const servicesData = [
     useCases: [
       {
         title: 'E-Commerce Platforms',
-        description: 'Full-featured online stores with payment integration and inventory management'
+        description: 'Full-featured online stores with payment integration and inventory management',
+        icon: FaShoppingCart
       },
       {
         title: 'SaaS Applications',
-        description: 'Cloud-based software solutions with subscription management'
+        description: 'Cloud-based software solutions with subscription management',
+        icon: FaCloud
       },
       {
         title: 'Corporate Websites',
-        description: 'Professional websites that showcase your brand and drive conversions'
+        description: 'Professional websites that showcase your brand and drive conversions',
+        icon: FaBuilding
       },
       {
         title: 'Web Portals',
-        description: 'Custom portals for employees, customers, or partners'
+        description: 'Custom portals for employees, customers, or partners',
+        icon: FaLayerGroup
       }
     ],
     faq: [
@@ -196,19 +204,23 @@ export const servicesData = [
     useCases: [
       {
         title: 'On-Demand Services',
-        description: 'Apps for food delivery, ride-sharing, and service marketplaces'
+        description: 'Apps for food delivery, ride-sharing, and service marketplaces',
+        icon: FaTruck
       },
       {
         title: 'Social Networking',
-        description: 'Connect users with messaging, feeds, and real-time interactions'
+        description: 'Connect users with messaging, feeds, and real-time interactions',
+        icon: FaUserFriends
       },
       {
         title: 'Fitness & Health',
-        description: 'Track workouts, nutrition, and health metrics'
+        description: 'Track workouts, nutrition, and health metrics',
+        icon: FaHeartbeat
       },
       {
         title: 'Enterprise Apps',
-        description: 'Internal tools for productivity, communication, and workflow'
+        description: 'Internal tools for productivity, communication, and workflow',
+        icon: FaBriefcase
       }
     ],
     faq: [
@@ -271,19 +283,23 @@ export const servicesData = [
     useCases: [
       {
         title: 'Cloud Migration',
-        description: 'Move legacy applications to cloud infrastructure'
+        description: 'Move legacy applications to cloud infrastructure',
+        icon: FaCloudUploadAlt
       },
       {
         title: 'Microservices Architecture',
-        description: 'Break monoliths into scalable, independent services'
+        description: 'Break monoliths into scalable, independent services',
+        icon: FaCubes
       },
       {
         title: 'DevOps Automation',
-        description: 'Implement CI/CD pipelines for faster releases'
+        description: 'Implement CI/CD pipelines for faster releases',
+        icon: FaCodeBranch
       },
       {
         title: 'Serverless Applications',
-        description: 'Build event-driven applications without managing servers'
+        description: 'Build event-driven applications without managing servers',
+        icon: FaBolt
       }
     ],
     faq: [
@@ -346,19 +362,23 @@ export const servicesData = [
     useCases: [
       {
         title: 'Website Redesign',
-        description: 'Modernize outdated websites with fresh, user-friendly designs'
+        description: 'Modernize outdated websites with fresh, user-friendly designs',
+        icon: FaMagic
       },
       {
         title: 'Mobile App Design',
-        description: 'Create intuitive mobile experiences that users love'
+        description: 'Create intuitive mobile experiences that users love',
+        icon: FaMobileAlt
       },
       {
         title: 'Design Systems',
-        description: 'Build scalable component libraries for consistent UIs'
+        description: 'Build scalable component libraries for consistent UIs',
+        icon: FaLayerGroup
       },
       {
         title: 'User Experience Audit',
-        description: 'Identify and fix usability issues in existing products'
+        description: 'Identify and fix usability issues in existing products',
+        icon: FaSearchPlus
       }
     ],
     faq: [

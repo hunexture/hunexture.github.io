@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaArrowLeft, FaCheck, FaLightbulb, FaRocket } from 'react-icons/fa';
+import { FaArrowLeft, FaCheck, FaRocket } from 'react-icons/fa';
 import { getServiceBySlug } from '../data/servicesData';
 import './ServiceDetail.css';
 
@@ -126,7 +126,7 @@ const ServiceDetail = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            <button onClick={() => navigate('/#contact')} className="cta-button primary">
+            <button onClick={() => navigate('/#contact')} className="cta-button primary" style={{ background: serviceColors.gradient, boxShadow: `0 10px 30px ${serviceColors.glow}` }}>
               Get Started <FaRocket />
             </button>
             <button onClick={() => navigate('/#portfolio')} className="cta-button secondary">
@@ -151,12 +151,13 @@ const ServiceDetail = () => {
                 <motion.div
                   key={index}
                   className="benefit-card"
+                  style={{ borderColor: `${serviceColors.primary}33` }}
                   initial={{ y: 50, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <FaCheck className="benefit-icon" />
+                  <FaCheck className="benefit-icon" style={{ color: serviceColors.primary }} />
                   <p>{benefit}</p>
                 </motion.div>
               ))}
@@ -182,13 +183,14 @@ const ServiceDetail = () => {
                   <motion.div
                     key={index}
                     className="tech-card"
+                    style={{ borderColor: `${serviceColors.primary}33` }}
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: index * 0.1 }}
                     whileHover={{ scale: 1.05, y: -5 }}
                   >
-                    <TechIcon className="tech-icon" />
+                    <TechIcon className="tech-icon" style={{ color: serviceColors.primary }} />
                     <p>{tech.name}</p>
                   </motion.div>
                 );
@@ -218,9 +220,9 @@ const ServiceDetail = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.2 }}
                 >
-                  <div className="step-number">{step.step}</div>
-                  <div className="step-content">
-                    <h3>{step.title}</h3>
+                  <div className="step-number" style={{ background: serviceColors.gradient, boxShadow: `0 5px 20px ${serviceColors.glow}` }}>{step.step}</div>
+                  <div className="step-content" style={{ borderColor: `${serviceColors.primary}33` }}>
+                    <h3 style={{ color: serviceColors.primary }}>{step.title}</h3>
                     <p>{step.description}</p>
                   </div>
                 </motion.div>
@@ -241,21 +243,25 @@ const ServiceDetail = () => {
           >
             <h2>Use Cases</h2>
             <div className="usecases-grid">
-              {service.useCases.map((useCase, index) => (
-                <motion.div
-                  key={index}
-                  className="usecase-card"
-                  initial={{ y: 50, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ y: -10 }}
-                >
-                  <FaLightbulb className="usecase-icon" />
-                  <h3>{useCase.title}</h3>
-                  <p>{useCase.description}</p>
-                </motion.div>
-              ))}
+              {service.useCases.map((useCase, index) => {
+                const UseCaseIcon = useCase.icon;
+                return (
+                  <motion.div
+                    key={index}
+                    className="usecase-card"
+                    style={{ borderColor: `${serviceColors.primary}33` }}
+                    initial={{ y: 50, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    whileHover={{ y: -10 }}
+                  >
+                    <UseCaseIcon className="usecase-icon" style={{ color: serviceColors.primary }} />
+                    <h3>{useCase.title}</h3>
+                    <p>{useCase.description}</p>
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.div>
         </div>
@@ -276,12 +282,13 @@ const ServiceDetail = () => {
                 <motion.div
                   key={index}
                   className="faq-item"
+                  style={{ borderColor: `${serviceColors.primary}33` }}
                   initial={{ y: 30, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <h3>{item.question}</h3>
+                  <h3 style={{ color: serviceColors.primary }}>{item.question}</h3>
                   <p>{item.answer}</p>
                 </motion.div>
               ))}
@@ -302,7 +309,7 @@ const ServiceDetail = () => {
           >
             <h2>Ready to Get Started?</h2>
             <p>Let's discuss how {service.title.toLowerCase()} can help your business grow.</p>
-            <button onClick={() => navigate('/#contact')} className="cta-button primary large">
+            <button onClick={() => navigate('/#contact')} className="cta-button primary large" style={{ background: serviceColors.gradient, boxShadow: `0 10px 30px ${serviceColors.glow}` }}>
               Contact Us Today <FaRocket />
             </button>
           </motion.div>

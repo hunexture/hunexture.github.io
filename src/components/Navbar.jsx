@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
-import { FaSun, FaMoon } from 'react-icons/fa'
+import { FaSun, FaMoon, FaChevronDown } from 'react-icons/fa'
 import Logo from './Logo'
+import { industriesData } from '../data/industriesData'
 import './Navbar.css'
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [industriesOpen, setIndustriesOpen] = useState(false)
   const { theme, toggleTheme } = useTheme()
   const navigate = useNavigate()
   const location = useLocation()
@@ -33,12 +35,17 @@ const Navbar = () => {
   }, [location])
 
   const navItems = [
-    { name: 'Home', href: '#hero' },
     { name: 'About', href: '#about' },
     { name: 'Services', href: '#services' },
     { name: 'Portfolio', href: '#portfolio' },
     { name: 'Contact', href: '#contact' },
   ]
+
+  const handleIndustryClick = (slug) => {
+    setMenuOpen(false)
+    setIndustriesOpen(false)
+    navigate(`/industries/${slug}`)
+  }
 
   const handleNavClick = (e, href) => {
     e.preventDefault()
@@ -74,16 +81,69 @@ const Navbar = () => {
         </a>
 
         <div className={`nav-menu ${menuOpen ? 'active' : ''}`}>
-          {navItems.map((item, index) => (
-            <a
-              key={index}
-              href={item.href}
-              className="nav-link"
-              onClick={(e) => handleNavClick(e, item.href)}
-            >
-              {item.name}
-            </a>
-          ))}
+          {/* About */}
+          <a
+            href="#about"
+            className="nav-link"
+            onClick={(e) => handleNavClick(e, '#about')}
+          >
+            About
+          </a>
+
+          {/* Services */}
+          <a
+            href="#services"
+            className="nav-link"
+            onClick={(e) => handleNavClick(e, '#services')}
+          >
+            Services
+          </a>
+
+          {/* Industries Dropdown */}
+          <div
+            className="nav-dropdown"
+            onMouseEnter={() => setIndustriesOpen(true)}
+            onMouseLeave={() => setIndustriesOpen(false)}
+          >
+            <button className="nav-link dropdown-trigger">
+              Industries <FaChevronDown className={`dropdown-arrow ${industriesOpen ? 'open' : ''}`} />
+            </button>
+            <div className={`dropdown-menu industries-dropdown ${industriesOpen ? 'show' : ''}`}>
+              <div className="dropdown-grid">
+                {industriesData.map((industry, index) => {
+                  const IndustryIcon = industry.icon;
+                  return (
+                    <div
+                      key={index}
+                      className="dropdown-item"
+                      onClick={() => handleIndustryClick(industry.slug)}
+                    >
+                      <IndustryIcon className="dropdown-icon" />
+                      <span>{industry.name}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* Portfolio */}
+          <a
+            href="#portfolio"
+            className="nav-link"
+            onClick={(e) => handleNavClick(e, '#portfolio')}
+          >
+            Portfolio
+          </a>
+
+          {/* Contact */}
+          <a
+            href="#contact"
+            className="nav-link"
+            onClick={(e) => handleNavClick(e, '#contact')}
+          >
+            Contact
+          </a>
         </div>
 
         <div className="nav-actions">

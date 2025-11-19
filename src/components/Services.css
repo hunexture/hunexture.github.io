@@ -36,6 +36,8 @@
   animation: fadeInUp 0.8s ease backwards;
   transform-style: preserve-3d;
   perspective: 1000px;
+  display: flex;
+  flex-direction: column;
 }
 
 .service-card:hover {
@@ -210,6 +212,7 @@
 .service-features {
   list-style: none;
   margin-bottom: 30px;
+  flex: 1;
 }
 
 .service-features li {
@@ -257,6 +260,7 @@
   overflow: hidden;
   text-decoration: none;
   font-family: inherit;
+  margin-top: auto;
 }
 
 .service-cta::before {
