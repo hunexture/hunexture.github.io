@@ -263,14 +263,155 @@
   box-shadow: 0 5px 15px var(--electric-blue-30);
 }
 
-@media (max-width: 968px) {
+/* Large Desktop */
+@media (min-width: 1440px) {
+  .portfolio-container {
+    max-width: 1300px;
+  }
+
   .portfolio-grid {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 28px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  .filter-btn {
+    padding: 14px 32px;
+    font-size: 15px;
+  }
+
+  .project-image {
+    height: 280px;
+  }
+
+  .project-content {
+    padding: 35px;
+  }
+
+  .project-title {
+    font-size: 24px;
+  }
+
+  .project-description {
+    font-size: 15px;
   }
 }
 
-@media (max-width: 768px) {
+/* Laptop */
+@media (max-width: 1439px) and (min-width: 1024px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  .filter-btn {
+    padding: 13px 30px;
+    font-size: 14px;
+  }
+
+  .project-image {
+    height: 260px;
+  }
+}
+
+/* Tablet Landscape */
+@media (max-width: 1023px) and (min-width: 769px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 55px;
+  }
+
+  .filter-tabs {
+    gap: 12px;
+    margin: 45px 0;
+  }
+
+  .filter-btn {
+    padding: 12px 26px;
+    font-size: 13px;
+  }
+
+  .project-image {
+    height: 240px;
+  }
+
+  .project-content {
+    padding: 28px;
+  }
+
+  .project-title {
+    font-size: 21px;
+  }
+
+  .project-description {
+    font-size: 14px;
+  }
+
+  .project-tag {
+    padding: 6px 13px;
+    font-size: 12px;
+  }
+}
+
+/* Tablet Portrait */
+@media (max-width: 768px) and (min-width: 481px) {
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 52px;
+  }
+
+  .portfolio-card:hover {
+    transform: translateY(-12px);
+  }
+
+  .filter-tabs {
+    gap: 10px;
+    margin: 42px 0;
+  }
+
+  .filter-btn {
+    padding: 11px 22px;
+    font-size: 13px;
+    min-height: 42px;
+  }
+
+  .filter-btn.active {
+    transform: scale(1.06);
+  }
+
+  .project-image {
+    height: 230px;
+  }
+
+  .project-content {
+    padding: 26px;
+  }
+
+  .project-title {
+    font-size: 20px;
+    margin-bottom: 13px;
+  }
+
+  .project-description {
+    font-size: 14px;
+    margin-bottom: 19px;
+  }
+
+  .project-tag {
+    padding: 6px 13px;
+    font-size: 12px;
+  }
+
+  .project-link {
+    width: 46px;
+    height: 46px;
+    font-size: 17px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
   .portfolio-grid {
     grid-template-columns: 1fr;
     gap: 22px;

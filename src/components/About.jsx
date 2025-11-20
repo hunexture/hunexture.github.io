@@ -1,26 +1,25 @@
 import React from 'react'
-import { FaLightbulb, FaUsers, FaRocket, FaChartLine } from 'react-icons/fa'
 import './About.css'
 
 const About = () => {
   const features = [
     {
-      icon: <FaLightbulb />,
+      icon: '💡',
       title: 'Innovation First',
       description: 'We stay ahead of technology trends, bringing cutting-edge solutions to every project.'
     },
     {
-      icon: <FaUsers />,
+      icon: '👥',
       title: 'Human-Centered',
       description: 'Technology serves people. We design experiences that put humans at the center.'
     },
     {
-      icon: <FaRocket />,
+      icon: '🚀',
       title: 'Rapid Delivery',
       description: 'Agile methodologies ensure we deliver quality solutions quickly and efficiently.'
     },
     {
-      icon: <FaChartLine />,
+      icon: '📈',
       title: 'Scalable Growth',
       description: 'Our solutions grow with your business, built for today and tomorrow.'
     }
