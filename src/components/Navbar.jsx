@@ -50,6 +50,7 @@ const Navbar = () => {
   const handleNavClick = (e, href) => {
     e.preventDefault()
     setMenuOpen(false)
+    setIndustriesOpen(false)
 
     // If we're not on the home page, navigate to home first
     if (location.pathname !== '/') {
@@ -60,6 +61,13 @@ const Navbar = () => {
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' })
       }
+    }
+  }
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen)
+    if (menuOpen) {
+      setIndustriesOpen(false)
     }
   }
 
@@ -102,10 +110,13 @@ const Navbar = () => {
           {/* Industries Dropdown */}
           <div
             className="nav-dropdown"
-            onMouseEnter={() => setIndustriesOpen(true)}
-            onMouseLeave={() => setIndustriesOpen(false)}
+            onMouseEnter={() => window.innerWidth > 768 && setIndustriesOpen(true)}
+            onMouseLeave={() => window.innerWidth > 768 && setIndustriesOpen(false)}
           >
-            <button className="nav-link dropdown-trigger">
+            <button
+              className="nav-link dropdown-trigger"
+              onClick={() => window.innerWidth <= 768 && setIndustriesOpen(!industriesOpen)}
+            >
               Industries <FaChevronDown className={`dropdown-arrow ${industriesOpen ? 'open' : ''}`} />
             </button>
             <div className={`dropdown-menu industries-dropdown ${industriesOpen ? 'show' : ''}`}>
@@ -158,7 +169,7 @@ const Navbar = () => {
 
           <button
             className={`hamburger ${menuOpen ? 'active' : ''}`}
-            onClick={() => setMenuOpen(!menuOpen)}
+            onClick={toggleMenu}
             aria-label="Toggle menu"
           >
             <span></span>
@@ -166,6 +177,15 @@ const Navbar = () => {
             <span></span>
           </button>
         </div>
+
+        {/* Mobile menu overlay */}
+        {menuOpen && (
+          <div
+            className="mobile-overlay"
+            onClick={toggleMenu}
+            aria-hidden="true"
+          />
+        )}
       </div>
     </nav>
   )

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaArrowLeft, FaCheck, FaRocket, FaLightbulb } from 'react-icons/fa';
-import { getIndustryBySlug } from '../data/industriesData';
+import { getIndustryBySlug, getTechIcon, getWhyChooseUsIcon } from '../data/industriesData';
 import './IndustryDetail.css';
 
 const IndustryDetail = () => {
@@ -167,24 +167,28 @@ const IndustryDetail = () => {
           >
             <h2>Technologies We Use</h2>
             <div className="technologies-list">
-              {industry.technologies.map((tech, index) => (
-                <motion.div
-                  key={index}
-                  className="tech-badge"
-                  style={{
-                    borderColor: industry.color,
-                    color: industry.color,
-                    boxShadow: `0 5px 15px ${industry.color}30`
-                  }}
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.1, y: -5 }}
-                >
-                  {tech}
-                </motion.div>
-              ))}
+              {industry.technologies.map((tech, index) => {
+                const TechIcon = getTechIcon(tech);
+                return (
+                  <motion.div
+                    key={index}
+                    className="tech-badge"
+                    style={{
+                      borderColor: industry.color,
+                      color: industry.color,
+                      boxShadow: `0 5px 15px ${industry.color}30`
+                    }}
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    whileHover={{ scale: 1.1, y: -5 }}
+                  >
+                    <TechIcon className="tech-icon" />
+                    <span>{tech}</span>
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.div>
         </div>
@@ -236,20 +240,25 @@ const IndustryDetail = () => {
             >
               <h2>Why Choose Us</h2>
               <div className="why-choose-grid">
-                {industry.whyChooseUs.map((reason, index) => (
-                  <motion.div
-                    key={index}
-                    className="why-choose-card"
-                    style={{ borderColor: `${industry.color}33` }}
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                  >
-                    <FaCheck className="check-icon" style={{ color: industry.color }} />
-                    <p>{reason}</p>
-                  </motion.div>
-                ))}
+                {industry.whyChooseUs.map((reason, index) => {
+                  const ReasonIcon = getWhyChooseUsIcon(reason);
+                  return (
+                    <motion.div
+                      key={index}
+                      className="why-choose-card"
+                      style={{ borderColor: `${industry.color}33` }}
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                    >
+                      <div className="why-choose-icon-wrapper" style={{ background: `${industry.color}20` }}>
+                        <ReasonIcon className="check-icon" style={{ color: industry.color }} />
+                      </div>
+                      <p>{reason}</p>
+                    </motion.div>
+                  );
+                })}
               </div>
             </motion.div>
           </div>

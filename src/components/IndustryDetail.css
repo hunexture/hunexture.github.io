@@ -237,6 +237,14 @@
   background: var(--electric-blue-05);
   transition: all 0.3s ease;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tech-badge .tech-icon {
+  font-size: 24px;
+  flex-shrink: 0;
 }
 
 .tech-badge:hover {
@@ -307,10 +315,24 @@
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
 }
 
+.why-choose-icon-wrapper {
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.why-choose-card:hover .why-choose-icon-wrapper {
+  transform: scale(1.1) rotate(5deg);
+}
+
 .check-icon {
   font-size: 22px;
   flex-shrink: 0;
-  margin-top: 2px;
 }
 
 .why-choose-card p {

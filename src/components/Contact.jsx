@@ -27,7 +27,7 @@ const Contact = () => {
 
     try {
       // Using FormSubmit.co - a free form backend service
-      const response = await fetch('https://formsubmit.co/hunexture@gmail.com', {
+      const response = await fetch('https://formsubmit.co/info@hunexture.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ const Contact = () => {
       }
     } catch (error) {
       console.error('Error submitting form:', error)
-      alert('There was an error sending your message. Please try again or contact us directly at hunexture@gmail.com')
+      alert('There was an error sending your message. Please try again or contact us directly at info@hunexture.com')
     } finally {
       setIsSubmitting(false)
     }
@@ -68,15 +68,15 @@ const Contact = () => {
     {
       icon: <FaEnvelope />,
       title: 'Email',
-      content: 'hunexture@gmail.com',
-      link: 'mailto:hunexture@gmail.com'
+      content: 'info@hunexture.com',
+      link: 'mailto:info@hunexture.com'
     },
-    {
-      icon: <FaPhone />,
-      title: 'Phone',
-      content: '+91 9067262552',
-      link: 'tel:+919067262552'
-    },
+    // {
+    //   icon: <FaPhone />,
+    //   title: 'Phone',
+    //   content: '+91 9067262552',
+    //   link: 'tel:+919067262552'
+    // },
     {
       icon: <FaMapMarkerAlt />,
       title: 'Location',

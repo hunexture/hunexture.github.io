@@ -11,8 +11,75 @@ import {
   FaDollarSign, FaWallet, FaChartPie, FaCheckCircle, FaUserFriends, FaComment,
   FaBell, FaFileInvoiceDollar, FaCalculator, FaRobot, FaCogs, FaNetworkWired,
   FaSignal, FaHeadset, FaCut, FaPalette, FaCamera, FaGift, FaMapMarkerAlt,
-  FaMoneyBillWave, FaShoppingBasket, FaBullhorn
+  FaMoneyBillWave, FaShoppingBasket, FaBullhorn, FaAward, FaLock, FaChartBar,
+  FaBrain, FaRocket, FaHandsHelping, FaCertificate, FaHeadphonesAlt, FaServer,
+  FaCode, FaNode, FaPython, FaReact, FaAws, FaMicrosoft as FaAzure, FaDocker,
+  FaGitAlt, FaJava
 } from 'react-icons/fa';
+import {
+  SiMongodb, SiPostgresql, SiRedis, SiElasticsearch, SiGooglemaps, SiStripe,
+  SiShopify, SiDjango, SiWebrtc, SiFfmpeg, SiBlockchaindotcom, SiApachekafka,
+  SiOracle, SiReact, SiNodedotjs, SiPython, SiJavascript, SiTypescript
+} from 'react-icons/si';
+
+// Technology icon mapper
+const getTechIcon = (techName) => {
+  const iconMap = {
+    'React': SiReact,
+    'React Native': SiReact,
+    'Node.js': SiNodedotjs,
+    'Python': SiPython,
+    'MongoDB': SiMongodb,
+    'PostgreSQL': SiPostgresql,
+    'Redis': SiRedis,
+    'Elasticsearch': SiElasticsearch,
+    'Google Maps': SiGooglemaps,
+    'Stripe': SiStripe,
+    'Shopify': SiShopify,
+    'Django': SiDjango,
+    'WebRTC': SiWebrtc,
+    'FFmpeg': SiFfmpeg,
+    'Blockchain': SiBlockchaindotcom,
+    'Kafka': SiApachekafka,
+    'Oracle': SiOracle,
+    'AWS': FaAws,
+    'AWS Media Services': FaAws,
+    'Azure': FaAzure,
+    'JavaScript': SiJavascript,
+    'TypeScript': SiTypescript,
+    'FHIR': FaDatabase,
+    'GPS API': FaMapMarkerAlt,
+    'CDN': FaServer,
+    'Payment Gateways': FaCreditCard,
+    'Google APIs': FaCode,
+    'GPS Tracking': FaMapMarkerAlt,
+    'Cloud Storage': FaCloud,
+    'Microservices': FaServer,
+    'WebSocket': FaNetworkWired,
+    'Java': FaJava,
+    'IoT Devices': FaRobot,
+    'AR/VR': FaCamera,
+    'AI/ML': FaBrain
+  };
+  return iconMap[techName] || FaCode;
+};
+
+// Why Choose Us icon mapper
+const getWhyChooseUsIcon = (text) => {
+  if (text.toLowerCase().includes('hipaa') || text.toLowerCase().includes('complian') || text.toLowerCase().includes('security')) return FaLock;
+  if (text.toLowerCase().includes('experience') || text.toLowerCase().includes('expertise')) return FaAward;
+  if (text.toLowerCase().includes('ai') || text.toLowerCase().includes('machine learning') || text.toLowerCase().includes('intelligent')) return FaBrain;
+  if (text.toLowerCase().includes('real-time') || text.toLowerCase().includes('fast') || text.toLowerCase().includes('rapid')) return FaRocket;
+  if (text.toLowerCase().includes('support') || text.toLowerCase().includes('service')) return FaHeadphonesAlt;
+  if (text.toLowerCase().includes('integration') || text.toLowerCase().includes('scalable')) return FaCogs;
+  if (text.toLowerCase().includes('user') || text.toLowerCase().includes('customer') || text.toLowerCase().includes('focus')) return FaUsers;
+  if (text.toLowerCase().includes('standard') || text.toLowerCase().includes('certified')) return FaCertificate;
+  if (text.toLowerCase().includes('track record') || text.toLowerCase().includes('proven')) return FaTrophy;
+  if (text.toLowerCase().includes('advanced') || text.toLowerCase().includes('cutting-edge')) return FaRocket;
+  if (text.toLowerCase().includes('custom') || text.toLowerCase().includes('tailored')) return FaHandsHelping;
+  if (text.toLowerCase().includes('quality') || text.toLowerCase().includes('excellence')) return FaStar;
+  return FaCheckCircle;
+};
 
 export const industriesData = [
   {
@@ -1086,3 +1153,5 @@ export const getIndustryBySlug = (slug) => {
 export const getAllIndustrySlugs = () => {
   return industriesData.map(industry => industry.slug);
 };
+
+export { getTechIcon, getWhyChooseUsIcon };

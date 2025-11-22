@@ -314,7 +314,7 @@
 }
 
 .tech-card:hover .tech-icon {
-  transform: scale(1.2) rotateY(360deg);
+  transform: scale(1.2) ;
   filter: drop-shadow(0 0 20px currentColor);
 }
 
@@ -389,7 +389,7 @@
 }
 
 .process-step:hover .step-number {
-  transform: scale(1.15) rotate(360deg);
+  transform: scale(1.15);
   box-shadow: 0 8px 30px var(--electric-blue-60);
 }
 
