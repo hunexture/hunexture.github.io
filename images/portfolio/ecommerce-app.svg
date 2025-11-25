@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <defs>
+    <linearGradient id="ecomGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#ecomGrad)"/>
+
+  <!-- Phone mockup -->
+  <rect x="250" y="50" width="300" height="500" rx="30" fill="#1a202c"/>
+  <rect x="270" y="90" width="260" height="430" rx="5" fill="#fff"/>
+
+  <!-- Status bar -->
+  <rect x="280" y="100" width="240" height="20" fill="#f7fafc"/>
+
+  <!-- Product image -->
+  <rect x="290" y="130" width="220" height="180" rx="8" fill="#fbb6ce"/>
+  <circle cx="400" cy="220" r="40" fill="#fff" opacity="0.3"/>
+
+  <!-- Product details -->
+  <rect x="290" y="325" width="180" height="15" rx="3" fill="#2d3748"/>
+  <rect x="290" y="350" width="120" height="12" rx="3" fill="#cbd5e0"/>
+  <rect x="290" y="370" width="140" height="12" rx="3" fill="#cbd5e0"/>
+
+  <!-- Price -->
+  <rect x="290" y="400" width="80" height="25" rx="5" fill="#f5576c"/>
+  <text x="300" y="418" font-family="Arial" font-size="14" font-weight="bold" fill="#fff">$299</text>
+
+  <!-- Add to cart button -->
+  <rect x="290" y="450" width="220" height="45" rx="8" fill="#f093fb"/>
+  <text x="350" y="478" font-family="Arial" font-size="14" font-weight="bold" fill="#fff">Add to Cart</text>
+
+  <!-- AR icon -->
+  <circle cx="490" cy="465" r="18" fill="#fff" opacity="0.3"/>
+  <path d="M 485 460 L 490 455 L 495 460 M 485 470 L 490 475 L 495 470" stroke="#f5576c" stroke-width="2" fill="none"/>
+
+  <!-- Floating elements -->
+  <circle cx="150" cy="200" r="30" fill="#fff" opacity="0.2"/>
+  <circle cx="650" cy="350" r="40" fill="#fff" opacity="0.2"/>
+  <rect x="580" y="150" width="60" height="60" rx="10" fill="#fff" opacity="0.15"/>
+</svg>
