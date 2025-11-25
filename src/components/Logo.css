@@ -1,0 +1,200 @@
+.hunexture-logo {
+  display: inline-block;
+  user-select: none;
+}
+
+/* Image-based logo */
+.hunexture-logo-image {
+  display: inline-block;
+  user-select: none;
+  line-height: 0;
+}
+
+.logo-img {
+  display: block;
+  height: auto;
+  transition: all 0.3s ease;
+}
+
+/* Image size variants */
+.hunexture-logo-image.small .logo-img {
+  height: 30px;
+}
+
+.hunexture-logo-image.medium .logo-img {
+  height: 40px;
+}
+
+.hunexture-logo-image.large .logo-img {
+  height: 50px;
+}
+
+.hunexture-logo-image.xlarge .logo-img {
+  height: 70px;
+}
+
+/* Hover effect for image logo */
+.hunexture-logo-image:hover .logo-img {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+.logo-text {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 800;
+  letter-spacing: 3px;
+  display: inline-block;
+  position: relative;
+}
+
+/* X styling with angular design */
+.logo-x {
+  position: relative;
+  display: inline-block;
+  font-weight: 900;
+  margin: 0 -2px;
+}
+
+.logo-x::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  transition: all 0.3s ease;
+}
+
+.logo-x::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  transition: all 0.3s ease;
+}
+
+/* Size variants */
+.hunexture-logo.small .logo-text {
+  font-size: 20px;
+  letter-spacing: 2px;
+}
+
+.hunexture-logo.medium .logo-text {
+  font-size: 24px;
+  letter-spacing: 3px;
+}
+
+.hunexture-logo.large .logo-text {
+  font-size: 32px;
+  letter-spacing: 4px;
+}
+
+.hunexture-logo.xlarge .logo-text {
+  font-size: 48px;
+  letter-spacing: 5px;
+}
+
+/* Color variants */
+.hunexture-logo.gradient .logo-text {
+  background: var(--gradient-1);
+  -webkit-background-clip: text;
+  /* -webkit-text-fill-color: transparent; */
+  background-clip: text;
+}
+
+.hunexture-logo.white .logo-text {
+  color: var(--text-white);
+}
+
+.hunexture-logo.electric .logo-text {
+  color: var(--electric-blue);
+}
+
+/* Hover effect */
+.hunexture-logo:hover .logo-x::before {
+  transform: translate(-50%, -50%) rotate(45deg) scale(1.2);
+}
+
+.hunexture-logo:hover .logo-x::after {
+  transform: translate(-50%, -50%) rotate(-45deg) scale(1.2);
+}
+
+/* Animated variant */
+.hunexture-logo.animated .logo-x {
+  animation: rotateX 2s ease-in-out infinite;
+}
+
+@keyframes rotateX {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(90deg);
+  }
+}
+
+/* Glow effect */
+.hunexture-logo.glow .logo-text {
+  text-shadow: 0 0 20px var(--electric-blue-50),
+               0 0 40px var(--electric-blue-30),
+               0 0 60px var(--electric-blue-20);
+}
+
+/* Underline effect */
+.hunexture-logo-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.logo-underline {
+  height: 3px;
+  background: var(--gradient-1);
+  width: 0;
+  transition: width 0.3s ease;
+  margin-top: 2px;
+}
+
+.hunexture-logo-wrapper:hover .logo-underline {
+  width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hunexture-logo.medium .logo-text {
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+
+  .hunexture-logo.large .logo-text {
+    font-size: 28px;
+    letter-spacing: 3px;
+  }
+
+  .hunexture-logo.xlarge .logo-text {
+    font-size: 36px;
+    letter-spacing: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hunexture-logo.medium .logo-text {
+    font-size: 18px;
+    letter-spacing: 1.5px;
+  }
+
+  .hunexture-logo.large .logo-text {
+    font-size: 24px;
+    letter-spacing: 2px;
+  }
+
+  .hunexture-logo.xlarge .logo-text {
+    font-size: 32px;
+    letter-spacing: 3px;
+  }
+}

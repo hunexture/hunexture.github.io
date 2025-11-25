@@ -1,0 +1,672 @@
+import {
+  FaHeartbeat, FaBalanceScale, FaTruck, FaGraduationCap, FaVideo, FaPlane,
+  FaShoppingBag, FaHardHat, FaBasketballBall, FaStore, FaCreditCard, FaInstagram,
+  FaShieldAlt, FaIndustry, FaWifi, FaSpa, FaStar, FaShoppingCart, FaHospital,
+  FaStethoscope, FaUsers, FaChartLine, FaFileAlt, FaCalendarAlt, FaGavel,
+  FaSearch, FaComments, FaClock, FaMap, FaWarehouse, FaBoxes, FaRoute,
+  FaBook, FaChalkboardTeacher, FaLaptop, FaClipboardCheck, FaMobileAlt,
+  FaFilm, FaCloud, FaTv, FaHotel, FaTicketAlt, FaUserTie, FaCashRegister,
+  FaHeart, FaTag, FaBuilding, FaTools, FaFileSignature, FaHardHat as FaHelmet,
+  FaTrophy, FaFutbol, FaMedal, FaDatabase, FaHandshake, FaStar as FaRating,
+  FaDollarSign, FaWallet, FaChartPie, FaCheckCircle, FaUserFriends, FaComment,
+  FaBell, FaFileInvoiceDollar, FaCalculator, FaRobot, FaCogs, FaNetworkWired,
+  FaSignal, FaHeadset, FaCut, FaPalette, FaCamera, FaGift, FaMapMarkerAlt,
+  FaMoneyBillWave, FaShoppingBasket, FaMegaphone
+} from 'react-icons/fa';
+
+export const industriesData = [
+  {
+    id: 'healthcare',
+    slug: 'healthcare',
+    name: 'Healthcare',
+    icon: FaHeartbeat,
+    shortDescription: 'Digital transformation for modern healthcare',
+    description: 'Transform patient care with cutting-edge technology solutions. We help healthcare organizations improve patient outcomes, streamline operations, and ensure compliance with HIPAA and other regulations.',
+    image: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    services: [
+      { name: 'Electronic Health Records (EHR)', icon: FaFileAlt },
+      { name: 'Telemedicine Platforms', icon: FaStethoscope },
+      { name: 'Patient Portal Development', icon: FaUsers },
+      { name: 'Healthcare Analytics', icon: FaChartLine },
+      { name: 'Medical Imaging Solutions', icon: FaHospital },
+      { name: 'Appointment Scheduling Systems', icon: FaCalendarAlt }
+    ],
+    benefits: [
+      'Improved patient care and outcomes',
+      'Enhanced operational efficiency',
+      'HIPAA compliance and data security',
+      'Better patient engagement',
+      'Reduced administrative costs'
+    ],
+    challenges: [
+      'Data security and privacy compliance',
+      'Integration with legacy systems',
+      'Managing patient data across platforms',
+      'Ensuring system uptime and reliability'
+    ],
+    whyChooseUs: [
+      'HIPAA-compliant solutions built from the ground up',
+      'Experience with major healthcare providers',
+      'Expertise in HL7 and FHIR standards',
+      'Focus on user-friendly patient experiences'
+    ],
+    faq: [
+      {
+        question: 'How do you ensure HIPAA compliance?',
+        answer: 'We follow strict HIPAA guidelines in all development phases, including encryption, access controls, audit logs, and regular security assessments.'
+      },
+      {
+        question: 'Can you integrate with existing EHR systems?',
+        answer: 'Yes, we have extensive experience integrating with major EHR systems using HL7, FHIR, and custom APIs.'
+      },
+      {
+        question: 'What is the typical timeline for a healthcare project?',
+        answer: 'Timeline varies based on complexity, but most projects range from 3-9 months including planning, development, testing, and deployment.'
+      }
+    ],
+    caseStudies: [
+      {
+        title: 'Telemedicine Platform',
+        description: 'Built a comprehensive telehealth solution serving 50,000+ patients',
+        results: '10,000+ virtual consultations per month'
+      }
+    ],
+    technologies: ['React', 'Node.js', 'FHIR', 'WebRTC', 'AWS'],
+    color: '#667eea'
+  },
+  {
+    id: 'legal',
+    slug: 'legal',
+    name: 'Legal',
+    icon: FaBalanceScale,
+    shortDescription: 'Technology solutions for law firms',
+    description: 'Empower legal professionals with innovative technology. From case management to document automation, we help law firms work smarter and serve clients better.',
+    image: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+    services: [
+      { name: 'Case Management Systems', icon: FaGavel },
+      { name: 'Document Automation', icon: FaFileAlt },
+      { name: 'Legal Research Tools', icon: FaSearch },
+      { name: 'Client Portals', icon: FaUsers },
+      { name: 'Billing & Time Tracking', icon: FaClock },
+      { name: 'E-Discovery Solutions', icon: FaDatabase }
+    ],
+    benefits: [
+      'Streamlined case management',
+      'Improved client communication',
+      'Automated document generation',
+      'Secure data handling',
+      'Better time and billing accuracy'
+    ],
+    challenges: [
+      'Managing large volumes of case documents',
+      'Ensuring data confidentiality and security',
+      'Tracking billable hours accurately',
+      'Coordinating across multiple cases and clients'
+    ],
+    whyChooseUs: [
+      'Built-in security and confidentiality features',
+      'Experience with legal workflow automation',
+      'Integration with court filing systems',
+      'Customizable to different practice areas'
+    ],
+    faq: [
+      {
+        question: 'Is the system secure for confidential legal documents?',
+        answer: 'Yes, we implement bank-level encryption, role-based access control, and audit trails to ensure complete confidentiality and security.'
+      },
+      {
+        question: 'Can it integrate with existing legal research databases?',
+        answer: 'Absolutely. We provide integrations with major legal research platforms like Westlaw, LexisNexis, and others.'
+      },
+      {
+        question: 'How does the billing and time tracking work?',
+        answer: 'Our system offers automatic time tracking, customizable billing rates, and integration with accounting software for seamless invoicing.'
+      }
+    ],
+    caseStudies: [
+      {
+        title: 'Case Management Platform',
+        description: 'Developed comprehensive legal practice management software',
+        results: '500+ law firms using the platform'
+      }
+    ],
+    technologies: ['React', 'Python', 'PostgreSQL', 'Elasticsearch', 'Azure'],
+    color: '#4facfe'
+  },
+  {
+    id: 'logistics',
+    slug: 'logistics',
+    name: 'Logistics',
+    icon: FaTruck,
+    shortDescription: 'Smart solutions for supply chain management',
+    description: 'Optimize your supply chain with intelligent logistics solutions. Real-time tracking, route optimization, and predictive analytics to keep your business moving.',
+    image: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+    services: [
+      'Fleet Management Systems',
+      'Route Optimization',
+      'Warehouse Management',
+      'Real-time Tracking',
+      'Inventory Management',
+      'Last-Mile Delivery Solutions'
+    ],
+    benefits: [
+      'Real-time shipment visibility',
+      'Reduced operational costs',
+      'Optimized delivery routes',
+      'Improved customer satisfaction',
+      'Better inventory control'
+    ],
+    caseStudies: [
+      {
+        title: 'Fleet Tracking System',
+        description: 'Real-time tracking solution for 1,000+ vehicles',
+        results: '30% reduction in fuel costs'
+      }
+    ],
+    technologies: ['React Native', 'Node.js', 'MongoDB', 'GPS API', 'Google Maps'],
+    color: '#f093fb'
+  },
+  {
+    id: 'education',
+    slug: 'education',
+    name: 'Education',
+    icon: FaGraduationCap,
+    shortDescription: 'EdTech solutions for modern learning',
+    description: 'Transform education with innovative learning platforms. From LMS to virtual classrooms, we help educational institutions deliver engaging digital experiences.',
+    image: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
+    services: [
+      'Learning Management Systems',
+      'Virtual Classroom Platforms',
+      'Student Information Systems',
+      'E-Learning Content Creation',
+      'Assessment & Grading Tools',
+      'Parent-Teacher Communication'
+    ],
+    benefits: [
+      'Enhanced learning experiences',
+      'Remote learning capabilities',
+      'Personalized education paths',
+      'Better student engagement',
+      'Streamlined administration'
+    ],
+    caseStudies: [
+      {
+        title: 'Online Learning Platform',
+        description: 'Built LMS platform serving 100,000+ students',
+        results: '95% student satisfaction rate'
+      }
+    ],
+    technologies: ['React', 'Django', 'PostgreSQL', 'WebRTC', 'AWS'],
+    color: '#30cfd0'
+  },
+  {
+    id: 'media-ott',
+    slug: 'media-ott',
+    name: 'Media & OTT',
+    icon: FaVideo,
+    shortDescription: 'Streaming and content delivery platforms',
+    description: 'Build the next generation of media and entertainment platforms. From OTT streaming to content management, we create engaging digital experiences.',
+    image: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+    services: [
+      'OTT Platform Development',
+      'Video Streaming Solutions',
+      'Content Management Systems',
+      'Live Streaming Applications',
+      'Subscription Management',
+      'Analytics & Recommendations'
+    ],
+    benefits: [
+      'Scalable streaming infrastructure',
+      'Multi-device compatibility',
+      'AI-powered recommendations',
+      'Monetization options',
+      'Real-time analytics'
+    ],
+    caseStudies: [
+      {
+        title: 'OTT Streaming Platform',
+        description: 'Developed Netflix-like platform with 1M+ subscribers',
+        results: '10M+ hours of content streamed monthly'
+      }
+    ],
+    technologies: ['React', 'Node.js', 'FFmpeg', 'AWS Media Services', 'CDN'],
+    color: '#fa709a'
+  },
+  {
+    id: 'travel',
+    slug: 'travel',
+    name: 'Travel',
+    icon: FaPlane,
+    shortDescription: 'Digital solutions for travel and hospitality',
+    description: 'Transform the travel experience with innovative technology. Booking systems, itinerary management, and personalized recommendations.',
+    image: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    services: [
+      'Booking Management Systems',
+      'Travel Itinerary Planners',
+      'Hotel Management Software',
+      'Flight Booking Platforms',
+      'Tour & Activity Booking',
+      'Travel CRM Solutions'
+    ],
+    benefits: [
+      'Seamless booking experience',
+      'Real-time availability updates',
+      'Personalized recommendations',
+      'Multi-currency support',
+      'Mobile-first solutions'
+    ],
+    caseStudies: [
+      {
+        title: 'Travel Booking Platform',
+        description: 'Built comprehensive travel booking system',
+        results: '500K+ bookings processed annually'
+      }
+    ],
+    technologies: ['React', 'Node.js', 'MongoDB', 'Payment Gateways', 'Google APIs'],
+    color: '#667eea'
+  },
+  {
+    id: 'retail',
+    slug: 'retail',
+    name: 'Retail',
+    icon: FaShoppingBag,
+    shortDescription: 'E-commerce and retail technology',
+    description: 'Modernize retail operations with digital solutions. From e-commerce platforms to POS systems, we help retailers thrive in the digital age.',
+    image: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+    services: [
+      'E-Commerce Platforms',
+      'POS Systems',
+      'Inventory Management',
+      'Customer Loyalty Programs',
+      'Omnichannel Solutions',
+      'Retail Analytics'
+    ],
+    benefits: [
+      'Increased online sales',
+      'Better inventory visibility',
+      'Enhanced customer experience',
+      'Multi-channel integration',
+      'Data-driven insights'
+    ],
+    caseStudies: [
+      {
+        title: 'E-Commerce Platform',
+        description: 'Built modern online store with AR features',
+        results: '3x increase in online conversion rate'
+      }
+    ],
+    technologies: ['React', 'Node.js', 'MongoDB', 'Stripe', 'Shopify'],
+    color: '#4facfe'
+  },
+  {
+    id: 'construction',
+    slug: 'construction',
+    name: 'Construction',
+    icon: FaHardHat,
+    shortDescription: 'Construction management solutions',
+    description: 'Build better with digital tools. Project management, resource planning, and site tracking solutions for modern construction.',
+    image: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+    services: [
+      'Project Management Software',
+      'Resource Planning Tools',
+      'Site Tracking & Monitoring',
+      'Document Management',
+      'Equipment Tracking',
+      'Safety Compliance Tools'
+    ],
+    benefits: [
+      'Improved project visibility',
+      'Better resource utilization',
+      'Reduced project delays',
+      'Enhanced safety compliance',
+      'Real-time progress tracking'
+    ],
+    caseStudies: [
+      {
+        title: 'Construction Management Platform',
+        description: 'Developed comprehensive project management solution',
+        results: '50+ construction projects managed'
+      }
+    ],
+    technologies: ['React', 'Python', 'PostgreSQL', 'GPS Tracking', 'Cloud Storage'],
+    color: '#f093fb'
+  },
+  {
+    id: 'sports',
+    slug: 'sports',
+    name: 'Sports',
+    icon: FaBasketballBall,
+    shortDescription: 'Sports technology and fan engagement',
+    description: 'Engage fans and optimize performance with sports technology. From fan apps to performance analytics, we bring innovation to sports.',
+    image: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
+    services: [
+      'Fan Engagement Apps',
+      'Sports Analytics Platforms',
+      'Ticket Booking Systems',
+      'Live Score Applications',
+      'Fantasy Sports Platforms',
+      'Athlete Performance Tracking'
+    ],
+    benefits: [
+      'Enhanced fan engagement',
+      'Real-time statistics',
+      'Better ticket sales',
+      'Performance insights',
+      'Social media integration'
+    ],
+    caseStudies: [
+      {
+        title: 'Sports Fan App',
+        description: 'Built fan engagement platform for major league',
+        results: '1M+ active users'
+      }
+    ],
+    technologies: ['React Native', 'Node.js', 'Redis', 'WebSocket', 'AWS'],
+    color: '#30cfd0'
+  },
+  {
+    id: 'marketplace',
+    slug: 'marketplace',
+    name: 'Marketplace',
+    icon: FaStore,
+    shortDescription: 'Multi-vendor marketplace platforms',
+    description: 'Build thriving marketplaces that connect buyers and sellers. Scalable platforms with robust features for multi-vendor success.',
+    image: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+    services: [
+      'Multi-Vendor Platforms',
+      'Vendor Management Systems',
+      'Payment Gateway Integration',
+      'Rating & Review Systems',
+      'Order Management',
+      'Analytics Dashboards'
+    ],
+    benefits: [
+      'Scalable marketplace infrastructure',
+      'Secure payment processing',
+      'Vendor onboarding tools',
+      'Advanced search & filters',
+      'Commission management'
+    ],
+    caseStudies: [
+      {
+        title: 'Online Marketplace',
+        description: 'Built marketplace platform with 10,000+ vendors',
+        results: '$10M+ in monthly transactions'
+      }
+    ],
+    technologies: ['React', 'Node.js', 'MongoDB', 'Stripe', 'Elasticsearch'],
+    color: '#fa709a'
+  },
+  {
+    id: 'finance',
+    slug: 'finance',
+    name: 'Finance',
+    icon: FaCreditCard,
+    shortDescription: 'FinTech and banking solutions',
+    description: 'Transform financial services with innovative technology. Secure, compliant, and user-friendly solutions for modern finance.',
+    image: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    services: [
+      'Banking Applications',
+      'Payment Processing',
+      'Investment Platforms',
+      'Loan Management Systems',
+      'Financial Analytics',
+      'Compliance & Reporting'
+    ],
+    benefits: [
+      'Secure transactions',
+      'Regulatory compliance',
+      'Real-time analytics',
+      'Fraud detection',
+      'Customer satisfaction'
+    ],
+    caseStudies: [
+      {
+        title: 'Digital Banking Platform',
+        description: 'Built mobile banking app for regional bank',
+        results: '500K+ active users'
+      }
+    ],
+    technologies: ['React', 'Node.js', 'PostgreSQL', 'Blockchain', 'AWS'],
+    color: '#667eea'
+  },
+  {
+    id: 'social-media',
+    slug: 'social-media',
+    name: 'Social Media',
+    icon: FaInstagram,
+    shortDescription: 'Social networking and community platforms',
+    description: 'Build engaging social platforms that connect people. From social networks to community forums, we create spaces for interaction.',
+    image: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+    services: [
+      'Social Network Development',
+      'Community Forums',
+      'Real-time Chat Systems',
+      'Content Management',
+      'User Authentication',
+      'Moderation Tools'
+    ],
+    benefits: [
+      'Real-time interactions',
+      'Scalable infrastructure',
+      'Content moderation',
+      'User engagement tools',
+      'Analytics & insights'
+    ],
+    caseStudies: [
+      {
+        title: 'Social Platform',
+        description: 'Developed niche social network',
+        results: '2M+ registered users'
+      }
+    ],
+    technologies: ['React', 'Node.js', 'MongoDB', 'WebSocket', 'Redis'],
+    color: '#4facfe'
+  },
+  {
+    id: 'insurance',
+    slug: 'insurance',
+    name: 'Insurance',
+    icon: FaShieldAlt,
+    shortDescription: 'Insurance technology solutions',
+    description: 'Modernize insurance operations with digital solutions. From policy management to claims processing, streamline your insurance business.',
+    image: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+    services: [
+      'Policy Management Systems',
+      'Claims Processing Automation',
+      'Underwriting Platforms',
+      'Customer Portals',
+      'Risk Assessment Tools',
+      'Insurance Analytics'
+    ],
+    benefits: [
+      'Faster claims processing',
+      'Automated underwriting',
+      'Better risk assessment',
+      'Improved customer service',
+      'Regulatory compliance'
+    ],
+    caseStudies: [
+      {
+        title: 'Insurance Management Platform',
+        description: 'Built comprehensive insurance management system',
+        results: '100K+ policies managed'
+      }
+    ],
+    technologies: ['React', 'Python', 'PostgreSQL', 'AI/ML', 'AWS'],
+    color: '#f093fb'
+  },
+  {
+    id: 'manufacturing',
+    slug: 'manufacturing',
+    name: 'Manufacturing',
+    icon: FaIndustry,
+    shortDescription: 'Industry 4.0 and smart manufacturing',
+    description: 'Transform manufacturing with Industry 4.0 solutions. IoT, automation, and analytics for smarter production.',
+    image: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
+    services: [
+      'Production Planning Systems',
+      'Quality Management',
+      'IoT & Automation',
+      'Inventory Control',
+      'Predictive Maintenance',
+      'Supply Chain Integration'
+    ],
+    benefits: [
+      'Improved production efficiency',
+      'Reduced downtime',
+      'Better quality control',
+      'Real-time monitoring',
+      'Cost optimization'
+    ],
+    caseStudies: [
+      {
+        title: 'Smart Factory Solution',
+        description: 'Implemented IoT-based manufacturing solution',
+        results: '40% increase in productivity'
+      }
+    ],
+    technologies: ['React', 'Python', 'IoT Devices', 'MongoDB', 'Azure'],
+    color: '#30cfd0'
+  },
+  {
+    id: 'it-telecom',
+    slug: 'it-telecom',
+    name: 'IT & Telecom',
+    icon: FaWifi,
+    shortDescription: 'Telecom and IT infrastructure solutions',
+    description: 'Build the backbone of digital communication. Network management, service provisioning, and customer management solutions.',
+    image: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+    services: [
+      'Network Management Systems',
+      'Service Provisioning',
+      'Billing & Revenue Management',
+      'Customer Care Platforms',
+      'Telecom Analytics',
+      'OSS/BSS Solutions'
+    ],
+    benefits: [
+      'Network optimization',
+      'Improved service delivery',
+      'Accurate billing',
+      'Better customer support',
+      'Real-time monitoring'
+    ],
+    caseStudies: [
+      {
+        title: 'Telecom Management Platform',
+        description: 'Built network management solution',
+        results: 'Serving 1M+ subscribers'
+      }
+    ],
+    technologies: ['React', 'Java', 'Oracle', 'Kafka', 'Microservices'],
+    color: '#fa709a'
+  },
+  {
+    id: 'beauty-lifestyle',
+    slug: 'beauty-lifestyle',
+    name: 'Beauty & Lifestyle',
+    icon: FaSpa,
+    shortDescription: 'Beauty and wellness technology',
+    description: 'Enhance beauty and wellness businesses with digital solutions. Booking systems, inventory management, and customer engagement tools.',
+    image: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    services: [
+      'Salon Booking Systems',
+      'Inventory Management',
+      'Customer Loyalty Programs',
+      'E-Commerce Platforms',
+      'Virtual Try-On Solutions',
+      'CRM Systems'
+    ],
+    benefits: [
+      'Streamlined bookings',
+      'Better customer retention',
+      'Inventory optimization',
+      'Online sales growth',
+      'Enhanced customer experience'
+    ],
+    caseStudies: [
+      {
+        title: 'Beauty Booking Platform',
+        description: 'Built appointment booking platform for salons',
+        results: '50K+ appointments booked monthly'
+      }
+    ],
+    technologies: ['React', 'Node.js', 'MongoDB', 'AR/VR', 'Stripe'],
+    color: '#667eea'
+  },
+  {
+    id: 'on-demand',
+    slug: 'on-demand',
+    name: 'On Demand',
+    icon: FaStar,
+    shortDescription: 'On-demand service platforms',
+    description: 'Build on-demand platforms that connect service providers with customers. Real-time matching, tracking, and payment solutions.',
+    image: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+    services: [
+      'Service Marketplace Platforms',
+      'Real-time Matching Algorithms',
+      'GPS Tracking Systems',
+      'Payment Integration',
+      'Rating & Review Systems',
+      'Multi-sided Platforms'
+    ],
+    benefits: [
+      'Real-time service matching',
+      'Efficient operations',
+      'Scalable platform',
+      'Secure payments',
+      'Quality assurance'
+    ],
+    caseStudies: [
+      {
+        title: 'On-Demand Service Platform',
+        description: 'Built Uber-like platform for home services',
+        results: '100K+ service providers onboarded'
+      }
+    ],
+    technologies: ['React Native', 'Node.js', 'MongoDB', 'Google Maps', 'Stripe'],
+    color: '#4facfe'
+  },
+  {
+    id: 'ecommerce',
+    slug: 'ecommerce',
+    name: 'E-Commerce',
+    icon: FaShoppingCart,
+    shortDescription: 'Full-stack e-commerce solutions',
+    description: 'Build powerful e-commerce platforms that drive sales. From storefronts to payment processing, complete e-commerce solutions.',
+    image: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+    services: [
+      'E-Commerce Website Development',
+      'Mobile Commerce Apps',
+      'Payment Gateway Integration',
+      'Inventory Management',
+      'Order Fulfillment',
+      'Marketing Automation'
+    ],
+    benefits: [
+      'Increased online sales',
+      'Better conversion rates',
+      'Seamless checkout',
+      'Multi-channel selling',
+      'Customer insights'
+    ],
+    caseStudies: [
+      {
+        title: 'E-Commerce Platform',
+        description: 'Built enterprise e-commerce solution',
+        results: '$50M+ annual revenue'
+      }
+    ],
+    technologies: ['React', 'Node.js', 'MongoDB', 'Stripe', 'AWS'],
+    color: '#f093fb'
+  }
+];
+
+export const getIndustryBySlug = (slug) => {
+  return industriesData.find(industry => industry.slug === slug);
+};
+
+export const getAllIndustrySlugs = () => {
+  return industriesData.map(industry => industry.slug);
+};

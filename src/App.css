@@ -1,0 +1,266 @@
+.App {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Section base styles */
+section {
+  position: relative;
+  padding: 100px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Advanced Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes rotateIn {
+  from {
+    transform: rotate(-180deg) scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--electric-blue-30),
+                0 0 40px var(--electric-blue-20),
+                0 0 60px var(--electric-blue-10);
+  }
+  50% {
+    box-shadow: 0 0 30px var(--electric-blue-50),
+                0 0 60px var(--electric-blue-30),
+                0 0 90px var(--electric-blue-20);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes textGlow {
+  0%, 100% {
+    text-shadow: 0 0 10px var(--electric-blue-50),
+                 0 0 20px var(--electric-blue-30),
+                 0 0 30px var(--electric-blue-20);
+  }
+  50% {
+    text-shadow: 0 0 20px var(--electric-blue-80),
+                 0 0 40px var(--electric-blue-50),
+                 0 0 60px var(--electric-blue-30);
+  }
+}
+
+@keyframes borderGlow {
+  0%, 100% {
+    border-color: var(--electric-blue-30);
+  }
+  50% {
+    border-color: var(--electric-blue-80);
+  }
+}
+
+/* Perspective container for 3D effects */
+.perspective-container {
+  perspective: 1000px;
+}
+
+/* 3D Transform utilities */
+.transform-3d {
+  transform-style: preserve-3d;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom cursor effect */
+body {
+  cursor: default;
+}
+
+a, button {
+  cursor: pointer;
+}
+
+/* Responsive */
+/* Large Desktop */
+@media (min-width: 1920px) {
+  section {
+    padding: 120px 50px;
+  }
+
+  .container {
+    max-width: 1400px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1440px) and (max-width: 1919px) {
+  section {
+    padding: 110px 40px;
+  }
+
+  .container {
+    max-width: 1300px;
+  }
+}
+
+/* Laptop */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  section {
+    padding: 100px 30px;
+  }
+
+  .container {
+    max-width: 1100px;
+  }
+}
+
+/* Tablet Landscape */
+@media (max-width: 1023px) and (min-width: 769px) {
+  section {
+    padding: 80px 30px;
+  }
+
+  .container {
+    padding: 0 30px;
+  }
+}
+
+/* Tablet Portrait */
+@media (max-width: 768px) and (min-width: 481px) {
+  section {
+    padding: 60px 25px;
+  }
+
+  .container {
+    padding: 0 25px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  section {
+    padding: 50px 20px;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 375px) {
+  section {
+    padding: 40px 15px;
+  }
+
+  .container {
+    padding: 0 15px;
+  }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
