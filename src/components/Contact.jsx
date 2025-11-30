@@ -77,12 +77,12 @@ const Contact = () => {
     //   content: '+91 9067262552',
     //   link: 'tel:+919067262552'
     // },
-    {
-      icon: <FaMapMarkerAlt />,
-      title: 'Location',
-      content: 'Ahmedabad, Gujarat',
-      link: '#'
-    }
+    // {
+    //   icon: <FaMapMarkerAlt />,
+    //   title: 'Location',
+    //   content: 'Ahmedabad, Gujarat',
+    //   link: '#'
+    // }
   ]
 
   const socialLinks = [
@@ -206,10 +206,10 @@ const Contact = () => {
                 <FaEnvelope className="btn-icon" />
               </button>
 
-              <button type="button" className="whatsapp-btn" onClick={handleWhatsApp}>
+              {/* <button type="button" className="whatsapp-btn" onClick={handleWhatsApp}>
                 Send via WhatsApp
                 <FaWhatsapp className="btn-icon" />
-              </button>
+              </button> */}
             </div>
           </form>
         </div>

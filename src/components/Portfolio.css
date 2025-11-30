@@ -263,6 +263,79 @@
   box-shadow: 0 5px 15px var(--electric-blue-30);
 }
 
+/* Load More Button */
+.load-more-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+  animation: fadeInUp 0.8s ease backwards;
+}
+
+.load-more-btn {
+  padding: 16px 40px;
+  background: var(--gradient-1);
+  color: var(--dark-black);
+  border: none;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: 'Orbitron', sans-serif;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px var(--electric-blue-40);
+}
+
+.load-more-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: var(--electric-blue);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+  z-index: -1;
+}
+
+.load-more-btn:hover {
+  /* transform: translateY(-5px) scale(1.05); */
+  box-shadow: 0 15px 40px var(--electric-blue-60);
+}
+
+.load-more-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.chevron-icon {
+  transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  font-size: 14px;
+}
+
+.chevron-icon.rotated {
+  transform: rotate(180deg);
+}
+
+.load-more-btn:hover .chevron-icon {
+  animation: bounce 1s ease infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
 /* Large Desktop */
 @media (min-width: 1440px) {
   .portfolio-container {
@@ -408,6 +481,15 @@
     height: 46px;
     font-size: 17px;
   }
+
+  .load-more-container {
+    margin-top: 50px;
+  }
+
+  .load-more-btn {
+    padding: 14px 32px;
+    font-size: 14px;
+  }
 }
 
 /* Mobile */
@@ -465,9 +547,23 @@
     height: 45px;
     font-size: 16px;
   }
+
+  .load-more-container {
+    margin-top: 45px;
+  }
+
+  .load-more-btn {
+    padding: 13px 28px;
+    font-size: 13px;
+    gap: 10px;
+  }
+
+  .chevron-icon {
+    font-size: 12px;
+  }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 380px) {
   .filter-tabs {
     gap: 6px;
   }
@@ -497,5 +593,10 @@
   .project-tag {
     padding: 4px 10px;
     font-size: 10px;
+  }
+
+  .load-more-btn {
+    padding: 12px 24px;
+    font-size: 12px;
   }
 }

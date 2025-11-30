@@ -1,4 +1,4 @@
-import { FaBrain, FaCode, FaMobile, FaCloud, FaPaintBrush, FaRobot, FaDatabase, FaChartLine, FaEye, FaReact, FaNodeJs, FaServer, FaAndroid, FaApple, FaCog, FaAws, FaDocker, FaGitAlt, FaFigma, FaPalette, FaUsers, FaTools, FaCamera, FaComments, FaShoppingCart, FaBuilding, FaLayerGroup, FaTruck, FaUserFriends, FaHeartbeat, FaBriefcase, FaCloudUploadAlt, FaCubes, FaCodeBranch, FaBolt, FaMagic, FaMobileAlt, FaSearchPlus } from 'react-icons/fa';
+import { FaBrain, FaCode, FaMobile, FaCloud, FaPaintBrush, FaRobot, FaDatabase, FaChartLine, FaEye, FaReact, FaNodeJs, FaServer, FaAndroid, FaApple, FaCog, FaAws, FaDocker, FaGitAlt, FaFigma, FaPalette, FaUsers, FaTools, FaCamera, FaComments, FaShoppingCart, FaBuilding, FaLayerGroup, FaTruck, FaUserFriends, FaHeartbeat, FaBriefcase, FaCloudUploadAlt, FaCubes, FaCodeBranch, FaBolt, FaMagic, FaMobileAlt, FaSearchPlus, FaBullhorn, FaGoogle, FaFacebookF, FaInstagram, FaEnvelope, FaSearch, FaPencilAlt } from 'react-icons/fa';
 
 export const servicesData = [
   {
@@ -393,6 +393,85 @@ export const servicesData = [
       {
         question: 'Can you work with our developers?',
         answer: 'Absolutely! We collaborate closely with development teams to ensure designs are implemented correctly.'
+      }
+    ]
+  },
+  {
+    id: 'digital-marketing',
+    slug: 'digital-marketing',
+    icon: FaBullhorn,
+    title: 'Digital Marketing',
+    shortDescription: 'Data-driven marketing strategies that deliver results',
+    description: 'Grow your online presence and reach your target audience with comprehensive digital marketing strategies. We combine creativity with data analytics to deliver measurable results and maximize your ROI.',
+    features: ['SEO & SEM', 'Social Media Marketing', 'Content Marketing', 'Analytics & Reporting'],
+    benefits: [
+      'Increase brand visibility and awareness',
+      'Generate qualified leads and conversions',
+      'Build engaged communities around your brand',
+      'Track and optimize campaign performance'
+    ],
+    technologies: [
+      { name: 'Google Ads', icon: FaGoogle },
+      { name: 'Social Media', icon: FaInstagram },
+      { name: 'SEO Tools', icon: FaSearch },
+      { name: 'Analytics', icon: FaChartLine }
+    ],
+    process: [
+      {
+        step: 1,
+        title: 'Strategy Development',
+        description: 'Analyze your market, competitors, and audience to create a winning strategy'
+      },
+      {
+        step: 2,
+        title: 'Campaign Creation',
+        description: 'Develop compelling content and creative assets for your campaigns'
+      },
+      {
+        step: 3,
+        title: 'Launch & Optimize',
+        description: 'Execute campaigns across channels and continuously optimize performance'
+      },
+      {
+        step: 4,
+        title: 'Analytics & Reporting',
+        description: 'Track KPIs and provide detailed insights for data-driven decisions'
+      }
+    ],
+    useCases: [
+      {
+        title: 'Search Engine Marketing',
+        description: 'Increase visibility with SEO optimization and paid search campaigns',
+        icon: FaGoogle
+      },
+      {
+        title: 'Social Media Campaigns',
+        description: 'Engage audiences on Facebook, Instagram, LinkedIn, and Twitter',
+        icon: FaFacebookF
+      },
+      {
+        title: 'Content Marketing',
+        description: 'Create valuable content that attracts and converts your audience',
+        icon: FaPencilAlt
+      },
+      {
+        title: 'Email Marketing',
+        description: 'Build relationships and drive conversions with targeted email campaigns',
+        icon: FaEnvelope
+      }
+    ],
+    faq: [
+      {
+        question: 'How long before I see results?',
+        answer: 'Paid advertising can show results within days, while SEO typically takes 3-6 months. We provide regular reports to track progress.'
+      },
+      {
+        question: 'What is your pricing model?',
+        answer: 'We offer flexible pricing including monthly retainers, project-based fees, and performance-based models depending on your needs.'
+      },
+      {
+        question: 'Do you create content for campaigns?',
+        answer: 'Yes, our team creates all types of content including copy, graphics, videos, and blog posts tailored to your brand and audience.'
       }
     ]
   }

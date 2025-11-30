@@ -1,11 +1,35 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa'
+import { FaExternalLinkAlt, FaGithub, FaChevronDown } from 'react-icons/fa'
 import { portfolioData } from '../data/portfolioData'
 import './Portfolio.css'
 
 const Portfolio = () => {
   const [filter, setFilter] = useState('all')
+  const [expanded, setExpanded] = useState(false)
+  const [initialCount, setInitialCount] = useState(4)
+
+  // Determine initial count based on screen size
+  useEffect(() => {
+    const updateInitialCount = () => {
+      if (window.innerWidth < 768) {
+        setInitialCount(3) // Mobile: 3 projects
+      } else if (window.innerWidth < 1024) {
+        setInitialCount(4) // Tablet: 4 projects
+      } else {
+        setInitialCount(4) // Desktop: 4 projects
+      }
+    }
+
+    updateInitialCount()
+    window.addEventListener('resize', updateInitialCount)
+    return () => window.removeEventListener('resize', updateInitialCount)
+  }, [])
+
+  // Reset expanded state when filter changes
+  useEffect(() => {
+    setExpanded(false)
+  }, [filter])
 
   const projects = portfolioData
 
@@ -14,12 +38,19 @@ const Portfolio = () => {
     { id: 'ai', label: 'AI Solutions' },
     { id: 'web', label: 'Web Apps' },
     { id: 'mobile', label: 'Mobile Apps' },
-    { id: 'cloud', label: 'Cloud Services' }
+    { id: 'cloud', label: 'Cloud Services' },
+    { id: 'marketing', label: 'Digital Marketing' }
   ]
 
   const filteredProjects = filter === 'all'
     ? projects
     : projects.filter(project => project.category === filter)
+
+  const displayedProjects = expanded
+    ? filteredProjects
+    : filteredProjects.slice(0, initialCount)
+
+  const hasMoreProjects = filteredProjects.length > initialCount
 
   return (
     <section id="portfolio" className="portfolio">
@@ -46,7 +77,7 @@ const Portfolio = () => {
         </div>
 
         <div className="portfolio-grid">
-          {filteredProjects.map((project, index) => (
+          {displayedProjects.map((project, index) => (
             <Link
               key={project.id}
               to={`/portfolio/${project.slug}`}
@@ -100,6 +131,18 @@ const Portfolio = () => {
             </Link>
           ))}
         </div>
+
+        {hasMoreProjects && (
+          <div className="load-more-container">
+            <button
+              className="load-more-btn"
+              onClick={() => setExpanded(!expanded)}
+            >
+              {expanded ? 'Show Less' : `Load More Projects (${filteredProjects.length - initialCount} more)`}
+              <FaChevronDown className={`chevron-icon ${expanded ? 'rotated' : ''}`} />
+            </button>
+          </div>
+        )}
       </div>
     </section>
   )

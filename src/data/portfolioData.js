@@ -1,5 +1,5 @@
-import { FaBrain, FaMobile, FaCloud, FaLaptopCode, FaHome, FaChartLine, FaPython, FaReact, FaAws, FaNodeJs, FaVuejs, FaDocker, FaDatabase } from 'react-icons/fa';
-import { SiTensorflow, SiMongodb, SiStripe, SiKubernetes, SiGraphql, SiPostgresql, SiWebrtc, SiMqtt, SiRedis, SiGo, SiFlutter } from 'react-icons/si';
+import { FaBrain, FaMobile, FaCloud, FaLaptopCode, FaHome, FaChartLine, FaPython, FaReact, FaAws, FaNodeJs, FaVuejs, FaDocker, FaDatabase, FaBullhorn, FaGoogle, FaInstagram, FaUsers, FaShoppingCart } from 'react-icons/fa';
+import { SiTensorflow, SiMongodb, SiStripe, SiKubernetes, SiGraphql, SiPostgresql, SiWebrtc, SiMqtt, SiRedis, SiGo, SiFlutter, SiGoogleads, SiFacebook, SiGoogleanalytics } from 'react-icons/si';
 
 export const portfolioData = [
   {
@@ -463,6 +463,84 @@ export const portfolioData = [
       quote: 'The app is incredibly fast and reliable. I can execute trades in milliseconds and the charting tools rival desktop platforms.',
       author: 'CEO',
       company: 'Client Fintech Company'
+    },
+
+    liveUrl: null,
+    githubUrl: null,
+    caseStudyUrl: null
+  },
+
+  {
+    id: 7,
+    slug: 'ecommerce-digital-marketing-campaign',
+    title: 'E-Commerce Digital Marketing Campaign',
+    category: 'marketing',
+    categoryLabel: 'Digital Marketing',
+    shortDescription: 'Multi-channel marketing campaign that drove 300% revenue growth for online retailer.',
+    description: 'A comprehensive digital marketing strategy combining SEO, paid advertising, social media, and content marketing to dramatically increase online sales and brand awareness for a growing e-commerce business.',
+    image: `url(${process.env.PUBLIC_URL}/images/portfolio/digital-marketing.svg)`,
+    tags: ['SEO', 'Google Ads', 'Social Media', 'Content Marketing'],
+    icon: FaBullhorn,
+
+    challenge: 'An e-commerce retailer was struggling with low online visibility, high customer acquisition costs, and minimal social media engagement. Their marketing efforts were fragmented across channels with no unified strategy, resulting in poor ROI.',
+
+    solution: 'We developed and executed an integrated digital marketing strategy that included SEO optimization, targeted Google Ads campaigns, influencer partnerships on Instagram and TikTok, email marketing automation, and a content marketing program. All campaigns were tracked with advanced analytics to optimize performance continuously.',
+
+    results: [
+      { metric: '300%', label: 'Revenue Growth' },
+      { metric: '450%', label: 'Organic Traffic Increase' },
+      { metric: '65%', label: 'Lower CAC' },
+      { metric: '8.5x', label: 'ROAS on Paid Ads' }
+    ],
+
+    features: [
+      {
+        title: 'SEO Optimization',
+        description: 'Comprehensive on-page and off-page SEO to dominate search rankings',
+        icon: FaGoogle
+      },
+      {
+        title: 'Paid Advertising',
+        description: 'Data-driven Google Ads and social media campaigns with continuous optimization',
+        icon: FaBullhorn
+      },
+      {
+        title: 'Social Media Growth',
+        description: 'Organic and paid social strategies across Instagram, Facebook, and TikTok',
+        icon: FaInstagram
+      },
+      {
+        title: 'Influencer Marketing',
+        description: 'Strategic partnerships with micro and macro influencers',
+        icon: FaUsers
+      }
+    ],
+
+    technologies: [
+      { name: 'Google Ads', icon: SiGoogleads, purpose: 'Paid Search & Display' },
+      { name: 'Facebook Ads', icon: SiFacebook, purpose: 'Social Advertising' },
+      { name: 'Google Analytics', icon: SiGoogleanalytics, purpose: 'Analytics & Tracking' },
+      { name: 'SEO Tools', icon: FaGoogle, purpose: 'SEO Optimization' },
+      { name: 'Instagram', icon: FaInstagram, purpose: 'Social Media Marketing' },
+      { name: 'Email Marketing', icon: FaDatabase, purpose: 'Marketing Automation' }
+    ],
+
+    timeline: '6 months',
+    teamSize: '5 members',
+    client: 'Fashion E-Commerce Brand',
+    industry: 'Retail & E-Commerce',
+
+    keyTakeaways: [
+      'Integrated multi-channel strategies outperform single-channel approaches',
+      'Continuous A/B testing and optimization are essential for maximizing ROI',
+      'Influencer marketing drives authentic engagement and conversions',
+      'Data-driven decision making leads to sustainable growth'
+    ],
+
+    testimonial: {
+      quote: 'This team transformed our entire digital presence. The results exceeded our expectations, and we\'re now the leading brand in our category online.',
+      author: 'Marketing Director',
+      company: 'Client E-Commerce Company'
     },
 
     liveUrl: null,
