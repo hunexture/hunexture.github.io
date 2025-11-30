@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <defs>
+    <linearGradient id="marketingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#marketingGrad)"/>
+
+  <!-- Dashboard mockup -->
+  <rect x="50" y="80" width="700" height="450" rx="10" fill="#fff" opacity="0.95"/>
+
+  <!-- Header -->
+  <rect x="70" y="100" width="660" height="50" rx="5" fill="#f7fafc"/>
+  <rect x="85" y="115" width="150" height="20" rx="3" fill="#f093fb"/>
+  <circle cx="680" cy="125" r="15" fill="#e2e8f0"/>
+
+  <!-- Marketing Campaign Cards -->
+  <g opacity="0.8">
+    <!-- Social Media Card -->
+    <rect x="80" y="180" width="200" height="140" rx="8" fill="#f7fafc"/>
+    <text x="100" y="210" font-family="Arial" font-size="12" font-weight="bold" fill="#4a5568">Social Media</text>
+
+    <!-- Social icons -->
+    <circle cx="110" cy="240" r="18" fill="#3b5998"/>
+    <circle cx="160" cy="240" r="18" fill="#E1306C"/>
+    <circle cx="210" cy="240" r="18" fill="#1DA1F2"/>
+
+    <text x="100" y="285" font-family="Arial" font-size="11" fill="#718096">Engagement: +450%</text>
+    <rect x="100" y="295" width="140" height="8" rx="4" fill="#e2e8f0"/>
+    <rect x="100" y="295" width="110" height="8" rx="4" fill="#f093fb"/>
+
+    <!-- SEO Performance -->
+    <rect x="310" y="180" width="200" height="140" rx="8" fill="#f7fafc"/>
+    <text x="330" y="210" font-family="Arial" font-size="12" font-weight="bold" fill="#4a5568">SEO Rankings</text>
+
+    <!-- Search icon -->
+    <circle cx="365" cy="250" r="25" stroke="#f093fb" stroke-width="4" fill="none"/>
+    <line x1="383" y1="268" x2="398" y2="283" stroke="#f093fb" stroke-width="4"/>
+    <text x="415" y="255" font-family="Arial" font-size="20" font-weight="bold" fill="#f093fb">↑300%</text>
+
+    <text x="330" y="285" font-family="Arial" font-size="11" fill="#718096">Organic Traffic</text>
+    <rect x="330" y="295" width="140" height="8" rx="4" fill="#e2e8f0"/>
+    <rect x="330" y="295" width="125" height="8" rx="4" fill="#f5576c"/>
+
+    <!-- Email Campaign -->
+    <rect x="540" y="180" width="170" height="140" rx="8" fill="#f7fafc"/>
+    <text x="560" y="210" font-family="Arial" font-size="12" font-weight="bold" fill="#4a5568">Email Campaign</text>
+
+    <!-- Email icon -->
+    <rect x="575" y="235" width="100" height="60" rx="5" fill="#f093fb" opacity="0.2"/>
+    <path d="M 575 235 L 625 265 L 675 235" stroke="#f093fb" stroke-width="3" fill="none"/>
+
+    <text x="560" y="310" font-family="Arial" font-size="10" fill="#718096">Open Rate: 42%</text>
+  </g>
+
+  <!-- ROI Growth Chart -->
+  <rect x="80" y="345" width="300" height="160" rx="8" fill="#f7fafc" opacity="0.8"/>
+  <text x="100" y="370" font-family="Arial" font-size="12" font-weight="bold" fill="#4a5568">Revenue Growth</text>
+
+  <!-- Line chart showing growth -->
+  <polyline points="100,470 140,450 180,430 220,400 260,385 340,365" stroke="#f093fb" stroke-width="4" fill="none"/>
+  <circle cx="100" cy="470" r="5" fill="#f093fb"/>
+  <circle cx="140" cy="450" r="5" fill="#f093fb"/>
+  <circle cx="180" cy="430" r="5" fill="#f093fb"/>
+  <circle cx="220" cy="400" r="5" fill="#f5576c"/>
+  <circle cx="260" cy="385" r="5" fill="#f5576c"/>
+  <circle cx="340" cy="365" r="6" fill="#f5576c"/>
+
+  <!-- Stats boxes -->
+  <rect x="410" y="345" width="140" height="70" rx="8" fill="#f093fb" opacity="0.9"/>
+  <text x="425" y="375" font-family="Arial" font-size="16" font-weight="bold" fill="#fff">8.5x</text>
+  <text x="425" y="395" font-family="Arial" font-size="11" fill="#fff">ROAS</text>
+
+  <rect x="570" y="345" width="140" height="70" rx="8" fill="#f5576c" opacity="0.9"/>
+  <text x="585" y="375" font-family="Arial" font-size="16" font-weight="bold" fill="#fff">-65%</text>
+  <text x="585" y="395" font-family="Arial" font-size="11" fill="#fff">CAC Reduction</text>
+
+  <rect x="410" y="435" width="140" height="70" rx="8" fill="#f5576c" opacity="0.9"/>
+  <text x="425" y="465" font-family="Arial" font-size="16" font-weight="bold" fill="#fff">300%</text>
+  <text x="425" y="485" font-family="Arial" font-size="11" fill="#fff">Revenue ↑</text>
+
+  <rect x="570" y="435" width="140" height="70" rx="8" fill="#f093fb" opacity="0.9"/>
+  <text x="585" y="465" font-family="Arial" font-size="16" font-weight="bold" fill="#fff">450%</text>
+  <text x="585" y="485" font-family="Arial" font-size="11" fill="#fff">Traffic ↑</text>
+
+  <!-- Megaphone icon -->
+  <circle cx="680" cy="250" r="40" fill="#f093fb" opacity="0.15"/>
+  <path d="M 670 240 L 690 240 L 700 230 L 700 270 L 690 260 L 670 260 Z" fill="#fff" opacity="0.8"/>
+  <ellipse cx="668" cy="250" rx="8" ry="15" fill="#fff" opacity="0.8"/>
+</svg>
