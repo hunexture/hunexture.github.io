@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradient Descent Visualizer - 3D</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-panel: #1e293b;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --accent: #06b6d4;
+            --accent-hover: #0891b2;
+            --border: #334155;
+            --danger: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow: hidden;
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* 3D Container */
+        #canvas-container {
+            flex-grow: 1;
+            position: relative;
+            height: 100%;
+        }
+
+        canvas {
+            display: block;
+            outline: none;
+        }
+
+        /* Overlay Info */
+        #overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            pointer-events: none;
+            z-index: 10;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            max-width: 300px;
+        }
+
+        .legend {
+            margin-top: 10px;
+            font-size: 0.75rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .legend span {
+            font-weight: bold;
+        }
+
+        .warning-box {
+            margin-top: 10px;
+            background: rgba(239, 68, 68, 0.2);
+            border-left: 3px solid var(--danger);
+            padding: 8px;
+            font-size: 0.75rem;
+            color: #fca5a5;
+            display: none;
+        }
+
+        /* Sidebar Controls */
+        #sidebar {
+            width: 320px;
+            background-color: var(--bg-dark);
+            border-left: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+            overflow-y: auto;
+            flex-shrink: 0;
+            z-index: 20;
+        }
+
+        /* 2D Chart */
+        #chart-container {
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.875rem;
+            font-weight: bold;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        button {
+            flex: 1;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            color: white;
+        }
+
+        #btn-play {
+            background-color: #22c55e;
+        }
+
+        #btn-play:hover {
+            background-color: #16a34a;
+        }
+
+        #btn-play.paused {
+            background-color: #ef4444;
+        }
+
+        #btn-play.paused:hover {
+            background-color: #dc2626;
+        }
+
+        #btn-reset {
+            background-color: #334155;
+        }
+
+        #btn-reset:hover {
+            background-color: #475569;
+        }
+
+        .slider-group {
+            background-color: var(--bg-panel);
+            padding: 1rem;
+            border-radius: 0.25rem;
+            border: 1px solid var(--border);
+        }
+
+        label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        input[type=range] {
+            width: 100%;
+            height: 8px;
+            background: #475569;
+            border-radius: 4px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--bg-panel);
+            padding: 1rem;
+            border-radius: 0.25rem;
+            border: 1px solid var(--border);
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #475569;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: var(--danger);
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(20px);
+        }
+
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+            font-family: monospace;
+        }
+
+        .stats {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+            font-family: monospace;
+            font-size: 0.875rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .val-good {
+            color: #4ade80;
+        }
+
+        .val-bad {
+            color: #facc15;
+        }
+
+        .val-danger {
+            color: #ef4444;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            #sidebar {
+                width: 100%;
+                height: 40%;
+                border-left: none;
+                border-top: 1px solid var(--border);
+            }
+
+            #canvas-container {
+                height: 60%;
+            }
+        }
+    </style>
+    <!-- Three.js from CDN -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <div id="canvas-container">
+        <div id="overlay">
+            <h1>Gradient Descent Visualizer</h1>
+            <p>Visualizing how the machine "learns" weights (w) and bias (b) by minimizing Error.</p>
+            <div style="font-size: 0.75rem; color: #06b6d4; margin-top: 5px;">Goal: Find the bottom of the valley.</div>
+            <div class="legend">
+                <span style="color: #f87171">Red: Weight (x)</span>
+                <span style="color: #60a5fa">Blue: Bias (z)</span>
+                <span style="color: #4ade80">Green: Loss (y)</span>
+            </div>
+            <div id="warning-msg" class="warning-box">
+                <strong>Unnormalized Data Mode:</strong><br />
+                Notice the deep, narrow valley. The "mountain" has been stretched. Standard Learning Rates may cause the
+                ball to bounce wildly (diverge)!
+            </div>
+        </div>
+        <!-- Canvas injected here by JS -->
+    </div>
+
+    <div id="sidebar">
+        <!-- 2D Chart SVG -->
+        <div id="chart-container">
+            <div class="chart-header">
+                <span>Model Fit (2D)</span>
+                <span id="epoch-display">Epoch: 0</span>
+            </div>
+            <svg id="chart-svg" width="100%" height="180" viewBox="0 0 280 180" style="overflow: visible;">
+                <!-- Axes -->
+                <line x1="20" y1="160" x2="260" y2="160" stroke="#666" stroke-width="2" />
+                <line x1="20" y1="160" x2="20" y2="20" stroke="#666" stroke-width="2" />
+
+                <!-- Data Points (Static) -->
+                <g id="data-points"></g>
+
+                <!-- Model Line (Dynamic) -->
+                <line id="model-line" x1="0" y1="0" x2="0" y2="0" stroke="#ff00ff" stroke-width="2"
+                    stroke-dasharray="4" />
+
+                <!-- Labels -->
+                <text x="140" y="180" fill="#888" font-size="10" text-anchor="middle">Size (x)</text>
+                <text x="0" y="90" fill="#888" font-size="10" transform="rotate(-90, 10, 90)">Price (y)</text>
+            </svg>
+            <div
+                style="margin-top: 8px; font-size: 0.75rem; color: #94a3b8; font-family: monospace; display: flex; justify-content: space-around;">
+                <span id="chart-w">w: 0.00</span>
+                <span id="chart-b">b: 0.00</span>
+            </div>
+        </div>
+
+        <div class="controls">
+
+            <!-- Normalization Toggle -->
+            <div class="toggle-group">
+                <div>
+                    <div style="font-size: 0.75rem; font-weight: bold; color: var(--text-muted);">UNNORMALIZED DATA
+                    </div>
+                    <div style="font-size: 0.65rem; color: #64748b;">Simulate large inputs</div>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="normalization-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="btn-group">
+                <button id="btn-play">Train (Play)</button>
+                <button id="btn-reset">Reset</button>
+            </div>
+
+            <div class="slider-group">
+                <label>Learning Rate (Step Size)</label>
+                <input type="range" id="lr-slider" min="0.001" max="0.08" step="0.001" value="0.01">
+                <div class="slider-labels">
+                    <span>0.001</span>
+                    <span id="lr-value" style="color: var(--accent); font-weight: bold;">0.01</span>
+                    <span>0.08</span>
+                </div>
+                <p style="margin-top: 8px; font-style: italic; font-size: 0.7rem;">Try increasing! Too high = chaos.</p>
+            </div>
+
+            <div class="stats">
+                <div class="stat-row">
+                    <span style="color: var(--text-muted)">Step:</span>
+                    <span id="stat-step">0 / 100</span>
+                </div>
+                <div class="stat-row">
+                    <span style="color: var(--text-muted)">Cost (MSE):</span>
+                    <span id="stat-cost" class="val-good">0.0000</span>
+                </div>
+                <div class="stat-row">
+                    <span style="color: var(--text-muted)">Weight (w):</span>
+                    <span id="stat-w">0.0000</span>
+                </div>
+                <div class="stat-row">
+                    <span style="color: var(--text-muted)">Bias (b):</span>
+                    <span id="stat-b">0.0000</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        // --- Simulation State ---
+        let state = {
+            learningRate: 0.01,
+            isPlaying: false,
+            currentStep: 0,
+            history: [],
+            initialW: 0.0,
+            initialB: -2.0,
+            maxSteps: 100,
+            isUnnormalized: false
+        };
+
+        // --- Data & Math ---
+        // Base Data (Normalized form)
+        const BASE_X = [1, 2, 3, 4, 5];
+        const BASE_Y = [2, 4, 6, 8, 10]; // Target: y = 2x
+
+        // Dynamic Data Getter
+        function getData() {
+            const scale = state.isUnnormalized ? 3 : 1; // Scale inputs by 3x to simulate unnormalized data
+            const X = BASE_X.map(x => x * scale);
+            const Y = BASE_Y.map(y => y * scale);
+            return { X, Y };
+        }
+
+        const calculateMSE = (w, b) => {
+            const { X, Y } = getData();
+            let errorSum = 0;
+            const n = X.length;
+            for (let i = 0; i < n; i++) {
+                const prediction = w * X[i] + b;
+                errorSum += (Y[i] - prediction) ** 2;
+            }
+            return errorSum / n;
+        };
+
+        const stepGradient = (w, b, lr) => {
+            const { X, Y } = getData();
+            let dw = 0;
+            let db = 0;
+            const n = X.length;
+            for (let i = 0; i < n; i++) {
+                const prediction = w * X[i] + b;
+                const error = Y[i] - prediction;
+                dw += -2 * X[i] * error;
+                db += -2 * error;
+            }
+            return {
+                newW: w - (lr * dw) / n,
+                newB: b - (lr * db) / n,
+            };
+        };
+
+        // --- 3D Scene Setup ---
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+
+        const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 100);
+        camera.position.set(8, 6, 8);
+
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
+
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.target.set(2, 0, 0);
+        controls.enableDamping = true;
+        controls.maxPolarAngle = Math.PI / 2 - 0.1;
+
+        // Lights
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+        const pointLight = new THREE.PointLight(0xffffff, 1);
+        pointLight.position.set(10, 10, 10);
+        scene.add(pointLight);
+
+        // --- 3D Objects ---
+
+        let lossSurfaceMesh = null;
+
+        // 1. Loss Surface
+        function createLossSurface() {
+            if (lossSurfaceMesh) {
+                scene.remove(lossSurfaceMesh);
+                lossSurfaceMesh.geometry.dispose();
+                lossSurfaceMesh.material.dispose();
+            }
+
+            const wRange = { min: -1, max: 5, steps: 40 };
+            const bRange = { min: -3, max: 3, steps: 40 };
+
+            const positions = [];
+            const colors = [];
+            const indices = [];
+
+            // Adjust visual scaling divisor based on data scale
+            // If unnormalized (Scale 3), errors are ~9x larger, so we divide visual height more to keep it on screen
+            const visualScale = state.isUnnormalized ? 0.015 : 0.1;
+
+            for (let i = 0; i <= wRange.steps; i++) {
+                for (let j = 0; j <= bRange.steps; j++) {
+                    const w = wRange.min + (i / wRange.steps) * (wRange.max - wRange.min);
+                    const b = bRange.min + (j / bRange.steps) * (bRange.max - bRange.min);
+                    const cost = calculateMSE(w, b);
+                    const visualY = Math.min(cost * visualScale, 8);
+
+                    positions.push(w, visualY, b);
+
+                    // Color logic: adapt for higher costs
+                    // In unnormalized mode, cost changes rapidly, so we make gradient steeper
+                    const colorScale = state.isUnnormalized ? 0.002 : 0.02;
+                    const color = new THREE.Color().setHSL(0.6 - Math.min(cost * colorScale, 0.6), 1, 0.5);
+                    colors.push(color.r, color.g, color.b);
+                }
+            }
+
+            const rowSize = bRange.steps + 1;
+            for (let i = 0; i < wRange.steps; i++) {
+                for (let j = 0; j < bRange.steps; j++) {
+                    const a = i * rowSize + j;
+                    const b = i * rowSize + j + 1;
+                    const c = (i + 1) * rowSize + j;
+                    const d = (i + 1) * rowSize + j + 1;
+                    indices.push(a, b, d);
+                    indices.push(a, d, c);
+                }
+            }
+
+            const geometry = new THREE.BufferGeometry();
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+            geometry.setIndex(indices);
+            geometry.computeVertexNormals();
+
+            const material = new THREE.MeshStandardMaterial({
+                vertexColors: true,
+                side: THREE.DoubleSide,
+                flatShading: true,
+                transparent: true,
+                opacity: 0.8
+            });
+            lossSurfaceMesh = new THREE.Mesh(geometry, material);
+
+            const wireGeo = new THREE.WireframeGeometry(geometry);
+            const wireMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.1 });
+            const wireMesh = new THREE.LineSegments(wireGeo, wireMat);
+            lossSurfaceMesh.add(wireMesh);
+
+            scene.add(lossSurfaceMesh);
+        }
+
+        // Base Grid
+        const grid = new THREE.GridHelper(20, 20, 0x444444, 0x222222);
+        grid.position.y = -0.05;
+        scene.add(grid);
+
+        // 2. Axes
+        function createAxis(start, end, colorHex) {
+            const pStart = new THREE.Vector3(...start);
+            const pEnd = new THREE.Vector3(...end);
+            const direction = new THREE.Vector3().subVectors(pEnd, pStart);
+            const length = direction.length();
+            const pos = new THREE.Vector3().addVectors(pStart, pEnd).multiplyScalar(0.5);
+
+            const group = new THREE.Group();
+            group.position.copy(pos);
+            group.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), direction.normalize());
+
+            const cylinder = new THREE.Mesh(
+                new THREE.CylinderGeometry(0.02, 0.02, length, 8),
+                new THREE.MeshBasicMaterial({ color: colorHex })
+            );
+            group.add(cylinder);
+
+            const cone = new THREE.Mesh(
+                new THREE.ConeGeometry(0.08, 0.2, 12),
+                new THREE.MeshBasicMaterial({ color: colorHex })
+            );
+            cone.position.y = length / 2;
+            group.add(cone);
+
+            return group;
+        }
+        scene.add(createAxis([0, 0, 0], [5, 0, 0], 0xff0000)); // W
+        scene.add(createAxis([0, 0, 0], [0, 0, 3], 0x0000ff)); // B
+        scene.add(createAxis([0, 0, 0], [0, 5, 0], 0x00ff00)); // Cost
+
+        // 3. Agent (Ball + Trail)
+        const agentGroup = new THREE.Group();
+        scene.add(agentGroup);
+
+        const agentMesh = new THREE.Mesh(
+            new THREE.SphereGeometry(0.15, 32, 32),
+            new THREE.MeshStandardMaterial({ color: 0xff00ff, emissive: 0xff00ff, emissiveIntensity: 0.5 })
+        );
+        agentGroup.add(agentMesh);
+
+        // Trail Line
+        const MAX_POINTS = 105;
+        const trailGeometry = new THREE.BufferGeometry();
+        const trailPositions = new Float32Array(MAX_POINTS * 3);
+        trailGeometry.setAttribute('position', new THREE.BufferAttribute(trailPositions, 3));
+        const trailMesh = new THREE.Line(
+            trailGeometry,
+            new THREE.LineBasicMaterial({ color: 0xff00ff })
+        );
+        agentGroup.add(trailMesh);
+
+        // --- Logic & Updates ---
+
+        function calculateHistory() {
+            let w = state.initialW;
+            let b = state.initialB;
+            state.history = [];
+
+            // Push initial
+            state.history.push({ w, b, cost: calculateMSE(w, b) });
+
+            for (let i = 0; i < state.maxSteps; i++) {
+                const update = stepGradient(w, b, state.learningRate);
+                w = update.newW;
+                b = update.newB;
+                state.history.push({ w, b, cost: calculateMSE(w, b) });
+            }
+        }
+
+        function update3DVisuals() {
+            const safeStep = Math.min(state.currentStep, state.history.length - 1);
+            const current = state.history[safeStep];
+
+            const visualScale = state.isUnnormalized ? 0.015 : 0.1;
+            const visualY = Math.min(current.cost * visualScale, 8);
+
+            // Move Ball
+            agentMesh.position.set(current.w, visualY, current.b);
+
+            // Update Trail
+            const drawCount = safeStep + 1;
+            const posAttribute = trailMesh.geometry.attributes.position;
+
+            for (let i = 0; i < drawCount; i++) {
+                const h = state.history[i];
+                const hY = Math.min(h.cost * visualScale, 8) + 0.05; // slight offset so line isn't inside ground
+                posAttribute.setXYZ(i, h.w, hY, h.b);
+            }
+
+            trailMesh.geometry.setDrawRange(0, drawCount);
+            posAttribute.needsUpdate = true;
+        }
+
+        // --- 2D Chart Logic ---
+        const svgWidth = 280;
+        const svgHeight = 180;
+        const padding = 20;
+
+        function init2DChart() {
+            const g = document.getElementById('data-points');
+            g.innerHTML = ''; // Clear previous points
+
+            const dataScale = state.isUnnormalized ? 3 : 1;
+            const xMax = 6 * dataScale;
+
+            const xScale = (val) => padding + (val / xMax) * (svgWidth - 2 * padding);
+            const yScale = (val) => svgHeight - padding - (val / (12 * dataScale)) * (svgHeight - 2 * padding);
+
+            const { X, Y } = getData();
+            X.forEach((x, i) => {
+                const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                circle.setAttribute("cx", xScale(x));
+                circle.setAttribute("cy", yScale(Y[i]));
+                circle.setAttribute("r", "4");
+                circle.setAttribute("fill", "#4ade80");
+                g.appendChild(circle);
+            });
+        }
+
+        function update2DChart() {
+            const safeStep = Math.min(state.currentStep, state.history.length - 1);
+            const current = state.history[safeStep];
+            const { w, b } = current;
+
+            const dataScale = state.isUnnormalized ? 3 : 1;
+            const xMax = 6 * dataScale;
+
+            const xScale = (val) => padding + (val / xMax) * (svgWidth - 2 * padding);
+            const yScale = (val) => svgHeight - padding - (val / (12 * dataScale)) * (svgHeight - 2 * padding);
+
+            const line = document.getElementById('model-line');
+            // x = 0
+            line.setAttribute('x1', xScale(0));
+            line.setAttribute('y1', yScale(b));
+            // x = max
+            line.setAttribute('x2', xScale(xMax));
+            line.setAttribute('y2', yScale(w * xMax + b));
+
+            // Text Update
+            document.getElementById('chart-w').textContent = `w: ${w.toFixed(2)}`;
+            document.getElementById('chart-b').textContent = `b: ${b.toFixed(2)}`;
+        }
+
+        // --- DOM & UI Updates ---
+
+        function updateUI() {
+            const safeStep = Math.min(state.currentStep, state.history.length - 1);
+            const current = state.history[safeStep];
+
+            document.getElementById('epoch-display').textContent = `Epoch: ${safeStep}`;
+            document.getElementById('stat-step').textContent = `${safeStep} / ${state.maxSteps}`;
+
+            const costEl = document.getElementById('stat-cost');
+            costEl.textContent = current.cost.toFixed(4);
+
+            // Check for divergence (NaN or Infinity or ridiculously huge)
+            if (!isFinite(current.cost) || current.cost > 10000) {
+                costEl.textContent = "EXPLODED";
+                costEl.className = "val-danger";
+            } else {
+                costEl.className = current.cost < 0.5 ? 'val-good' : 'val-bad';
+            }
+
+            document.getElementById('stat-w').textContent = current.w.toFixed(4);
+            document.getElementById('stat-b').textContent = current.b.toFixed(4);
+
+            const btn = document.getElementById('btn-play');
+            if (state.isPlaying) {
+                btn.textContent = 'Pause';
+                btn.classList.add('paused');
+            } else {
+                btn.textContent = state.currentStep >= state.maxSteps ? 'Restart' : 'Train (Play)';
+                btn.classList.remove('paused');
+            }
+
+            // Warning msg
+            const warn = document.getElementById('warning-msg');
+            warn.style.display = state.isUnnormalized ? 'block' : 'none';
+        }
+
+        function renderAll() {
+            update3DVisuals();
+            update2DChart();
+            updateUI();
+        }
+
+        // --- Loops & Handlers ---
+
+        let animationFrameId;
+        let lastTime = 0;
+        const frameInterval = 50; // ms
+
+        function gameLoop(timestamp) {
+            if (state.isPlaying) {
+                if (timestamp - lastTime > frameInterval) {
+                    if (state.currentStep < state.maxSteps) {
+                        state.currentStep++;
+                        renderAll();
+                    } else {
+                        state.isPlaying = false;
+                        updateUI();
+                    }
+                    lastTime = timestamp;
+                }
+            }
+            // Render Scene always
+            controls.update();
+            renderer.render(scene, camera);
+            animationFrameId = requestAnimationFrame(gameLoop);
+        }
+
+        // --- Event Listeners ---
+
+        document.getElementById('normalization-toggle').addEventListener('change', (e) => {
+            state.isUnnormalized = e.target.checked;
+            state.isPlaying = false;
+            state.currentStep = 0;
+
+            // Regenerate surface for new scale
+            createLossSurface();
+            // Re-calc history
+            calculateHistory();
+            // Update 2D charts for new axes
+            init2DChart();
+
+            renderAll();
+        });
+
+        document.getElementById('btn-play').addEventListener('click', () => {
+            if (state.currentStep >= state.maxSteps) {
+                state.currentStep = 0;
+            }
+            state.isPlaying = !state.isPlaying;
+            updateUI();
+        });
+
+        document.getElementById('btn-reset').addEventListener('click', () => {
+            state.isPlaying = false;
+            state.currentStep = 0;
+            renderAll();
+        });
+
+        const slider = document.getElementById('lr-slider');
+        slider.addEventListener('input', (e) => {
+            state.learningRate = parseFloat(e.target.value);
+            document.getElementById('lr-value').textContent = state.learningRate;
+
+            // Recalculate whole history
+            calculateHistory();
+            state.currentStep = 0;
+            state.isPlaying = false;
+            renderAll();
+        });
+
+        window.addEventListener('resize', () => {
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        });
+
+        // --- Initialization ---
+        createLossSurface();
+        calculateHistory();
+        init2DChart();
+        renderAll();
+        requestAnimationFrame(gameLoop);
+
+    </script>
+</body>
+
+</html>

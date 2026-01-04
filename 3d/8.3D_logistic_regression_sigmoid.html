@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Logistic Regression Explorer</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #111;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        #ui-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 320px;
+            background: rgba(20, 20, 30, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: height 0.3s ease;
+        }
+
+        .ui-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #4facfe;
+        }
+
+        /* Toggle Button Styles - Overriding generic button styles */
+        #toggle-ui {
+            background: transparent;
+            border: none;
+            color: #4facfe;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0 5px;
+            line-height: 1;
+            flex: 0 0 auto;
+            /* Prevent stretching */
+            width: auto;
+        }
+
+        #toggle-ui:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        h3 {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .control-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        input[type=range] {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .value-display {
+            color: #00f260;
+            font-weight: bold;
+            font-family: monospace;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        /* Generic button styles for controls */
+        .btn-group button {
+            flex: 1;
+            padding: 8px;
+            background: #333;
+            border: 1px solid #555;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-group button:hover {
+            background: #444;
+        }
+
+        .btn-group button.active {
+            background: #4facfe;
+            border-color: #4facfe;
+            color: #000;
+            font-weight: bold;
+        }
+
+        #tooltip {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            max-width: 400px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #4facfe;
+            pointer-events: none;
+            line-height: 1.4;
+            font-size: 0.9rem;
+        }
+
+        .legend {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            font-size: 0.8rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .dot-red {
+            background: #ff4b4b;
+            box-shadow: 0 0 5px #ff4b4b;
+        }
+
+        .dot-blue {
+            background: #4b4bff;
+            box-shadow: 0 0 5px #4b4bff;
+        }
+
+        /* Collapsed state */
+        #ui-container.collapsed {
+            width: auto;
+            padding-bottom: 10px;
+        }
+
+        #ui-container.collapsed .ui-header {
+            margin-bottom: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        #ui-container.collapsed #ui-content {
+            display: none;
+        }
+    </style>
+    <!-- Import Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+
+<body>
+
+    <div id="ui-container">
+        <div class="ui-header">
+            <h2>Logistic Classifier</h2>
+            <button id="toggle-ui" title="Minimize/Maximize">−</button>
+        </div>
+
+        <div id="ui-content">
+            <h3>Model Parameters</h3>
+            <div class="control-group">
+                <label>Weight 1 (X slope) <span id="val-w1" class="value-display">1.0</span></label>
+                <input type="range" id="w1" min="-5" max="5" step="0.1" value="1.5">
+            </div>
+            <div class="control-group">
+                <label>Weight 2 (Y slope) <span id="val-w2" class="value-display">1.0</span></label>
+                <input type="range" id="w2" min="-5" max="5" step="0.1" value="1.5">
+            </div>
+            <div class="control-group">
+                <label>Bias (Offset) <span id="val-b" class="value-display">0.0</span></label>
+                <input type="range" id="b" min="-5" max="5" step="0.1" value="0">
+            </div>
+
+            <h3>Decision Boundary</h3>
+            <div class="control-group">
+                <label>Threshold <span id="val-t" class="value-display">0.5</span></label>
+                <input type="range" id="threshold" min="0.01" max="0.99" step="0.01" value="0.5">
+            </div>
+
+            <h3>Visualization Mode</h3>
+            <div class="btn-group">
+                <button id="mode-linear">Linear (Raw)</button>
+                <button id="mode-sigmoid" class="active">Sigmoid (Prob)</button>
+            </div>
+
+            <div class="legend">
+                <div><span class="dot dot-red"></span> Class 0 (No)</div>
+                <div><span class="dot dot-blue"></span> Class 1 (Yes)</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tooltip">
+        <strong>The Sigmoid Function:</strong><br>
+        This surface represents the probability (Z-axis).<br>
+        Notice how the curve "squashes" large values to 1 and low values to 0.
+        Adjust weights to separate the red and blue dots!
+    </div>
+
+    <script>
+        // --- 1. Scene Setup ---
+        const scene = new THREE.Scene();
+        // Dark grid background
+        scene.background = new THREE.Color(0x050510);
+        scene.fog = new THREE.FogExp2(0x050510, 0.03);
+
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+        camera.position.set(8, 6, 8);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMap.enabled = true;
+        document.body.appendChild(renderer.domElement);
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+
+        // --- 2. Lighting and Helpers ---
+        const ambientLight = new THREE.AmbientLight(0x404040, 2);
+        scene.add(ambientLight);
+
+        const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+        dirLight.position.set(5, 10, 7);
+        dirLight.castShadow = true;
+        scene.add(dirLight);
+
+        // Grid helper at Z=0 and Z=1
+        const gridHelper0 = new THREE.GridHelper(10, 10, 0x333333, 0x111111);
+        scene.add(gridHelper0); // Floor (Probability 0)
+
+        const gridHelper1 = new THREE.GridHelper(10, 10, 0x333333, 0x111111);
+        gridHelper1.position.y = 1; // Ceiling (Probability 1) - Note: In ThreeJS Y is usually Up. We will map logic Z to ThreeJS Y.
+        // Wait, standard convention in stats: Z is outcome.
+        // Let's map: Feature 1 -> X, Feature 2 -> Z, Probability -> Y (Height)
+        scene.add(gridHelper1);
+
+        // Labels (using simple line logic or sprites is complex, will use axes helper)
+        const axesHelper = new THREE.AxesHelper(1);
+        scene.add(axesHelper);
+
+        // --- 3. Data Generation (The "Training Data") ---
+        const pointsGroup = new THREE.Group();
+        scene.add(pointsGroup);
+
+        function createDataPoints() {
+            const sphereGeo = new THREE.SphereGeometry(0.15, 16, 16);
+            const redMat = new THREE.MeshStandardMaterial({ color: 0xff4b4b, roughness: 0.3, metalness: 0.7 });
+            const blueMat = new THREE.MeshStandardMaterial({ color: 0x4b4bff, roughness: 0.3, metalness: 0.7 });
+
+            // Generate Cluster 0 (Class 0 - Red) -> Bottom left
+            for (let i = 0; i < 20; i++) {
+                const mesh = new THREE.Mesh(sphereGeo, redMat);
+                // Random position centered around x=-2, z=-2
+                mesh.position.x = -2 + (Math.random() * 3 - 1.5);
+                mesh.position.z = -2 + (Math.random() * 3 - 1.5);
+                mesh.position.y = 0; // True value is 0
+                mesh.castShadow = true;
+                pointsGroup.add(mesh);
+            }
+
+            // Generate Cluster 1 (Class 1 - Blue) -> Top right
+            for (let i = 0; i < 20; i++) {
+                const mesh = new THREE.Mesh(sphereGeo, blueMat);
+                // Random position centered around x=2, z=2
+                mesh.position.x = 2 + (Math.random() * 3 - 1.5);
+                mesh.position.z = 2 + (Math.random() * 3 - 1.5);
+                mesh.position.y = 1; // True value is 1
+                mesh.castShadow = true;
+                pointsGroup.add(mesh);
+            }
+        }
+        createDataPoints();
+
+        // --- 4. The Logistic Surface (The Model) ---
+        // Plane covering x[-5, 5] and z[-5, 5]
+        const segments = 50;
+        const geometry = new THREE.PlaneGeometry(10, 10, segments, segments);
+        // Rotate geometry so it lays flat initially, but we manipulate vertices manually anyway
+        geometry.rotateX(-Math.PI / 2);
+
+        const surfaceMat = new THREE.MeshPhongMaterial({
+            color: 0x00f260,
+            side: THREE.DoubleSide,
+            transparent: true,
+            opacity: 0.4,
+            wireframe: false,
+            shininess: 100
+        });
+
+        const surfaceMesh = new THREE.Mesh(geometry, surfaceMat);
+        scene.add(surfaceMesh);
+
+        // Wireframe helper for the surface
+        const wireframeMat = new THREE.MeshBasicMaterial({ color: 0x00ff88, wireframe: true, transparent: true, opacity: 0.1 });
+        const wireframeMesh = new THREE.Mesh(geometry, wireframeMat);
+        scene.add(wireframeMesh);
+
+        // --- 5. The Threshold Plane ---
+        const thresholdGeo = new THREE.PlaneGeometry(10, 10);
+        thresholdGeo.rotateX(-Math.PI / 2);
+        const thresholdMat = new THREE.MeshBasicMaterial({
+            color: 0xffffff,
+            side: THREE.DoubleSide,
+            transparent: true,
+            opacity: 0.15,
+            depthWrite: false
+        });
+        const thresholdPlane = new THREE.Mesh(thresholdGeo, thresholdMat);
+        thresholdPlane.position.y = 0.5;
+        scene.add(thresholdPlane);
+
+        // --- 6. Logic & Interaction ---
+
+        const params = {
+            w1: 1.5,
+            w2: 1.5,
+            b: 0,
+            mode: 'sigmoid' // or 'linear'
+        };
+
+        // DOM Elements
+        const elW1 = document.getElementById('w1');
+        const elW2 = document.getElementById('w2');
+        const elB = document.getElementById('b');
+        const elT = document.getElementById('threshold');
+        const displayW1 = document.getElementById('val-w1');
+        const displayW2 = document.getElementById('val-w2');
+        const displayB = document.getElementById('val-b');
+        const displayT = document.getElementById('val-t');
+        const btnLinear = document.getElementById('mode-linear');
+        const btnSigmoid = document.getElementById('mode-sigmoid');
+        const tooltip = document.getElementById('tooltip');
+
+        // Minimize/Maximize UI
+        const toggleBtn = document.getElementById('toggle-ui');
+        const uiContainer = document.getElementById('ui-container');
+
+        toggleBtn.addEventListener('click', () => {
+            uiContainer.classList.toggle('collapsed');
+            if (uiContainer.classList.contains('collapsed')) {
+                toggleBtn.textContent = '+';
+            } else {
+                toggleBtn.textContent = '−';
+            }
+        });
+
+        // Math Helper: Sigmoid
+        function sigmoid(z) {
+            return 1 / (1 + Math.exp(-z));
+        }
+
+        function updateSurfaceGeometry() {
+            const positions = geometry.attributes.position;
+            // PlaneGeometry created on XY, then we rotated it -90 X.
+            // But checking vertex coords directly is safer.
+            // Vertices are arranged: x, y, z.
+            // Since we did rotateX(-PI/2), the plane's local Z became World Y (Up).
+            // However, it's easier to just calculate Y based on X and Z world coords.
+
+            for (let i = 0; i < positions.count; i++) {
+                const x = positions.getX(i);
+                const z = positions.getZ(i); // World Z (Feature 2)
+
+                // Linear combination
+                const linearZ = (params.w1 * x) + (params.w2 * z) + params.b;
+
+                let yVal;
+                if (params.mode === 'sigmoid') {
+                    yVal = sigmoid(linearZ);
+                } else {
+                    // Linear Regression mode (unbounded)
+                    // Clamp slightly for visuals so it doesn't shoot to infinity
+                    yVal = linearZ;
+                }
+
+                positions.setY(i, yVal);
+            }
+            positions.needsUpdate = true;
+            geometry.computeVertexNormals();
+        }
+
+        // Listeners
+        elW1.addEventListener('input', (e) => {
+            params.w1 = parseFloat(e.target.value);
+            displayW1.textContent = params.w1.toFixed(1);
+            updateSurfaceGeometry();
+        });
+
+        elW2.addEventListener('input', (e) => {
+            params.w2 = parseFloat(e.target.value);
+            displayW2.textContent = params.w2.toFixed(1);
+            updateSurfaceGeometry();
+        });
+
+        elB.addEventListener('input', (e) => {
+            params.b = parseFloat(e.target.value);
+            displayB.textContent = params.b.toFixed(1);
+            updateSurfaceGeometry();
+        });
+
+        elT.addEventListener('input', (e) => {
+            const val = parseFloat(e.target.value);
+            thresholdPlane.position.y = val;
+            displayT.textContent = val.toFixed(2);
+        });
+
+        btnLinear.addEventListener('click', () => {
+            params.mode = 'linear';
+            btnLinear.classList.add('active');
+            btnSigmoid.classList.remove('active');
+            tooltip.innerHTML = `<strong>Linear Regression Mode:</strong><br>
+            See how the plane extends to infinity? This is why linear regression is bad for classification. 
+            It predicts values like 5.2 or -3.1, which aren't probabilities!`;
+            updateSurfaceGeometry();
+        });
+
+        btnSigmoid.addEventListener('click', () => {
+            params.mode = 'sigmoid';
+            btnSigmoid.classList.add('active');
+            btnLinear.classList.remove('active');
+            tooltip.innerHTML = `<strong>The Sigmoid Function:</strong><br>
+            The squashing function bends the plane into an S-curve, keeping predictions strictly between 0 and 1.`;
+            updateSurfaceGeometry();
+        });
+
+        // --- 7. Animation Loop ---
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        // Handle resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Initialize
+        updateSurfaceGeometry();
+        animate();
+
+    </script>
+</body>
+
+</html>
