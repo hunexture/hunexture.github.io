@@ -10,6 +10,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [industriesOpen, setIndustriesOpen] = useState(false)
+  const [blogOpen, setBlogOpen] = useState(false)
   const { theme, toggleTheme } = useTheme()
   const navigate = useNavigate()
   const location = useLocation()
@@ -127,6 +128,33 @@ const Navbar = () => {
                     </div>
                   );
                 })}
+              </div>
+            </div>
+          </div>
+
+
+          {/* Blog Dropdown */}
+          <div
+            className="nav-dropdown"
+            onMouseEnter={() => window.innerWidth > 768 && setBlogOpen(true)}
+            onMouseLeave={() => window.innerWidth > 768 && setBlogOpen(false)}
+          >
+            <button
+              className="nav-link dropdown-trigger"
+              onClick={() => window.innerWidth <= 768 && setBlogOpen(!blogOpen)}
+            >
+              Blog <FaChevronDown className={`dropdown-arrow ${blogOpen ? 'open' : ''}`} />
+            </button>
+            <div className={`dropdown-menu ${blogOpen ? 'show' : ''}`}>
+              <div
+                className="dropdown-item"
+                onClick={() => {
+                  setMenuOpen(false);
+                  setBlogOpen(false);
+                  navigate('/blog/linear-algebra');
+                }}
+              >
+                <span>Linear Algebra</span>
               </div>
             </div>
           </div>

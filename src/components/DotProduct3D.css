@@ -1,0 +1,231 @@
+.dot-product-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: #1a1a1a;
+    overflow: hidden;
+}
+
+.back-button-dot {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.back-button-dot:hover {
+    transform: translateX(-5px);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.5);
+}
+
+.canvas-container-dot {
+    width: 100%;
+    height: 100%;
+}
+
+.panel-dot {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: white;
+    background: rgba(0, 0, 0, 0.85);
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 320px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+}
+
+.panel-dot h3 {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 5px;
+    font-size: 1.1em;
+}
+
+.section-title {
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #ddd;
+    display: block;
+    margin-top: 10px;
+}
+
+.text-yellow {
+    color: #ffff00;
+}
+
+.text-cyan {
+    color: #00ffff;
+}
+
+.input-group-dot {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.input-group-dot label {
+    font-weight: bold;
+    margin-right: 5px;
+    width: 20px;
+    font-size: 0.9em;
+}
+
+.input-group-dot input[type="number"] {
+    background: #333;
+    border: 1px solid #555;
+    color: white;
+    padding: 4px;
+    border-radius: 4px;
+    width: 60px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.input-group-dot input[type="number"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+.color-x {
+    color: #ff4444;
+}
+
+.color-y {
+    color: #44ff44;
+}
+
+.color-z {
+    color: #4444ff;
+}
+
+.results {
+    background: #222;
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 15px;
+    border: 1px solid #444;
+}
+
+.result-row {
+    margin-bottom: 5px;
+    font-size: 0.95em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.result-val {
+    font-weight: bold;
+}
+
+.highlight {
+    color: #4da6ff;
+}
+
+.meaning-text {
+    margin-top: 8px;
+    font-style: italic;
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+.update-btn-dot {
+    margin-top: 15px;
+    width: 100%;
+    padding: 8px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.update-btn-dot:hover {
+    background-color: #0063b1;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.instructions-dot {
+    margin-top: 15px;
+    font-size: 0.8em;
+    color: #ccc;
+    border-top: 1px solid #444;
+    padding-top: 10px;
+    line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .panel-dot {
+        max-width: 280px;
+        padding: 15px;
+    }
+
+    .back-button-dot {
+        top: 10px;
+        right: 10px;
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+
+    .panel-dot h3 {
+        font-size: 1rem;
+    }
+
+    .input-group-dot input[type="number"] {
+        width: 55px;
+    }
+}
+
+@media (max-width: 480px) {
+    .panel-dot {
+        top: 5px;
+        left: 5px;
+        max-width: calc(100% - 10px);
+        padding: 12px;
+        max-height: 85vh;
+    }
+
+    .back-button-dot {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin: 10px;
+        width: calc(100% - 20px);
+    }
+
+    .section-title {
+        font-size: 0.85em;
+    }
+
+    .input-group-dot input[type="number"] {
+        width: 50px;
+        padding: 3px;
+    }
+}

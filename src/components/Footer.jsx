@@ -53,7 +53,7 @@ const Footer = () => {
   }
 
   const socialLinks = [
-    { icon: <FaLinkedin />, url: 'https://www.linkedin.com/in/hunexture-tech-175766391/', name: 'LinkedIn' },
+    { icon: <FaLinkedin />, url: 'https://www.linkedin.com/company/hunexture/', name: 'LinkedIn' },
     { icon: <FaGithub />, url: 'https://github.com/hunexture', name: 'GitHub' },
     { icon: <FaTwitter />, url: 'https://x.com/hunexture', name: 'Twitter' },
     { icon: <FaInstagram />, url: 'https://www.instagram.com/hunexture', name: 'Instagram' }
@@ -123,8 +123,7 @@ const Footer = () => {
 
         <div className="footer-bottom">
           <p className="footer-copyright">
-            &copy; {new Date().getFullYear()} Hunexture. All rights reserved. Made with{' '}
-            <FaHeart className="heart-icon" /> by the Hunexture Team.
+            &copy; {new Date().getFullYear()} Hunexture. All rights reserved. Made by the Hunexture Team.
           </p>
         </div>
       </div>

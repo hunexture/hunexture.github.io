@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Vector Dot Product Visualization</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #1a1a1a;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #panel {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 320px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        h3 {
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 5px;
+            font-size: 1.1em;
+        }
+
+        .section-title {
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #ddd;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .input-group {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 5px;
+            width: 20px;
+            font-size: 0.9em;
+        }
+
+        input[type="number"] {
+            background: #333;
+            border: 1px solid #555;
+            color: white;
+            padding: 4px;
+            border-radius: 4px;
+            width: 60px;
+        }
+
+        .color-x {
+            color: #ff4444;
+        }
+
+        .color-y {
+            color: #44ff44;
+        }
+
+        .color-z {
+            color: #4444ff;
+        }
+
+        .text-yellow {
+            color: #ffff00;
+        }
+
+        .text-cyan {
+            color: #00ffff;
+        }
+
+        #results {
+            background: #222;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 15px;
+            border: 1px solid #444;
+        }
+
+        .result-row {
+            margin-bottom: 5px;
+            font-size: 0.95em;
+        }
+
+        .result-val {
+            float: right;
+            font-weight: bold;
+        }
+
+        .highlight {
+            color: #4da6ff;
+        }
+
+        #updateBtn {
+            margin-top: 15px;
+            width: 100%;
+            padding: 8px;
+            background-color: #0078d7;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        #updateBtn:hover {
+            background-color: #0063b1;
+        }
+
+        .instructions {
+            margin-top: 15px;
+            font-size: 0.8em;
+            color: #ccc;
+            border-top: 1px solid #444;
+            padding-top: 10px;
+        }
+    </style>
+    <!-- Import Three.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Import OrbitControls -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+
+<body>
+
+    <div id="panel">
+        <h3>Dot Product Visualizer</h3>
+
+        <span class="section-title text-yellow">Vector A (Reference)</span>
+        <div class="input-group"><label class="color-x">X</label><input type="number" id="ax" value="50"></div>
+        <div class="input-group"><label class="color-y">Y</label><input type="number" id="ay" value="0"></div>
+        <div class="input-group"><label class="color-z">Z</label><input type="number" id="az" value="0"></div>
+
+        <span class="section-title text-cyan">Vector B (Comparison)</span>
+        <div class="input-group"><label class="color-x">X</label><input type="number" id="bx" value="30"></div>
+        <div class="input-group"><label class="color-y">Y</label><input type="number" id="by" value="40"></div>
+        <div class="input-group"><label class="color-z">Z</label><input type="number" id="bz" value="0"></div>
+
+        <div id="results">
+            <div class="result-row">Dot Product: <span id="dotVal" class="result-val highlight">0</span></div>
+            <div class="result-row">Angle: <span id="angleVal" class="result-val">0°</span></div>
+            <div style="margin-top:8px; font-style: italic; font-size: 0.9em; color: #aaa;" id="meaning"></div>
+        </div>
+
+        <button id="updateBtn">Update / Recalculate</button>
+
+        <div class="instructions">
+            Try setting B to [-50, 0, 0] for opposite,<br>
+            or [0, 50, 0] for perpendicular.<br><br>
+            Left Click: Rotate | Scroll: Zoom
+        </div>
+    </div>
+
+    <script>
+        // 1. Scene Setup
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x1a1a1a);
+        scene.fog = new THREE.Fog(0x1a1a1a, 100, 1000);
+
+        // 2. Camera Setup
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 2000);
+        camera.position.set(100, 100, 150);
+
+        // 3. Renderer Setup
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // 4. Controls
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+
+        // 5. Helpers
+        const gridHelper = new THREE.GridHelper(400, 40, 0x444444, 0x222222);
+        scene.add(gridHelper);
+
+        const axesHelper = new THREE.AxesHelper(100);
+        scene.add(axesHelper);
+
+        // 6. Global Objects
+        let arrowA, arrowB;
+        let labels = [];
+
+        // 7. Text Label Function
+        function makeTextSprite(message, parameters) {
+            if (parameters === undefined) parameters = {};
+            const fontface = parameters.hasOwnProperty("fontface") ? parameters["fontface"] : "Arial";
+            const fontsize = parameters.hasOwnProperty("fontsize") ? parameters["fontsize"] : 24;
+            const borderThickness = parameters.hasOwnProperty("borderThickness") ? parameters["borderThickness"] : 4;
+            const borderColor = parameters.hasOwnProperty("borderColor") ? parameters["borderColor"] : { r: 0, g: 0, b: 0, a: 1.0 };
+            const backgroundColor = parameters.hasOwnProperty("backgroundColor") ? parameters["backgroundColor"] : { r: 255, g: 255, b: 255, a: 1.0 };
+
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            context.font = "Bold " + fontsize + "px " + fontface;
+            const metrics = context.measureText(message);
+            const textWidth = metrics.width;
+
+            context.fillStyle = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + "," + backgroundColor.a + ")";
+            context.strokeStyle = "rgba(" + borderColor.r + "," + borderColor.g + "," + borderColor.b + "," + borderColor.a + ")";
+            context.lineWidth = borderThickness;
+
+            context.fillStyle = "rgba(255, 255, 255, 1.0)";
+            context.fillText(message, borderThickness, fontsize + borderThickness);
+
+            const texture = new THREE.Texture(canvas);
+            texture.needsUpdate = true;
+            const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
+            const sprite = new THREE.Sprite(spriteMaterial);
+            sprite.scale.set(textWidth / 3, fontsize / 1.5, 1.0);
+            return sprite;
+        }
+
+        function createArrow(x, y, z, color) {
+            const origin = new THREE.Vector3(0, 0, 0);
+            const dest = new THREE.Vector3(x, y, z);
+            const length = dest.length();
+            const direction = length > 0 ? dest.clone().normalize() : new THREE.Vector3(0, 1, 0);
+            return new THREE.ArrowHelper(direction, origin, length, color, Math.min(length * 0.2, 10), Math.min(length * 0.1, 5));
+        }
+
+        // 8. Main Update Function
+        function updateVector() {
+            // Clear old stuff
+            if (arrowA) scene.remove(arrowA);
+            if (arrowB) scene.remove(arrowB);
+            labels.forEach(l => scene.remove(l));
+            labels = [];
+
+            // Get Inputs
+            const ax = parseFloat(document.getElementById('ax').value) || 0;
+            const ay = parseFloat(document.getElementById('ay').value) || 0;
+            const az = parseFloat(document.getElementById('az').value) || 0;
+
+            const bx = parseFloat(document.getElementById('bx').value) || 0;
+            const by = parseFloat(document.getElementById('by').value) || 0;
+            const bz = parseFloat(document.getElementById('bz').value) || 0;
+
+            // Create Vectors
+            const vecA = new THREE.Vector3(ax, ay, az);
+            const vecB = new THREE.Vector3(bx, by, bz);
+
+            // Draw Arrows
+            arrowA = createArrow(ax, ay, az, 0xffff00); // Yellow
+            arrowB = createArrow(bx, by, bz, 0x00ffff); // Cyan
+            scene.add(arrowA);
+            scene.add(arrowB);
+
+            // Calculate Dot Product & Angle
+            const dotProduct = vecA.dot(vecB);
+
+            // Calculate Angle (safeguard against zero length vectors)
+            let angleDeg = 0;
+            if (vecA.length() > 0 && vecB.length() > 0) {
+                const angleRad = vecA.angleTo(vecB);
+                angleDeg = angleRad * (180 / Math.PI);
+            }
+
+            // Update UI
+            document.getElementById('dotVal').innerText = dotProduct.toFixed(2);
+            document.getElementById('angleVal').innerText = angleDeg.toFixed(1) + "°";
+
+            const meaningEl = document.getElementById('meaning');
+            if (vecA.length() === 0 || vecB.length() === 0) {
+                meaningEl.innerText = "One vector has zero length.";
+                meaningEl.style.color = "#aaa";
+            } else if (Math.abs(dotProduct) < 0.1 || Math.abs(angleDeg - 90) < 0.1) {
+                meaningEl.innerText = "Perpendicular (Unrelated). Result is Zero.";
+                meaningEl.style.color = "#aaa";
+            } else if (dotProduct > 0) {
+                meaningEl.innerText = "Similar directions (Positive).";
+                meaningEl.style.color = "#44ff44";
+            } else {
+                meaningEl.innerText = "Opposite directions (Negative).";
+                meaningEl.style.color = "#ff4444";
+            }
+
+            // Add Labels
+            const labelA = makeTextSprite(" A ", { fontsize: 24, backgroundColor: { r: 100, g: 100, b: 0, a: 0.6 } });
+            labelA.position.copy(vecA).multiplyScalar(1.1); // Place slightly beyond tip
+            scene.add(labelA);
+            labels.push(labelA);
+
+            const labelB = makeTextSprite(" B ", { fontsize: 24, backgroundColor: { r: 0, g: 100, b: 100, a: 0.6 } });
+            labelB.position.copy(vecB).multiplyScalar(1.1);
+            scene.add(labelB);
+            labels.push(labelB);
+        }
+
+        // 9. Initial Load & Listeners
+        document.getElementById('updateBtn').addEventListener('click', updateVector);
+
+        const inputs = document.querySelectorAll('input[type="number"]');
+        inputs.forEach(input => {
+            input.addEventListener('keypress', (e) => { if (e.key === 'Enter') updateVector(); });
+            input.addEventListener('input', updateVector); // Real-time
+        });
+
+        // 10. Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        dirLight.position.set(50, 50, 50);
+        scene.add(dirLight);
+
+        // 11. Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        updateVector();
+        animate();
+
+    </script>
+</body>
+
+</html>

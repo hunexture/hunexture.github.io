@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+.cond-prob-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0f172a;
+    color: #e2e8f0;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+}
+
+.back-button-cp {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.back-button-cp:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.5);
+}
+
+.canvas-container-cp {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+/* UI Overlay */
+.ui-layer-cp {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.panel-cp {
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    pointer-events: auto;
+    max-width: 400px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+}
+
+.panel-bottom {
+    align-self: center;
+}
+
+.panel-cp h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #38bdf8;
+}
+
+.panel-cp h2 {
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+    color: #94a3b8;
+}
+
+.explanation-cp {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    color: #cbd5e1;
+}
+
+.explanation-cp strong {
+    color: #e2e8f0;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.math-display-cp {
+    font-family: 'Courier New', monospace;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.75rem;
+    border-radius: 6px;
+    margin-top: 1rem;
+    border-left: 3px solid #38bdf8;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.math-display-cp strong {
+    color: #38bdf8;
+    font-weight: bold;
+}
+
+.legend-cp {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.legend-item-cp {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.dot-cp {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+/* Controls */
+.controls-cp {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.controls-cp button {
+    background: #1e293b;
+    border: 1px solid #334155;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+}
+
+.controls-cp button:hover {
+    background: #334155;
+    border-color: #475569;
+    transform: translateY(-1px);
+}
+
+.controls-cp button.active {
+    background: #0284c7;
+    border-color: #0ea5e9;
+    box-shadow: 0 0 10px rgba(2, 132, 199, 0.4);
+}
+
+.hint-cp {
+    margin: 0;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .ui-layer-cp {
+        padding: 1rem;
+    }
+
+    .panel-cp {
+        max-width: 100%;
+        padding: 1rem;
+    }
+
+    .panel-cp h1 {
+        font-size: 1.1rem;
+    }
+
+    .panel-cp h2 {
+        font-size: 0.9rem;
+    }
+
+    .explanation-cp {
+        font-size: 0.85rem;
+    }
+
+    .controls-cp {
+        justify-content: center;
+    }
+
+    .controls-cp button {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .back-button-cp {
+        top: 10px;
+        right: 10px;
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ui-layer-cp {
+        padding: 0.5rem;
+    }
+
+    .panel-cp {
+        padding: 0.75rem;
+    }
+
+    .legend-cp {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .controls-cp button {
+        flex: 1 1 45%;
+        min-width: 120px;
+    }
+
+    .back-button-cp {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin: 10px;
+        width: calc(100% - 20px);
+    }
+}

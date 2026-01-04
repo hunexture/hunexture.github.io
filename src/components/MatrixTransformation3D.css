@@ -1,0 +1,340 @@
+.matrix-transform-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: #1a1a1a;
+    overflow: hidden;
+}
+
+.back-button-matrix {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.back-button-matrix:hover {
+    transform: translateX(-5px);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.5);
+}
+
+.canvas-container-matrix {
+    width: 100%;
+    height: 100%;
+}
+
+.panel-matrix {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: white;
+    background: rgba(0, 0, 0, 0.85);
+    padding: 15px;
+    border-radius: 8px;
+    max-width: 340px;
+    min-width: 260px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    transition: height 0.3s ease;
+}
+
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #444;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+}
+
+.header-row h3 {
+    margin: 0;
+    font-size: 1.1em;
+    user-select: none;
+}
+
+.min-btn {
+    background: #444;
+    border: 1px solid #666;
+    color: #fff;
+    cursor: pointer;
+    width: 26px;
+    height: 26px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    padding: 0;
+    transition: all 0.2s;
+}
+
+.min-btn:hover {
+    background: #555;
+    border-color: #888;
+}
+
+.min-btn:active {
+    background: #333;
+}
+
+.section-title-matrix {
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #ddd;
+    display: block;
+    margin-top: 10px;
+}
+
+.text-yellow {
+    color: #ffff00;
+}
+
+.text-cyan {
+    color: #00ffff;
+}
+
+.input-group-matrix {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.input-group-matrix label {
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.input-group-matrix input[type="number"] {
+    background: #333;
+    border: 1px solid #555;
+    color: white;
+    padding: 4px;
+    border-radius: 4px;
+    width: 50px;
+    text-align: center;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.input-group-matrix input[type="number"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+.color-x {
+    color: #ff4444;
+}
+
+.color-y {
+    color: #44ff44;
+}
+
+.color-z {
+    color: #4444ff;
+}
+
+/* Matrix Styling */
+.matrix-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.matrix-bracket {
+    font-size: 3em;
+    font-weight: lighter;
+    color: #888;
+    line-height: 0.8;
+    user-select: none;
+}
+
+.matrix-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.matrix-row-input {
+    display: flex;
+    gap: 5px;
+}
+
+.matrix-input {
+    background: #333 !important;
+    border: 1px solid #555 !important;
+    color: white !important;
+    padding: 4px !important;
+    border-radius: 4px !important;
+    width: 60px !important;
+    text-align: center !important;
+    font-size: 14px !important;
+    transition: all 0.3s ease !important;
+}
+
+.matrix-input:focus {
+    outline: none !important;
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2) !important;
+}
+
+/* Preset Buttons */
+.btn-group-matrix {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.preset-btn-matrix {
+    flex: 1;
+    padding: 6px;
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: all 0.2s;
+    min-width: 70px;
+}
+
+.preset-btn-matrix:hover {
+    background-color: #666;
+    transform: translateY(-1px);
+}
+
+.preset-btn-matrix:active {
+    transform: translateY(0);
+}
+
+/* Results */
+.results-matrix {
+    background: #222;
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 15px;
+    border: 1px solid #444;
+}
+
+.result-row-matrix {
+    margin-bottom: 5px;
+    font-size: 0.95em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.result-val-matrix {
+    font-weight: bold;
+}
+
+.highlight {
+    color: #4da6ff;
+}
+
+.update-btn-matrix {
+    margin-top: 15px;
+    width: 100%;
+    padding: 8px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.update-btn-matrix:hover {
+    background-color: #0063b1;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.instructions-matrix {
+    margin-top: 15px;
+    font-size: 0.8em;
+    color: #ccc;
+    border-top: 1px solid #444;
+    padding-top: 10px;
+    line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .panel-matrix {
+        max-width: 300px;
+        min-width: 240px;
+        padding: 12px;
+    }
+
+    .back-button-matrix {
+        top: 10px;
+        right: 10px;
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+
+    .matrix-input {
+        width: 50px !important;
+    }
+
+    .input-group-matrix input[type="number"] {
+        width: 45px;
+    }
+}
+
+@media (max-width: 480px) {
+    .panel-matrix {
+        top: 5px;
+        left: 5px;
+        max-width: calc(100% - 10px);
+        padding: 10px;
+        max-height: 85vh;
+    }
+
+    .back-button-matrix {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin: 10px;
+        width: calc(100% - 20px);
+    }
+
+    .matrix-bracket {
+        font-size: 2.5em;
+    }
+
+    .matrix-input {
+        width: 45px !important;
+        padding: 3px !important;
+    }
+
+    .preset-btn-matrix {
+        font-size: 0.75em;
+        padding: 5px;
+        min-width: 60px;
+    }
+}

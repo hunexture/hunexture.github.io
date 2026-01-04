@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Matrix Transformation Visualization</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #1a1a1a;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #panel {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 15px;
+            border-radius: 8px;
+            max-width: 340px;
+            min-width: 260px;
+            /* Prevent awkward shrinking when minimized */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            max-height: 90vh;
+            overflow-y: auto;
+            transition: height 0.3s ease;
+        }
+
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #444;
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            margin: 0;
+            font-size: 1.1em;
+            user-select: none;
+            /* Prevent text selection */
+        }
+
+        #minBtn {
+            background: #444;
+            border: 1px solid #666;
+            color: #fff;
+            cursor: pointer;
+            width: 26px;
+            height: 26px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 0;
+            padding: 0;
+            transition: background 0.2s;
+        }
+
+        #minBtn:hover {
+            background: #555;
+            border-color: #888;
+        }
+
+        #minBtn:active {
+            background: #333;
+        }
+
+        .section-title {
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #ddd;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .input-group {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 5px;
+            width: 20px;
+            font-size: 0.9em;
+        }
+
+        input[type="number"] {
+            background: #333;
+            border: 1px solid #555;
+            color: white;
+            padding: 4px;
+            border-radius: 4px;
+            width: 50px;
+            text-align: center;
+        }
+
+        /* Matrix Grid Styling */
+        .matrix-row {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 5px;
+            justify-content: center;
+        }
+
+        .matrix-input {
+            width: 60px !important;
+        }
+
+        .matrix-bracket {
+            font-size: 3em;
+            font-weight: lighter;
+            color: #888;
+            line-height: 0.8;
+        }
+
+        .color-x {
+            color: #ff4444;
+        }
+
+        .color-y {
+            color: #44ff44;
+        }
+
+        .color-z {
+            color: #4444ff;
+        }
+
+        .text-yellow {
+            color: #ffff00;
+        }
+
+        .text-cyan {
+            color: #00ffff;
+        }
+
+        #results {
+            background: #222;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 15px;
+            border: 1px solid #444;
+        }
+
+        .result-row {
+            margin-bottom: 5px;
+            font-size: 0.95em;
+        }
+
+        .result-val {
+            float: right;
+            font-weight: bold;
+        }
+
+        .highlight {
+            color: #4da6ff;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .preset-btn {
+            flex: 1;
+            padding: 6px;
+            background-color: #444;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8em;
+            transition: background 0.2s;
+        }
+
+        .preset-btn:hover {
+            background-color: #666;
+        }
+
+        #updateBtn {
+            margin-top: 15px;
+            width: 100%;
+            padding: 8px;
+            background-color: #0078d7;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        #updateBtn:hover {
+            background-color: #0063b1;
+        }
+
+        .instructions {
+            margin-top: 15px;
+            font-size: 0.8em;
+            color: #ccc;
+            border-top: 1px solid #444;
+            padding-top: 10px;
+        }
+    </style>
+    <!-- Import Three.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Import OrbitControls -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+
+<body>
+
+    <div id="panel">
+        <div class="header-row">
+            <h3>Matrix Machine</h3>
+            <button id="minBtn" title="Minimize / Restore">-</button>
+        </div>
+
+        <div id="panelContent">
+            <!-- Input Vector -->
+            <span class="section-title text-yellow">1. Input Vector (v)</span>
+            <div class="input-group">
+                <label class="color-x">X</label><input type="number" id="vx" value="10">
+                <label class="color-y">Y</label><input type="number" id="vy" value="10">
+                <label class="color-z">Z</label><input type="number" id="vz" value="10">
+            </div>
+
+            <!-- Matrix Input -->
+            <span class="section-title">2. Transformation Matrix (M)</span>
+            <div style="display: flex; align-items: center; justify-content: center;">
+                <div class="matrix-bracket">[</div>
+                <div>
+                    <div class="matrix-row">
+                        <input type="number" class="matrix-input" id="m00" value="1">
+                        <input type="number" class="matrix-input" id="m01" value="0">
+                        <input type="number" class="matrix-input" id="m02" value="0">
+                    </div>
+                    <div class="matrix-row">
+                        <input type="number" class="matrix-input" id="m10" value="0">
+                        <input type="number" class="matrix-input" id="m11" value="1">
+                        <input type="number" class="matrix-input" id="m12" value="0">
+                    </div>
+                    <div class="matrix-row">
+                        <input type="number" class="matrix-input" id="m20" value="0">
+                        <input type="number" class="matrix-input" id="m21" value="0">
+                        <input type="number" class="matrix-input" id="m22" value="1">
+                    </div>
+                </div>
+                <div class="matrix-bracket">]</div>
+            </div>
+
+            <!-- Presets -->
+            <div class="btn-group">
+                <button class="preset-btn" onclick="setIdentity()">Identity</button>
+                <button class="preset-btn" onclick="setScale2x()">Scale 2x</button>
+                <button class="preset-btn" onclick="setRotateY()">Rot Y 90°</button>
+                <button class="preset-btn" onclick="setShear()">Shear</button>
+            </div>
+
+            <div id="results">
+                <span class="section-title text-cyan" style="margin-top:0;">3. Output Result (M × v)</span>
+                <div class="result-row">X: <span id="resX" class="result-val highlight">0</span></div>
+                <div class="result-row">Y: <span id="resY" class="result-val highlight">0</span></div>
+                <div class="result-row">Z: <span id="resZ" class="result-val highlight">0</span></div>
+            </div>
+
+            <button id="updateBtn">Apply Transformation</button>
+
+            <div class="instructions">
+                The Matrix multiplies the Input Vector to create the Output Vector.<br><br>
+                Left Click: Rotate | Scroll: Zoom
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. Scene Setup
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x1a1a1a);
+        scene.fog = new THREE.Fog(0x1a1a1a, 100, 1000);
+
+        // 2. Camera Setup
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 2000);
+        camera.position.set(60, 40, 80);
+
+        // 3. Renderer Setup
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // 4. Controls
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+
+        // 5. Helpers
+        const gridHelper = new THREE.GridHelper(200, 20, 0x444444, 0x222222);
+        scene.add(gridHelper);
+
+        const axesHelper = new THREE.AxesHelper(50);
+        scene.add(axesHelper);
+
+        // 6. Global Objects
+        let arrowInput, arrowOutput;
+        let labels = [];
+
+        // 7. Text Label Function
+        function makeTextSprite(message, parameters) {
+            if (parameters === undefined) parameters = {};
+            const fontface = parameters.hasOwnProperty("fontface") ? parameters["fontface"] : "Arial";
+            const fontsize = parameters.hasOwnProperty("fontsize") ? parameters["fontsize"] : 24;
+            const borderThickness = parameters.hasOwnProperty("borderThickness") ? parameters["borderThickness"] : 4;
+            const borderColor = parameters.hasOwnProperty("borderColor") ? parameters["borderColor"] : { r: 0, g: 0, b: 0, a: 1.0 };
+            const backgroundColor = parameters.hasOwnProperty("backgroundColor") ? parameters["backgroundColor"] : { r: 255, g: 255, b: 255, a: 1.0 };
+
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            context.font = "Bold " + fontsize + "px " + fontface;
+            const metrics = context.measureText(message);
+            const textWidth = metrics.width;
+
+            context.fillStyle = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + "," + backgroundColor.a + ")";
+            context.strokeStyle = "rgba(" + borderColor.r + "," + borderColor.g + "," + borderColor.b + "," + borderColor.a + ")";
+            context.lineWidth = borderThickness;
+
+            context.fillStyle = "rgba(255, 255, 255, 1.0)";
+            context.fillText(message, borderThickness, fontsize + borderThickness);
+
+            const texture = new THREE.Texture(canvas);
+            texture.needsUpdate = true;
+            const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
+            const sprite = new THREE.Sprite(spriteMaterial);
+            sprite.scale.set(textWidth / 3, fontsize / 1.5, 1.0);
+            return sprite;
+        }
+
+        function createArrow(x, y, z, color, lengthMult = 1) {
+            const origin = new THREE.Vector3(0, 0, 0);
+            const dest = new THREE.Vector3(x, y, z);
+            const length = dest.length();
+            const direction = length > 0 ? dest.clone().normalize() : new THREE.Vector3(0, 1, 0);
+            // Dynamic head size based on length
+            return new THREE.ArrowHelper(direction, origin, length, color, Math.min(length * 0.2, 10), Math.min(length * 0.1, 5));
+        }
+
+        // 8. Matrix Presets
+        function setMatrixValues(v) {
+            document.getElementById('m00').value = v[0]; document.getElementById('m01').value = v[1]; document.getElementById('m02').value = v[2];
+            document.getElementById('m10').value = v[3]; document.getElementById('m11').value = v[4]; document.getElementById('m12').value = v[5];
+            document.getElementById('m20').value = v[6]; document.getElementById('m21').value = v[7]; document.getElementById('m22').value = v[8];
+            updateVisualization();
+        }
+
+        window.setIdentity = () => setMatrixValues([1, 0, 0, 0, 1, 0, 0, 0, 1]);
+        window.setScale2x = () => setMatrixValues([2, 0, 0, 0, 2, 0, 0, 0, 2]);
+        window.setRotateY = () => setMatrixValues([0, 0, 1, 0, 1, 0, -1, 0, 0]);
+        window.setShear = () => setMatrixValues([1, 1, 0, 0, 1, 0, 0, 0, 1]);
+
+        // 9. Main Update Function
+        function updateVisualization() {
+            // Clear old stuff
+            if (arrowInput) scene.remove(arrowInput);
+            if (arrowOutput) scene.remove(arrowOutput);
+            labels.forEach(l => scene.remove(l));
+            labels = [];
+
+            // Get Input Vector
+            const vx = parseFloat(document.getElementById('vx').value) || 0;
+            const vy = parseFloat(document.getElementById('vy').value) || 0;
+            const vz = parseFloat(document.getElementById('vz').value) || 0;
+
+            // Get Matrix
+            const m00 = parseFloat(document.getElementById('m00').value) || 0;
+            const m01 = parseFloat(document.getElementById('m01').value) || 0;
+            const m02 = parseFloat(document.getElementById('m02').value) || 0;
+
+            const m10 = parseFloat(document.getElementById('m10').value) || 0;
+            const m11 = parseFloat(document.getElementById('m11').value) || 0;
+            const m12 = parseFloat(document.getElementById('m12').value) || 0;
+
+            const m20 = parseFloat(document.getElementById('m20').value) || 0;
+            const m21 = parseFloat(document.getElementById('m21').value) || 0;
+            const m22 = parseFloat(document.getElementById('m22').value) || 0;
+
+            // Calculate Output (Matrix * Vector)
+            // Row 1 * Vector
+            const resX = (m00 * vx) + (m01 * vy) + (m02 * vz);
+            // Row 2 * Vector
+            const resY = (m10 * vx) + (m11 * vy) + (m12 * vz);
+            // Row 3 * Vector
+            const resZ = (m20 * vx) + (m21 * vy) + (m22 * vz);
+
+            // Update Result UI
+            document.getElementById('resX').innerText = resX.toFixed(2);
+            document.getElementById('resY').innerText = resY.toFixed(2);
+            document.getElementById('resZ').innerText = resZ.toFixed(2);
+
+            // Draw Arrows
+            // Input Vector (Yellow)
+            arrowInput = createArrow(vx, vy, vz, 0xffff00);
+            scene.add(arrowInput);
+
+            // Output Vector (Cyan)
+            arrowOutput = createArrow(resX, resY, resZ, 0x00ffff);
+            scene.add(arrowOutput);
+
+            // Add Labels
+            const labelIn = makeTextSprite(" Input ", { fontsize: 24, backgroundColor: { r: 100, g: 100, b: 0, a: 0.6 } });
+            labelIn.position.set(vx, vy, vz).multiplyScalar(1.1);
+            scene.add(labelIn);
+            labels.push(labelIn);
+
+            const labelOut = makeTextSprite(" Output ", { fontsize: 24, backgroundColor: { r: 0, g: 100, b: 100, a: 0.6 } });
+            labelOut.position.set(resX, resY, resZ).multiplyScalar(1.1);
+            scene.add(labelOut);
+            labels.push(labelOut);
+        }
+
+        // 10. Initial Load & Listeners
+        document.getElementById('updateBtn').addEventListener('click', updateVisualization);
+
+        const inputs = document.querySelectorAll('input[type="number"]');
+        inputs.forEach(input => {
+            input.addEventListener('keypress', (e) => { if (e.key === 'Enter') updateVisualization(); });
+            input.addEventListener('input', updateVisualization); // Real-time
+        });
+
+        // 11. Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        dirLight.position.set(50, 50, 50);
+        scene.add(dirLight);
+
+        // 12. Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Toggle Minimize Logic
+        const minBtn = document.getElementById('minBtn');
+        const panelContent = document.getElementById('panelContent');
+
+        minBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // Good practice
+            if (panelContent.style.display === 'none') {
+                panelContent.style.display = 'block';
+                minBtn.textContent = '-'; // Standard hyphen
+            } else {
+                panelContent.style.display = 'none';
+                minBtn.textContent = '+'; // Standard plus
+            }
+        });
+
+        updateVisualization();
+        animate();
+
+    </script>
+</body>
+
+</html>

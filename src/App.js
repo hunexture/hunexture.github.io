@@ -16,6 +16,8 @@ import IndustryDetail from './components/IndustryDetail'
 import PrivacyPolicy from './components/PrivacyPolicy'
 import TermsOfService from './components/TermsOfService'
 import CookiePolicy from './components/CookiePolicy'
+import BlogList from './components/BlogList'
+import BlogPost from './components/BlogPost'
 import './App.css'
 
 // Home page component
@@ -33,19 +35,24 @@ const HomePage = () => (
 const Layout = ({ children }) => {
   const location = useLocation()
   const isDetailPage = location.pathname.startsWith('/services/') ||
-                       location.pathname.startsWith('/portfolio/') ||
-                       location.pathname.startsWith('/industries/') ||
-                       location.pathname.startsWith('/privacy-policy') ||
-                       location.pathname.startsWith('/terms-of-service') ||
-                       location.pathname.startsWith('/cookie-policy')
+    location.pathname.startsWith('/portfolio/') ||
+    location.pathname.startsWith('/industries/') ||
+    location.pathname.startsWith('/privacy-policy') ||
+    location.pathname.startsWith('/terms-of-service') ||
+    location.pathname.startsWith('/cookie-policy') ||
+    location.pathname.startsWith('/blog/')
+
+  // Check if it's a blog post page (has slug) vs blog list page
+  const pathParts = location.pathname.split('/').filter(Boolean)
+  const isBlogPostPage = pathParts[0] === 'blog' && pathParts.length === 3 // /blog/category/slug
 
   return (
     <div className="App">
       {!isDetailPage && <AnimatedBackground />}
       {!isDetailPage && <BackgroundEffect />}
-      <Navbar />
+      {!isBlogPostPage && <Navbar />}
       {children}
-      <Footer />
+      {!isBlogPostPage && <Footer />}
     </div>
   )
 }
@@ -63,6 +70,8 @@ function App() {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/cookie-policy" element={<CookiePolicy />} />
+            <Route path="/blog/:category" element={<BlogList />} />
+            <Route path="/blog/:category/:slug" element={<BlogPost />} />
           </Routes>
         </Layout>
       </Router>

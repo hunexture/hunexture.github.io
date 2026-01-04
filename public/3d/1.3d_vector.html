@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Vector Visualization</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #1a1a1a;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #panel {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 300px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+            width: 30px;
+        }
+
+        input[type="number"] {
+            background: #333;
+            border: 1px solid #555;
+            color: white;
+            padding: 5px;
+            border-radius: 4px;
+            width: 80px;
+        }
+
+        .color-x {
+            color: #ff4444;
+        }
+
+        .color-y {
+            color: #44ff44;
+        }
+
+        .color-z {
+            color: #4444ff;
+        }
+
+        #updateBtn {
+            margin-top: 15px;
+            width: 100%;
+            padding: 8px;
+            background-color: #0078d7;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        #updateBtn:hover {
+            background-color: #0063b1;
+        }
+
+        .instructions {
+            margin-top: 15px;
+            font-size: 0.85em;
+            color: #ccc;
+            border-top: 1px solid #444;
+            padding-top: 10px;
+        }
+    </style>
+    <!-- Import Three.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Import OrbitControls -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+
+<body>
+
+    <div id="panel">
+        <h3>Vector Config</h3>
+
+        <div class="input-group">
+            <label class="color-x">X:</label>
+            <input type="number" id="inputX" value="100">
+        </div>
+        <div class="input-group">
+            <label class="color-y">Y:</label>
+            <input type="number" id="inputY" value="20">
+        </div>
+        <div class="input-group">
+            <label class="color-z">Z:</label>
+            <input type="number" id="inputZ" value="30">
+        </div>
+
+        <button id="updateBtn">Update Vector</button>
+
+        <div class="instructions">
+            Left Click: Rotate<br>
+            Right Click: Pan<br>
+            Scroll: Zoom
+        </div>
+    </div>
+
+    <script>
+        // 1. Scene Setup
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x1a1a1a);
+        scene.fog = new THREE.Fog(0x1a1a1a, 100, 1000);
+
+        // 2. Camera Setup
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 2000);
+        camera.position.set(150, 100, 200);
+
+        // 3. Renderer Setup
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // 4. Controls
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+
+        // 5. Helpers (Grid and Axes)
+        // We'll keep the grid large
+        const gridHelper = new THREE.GridHelper(400, 40, 0x444444, 0x222222);
+        scene.add(gridHelper);
+
+        const axesHelper = new THREE.AxesHelper(200);
+        scene.add(axesHelper);
+
+        // 6. Global Objects (So we can update them)
+        let arrowHelper;
+        let lineFloor, lineVert;
+        let labels = []; // Store sprite labels to remove them on update
+
+        // Material for projection lines
+        const materialLine = new THREE.LineBasicMaterial({
+            color: 0xaaaaaa,
+            opacity: 0.4,
+            transparent: true,
+            dashSize: 3,
+            gapSize: 1
+        });
+
+        // 7. Text Label Function
+        function makeTextSprite(message, parameters) {
+            if (parameters === undefined) parameters = {};
+            const fontface = parameters.hasOwnProperty("fontface") ? parameters["fontface"] : "Arial";
+            const fontsize = parameters.hasOwnProperty("fontsize") ? parameters["fontsize"] : 24;
+            const borderThickness = parameters.hasOwnProperty("borderThickness") ? parameters["borderThickness"] : 4;
+            const borderColor = parameters.hasOwnProperty("borderColor") ? parameters["borderColor"] : { r: 0, g: 0, b: 0, a: 1.0 };
+            const backgroundColor = parameters.hasOwnProperty("backgroundColor") ? parameters["backgroundColor"] : { r: 255, g: 255, b: 255, a: 1.0 };
+
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            context.font = "Bold " + fontsize + "px " + fontface;
+
+            const metrics = context.measureText(message);
+            const textWidth = metrics.width;
+
+            context.fillStyle = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + "," + backgroundColor.a + ")";
+            context.strokeStyle = "rgba(" + borderColor.r + "," + borderColor.g + "," + borderColor.b + "," + borderColor.a + ")";
+            context.lineWidth = borderThickness;
+
+            context.fillStyle = "rgba(255, 255, 255, 1.0)";
+            context.fillText(message, borderThickness, fontsize + borderThickness);
+
+            const texture = new THREE.Texture(canvas);
+            texture.needsUpdate = true;
+            const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
+            const sprite = new THREE.Sprite(spriteMaterial);
+            // Scale sprite based on text length roughly
+            sprite.scale.set(textWidth / 3, fontsize / 1.5, 1.0);
+            return sprite;
+        }
+
+        // 8. Main Update Function
+        function updateVector() {
+            // Get values
+            const x = parseFloat(document.getElementById('inputX').value) || 0;
+            const y = parseFloat(document.getElementById('inputY').value) || 0;
+            const z = parseFloat(document.getElementById('inputZ').value) || 0;
+
+            // --- A. Update Arrow ---
+            if (arrowHelper) scene.remove(arrowHelper);
+
+            const origin = new THREE.Vector3(0, 0, 0);
+            const vectorDest = new THREE.Vector3(x, y, z);
+            const length = vectorDest.length();
+
+            // Handle zero length case to avoid errors
+            const direction = length > 0 ? vectorDest.clone().normalize() : new THREE.Vector3(0, 1, 0);
+
+            // Color logic: if vector is huge, keep it visible
+            arrowHelper = new THREE.ArrowHelper(direction, origin, length, 0xffff00, Math.min(length * 0.2, 10), Math.min(length * 0.1, 5));
+            scene.add(arrowHelper);
+
+            // --- B. Update Projection Lines ---
+            if (lineFloor) scene.remove(lineFloor);
+            if (lineVert) scene.remove(lineVert);
+
+            // Floor Line: Origin -> (X,0,0) -> (X,0,Z) -> (0,0,Z) -> Origin
+            const pointsFloor = [
+                new THREE.Vector3(x, 0, 0),
+                new THREE.Vector3(x, 0, z),
+                new THREE.Vector3(0, 0, z),
+                new THREE.Vector3(0, 0, 0)
+            ];
+            const geometryFloor = new THREE.BufferGeometry().setFromPoints(pointsFloor);
+            lineFloor = new THREE.Line(geometryFloor, materialLine);
+            scene.add(lineFloor);
+
+            // Vertical Line: (X,0,Z) -> (X,Y,Z)
+            const pointsVert = [
+                new THREE.Vector3(x, 0, z),
+                new THREE.Vector3(x, y, z)
+            ];
+            const geometryVert = new THREE.BufferGeometry().setFromPoints(pointsVert);
+            lineVert = new THREE.Line(geometryVert, materialLine);
+            scene.add(lineVert);
+
+            // --- C. Update Labels ---
+            // Remove old labels
+            labels.forEach(l => scene.remove(l));
+            labels = [];
+
+            // Helper to add label
+            const addLabel = (text, pos, bg) => {
+                const sprite = makeTextSprite(text, { fontsize: 32, backgroundColor: bg });
+                sprite.position.copy(pos);
+                scene.add(sprite);
+                labels.push(sprite);
+            };
+
+            // Tip Label
+            addLabel(` (${x}, ${y}, ${z}) `, new THREE.Vector3(x, y + (y >= 0 ? 5 : -5), z), { r: 0, g: 0, b: 0, a: 0.6 });
+
+            // Axis Labels (Only show if value is significant)
+            if (Math.abs(x) > 1) addLabel(`X: ${x}`, new THREE.Vector3(x / 2, 2, 0), { r: 100, g: 0, b: 0, a: 0.6 });
+            if (Math.abs(z) > 1) addLabel(`Z: ${z}`, new THREE.Vector3(0, 2, z / 2), { r: 0, g: 0, b: 100, a: 0.6 });
+            if (Math.abs(y) > 1) addLabel(`Y: ${y}`, new THREE.Vector3(x, y / 2, z), { r: 0, g: 100, b: 0, a: 0.6 });
+        }
+
+        // 9. Initial Load & Listeners
+        document.getElementById('updateBtn').addEventListener('click', updateVector);
+
+        // Also update on 'Enter' key in inputs
+        ['inputX', 'inputY', 'inputZ'].forEach(id => {
+            document.getElementById(id).addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') updateVector();
+            });
+            // Optional: Real-time update
+            document.getElementById(id).addEventListener('input', updateVector);
+        });
+
+        // 10. Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        dirLight.position.set(50, 50, 50);
+        scene.add(dirLight);
+
+        // 11. Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', onWindowResize, false);
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        // Initialize
+        updateVector();
+        animate();
+
+    </script>
+</body>
+
+</html>

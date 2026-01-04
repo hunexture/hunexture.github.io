@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conditional Probability 3D</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #0f172a;
+            /* Slate 900 */
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        #canvas-container {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        /* UI Overlay */
+        #ui-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            pointer-events: none;
+            /* Let clicks pass through to canvas */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        .panel {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            pointer-events: auto;
+            max-width: 400px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #38bdf8;
+            /* Sky 400 */
+        }
+
+        h2 {
+            margin: 0 0 1rem 0;
+            font-size: 1rem;
+            color: #94a3b8;
+        }
+
+        p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        button {
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        button:hover {
+            background: #334155;
+            border-color: #475569;
+        }
+
+        button.active {
+            background: #0284c7;
+            border-color: #0ea5e9;
+            box-shadow: 0 0 10px rgba(2, 132, 199, 0.4);
+        }
+
+        /* Stats Display */
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            padding-bottom: 0.25rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .math-display {
+            font-family: 'Courier New', monospace;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+            border-left: 3px solid #38bdf8;
+        }
+
+        .legend {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            #ui-layer {
+                padding: 1rem;
+            }
+
+            .panel {
+                max-width: 100%;
+            }
+
+            .controls {
+                justify-content: center;
+            }
+        }
+    </style>
+    <!-- Import Map to resolve 'three' inside OrbitControls -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <div id="canvas-container"></div>
+
+    <div id="ui-layer">
+        <!-- Top Left Info Panel -->
+        <div class="panel">
+            <h1>Conditional Probability</h1>
+            <h2>Visualizing P(A | B)</h2>
+            <div id="explanation">
+                Loading simulation...
+            </div>
+
+            <div class="math-display" id="math-output">
+                P(A|B) = ?
+            </div>
+
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="dot" style="background:#ef4444"></div> Event A
+                </div>
+                <div class="legend-item">
+                    <div class="dot" style="background:#3b82f6"></div> Event B
+                </div>
+                <div class="legend-item">
+                    <div class="dot" style="background:#d946ef"></div> A & B
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Controls -->
+        <div class="panel" style="align-self: center;">
+            <div class="controls">
+                <button id="btn-universe" class="active">1. Universe (Ω)</button>
+                <button id="btn-condition">2. Condition (B)</button>
+                <button id="btn-restrict">3. Restrict Space</button>
+                <button id="btn-target">4. Target (A)</button>
+            </div>
+            <p style="margin:0; text-align: center; font-size: 0.8rem; color: #64748b;">
+                Click buttons to step through the logic. Drag to rotate. Scroll to zoom.
+            </p>
+        </div>
+    </div>
+
+    <!-- Import Three.js as a module -->
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        // --- Configuration ---
+        const PARTICLE_COUNT = 3000;
+        const CUBE_SIZE = 40;
+
+        // Colors
+        const COLOR_NEITHER = new THREE.Color(0x475569); // Slate 600 (faded)
+        const COLOR_A = new THREE.Color(0xef4444);      // Red
+        const COLOR_B = new THREE.Color(0x3b82f6);      // Blue
+        const COLOR_INTERSECTION = new THREE.Color(0xd946ef); // Fuschia/Purple
+        const COLOR_HIDDEN = new THREE.Color(0x0f172a); // Background color (for fading)
+
+        // --- State ---
+        let particles = [];
+        let counts = {
+            total: 0,
+            A: 0,
+            B: 0,
+            A_and_B: 0
+        };
+
+        // --- Scene Setup ---
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x0f172a);
+        scene.fog = new THREE.FogExp2(0x0f172a, 0.008);
+
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(60, 40, 70);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
+
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 0.5;
+
+        // --- Lighting ---
+        // Basic ambient light to soften shadows
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+
+        // --- Geometry Builders ---
+
+        // 1. Wireframe Box (The Universe)
+        const boxGeometry = new THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE);
+        const boxEdges = new THREE.EdgesGeometry(boxGeometry);
+        const boxMaterial = new THREE.LineBasicMaterial({ color: 0xffffff, opacity: 0.1, transparent: true });
+        const universeBox = new THREE.LineSegments(boxEdges, boxMaterial);
+        scene.add(universeBox);
+
+        // 2. Region Separators (Planes to visualize A and B boundaries)
+        const planeGeom = new THREE.PlaneGeometry(CUBE_SIZE, CUBE_SIZE);
+
+        // Plane X=0 (Divides Left/Right for Event B)
+        const planeB = new THREE.Mesh(
+            planeGeom,
+            new THREE.MeshBasicMaterial({ color: 0x3b82f6, opacity: 0.1, transparent: true, side: THREE.DoubleSide })
+        );
+        planeB.rotation.y = Math.PI / 2;
+        scene.add(planeB);
+
+        // Plane Y=0 (Divides Top/Bottom for Event A)
+        const planeA = new THREE.Mesh(
+            planeGeom,
+            new THREE.MeshBasicMaterial({ color: 0xef4444, opacity: 0.1, transparent: true, side: THREE.DoubleSide })
+        );
+        planeA.rotation.x = Math.PI / 2;
+        scene.add(planeA);
+
+
+        // --- Particle System ---
+        const geometry = new THREE.BufferGeometry();
+        const positions = [];
+        const colors = [];
+        const sizes = []; // Use for scaling visibility
+
+        // Data arrays for logical tracking
+        const pData = [];
+
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+            // Random position inside cube
+            const x = (Math.random() - 0.5) * CUBE_SIZE;
+            const y = (Math.random() - 0.5) * CUBE_SIZE;
+            const z = (Math.random() - 0.5) * CUBE_SIZE;
+
+            positions.push(x, y, z);
+
+            // Define Events based on spatial position
+            // Event B: x > 0 (Right side)
+            // Event A: y > 0 (Top side)
+
+            const isB = x > 0;
+            const isA = y > 0;
+
+            let type = 'neither';
+            let baseColor = COLOR_NEITHER;
+
+            if (isA && isB) {
+                type = 'both';
+                baseColor = COLOR_INTERSECTION;
+                counts.A_and_B++;
+                counts.A++;
+                counts.B++;
+            } else if (isB) {
+                type = 'B';
+                baseColor = COLOR_B;
+                counts.B++;
+            } else if (isA) {
+                type = 'A';
+                baseColor = COLOR_A;
+                counts.A++;
+            }
+
+            counts.total++;
+
+            colors.push(baseColor.r, baseColor.g, baseColor.b);
+            sizes.push(1.0); // Full size initially
+
+            pData.push({
+                id: i,
+                isA: isA,
+                isB: isB,
+                baseColor: baseColor,
+                originalPos: new THREE.Vector3(x, y, z)
+            });
+        }
+
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+        geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+        geometry.setAttribute('size', new THREE.Float32BufferAttribute(sizes, 1));
+
+        // Shader Material to handle per-particle sizing efficiently
+        const shaderMaterial = new THREE.ShaderMaterial({
+            uniforms: {
+                pointTexture: { value: new THREE.TextureLoader().load('https://threejs.org/examples/textures/sprites/disc.png') }
+            },
+            vertexShader: `
+                attribute float size;
+                varying vec3 vColor;
+                void main() {
+                    vColor = color;
+                    vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+                    gl_PointSize = size * ( 300.0 / -mvPosition.z );
+                    gl_Position = projectionMatrix * mvPosition;
+                }
+            `,
+            fragmentShader: `
+                uniform sampler2D pointTexture;
+                varying vec3 vColor;
+                void main() {
+                    gl_FragColor = vec4( vColor, 1.0 );
+                    gl_FragColor = gl_FragColor * texture2D( pointTexture, gl_PointCoord );
+                    if (gl_FragColor.a < 0.5) discard;
+                }
+            `,
+            depthTest: true,
+            depthWrite: true,
+            transparent: false,
+            vertexColors: true
+        });
+
+        const pointsSystem = new THREE.Points(geometry, shaderMaterial);
+        scene.add(pointsSystem);
+
+
+        // --- UI Logic & State Machine ---
+
+        let currentState = 0;
+        const explanationEl = document.getElementById('explanation');
+        const mathOutputEl = document.getElementById('math-output');
+        const buttons = {
+            universe: document.getElementById('btn-universe'),
+            condition: document.getElementById('btn-condition'),
+            restrict: document.getElementById('btn-restrict'),
+            target: document.getElementById('btn-target')
+        };
+
+        function updateUI(state) {
+            currentState = state;
+
+            // Reset Buttons
+            Object.values(buttons).forEach(b => b.classList.remove('active'));
+
+            const colorAttribute = geometry.attributes.color;
+            const sizeAttribute = geometry.attributes.size;
+
+            // Animation Target Arrays
+            const targetColors = [];
+            const targetSizes = [];
+
+            switch (state) {
+                case 0: // Universe
+                    buttons.universe.classList.add('active');
+                    explanationEl.innerHTML = `
+                        <strong>Step 1: The Sample Space (Ω)</strong><br>
+                        These particles represent all possible outcomes.<br>
+                        Count: ${counts.total}<br>
+                        P(A) ≈ ${(counts.A / counts.total).toFixed(2)} (Red region)<br>
+                        P(B) ≈ ${(counts.B / counts.total).toFixed(2)} (Blue region)
+                    `;
+                    mathOutputEl.innerHTML = `P(Ω) = 1.0`;
+
+                    controls.autoRotate = true;
+                    universeBox.visible = true;
+                    planeA.visible = true;
+                    planeB.visible = true;
+
+                    for (let i = 0; i < PARTICLE_COUNT; i++) {
+                        // Reset to base colors
+                        const p = pData[i];
+                        // If it's strictly A (red), Strictly B (blue), Both (purple), or Neither (gray)
+                        // In universe mode, let's distinguish them clearly.
+                        targetColors.push(p.baseColor.r, p.baseColor.g, p.baseColor.b);
+                        targetSizes.push(1.0);
+                    }
+                    break;
+
+                case 1: // Condition B Highlighting
+                    buttons.condition.classList.add('active');
+                    explanationEl.innerHTML = `
+                        <strong>Step 2: The Condition (Event B)</strong><br>
+                        We want to know the probability of A, <em>given</em> B has occurred.<br>
+                        Event B is the condition (The Blue & Purple dots on the right).
+                    `;
+                    mathOutputEl.innerHTML = `Condition: "Event B Occurred"`;
+
+                    controls.autoRotate = false;
+                    // Rotate camera to see the separation better
+                    // (We will let the user move, but stop auto rotation)
+
+                    for (let i = 0; i < PARTICLE_COUNT; i++) {
+                        const p = pData[i];
+                        if (p.isB) {
+                            // Highlight B (Blue/Purple)
+                            targetColors.push(p.baseColor.r, p.baseColor.g, p.baseColor.b);
+                            targetSizes.push(1.0);
+                        } else {
+                            // Dim non-B
+                            targetColors.push(0.1, 0.1, 0.1); // Very dark gray
+                            targetSizes.push(0.3); // Small dots
+                        }
+                    }
+                    break;
+
+                case 2: // Restrict Sample Space
+                    buttons.restrict.classList.add('active');
+                    explanationEl.innerHTML = `
+                        <strong>Step 3: Restrict Sample Space</strong><br>
+                        Since we know B occurred, we ignore everything else.<br>
+                        The "Blue Side" is now our entire Universe.
+                    `;
+                    mathOutputEl.innerHTML = `New Sample Space = Size of B (${counts.B})`;
+
+                    controls.autoRotate = false;
+                    universeBox.visible = false; // Hide outer box to emphasize local space
+                    planeA.visible = false;
+                    planeB.visible = true; // Keep B divider
+
+                    for (let i = 0; i < PARTICLE_COUNT; i++) {
+                        const p = pData[i];
+                        if (p.isB) {
+                            // Keep B, but make them all uniform Blue initially to show "This is the space"
+                            // Or keep their distinction? Let's make them uniform Blue to emphasize "This is B"
+                            // then reveal A in next step.
+                            // Actually, keeping the intersection visible is usually helpful.
+                            // Let's fade non-B to zero size.
+                            targetColors.push(p.baseColor.r, p.baseColor.g, p.baseColor.b);
+                            targetSizes.push(1.0);
+                        } else {
+                            // Hide completely
+                            targetColors.push(0, 0, 0);
+                            targetSizes.push(0.0);
+                        }
+                    }
+                    break;
+
+                case 3: // Target A
+                    buttons.target.classList.add('active');
+                    const prob = (counts.A_and_B / counts.B).toFixed(3);
+                    explanationEl.innerHTML = `
+                        <strong>Step 4: Identify Target (A)</strong><br>
+                        Within our new universe (B), we look for outcomes that are also A.<br>
+                        These are the Purple dots (Intersection A ∩ B).
+                    `;
+                    mathOutputEl.innerHTML = `
+                        P(A|B) = Count(A ∩ B) / Count(B)<br>
+                        P(A|B) = ${counts.A_and_B} / ${counts.B}<br>
+                        P(A|B) = <strong>${prob}</strong>
+                    `;
+
+                    controls.autoRotate = true;
+
+                    for (let i = 0; i < PARTICLE_COUNT; i++) {
+                        const p = pData[i];
+                        if (p.isB) {
+                            if (p.isA) {
+                                // Highlight Intersection
+                                targetColors.push(1.0, 0.0, 1.0); // Bright Magenta
+                                targetSizes.push(1.5); // Larger
+                            } else {
+                                // Dim the rest of B slightly
+                                targetColors.push(0.2, 0.4, 0.8); // Dim Blue
+                                targetSizes.push(0.5);
+                            }
+                        } else {
+                            // Still hidden
+                            targetColors.push(0, 0, 0);
+                            targetSizes.push(0.0);
+                        }
+                    }
+                    break;
+            }
+
+            animateTransition(targetColors, targetSizes);
+        }
+
+
+        // Simple animation loop for transitions
+        let animationFrameId;
+        function animateTransition(targetColors, targetSizes) {
+            const duration = 60; // frames
+            let frame = 0;
+
+            // Current State
+            const startSizes = [];
+            const startColors = [];
+
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                startSizes.push(geometry.attributes.size.array[i]);
+                startColors.push(
+                    geometry.attributes.color.array[i * 3],
+                    geometry.attributes.color.array[i * 3 + 1],
+                    geometry.attributes.color.array[i * 3 + 2]
+                );
+            }
+
+            function step() {
+                frame++;
+                const progress = frame / duration;
+                const ease = 1 - Math.pow(1 - progress, 3); // Cubic ease out
+
+                const currentColors = geometry.attributes.color.array;
+                const currentSizes = geometry.attributes.size.array;
+
+                for (let i = 0; i < PARTICLE_COUNT; i++) {
+                    // Interpolate Size
+                    currentSizes[i] = startSizes[i] + (targetSizes[i] - startSizes[i]) * ease;
+
+                    // Interpolate Color
+                    currentColors[i * 3] = startColors[i * 3] + (targetColors[i * 3] - startColors[i * 3]) * ease;
+                    currentColors[i * 3 + 1] = startColors[i * 3 + 1] + (targetColors[i * 3 + 1] - startColors[i * 3 + 1]) * ease;
+                    currentColors[i * 3 + 2] = startColors[i * 3 + 2] + (targetColors[i * 3 + 2] - startColors[i * 3 + 2]) * ease;
+                }
+
+                geometry.attributes.color.needsUpdate = true;
+                geometry.attributes.size.needsUpdate = true;
+
+                if (frame < duration) {
+                    requestAnimationFrame(step);
+                }
+            }
+            step();
+        }
+
+        // --- Event Listeners ---
+        buttons.universe.addEventListener('click', () => updateUI(0));
+        buttons.condition.addEventListener('click', () => updateUI(1));
+        buttons.restrict.addEventListener('click', () => updateUI(2));
+        buttons.target.addEventListener('click', () => updateUI(3));
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // --- Main Loop ---
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        // Initialize
+        updateUI(0);
+        animate();
+
+    </script>
+</body>
+
+</html>

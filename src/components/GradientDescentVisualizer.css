@@ -1,0 +1,361 @@
+.gradient-descent-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: #0f172a;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.back-button-gd {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.back-button-gd:hover {
+    transform: translateX(-5px);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.5);
+}
+
+/* Split View Layout */
+.viz-split-gd {
+    display: flex;
+    flex: 1;
+    height: 60%;
+    position: relative;
+}
+
+.view-3d-gd {
+    flex: 2;
+    position: relative;
+    background: #000;
+    overflow: hidden;
+}
+
+.canvas-3d-gd {
+    width: 100%;
+    height: 100%;
+}
+
+.view-2d-gd {
+    flex: 1;
+    position: relative;
+    background: #1e293b;
+    border-left: 1px solid #334155;
+}
+
+.canvas-2d-gd {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.view-label-gd {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    pointer-events: none;
+    user-select: none;
+    z-index: 10;
+}
+
+/* Controls Area */
+.controls-gd {
+    height: auto;
+    min-height: 220px;
+    background: #1e293b;
+    padding: 15px;
+    border-top: 1px solid #334155;
+    z-index: 10;
+    display: flex;
+    gap: 24px;
+}
+
+.control-panel-gd {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.border-left-gd {
+    border-left: 1px solid #475569;
+    padding-left: 24px;
+}
+
+.controls-gd h1 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #60a5fa;
+    margin: 0 0 5px 0;
+}
+
+.controls-gd p {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    margin: 0 0 10px 0;
+}
+
+.slider-group-gd {
+    margin-bottom: 8px;
+}
+
+.slider-header-gd {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+}
+
+.slider-header-gd label {
+    color: #cbd5e1;
+}
+
+.val-w-gd {
+    color: #60a5fa;
+    font-weight: bold;
+}
+
+.val-b-gd {
+    color: #4ade80;
+    font-weight: bold;
+}
+
+.val-lr-gd {
+    color: #facc15;
+    font-weight: bold;
+}
+
+.slider-group-gd input[type="range"] {
+    width: 100%;
+    cursor: pointer;
+    accent-color: #3b82f6;
+    height: 6px;
+    border-radius: 3px;
+    background: #334155;
+}
+
+.slider-group-gd input[type="range"]::-webkit-slider-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #3b82f6;
+    cursor: pointer;
+}
+
+.slider-group-gd input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #3b82f6;
+    cursor: pointer;
+    border: none;
+}
+
+/* Buttons */
+.button-group-gd {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.btn-gd {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    flex: 1;
+    font-size: 0.9rem;
+}
+
+.btn-primary-gd {
+    background: #3b82f6;
+    color: white;
+}
+
+.btn-primary-gd:hover {
+    background: #2563eb;
+    transform: translateY(-1px);
+}
+
+.btn-danger-gd {
+    background: #ef4444;
+    color: white;
+}
+
+.btn-danger-gd:hover {
+    background: #dc2626;
+    transform: translateY(-1px);
+}
+
+.btn-secondary-gd {
+    background: #475569;
+    color: white;
+    flex: 0.5;
+}
+
+.btn-secondary-gd:hover {
+    background: #334155;
+    transform: translateY(-1px);
+}
+
+/* Stats Panel */
+.stats-panel-gd {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    min-width: 150px;
+}
+
+.stat-box-gd {
+    background: #334155;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.border-red {
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.border-purple {
+    border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.stat-value-gd {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.text-red {
+    color: #f87171;
+}
+
+.text-purple {
+    color: #a78bfa;
+}
+
+.stat-label-gd {
+    font-size: 0.75rem;
+    color: #cbd5e1;
+    margin-top: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .viz-split-gd {
+        flex-direction: column;
+        height: 50%;
+    }
+
+    .view-3d-gd,
+    .view-2d-gd {
+        flex: 1;
+        border-left: none;
+        border-bottom: 1px solid #334155;
+    }
+
+    .controls-gd {
+        flex-direction: column;
+        gap: 16px;
+        min-height: auto;
+    }
+
+    .border-left-gd {
+        border-left: none;
+        border-top: 1px solid #475569;
+        padding-left: 0;
+        padding-top: 16px;
+    }
+
+    .stats-panel-gd {
+        flex-direction: row;
+        min-width: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .back-button-gd {
+        top: 10px;
+        right: 10px;
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+
+    .controls-gd {
+        padding: 12px;
+    }
+
+    .controls-gd h1 {
+        font-size: 1.1rem;
+    }
+
+    .controls-gd p {
+        font-size: 0.8rem;
+    }
+
+    .stat-value-gd {
+        font-size: 1.25rem;
+    }
+
+    .view-label-gd {
+        font-size: 0.7rem;
+        padding: 3px 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .viz-split-gd {
+        height: 40%;
+    }
+
+    .controls-gd {
+        padding: 10px;
+        min-height: auto;
+    }
+
+    .back-button-gd {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin: 10px;
+        width: calc(100% - 20px);
+    }
+
+    .stat-box-gd {
+        padding: 10px;
+    }
+
+    .stat-value-gd {
+        font-size: 1.1rem;
+    }
+
+    .btn-gd {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+}

@@ -158,9 +158,9 @@ const PrivacyPolicy = () => {
             <h2>13. Contact Us</h2>
             <p>If you have any questions about this Privacy Policy, please contact us:</p>
             <ul className="contact-info">
-              <li><strong>Email:</strong> privacy@hunexture.com</li>
-              <li><strong>Phone:</strong> +1 (555) 123-4567</li>
-              <li><strong>Address:</strong> 123 Tech Street, Innovation City, TC 12345</li>
+              <li><strong>Email:</strong> info@hunexture.com</li>
+              {/* <li><strong>Phone:</strong> +1 (555) 123-4567</li> */}
+              {/* <li><strong>Address:</strong> 123 Tech Street, Innovation City, TC 12345</li> */}
             </ul>
           </section>
         </div>
