@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { FaHeart, FaLinkedin, FaGithub, FaTwitter, FaInstagram, FaArrowUp } from 'react-icons/fa'
 import Logo from './Logo'
@@ -7,6 +7,24 @@ import './Footer.css'
 const Footer = () => {
   const navigate = useNavigate()
   const location = useLocation()
+  const [showScrollTop, setShowScrollTop] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowScrollTop(true)
+      } else {
+        setShowScrollTop(false)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+
+    // Check initial scroll position
+    handleScroll()
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -128,9 +146,11 @@ const Footer = () => {
         </div>
       </div>
 
-      <button className="scroll-to-top" onClick={scrollToTop} aria-label="Scroll to top">
-        <FaArrowUp />
-      </button>
+      {showScrollTop && (
+        <button className="scroll-to-top" onClick={scrollToTop} aria-label="Scroll to top">
+          <FaArrowUp />
+        </button>
+      )}
     </footer>
   )
 }
