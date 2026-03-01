@@ -10,6 +10,8 @@ const Contact = () => {
     message: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   // WhatsApp number (with country code, no + or spaces)
   const whatsappNumber = '919067262552'
@@ -45,14 +47,15 @@ const Contact = () => {
       })
 
       if (response.ok) {
-        alert('Thank you for your message! We will get back to you soon.')
+        setSubmitSuccess(true)
+        setSubmitError('')
         setFormData({ name: '', email: '', subject: '', message: '' })
       } else {
         throw new Error('Form submission failed')
       }
     } catch (error) {
       console.error('Error submitting form:', error)
-      alert('There was an error sending your message. Please try again or contact us directly at info@hunexture.com')
+      setSubmitError('Something went wrong. Please try again or email us directly at info@hunexture.com')
     } finally {
       setIsSubmitting(false)
     }
@@ -87,7 +90,6 @@ const Contact = () => {
 
   const socialLinks = [
     { icon: <FaLinkedin />, name: 'LinkedIn', url: 'https://www.linkedin.com/in/hunexture-tech-175766391/' },
-    { icon: <FaGithub />, name: 'GitHub', url: 'https://github.com/hunexture' },
     { icon: <FaTwitter />, name: 'Twitter', url: 'https://x.com/hunexture' },
     { icon: <FaInstagram />, name: 'Instagram', url: 'https://www.instagram.com/hunexture' }
   ]
@@ -100,7 +102,8 @@ const Contact = () => {
           <h2 className="section-title">Contact Us</h2>
           <div className="title-underline"></div>
           <p className="section-description">
-            Ready to transform your business with AI? Let's talk about your project.
+            Ready to build something extraordinary? Tell us about your project
+            and we'll get back to you within 24 hours.
           </p>
         </div>
 
@@ -147,6 +150,22 @@ const Contact = () => {
             </div>
           </div>
 
+          {submitSuccess ? (
+            <div className="form-success">
+              <div className="success-check">✓</div>
+              <h3 className="success-title">Message Sent!</h3>
+              <p className="success-message">
+                Thank you for reaching out. Our team will review your message
+                and respond within 24 hours.
+              </p>
+              <button
+                className="btn-secondary success-reset-btn"
+                onClick={() => setSubmitSuccess(false)}
+              >
+                Send Another Message
+              </button>
+            </div>
+          ) : (
           <form className="contact-form" onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="name">Your Name</label>
@@ -200,18 +219,18 @@ const Contact = () => {
               ></textarea>
             </div>
 
+            {submitError && (
+              <p className="form-error">{submitError}</p>
+            )}
+
             <div className="form-buttons">
               <button type="submit" className="submit-btn" disabled={isSubmitting}>
-                {isSubmitting ? 'Sending...' : 'Send via Email'}
+                {isSubmitting ? 'Sending...' : 'Send Message'}
                 <FaEnvelope className="btn-icon" />
               </button>
-
-              {/* <button type="button" className="whatsapp-btn" onClick={handleWhatsApp}>
-                Send via WhatsApp
-                <FaWhatsapp className="btn-icon" />
-              </button> */}
             </div>
           </form>
+          )}
         </div>
       </div>
     </section>

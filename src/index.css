@@ -126,12 +126,17 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Smooth transitions for theme changes */
-* {
+/* Smooth transitions for theme changes - only background/color, no transform conflict */
+*:not([class*="animate"]):not([class*="hero"]):not([class*="stat"]):not([class*="hex"]):not([class*="badge"]):not([class*="scroll"]) {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Orbitron', sans-serif;
 }
 
@@ -329,6 +334,7 @@ html {
 
 /* Touch-friendly elements */
 @media (hover: none) and (pointer: coarse) {
+
   button,
   a,
   input,

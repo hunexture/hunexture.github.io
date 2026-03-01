@@ -1,8 +1,8 @@
 .blog-list-container {
     min-height: 100vh;
     padding: 100px 20px 50px;
-    background: var(--background-color);
-    color: var(--text-color);
+    background: var(--dark-navy);
+    color: var(--text-white);
 }
 
 .blog-list-content {
@@ -15,8 +15,8 @@
     align-items: center;
     gap: 8px;
     padding: 12px 24px;
-    background: var(--primary-color);
-    color: white;
+    background: var(--electric-blue);
+    color: var(--navy-blue);
     border: none;
     border-radius: 8px;
     font-size: 16px;
@@ -39,7 +39,7 @@
 .blog-header h1 {
     font-size: 3rem;
     margin-bottom: 15px;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(135deg, var(--electric-blue), var(--bright-blue));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -78,7 +78,7 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(90deg, var(--electric-blue), var(--bright-blue));
     transform: scaleX(0);
     transition: transform 0.3s ease;
 }
@@ -90,13 +90,13 @@
 .blog-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 15px 40px rgba(0, 123, 255, 0.2);
-    border-color: var(--primary-color);
+    border-color: var(--electric-blue);
 }
 
 .blog-card-content h2 {
     font-size: 1.8rem;
     margin-bottom: 15px;
-    color: var(--text-color);
+    color: var(--text-white);
 }
 
 .blog-card-description {
@@ -125,7 +125,7 @@
 }
 
 .blog-date svg {
-    color: var(--primary-color);
+    color: var(--electric-blue);
 }
 
 .blog-tags {
@@ -136,7 +136,7 @@
 }
 
 .blog-tags svg {
-    color: var(--secondary-color);
+    color: var(--bright-blue);
     flex-shrink: 0;
 }
 
@@ -147,8 +147,8 @@
 }
 
 .tag {
-    background: var(--primary-color);
-    color: white;
+    background: var(--electric-blue);
+    color: var(--navy-blue);
     padding: 4px 12px;
     border-radius: 20px;
     font-size: 0.85rem;
@@ -157,7 +157,7 @@
 
 .read-more {
     margin-top: 20px;
-    color: var(--primary-color);
+    color: var(--electric-blue);
     font-weight: 600;
     font-size: 1rem;
     transition: all 0.3s ease;

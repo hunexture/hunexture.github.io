@@ -1,12 +1,48 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getBlogCategory } from '../data/blogData';
+import { getBlogCategory, blogData } from '../data/blogData';
 import { FaArrowLeft, FaCalendar, FaTag } from 'react-icons/fa';
 import './BlogList.css';
 
 const BlogList = () => {
     const { category } = useParams();
     const navigate = useNavigate();
+
+    // No category specified - show all blog categories
+    if (!category) {
+        return (
+            <div className="blog-list-container">
+                <div className="blog-list-content">
+                    <button onClick={() => navigate('/')} className="back-button">
+                        <FaArrowLeft /> Back to Home
+                    </button>
+                    <div className="blog-header">
+                        <h1>Blog</h1>
+                        <p className="blog-description">Explore our articles and insights across various topics.</p>
+                    </div>
+                    <div className="blog-grid">
+                        {Object.keys(blogData).map((slug) => {
+                            const cat = blogData[slug];
+                            return (
+                                <div
+                                    key={slug}
+                                    className="blog-card"
+                                    onClick={() => navigate(`/blog/${slug}`)}
+                                >
+                                    <div className="blog-card-content">
+                                        <h2>{cat.title}</h2>
+                                        <p className="blog-card-description">{cat.description}</p>
+                                        <div className="read-more">Explore Articles →</div>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     const blogCategory = getBlogCategory(category);
 
     if (!blogCategory) {

@@ -23,8 +23,9 @@ const Hero = () => {
         </h1>
 
         <p className="hero-description">
-          Empowering businesses with cutting-edge AI solutions and innovative technology.
-          We transform ideas into intelligent, scalable, and human-centered digital experiences.
+          We engineer AI-first solutions that automate intelligently, scale effortlessly,
+          and deliver measurable results — from custom ML models to cloud-native platforms,
+          built for businesses that refuse to settle.
         </p>
 
         <div className="hero-cta">

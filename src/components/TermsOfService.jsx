@@ -184,12 +184,12 @@ const TermsOfService = () => {
             <h2>12. Dispute Resolution</h2>
             <h3>12.1 Governing Law</h3>
             <p>
-              These Terms shall be governed by and construed in accordance with the laws of [Your Jurisdiction], without regard to its conflict of law provisions.
+              These Terms shall be governed by and construed in accordance with the laws of India, without regard to its conflict of law provisions.
             </p>
 
             <h3>12.2 Arbitration</h3>
             <p>
-              Any dispute arising out of or relating to these Terms or our services shall be resolved through binding arbitration in accordance with the rules of [Arbitration Association], except where prohibited by law.
+              Any dispute arising out of or relating to these Terms or our services shall be resolved through binding arbitration in accordance with the Arbitration and Conciliation Act, 1996 of India, except where prohibited by law.
             </p>
 
             <h3>12.3 Class Action Waiver</h3>

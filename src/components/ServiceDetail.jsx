@@ -61,6 +61,12 @@ const ServiceDetail = () => {
       primary: '#fa709a',
       secondary: '#fee140',
       glow: 'rgba(250, 112, 154, 0.3)'
+    },
+    'digital-marketing': {
+      gradient: 'linear-gradient(135deg, #f7971e 0%, #ffd200 100%)',
+      primary: '#f7971e',
+      secondary: '#ffd200',
+      glow: 'rgba(247, 151, 30, 0.3)'
     }
   };
 

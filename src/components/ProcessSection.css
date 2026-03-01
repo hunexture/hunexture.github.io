@@ -1,0 +1,290 @@
+/* ─── Process Section ─────────────────────────────────────── */
+.process-section {
+  background: var(--dark-navy);
+  padding: 40px 0;
+  position: relative;
+}
+
+.process-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Scroll-in animation */
+.process-section .ps-animate {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.process-section .ps-animate.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Header adjustments ──────────────────────────────────── */
+.process-section .section-header {
+  margin-bottom: 30px !important;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.process-section .section-title {
+  margin-bottom: 12px;
+}
+
+.process-section .title-underline {
+  display: none;
+}
+
+/* ─── Steps row ───────────────────────────────────────────── */
+.process-steps {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 10px;
+}
+
+/* ─── Single step ─────────────────────────────────────────── */
+.process-step {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Center content horizontally */
+  text-align: center;
+  /* Center text */
+}
+
+/* ─── Icon row: icon box + dashed line ────────────────────── */
+.process-step-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Center the icon box */
+  margin-bottom: 20px;
+  width: 100%;
+  position: relative;
+}
+
+/* Outlined rounded-square icon box */
+.process-icon-box {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  border: 2px solid;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 2;
+  /* Keep icon above the connector line */
+  background: var(--dark-navy);
+  /* Solid background so line doesn't show through */
+}
+
+.process-step:hover .process-icon-box {
+  transform: translateY(-5px);
+  /* box-shadow removed to prevent sticky glow effects on mobile tap */
+}
+
+/* Step number badge */
+.process-step-num {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', sans-serif;
+  line-height: 1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Dashed connector — stretches from icon to the right edge of this step */
+.process-connector {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  border-top: 2px dashed;
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.process-step:hover .process-connector {
+  opacity: 0.8;
+}
+
+/* ─── Title & description ─────────────────────────────────── */
+.process-step-title {
+  font-size: 21px;
+  font-weight: 700;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: -0.2px;
+  line-height: 1.2;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.process-step-desc {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-gray);
+  padding: 0 10px;
+  /* Adjust padding for center alignment */
+  text-align: center;
+}
+
+/* ─── Responsive ──────────────────────────────────────────── */
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .process-section {
+    padding: 50px 0;
+  }
+
+  .process-container {
+    max-width: 1320px;
+  }
+
+  .process-steps {
+    margin-top: 16px;
+  }
+
+  .process-icon-box {
+    width: 80px;
+    height: 80px;
+    font-size: 34px;
+  }
+
+  .process-step-title {
+    font-size: 23px;
+  }
+
+  .process-step-desc {
+    font-size: 15px;
+  }
+}
+
+/* Laptop */
+@media (max-width: 1439px) and (min-width: 1024px) {
+  .process-container {
+    padding: 0 32px;
+  }
+
+  .process-icon-box {
+    width: 68px;
+    height: 68px;
+    font-size: 28px;
+  }
+
+  .process-step-title {
+    font-size: 19px;
+  }
+}
+
+/* Tablet → 2 × 2 */
+@media (max-width: 1023px) and (min-width: 641px) {
+  .process-section {
+    padding: 40px 0;
+  }
+
+  .process-container {
+    padding: 0 28px;
+  }
+
+  .process-steps {
+    flex-wrap: wrap;
+    margin-top: 10px;
+    gap: 48px 0;
+  }
+
+  .process-step {
+    flex: 0 0 50%;
+  }
+
+  /* Hide the connector on the 2nd and 4th step (row-end items) */
+  .process-step:nth-child(2) .process-connector,
+  .process-step:nth-child(4) .process-connector {
+    display: none;
+  }
+
+  .process-step-desc {
+    padding-right: 40px;
+  }
+
+  .process-icon-box {
+    width: 64px;
+    height: 64px;
+    font-size: 26px;
+  }
+
+  .process-step-title {
+    font-size: 19px;
+  }
+}
+
+/* Mobile → single column */
+@media (max-width: 640px) {
+  .process-section {
+    padding: 30px 0;
+  }
+
+  .process-container {
+    padding: 0 20px;
+  }
+
+  .process-steps {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 40px 0;
+    margin-top: 10px;
+  }
+
+  .process-step {
+    flex: 0 0 50%;
+    width: 50%;
+  }
+
+  /* No horizontal connectors on mobile; show a vertical accent instead */
+  .process-connector {
+    display: none;
+  }
+
+  .process-step-top {
+    margin-bottom: 20px;
+    justify-content: center;
+  }
+
+  .process-icon-box {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    border-radius: 12px;
+  }
+
+  .process-step-title {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .process-step-desc {
+    font-size: 13px;
+    padding: 0 8px;
+    text-align: center;
+  }
+}

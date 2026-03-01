@@ -4,6 +4,8 @@ import { ThemeProvider } from './context/ThemeContext'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
+import TechMarquee from './components/TechMarquee'
+import ProcessSection from './components/ProcessSection'
 import Services from './components/Services'
 import Portfolio from './components/Portfolio'
 import Contact from './components/Contact'
@@ -13,6 +15,7 @@ import AnimatedBackground from './components/AnimatedBackground'
 import ServiceDetail from './components/ServiceDetail'
 import ProjectDetail from './components/ProjectDetail'
 import IndustryDetail from './components/IndustryDetail'
+import AIDetail from './components/AIDetail'
 import PrivacyPolicy from './components/PrivacyPolicy'
 import TermsOfService from './components/TermsOfService'
 import CookiePolicy from './components/CookiePolicy'
@@ -24,7 +27,9 @@ import './App.css'
 const HomePage = () => (
   <>
     <Hero />
+    <TechMarquee />
     <About />
+    <ProcessSection />
     <Services />
     <Portfolio />
     <Contact />
@@ -37,6 +42,7 @@ const Layout = ({ children }) => {
   const isDetailPage = location.pathname.startsWith('/services/') ||
     location.pathname.startsWith('/portfolio/') ||
     location.pathname.startsWith('/industries/') ||
+    location.pathname.startsWith('/ai/') ||
     location.pathname.startsWith('/privacy-policy') ||
     location.pathname.startsWith('/terms-of-service') ||
     location.pathname.startsWith('/cookie-policy') ||
@@ -67,9 +73,11 @@ function App() {
             <Route path="/services/:slug" element={<ServiceDetail />} />
             <Route path="/portfolio/:slug" element={<ProjectDetail />} />
             <Route path="/industries/:slug" element={<IndustryDetail />} />
+            <Route path="/ai/:slug" element={<AIDetail />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/cookie-policy" element={<CookiePolicy />} />
+            <Route path="/blog" element={<BlogList />} />
             <Route path="/blog/:category" element={<BlogList />} />
             <Route path="/blog/:category/:slug" element={<BlogPost />} />
           </Routes>

@@ -90,7 +90,7 @@ const Portfolio = () => {
               >
                 <div className="project-overlay">
                   <div className="overlay-text">
-                    <img src="/images/icons/article.svg" alt="Read More" className="overlay-icon" />
+                    <img src={`${process.env.PUBLIC_URL}/images/icons/article.svg`} alt="Read More" className="overlay-icon" />
                     View Details
                   </div>
                   {project.liveUrl && (

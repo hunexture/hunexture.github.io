@@ -1,0 +1,152 @@
+/* ---- Tech Marquee Strip ---- */
+.tech-marquee {
+  background: var(--dark-navy);
+  border-top: 1px solid var(--electric-blue-10);
+  border-bottom: 1px solid var(--electric-blue-10);
+  padding: 28px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.tech-marquee-label {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--text-gray);
+  margin-bottom: 22px;
+  opacity: 0.6;
+}
+
+/* Viewport clips overflow and holds the fade masks */
+.tech-marquee-viewport {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Scrolling track — width is auto so both duplicated sets fit */
+.tech-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: max-content;
+  animation: tech-marquee-scroll 35s linear infinite;
+}
+
+/* Pause on hover */
+.tech-marquee-viewport:hover .tech-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes tech-marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Individual item */
+.tech-marquee-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 36px;
+  border-right: 1px solid var(--electric-blue-10);
+  white-space: nowrap;
+  transition: opacity 0.25s ease;
+}
+
+.tech-marquee-item:hover {
+  opacity: 0.75;
+}
+
+/* Icon */
+.tech-marquee-icon {
+  font-size: 26px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.tech-marquee-item:hover .tech-marquee-icon {
+  transform: translateY(-3px) scale(1.1);
+}
+
+/* Name label */
+.tech-marquee-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-gray);
+  letter-spacing: 0.3px;
+  font-family: 'Inter', sans-serif;
+  transition: color 0.25s ease;
+}
+
+.tech-marquee-item:hover .tech-marquee-name {
+  color: var(--text-white);
+}
+
+/* Left/right gradient fade masks */
+.tech-marquee-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.tech-marquee-fade--left {
+  left: 0;
+  background: linear-gradient(to right, var(--dark-navy) 0%, transparent 100%);
+}
+
+.tech-marquee-fade--right {
+  right: 0;
+  background: linear-gradient(to left, var(--dark-navy) 0%, transparent 100%);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tech-marquee {
+    padding: 22px 0;
+  }
+
+  .tech-marquee-label {
+    font-size: 10px;
+    margin-bottom: 18px;
+  }
+
+  .tech-marquee-item {
+    padding: 8px 24px;
+    gap: 8px;
+  }
+
+  .tech-marquee-icon {
+    font-size: 22px;
+  }
+
+  .tech-marquee-name {
+    font-size: 12px;
+  }
+
+  .tech-marquee-fade {
+    width: 60px;
+  }
+
+  .tech-marquee-track {
+    animation-duration: 25s;
+  }
+}
+
+@media (max-width: 480px) {
+  .tech-marquee-item {
+    padding: 8px 18px;
+  }
+
+  .tech-marquee-icon {
+    font-size: 20px;
+  }
+
+  .tech-marquee-fade {
+    width: 40px;
+  }
+}

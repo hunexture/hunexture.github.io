@@ -1,7 +1,19 @@
+/* Scroll-triggered animation */
+.services .scroll-animate {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.services .scroll-animate.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .services {
   background: var(--dark-navy);
   position: relative;
-  padding: 80px 0;
+  padding: 24px 0 80px;
 }
 
 .services-container {
@@ -253,7 +265,7 @@
 /* Large Desktop */
 @media (min-width: 1440px) {
   .services {
-    padding: 100px 0;
+    padding: 50px 0 100px;
   }
 
   .services-container {
@@ -287,7 +299,7 @@
 /* Laptop */
 @media (max-width: 1439px) and (min-width: 1024px) {
   .services {
-    padding: 80px 0;
+    padding: 40px 0 80px;
   }
 
   .services-grid {
@@ -303,7 +315,7 @@
 /* Tablet Landscape */
 @media (max-width: 1023px) and (min-width: 769px) {
   .services {
-    padding: 70px 0;
+    padding: 30px 0 70px;
   }
 
   .services-grid {
@@ -343,7 +355,7 @@
 /* Tablet Portrait */
 @media (max-width: 768px) and (min-width: 481px) {
   .services {
-    padding: 60px 0;
+    padding: 30px 0 60px;
   }
 
   .section-description {
@@ -398,7 +410,7 @@
 /* Mobile */
 @media (max-width: 480px) {
   .services {
-    padding: 50px 0;
+    padding: 25px 0 50px;
   }
 
   .services-container {
@@ -481,7 +493,7 @@
 /* Small Mobile */
 @media (max-width: 375px) {
   .services {
-    padding: 45px 0;
+    padding: 20px 0 45px;
   }
 
   .services-container {

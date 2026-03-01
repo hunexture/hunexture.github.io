@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { FaHeart, FaLinkedin, FaGithub, FaTwitter, FaInstagram, FaArrowUp } from 'react-icons/fa'
+import { FaLinkedin, FaGithub, FaTwitter, FaInstagram, FaArrowUp, FaRocket } from 'react-icons/fa'
 import Logo from './Logo'
 import './Footer.css'
 
@@ -60,8 +60,9 @@ const Footer = () => {
       { name: 'AI Solutions', href: 'services/ai-solutions' },
       { name: 'Web Development', href: 'services/web-development' },
       { name: 'Mobile Apps', href: 'services/app-development' },
-      { name: 'UI/UX Design', href: 'services/uiux-design'},
-      { name: 'Cloud Integration', href: 'services/cloud-integration' }
+      { name: 'UI/UX Design', href: 'services/uiux-design' },
+      { name: 'Cloud Integration', href: 'services/cloud-integration' },
+      { name: 'Digital Marketing', href: 'services/digital-marketing' }
     ],
     legal: [
       { name: 'Privacy Policy', href: 'privacy-policy' },
@@ -79,6 +80,26 @@ const Footer = () => {
 
   return (
     <footer className="footer">
+      {/* Footer CTA Banner */}
+      <div className="footer-cta">
+        <div className="footer-cta-inner">
+          <div className="footer-cta-text">
+            <h3 className="footer-cta-title">Ready to Build Something <span className="footer-cta-title-accent">Extraordinary?</span></h3>
+            <p className="footer-cta-description">
+              Turn your vision into an intelligent, scalable reality.
+              We reply within 24 hours — always.
+            </p>
+          </div>
+          <a
+            href="#contact"
+            className="footer-cta-btn"
+            onClick={(e) => handleLinkClick(e, '#contact')}
+          >
+            Start a Project <FaRocket className="footer-cta-icon" />
+          </a>
+        </div>
+      </div>
+
       <div className="footer-container">
         <div className="footer-content">
           <div className="footer-brand">
