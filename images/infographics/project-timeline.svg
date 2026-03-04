@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" width="900" height="300">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap');
+    .phase-name { font-family: 'Orbitron', sans-serif; font-size: 14px; fill: #ffffff; font-weight: 600; text-anchor: middle; }
+    .phase-date { font-family: 'Orbitron', sans-serif; font-size: 11px; fill: #0080ff; font-weight: 700; text-anchor: middle; }
+    .phase-desc { font-family: 'Inter', sans-serif; font-size: 12px; fill: #8892b0; text-anchor: middle; line-height: 1.4; }
+    .main-line { stroke: url(#lineGrad); stroke-width: 6; fill: none; stroke-linecap: round; filter: drop-shadow(0 0 8px rgba(0,212,255,0.6));}
+    .node { fill: #112240; stroke: #00d4ff; stroke-width: 3; }
+    .node-pulse { fill: transparent; stroke: #00d4ff; stroke-width: 1; }
+    .grid-line { stroke: rgba(255,255,255,0.05); stroke-width: 1; }
+  </style>
+
+  <defs>
+    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e3a5f"/>
+      <stop offset="50%" stop-color="#0080ff"/>
+      <stop offset="100%" stop-color="#00d4ff"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="300" fill="#0a1628"/>
+
+  <!-- Faint horizontal grid -->
+  <line x1="0" y1="50" x2="900" y2="50" class="grid-line"/>
+  <line x1="0" y1="100" x2="900" y2="100" class="grid-line"/>
+  <line x1="0" y1="150" x2="900" y2="150" class="grid-line" style="stroke:rgba(255,255,255,0.1);"/>
+  <line x1="0" y1="200" x2="900" y2="200" class="grid-line"/>
+  <line x1="0" y1="250" x2="900" y2="250" class="grid-line"/>
+
+  <!-- Glowing Line -->
+  <line x1="50" y1="150" x2="850" y2="150" class="main-line"/>
+
+  <!-- Node 1 (Discovery) - Above -->
+  <g transform="translate(100, 150)">
+    <line x1="0" y1="0" x2="0" y2="-40" stroke="#1e3a5f" stroke-width="2"/>
+    <circle cx="0" cy="0" r="10" class="node"/>
+    <text x="0" y="-80" class="phase-date">Week 1-2</text>
+    <text x="0" y="-60" class="phase-name">Discovery</text>
+    <text x="0" y="-45" class="phase-desc" fill="#8892b0">Requirements</text>
+  </g>
+
+  <!-- Node 2 (Planning) - Below -->
+  <g transform="translate(240, 150)">
+    <line x1="0" y1="0" x2="0" y2="40" stroke="#004e89" stroke-width="2"/>
+    <circle cx="0" cy="0" r="10" class="node" style="stroke:#0080ff"/>
+    <text x="0" y="60" class="phase-date" fill="#0080ff">Week 3-4</text>
+    <text x="0" y="80" class="phase-name">Planning</text>
+    <text x="0" y="100" class="phase-desc">Strategy &amp; Architecture</text>
+  </g>
+
+  <!-- Node 3 (Design) - Above -->
+  <g transform="translate(380, 150)">
+    <line x1="0" y1="0" x2="0" y2="-40" stroke="#0080ff" stroke-width="2"/>
+    <circle cx="0" cy="0" r="10" class="node" style="stroke:#0080ff"/>
+    <text x="0" y="-80" class="phase-date" fill="#00d4ff">Week 5-8</text>
+    <text x="0" y="-60" class="phase-name">Design</text>
+    <text x="0" y="-45" class="phase-desc">UI/UX &amp; Prototyping</text>
+  </g>
+
+  <!-- Node 4 (Dev) - Below (Active) -->
+  <g transform="translate(520, 150)">
+    <line x1="0" y1="0" x2="0" y2="40" stroke="#00d4ff" stroke-width="2"/>
+    <circle cx="0" cy="0" r="12" class="node" style="fill:#004e89"/>
+    <circle cx="0" cy="0" r="20" class="node-pulse" stroke-dasharray="4 2"/>
+    <text x="0" y="60" class="phase-date" fill="#00d4ff">Week 9-16</text>
+    <text x="0" y="80" class="phase-name" fill="#00d4ff">Development</text>
+    <text x="0" y="100" class="phase-desc" fill="#e6f1ff">Frontend &amp; Backend</text>
+  </g>
+
+  <!-- Node 5 (Testing) - Above -->
+  <g transform="translate(660, 150)">
+    <line x1="0" y1="0" x2="0" y2="-40" stroke="#00d4ff" stroke-width="2"/>
+    <circle cx="0" cy="0" r="10" class="node"/>
+    <text x="0" y="-80" class="phase-date" fill="#00d4ff">Week 17-18</text>
+    <text x="0" y="-60" class="phase-name">Testing</text>
+    <text x="0" y="-45" class="phase-desc">QA &amp; Security</text>
+  </g>
+
+  <!-- Node 6 (Launch) - Below -->
+  <g transform="translate(800, 150)">
+    <line x1="0" y1="0" x2="0" y2="40" stroke="#64ffda" stroke-width="2"/>
+    <circle cx="0" cy="0" r="10" class="node" style="stroke:#64ffda"/>
+    <text x="0" y="60" class="phase-date" fill="#64ffda">Week 19-20</text>
+    <text x="0" y="80" class="phase-name">Launch</text>
+    <text x="0" y="100" class="phase-desc">Deployment</text>
+  </g>
+
+</svg>

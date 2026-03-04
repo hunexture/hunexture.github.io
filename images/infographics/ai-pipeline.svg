@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" width="900" height="420">
+  <!-- Fonts -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&amp;family=Inter:wght@400;500&amp;display=swap');
+    .title { font-family: 'Orbitron', sans-serif; font-size: 28px; fill: #ffffff; font-weight: 700; text-anchor: middle; }
+    .stage-title { font-family: 'Orbitron', sans-serif; font-size: 14px; fill: #e6f1ff; font-weight: 600; text-anchor: middle; }
+    .stage-desc { font-family: 'Inter', sans-serif; font-size: 11px; fill: #8892b0; text-anchor: middle; }
+    .arrow { stroke: #0080ff; stroke-width: 2; fill: none; }
+    .stage-box { fill: #112240; stroke: #00d4ff; stroke-width: 2; rx: 8; ry: 8; filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.4)); }
+    .glow { fill: url(#centerGlow); opacity: 0.6; }
+  </style>
+
+  <!-- Defs / Gradients / Filters -->
+  <defs>
+    <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/>
+    </radialGradient>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#0080ff" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="420" fill="#0a1628"/>
+  <circle cx="450" cy="210" r="250" class="glow" />
+
+  <!-- Title -->
+  <text x="450" y="60" class="title">AI Pipeline Architecture</text>
+
+  <!-- Stages group (Total width ~800px) -->
+  <g transform="translate(50, 150)">
+    
+    <!-- Draw arrows first so they sit behind boxes -->
+    <!-- 1 -> 2 -->
+    <path d="M 120 60 L 145 60" class="arrow" marker-end="url(#arrowhead)"/>
+    <!-- 2 -> 3 -->
+    <path d="M 265 60 L 290 60" class="arrow" marker-end="url(#arrowhead)"/>
+    <!-- 3 -> 4 -->
+    <path d="M 410 60 L 435 60" class="arrow" marker-end="url(#arrowhead)"/>
+    <!-- 4 -> 5 -->
+    <path d="M 555 60 L 580 60" class="arrow" marker-end="url(#arrowhead)"/>
+    <!-- 5 -> 6 -->
+    <path d="M 700 60 L 725 60" class="arrow" marker-end="url(#arrowhead)"/>
+
+    <!-- Stage 1 -->
+    <g transform="translate(0, 0)">
+      <rect width="120" height="120" class="stage-box"/>
+      <circle cx="60" cy="40" r="16" fill="#00d4ff" opacity="0.2"/>
+      <!-- Icon representation -->
+      <path d="M50 35 L70 35 M50 45 L70 45" stroke="#00d4ff" stroke-width="2"/>
+      <text x="60" y="80" class="stage-title">Raw Data</text>
+      <text x="60" y="100" class="stage-desc">Collection</text>
+    </g>
+
+    <!-- Stage 2 -->
+    <g transform="translate(145, 0)">
+      <rect width="120" height="120" class="stage-box"/>
+      <circle cx="60" cy="40" r="16" fill="#00d4ff" opacity="0.2"/>
+      <!-- Icon representation -->
+      <path d="M60 25 L60 55 M45 40 L75 40" stroke="#00d4ff" stroke-width="2"/>
+      <text x="60" y="80" class="stage-title">Data Cleaning</text>
+      <text x="60" y="100" class="stage-desc">Preprocessing</text>
+    </g>
+
+    <!-- Stage 3 -->
+    <g transform="translate(290, 0)">
+      <rect width="120" height="120" class="stage-box"/>
+      <circle cx="60" cy="40" r="16" fill="#00d4ff" opacity="0.2"/>
+      <!-- Icon representation -->
+      <circle cx="60" cy="40" r="10" stroke="#00d4ff" fill="none" stroke-width="2"/>
+      <text x="60" y="80" class="stage-title">Feature Eng</text>
+      <text x="60" y="100" class="stage-desc">Extraction</text>
+    </g>
+
+    <!-- Stage 4 -->
+    <g transform="translate(435, 0)">
+      <rect width="120" height="120" class="stage-box"/>
+      <circle cx="60" cy="40" r="16" fill="#00d4ff" opacity="0.2"/>
+      <!-- Icon representation -->
+      <polygon points="60,25 75,50 45,50" stroke="#00d4ff" fill="none" stroke-width="2"/>
+      <text x="60" y="80" class="stage-title">Model Train</text>
+      <text x="60" y="100" class="stage-desc">Learning</text>
+    </g>
+
+    <!-- Stage 5 -->
+    <g transform="translate(580, 0)">
+      <rect width="120" height="120" class="stage-box"/>
+      <circle cx="60" cy="40" r="16" fill="#00d4ff" opacity="0.2"/>
+      <!-- Icon representation -->
+      <path d="M50 40 L58 48 L70 30" fill="none" stroke="#00d4ff" stroke-width="3"/>
+      <text x="60" y="80" class="stage-title">Evaluation</text>
+      <text x="60" y="100" class="stage-desc">Validation</text>
+    </g>
+
+    <!-- Stage 6 -->
+    <g transform="translate(725, 0)">
+      <rect width="120" height="120" class="stage-box"/>
+      <circle cx="60" cy="40" r="16" fill="#00d4ff" opacity="0.2"/>
+      <!-- Icon representation -->
+      <path d="M55 25 L65 25 L65 50 L75 50 M65 50 L65 55" stroke="#00d4ff" fill="none" stroke-width="2"/>
+      <text x="60" y="80" class="stage-title">Deployment</text>
+      <text x="60" y="100" class="stage-desc">Production</text>
+    </g>
+
+  </g>
+</svg>

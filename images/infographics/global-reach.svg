@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 480" width="840" height="480">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&amp;family=Inter:wght@400;500;600&amp;display=swap');
+    .title { font-family: 'Orbitron', sans-serif; font-size: 24px; fill: #ffffff; font-weight: 700; text-anchor: middle; }
+    .stat { font-family: 'Inter', sans-serif; font-size: 14px; fill: #8892b0; font-weight: 500; text-anchor: middle; }
+    .map-path { fill: #112240; stroke: #1e3a5f; stroke-width: 1; }
+    .arc { fill: none; stroke: url(#arcGrad); stroke-width: 2; stroke-linecap: round; filter: drop-shadow(0 0 5px rgba(0,212,255,0.4)); }
+    .dot { fill: #00d4ff; filter: drop-shadow(0 0 8px #00d4ff); }
+    .pulse { fill: transparent; stroke: #00d4ff; stroke-width: 1; opacity: 0.6; }
+    .tooltip-bg { fill: #0a1628; stroke: #00d4ff; stroke-width: 1; rx: 4; }
+    .tooltip-text { font-family: 'Inter', sans-serif; font-size: 10px; fill: #e6f1ff; font-weight: 600; text-anchor: middle; }
+  </style>
+
+  <defs>
+    <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00d4ff"/>
+      <stop offset="100%" stop-color="#0080ff"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="840" height="480" fill="#0a1628"/>
+  <text x="420" y="40" class="title">Trusted Globally</text>
+
+  <!-- Simplified Map Paths (Abstracted for infographic feel) -->
+  <g transform="translate(60, 80)">
+    <!-- North America -->
+    <path d="M 50 50 Q 150 20 200 80 Q 250 150 150 200 Q 80 150 50 50" class="map-path"/>
+    <!-- South America -->
+    <path d="M 180 200 Q 250 250 220 350 Q 180 300 180 200" class="map-path"/>
+    <!-- Europe & Asia (Combined roughly) -->
+    <path d="M 350 40 Q 550 10 650 80 Q 700 150 580 200 Q 500 250 450 150 Q 350 120 350 40" class="map-path"/>
+    <!-- Africa -->
+    <path d="M 350 150 Q 450 150 400 300 Q 320 250 350 150" class="map-path"/>
+    <!-- Australia -->
+    <path d="M 600 240 Q 680 220 650 300 Q 580 300 600 240" class="map-path"/>
+
+    <!-- Nodes (Locations) -->
+    <!-- HQ: India (Approx 550, 160) -->
+    
+    <!-- Connectors (Arcs from India) -->
+    <path d="M 550 160 Q 350 50 150 100" class="arc"/> <!-- to USA -->
+    <path d="M 550 160 Q 450 60 400 80" class="arc"/> <!-- to UK/Germany -->
+    <path d="M 550 160 Q 500 130 480 150" class="arc"/> <!-- to UAE -->
+    <path d="M 550 160 Q 600 140 600 180" class="arc"/> <!-- to Singapore -->
+    <path d="M 550 160 Q 600 200 620 250" class="arc"/> <!-- to Australia -->
+    <path d="M 550 160 Q 350 20 120 60" class="arc"/> <!-- to Canada -->
+
+    <!-- Draw Dots and Tooltips -->
+    <!-- USA -->
+    <circle cx="150" cy="100" r="4" class="dot"/>
+    <circle cx="150" cy="100" r="12" class="pulse"/>
+    <rect x="130" y="70" width="40" height="18" class="tooltip-bg"/>
+    <text x="150" y="83" class="tooltip-text">USA</text>
+
+    <!-- Canada -->
+    <circle cx="120" cy="60" r="4" class="dot"/>
+    <circle cx="120" cy="60" r="12" class="pulse"/>
+    <rect x="100" y="30" width="40" height="18" class="tooltip-bg"/>
+    <text x="120" y="43" class="tooltip-text">Canada</text>
+
+    <!-- UK/Germany approx -->
+    <circle cx="400" cy="80" r="4" class="dot"/>
+    <circle cx="400" cy="80" r="12" class="pulse"/>
+    <rect x="375" y="50" width="50" height="18" class="tooltip-bg"/>
+    <text x="400" y="63" class="tooltip-text">Europe</text>
+
+    <!-- UAE -->
+    <circle cx="480" cy="150" r="4" class="dot"/>
+    <circle cx="480" cy="150" r="12" class="pulse"/>
+    <rect x="460" y="120" width="40" height="18" class="tooltip-bg"/>
+    <text x="480" y="133" class="tooltip-text">UAE</text>
+
+    <!-- Singapore -->
+    <circle cx="600" cy="180" r="4" class="dot"/>
+    <circle cx="600" cy="180" r="12" class="pulse"/>
+    <rect x="575" y="150" width="50" height="18" class="tooltip-bg"/>
+    <text x="600" y="163" class="tooltip-text">Singapore</text>
+
+    <!-- Australia -->
+    <circle cx="620" cy="250" r="4" class="dot"/>
+    <circle cx="620" cy="250" r="12" class="pulse"/>
+    <rect x="595" y="270" width="50" height="18" class="tooltip-bg"/>
+    <text x="620" y="283" class="tooltip-text">Australia</text>
+
+    <!-- India (HQ) -->
+    <circle cx="550" cy="160" r="6" fill="#64ffda" filter="drop-shadow(0 0 10px #64ffda)"/>
+    <circle cx="550" cy="160" r="16" fill="transparent" stroke="#64ffda" stroke-width="2"/>
+    <circle cx="550" cy="160" r="24" fill="transparent" stroke="#64ffda" stroke-width="1" opacity="0.5"/>
+    <rect x="525" y="185" width="50" height="20" class="tooltip-bg" style="stroke:#64ffda; fill:#112240"/>
+    <text x="550" y="198" class="tooltip-text" fill="#64ffda">HQ (India)</text>
+
+  </g>
+
+  <text x="420" y="450" class="stat">Clients across 10+ countries</text>
+</svg>

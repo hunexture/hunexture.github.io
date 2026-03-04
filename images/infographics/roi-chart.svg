@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 440" width="720" height="440">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&amp;family=Inter:wght@400;600&amp;display=swap');
+    .title { font-family: 'Orbitron', sans-serif; font-size: 24px; fill: #ffffff; font-weight: 700; text-anchor: middle; }
+    .label { font-family: 'Inter', sans-serif; font-size: 14px; fill: #e6f1ff; font-weight: 600; text-anchor: end; }
+    .note { font-family: 'Inter', sans-serif; font-size: 12px; fill: #8892b0; font-weight: 400; text-anchor: middle; }
+    .bar-text { font-family: 'Inter', sans-serif; font-size: 13px; fill: #ffffff; font-weight: 600; }
+    .bar-before { fill: #334155; rx: 4; }
+    .bar-after { fill: url(#blueGrad); rx: 4; filter: drop-shadow(0 0 4px rgba(0, 212, 255, 0.4)); }
+    .axis-line { stroke: #334155; stroke-width: 2; }
+  </style>
+
+  <defs>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0080ff"/>
+      <stop offset="100%" stop-color="#00d4ff"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="720" height="440" fill="#0a1628"/>
+  <text x="360" y="50" class="title">Before vs After Hunexture</text>
+
+  <g transform="translate(180, 100)">
+    <line x1="0" y1="0" x2="0" y2="280" class="axis-line"/>
+    
+    <!-- Row 1: Operational Cost -->
+    <text x="-20" y="32" class="label">Operational Cost</text>
+    <!-- Before 100% -->
+    <rect x="2" y="10" width="400" height="18" class="bar-before"/>
+    <text x="410" y="24" class="bar-text" fill="#8892b0">100%</text>
+    <!-- After 35% -->
+    <rect x="2" y="32" width="140" height="18" class="bar-after"/>
+    <text x="150" y="46" class="bar-text">35%</text>
+
+    <!-- Row 2: Processing Speed -->
+    <text x="-20" y="102" class="label">Processing Speed</text>
+    <rect x="2" y="80" width="80" height="18" class="bar-before"/>
+    <text x="90" y="94" class="bar-text" fill="#8892b0">20%</text>
+    <rect x="2" y="102" width="380" height="18" class="bar-after"/>
+    <text x="390" y="116" class="bar-text">95%</text>
+
+    <!-- Row 3: Error Rate -->
+    <text x="-20" y="172" class="label">Error Rate</text>
+    <rect x="2" y="150" width="320" height="18" class="bar-before"/>
+    <text x="330" y="164" class="bar-text" fill="#8892b0">80%</text>
+    <rect x="2" y="172" width="32" height="18" class="bar-after"/>
+    <text x="42" y="186" class="bar-text">8%</text>
+
+    <!-- Row 4: Team Efficiency -->
+    <text x="-20" y="242" class="label">Team Efficiency</text>
+    <rect x="2" y="220" width="160" height="18" class="bar-before"/>
+    <text x="170" y="234" class="bar-text" fill="#8892b0">40%</text>
+    <rect x="2" y="242" width="368" height="18" class="bar-after"/>
+    <text x="378" y="256" class="bar-text">92%</text>
+
+    <!-- Legend -->
+    <rect x="100" y="295" width="16" height="16" class="bar-before"/>
+    <text x="125" y="308" class="label" style="text-anchor:start; font-size:12px">Before</text>
+    <rect x="220" y="295" width="16" height="16" class="bar-after"/>
+    <text x="245" y="308" class="label" style="text-anchor:start; font-size:12px; fill:#00d4ff">After Hunexture</text>
+  </g>
+
+  <text x="360" y="420" class="note">Average results across 30+ client projects</text>
+</svg>
