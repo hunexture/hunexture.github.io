@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" width="760" height="460">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&amp;family=Inter:wght@400;500;600&amp;display=swap');
+    .title { font-family: 'Orbitron', sans-serif; font-size: 24px; fill: #ffffff; font-weight: 700; text-anchor: middle; }
+    .col-header { font-family: 'Orbitron', sans-serif; font-size: 18px; font-weight: 700; text-anchor: middle; }
+    .attr-text { font-family: 'Inter', sans-serif; font-size: 14px; fill: #e6f1ff; font-weight: 600; text-anchor: middle; }
+    .cell-text { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; text-anchor: middle; }
+    .divider { stroke: rgba(0, 212, 255, 0.3); stroke-width: 1; }
+    .bg-panel { fill: #112240; rx: 8; stroke: #1e3a5f; stroke-width: 1; }
+    .glow-panel { fill: #112240; rx: 8; stroke: #00d4ff; stroke-width: 2; filter: drop-shadow(0 0 10px rgba(0,212,255,0.2)); }
+  </style>
+
+  <rect width="760" height="460" fill="#0a1628"/>
+  <text x="380" y="40" class="title">AI-Powered vs Traditional Approach</text>
+
+  <!-- Headers -->
+  <text x="240" y="90" class="col-header" fill="#8892b0">Traditional</text>
+  <text x="560" y="90" class="col-header" fill="#00d4ff" style="filter: drop-shadow(0 0 5px #00d4ff);">AI-Powered by Hunexture</text>
+
+  <!-- Panels -->
+  <rect x="100" y="110" width="280" height="300" class="bg-panel"/>
+  <rect x="420" y="110" width="280" height="300" class="glow-panel"/>
+  
+  <!-- Row 1: Processing Speed -->
+  <text x="380" y="145" class="attr-text">Processing Speed</text>
+  <text x="240" y="145" class="cell-text" fill="#ef476f">Manual / Slow</text>
+  <text x="560" y="145" class="cell-text" fill="#64ffda">Instant / Automated</text>
+  <line x1="120" y1="155" x2="680" y2="155" class="divider"/>
+
+  <!-- Row 2: Accuracy -->
+  <text x="380" y="180" class="attr-text">Accuracy</text>
+  <text x="240" y="180" class="cell-text" fill="#ef476f">Prone to Human Error (~80%)</text>
+  <text x="560" y="180" class="cell-text" fill="#64ffda">High Precision (99%+)</text>
+  <line x1="120" y1="190" x2="680" y2="190" class="divider"/>
+
+  <!-- Row 3: Scalability -->
+  <text x="380" y="215" class="attr-text">Scalability</text>
+  <text x="240" y="215" class="cell-text" fill="#ef476f">Requires more hiring</text>
+  <text x="560" y="215" class="cell-text" fill="#64ffda">Infinite &amp; Elastic</text>
+  <line x1="120" y1="225" x2="680" y2="225" class="divider"/>
+
+  <!-- Row 4: Cost Over Time -->
+  <text x="380" y="250" class="attr-text">Cost Over Time</text>
+  <text x="240" y="250" class="cell-text" fill="#ef476f">Increases Linearly</text>
+  <text x="560" y="250" class="cell-text" fill="#64ffda">Decreases Drastically</text>
+  <line x1="120" y1="260" x2="680" y2="260" class="divider"/>
+
+  <!-- Row 5: Learning Ability -->
+  <text x="380" y="285" class="attr-text">Learning Ability</text>
+  <text x="240" y="285" class="cell-text" fill="#ef476f">Static Processes</text>
+  <text x="560" y="285" class="cell-text" fill="#64ffda">Continuous Self-Improvement</text>
+  <line x1="120" y1="295" x2="680" y2="295" class="divider"/>
+
+  <!-- Row 6: 24/7 Operation -->
+  <text x="380" y="320" class="attr-text">24/7 Operation</text>
+  <text x="240" y="320" class="cell-text" fill="#ef476f">Limited by Shifts</text>
+  <text x="560" y="320" class="cell-text" fill="#64ffda">Always Active</text>
+  <line x1="120" y1="330" x2="680" y2="330" class="divider"/>
+
+  <!-- Totals -->
+  <text x="240" y="365" class="cell-text" fill="#8892b0" style="font-weight:700;">Legacy Operations</text>
+  <text x="560" y="365" class="cell-text" fill="#00d4ff" style="font-weight:700;">Future-Ready Enterprise</text>
+
+  <!-- Red Cross Marks (Traditional) -->
+  <g stroke="#ef476f" stroke-width="2" fill="none">
+    <path d="M 125 135 L 135 145 M 135 135 L 125 145"/>
+    <path d="M 125 170 L 135 180 M 135 170 L 125 180"/>
+    <path d="M 125 205 L 135 215 M 135 205 L 125 215"/>
+    <path d="M 125 240 L 135 250 M 135 240 L 125 250"/>
+    <path d="M 125 275 L 135 285 M 135 275 L 125 285"/>
+    <path d="M 125 310 L 135 320 M 135 310 L 125 320"/>
+  </g>
+
+  <!-- Green Check Marks (AI) -->
+  <g stroke="#64ffda" stroke-width="2" fill="none">
+    <path d="M 445 140 L 450 145 L 460 135"/>
+    <path d="M 445 175 L 450 180 L 460 170"/>
+    <path d="M 445 210 L 450 215 L 460 205"/>
+    <path d="M 445 245 L 450 250 L 460 240"/>
+    <path d="M 445 280 L 450 285 L 460 275"/>
+    <path d="M 445 315 L 450 320 L 460 310"/>
+  </g>
+
+</svg>

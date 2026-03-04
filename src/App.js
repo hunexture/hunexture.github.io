@@ -16,11 +16,16 @@ import ServiceDetail from './components/ServiceDetail'
 import ProjectDetail from './components/ProjectDetail'
 import IndustryDetail from './components/IndustryDetail'
 import AIDetail from './components/AIDetail'
+import AISolutionsPage from './components/AISolutionsPage'
 import PrivacyPolicy from './components/PrivacyPolicy'
 import TermsOfService from './components/TermsOfService'
 import CookiePolicy from './components/CookiePolicy'
 import BlogList from './components/BlogList'
 import BlogPost from './components/BlogPost'
+import Testimonials from './components/Testimonials'
+import FAQ from './components/FAQ'
+import CookieBanner from './components/CookieBanner'
+import WhatsAppFAB from './components/WhatsAppFAB'
 import './App.css'
 
 // Home page component
@@ -30,8 +35,10 @@ const HomePage = () => (
     <TechMarquee />
     <About />
     <ProcessSection />
+    <Testimonials />
     <Services />
     <Portfolio />
+    <FAQ />
     <Contact />
   </>
 )
@@ -52,13 +59,18 @@ const Layout = ({ children }) => {
   const pathParts = location.pathname.split('/').filter(Boolean)
   const isBlogPostPage = pathParts[0] === 'blog' && pathParts.length === 3 // /blog/category/slug
 
+  const showNavbar = !isBlogPostPage
+  const showFooter = !isBlogPostPage
+
   return (
     <div className="App">
       {!isDetailPage && <AnimatedBackground />}
       {!isDetailPage && <BackgroundEffect />}
-      {!isBlogPostPage && <Navbar />}
+      {showNavbar && <Navbar />}
       {children}
-      {!isBlogPostPage && <Footer />}
+      {showFooter && <Footer />}
+      <CookieBanner />
+      {!isBlogPostPage && <WhatsAppFAB />}
     </div>
   )
 }
@@ -70,6 +82,7 @@ function App() {
         <Layout>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/services/ai-solutions" element={<AISolutionsPage />} />
             <Route path="/services/:slug" element={<ServiceDetail />} />
             <Route path="/portfolio/:slug" element={<ProjectDetail />} />
             <Route path="/industries/:slug" element={<IndustryDetail />} />

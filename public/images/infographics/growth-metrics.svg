@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" width="720" height="420">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&amp;family=Inter:wght@400;500;600&amp;display=swap');
+    .title { font-family: 'Orbitron', sans-serif; font-size: 20px; fill: #ffffff; font-weight: 700; text-anchor: middle; }
+    .label { font-family: 'Inter', sans-serif; font-size: 12px; fill: #8892b0; font-weight: 500; }
+    .leg-text { font-family: 'Inter', sans-serif; font-size: 11px; fill: #e6f1ff; font-weight: 500; }
+    .grid { stroke: rgba(255,255,255,0.05); stroke-width: 1; }
+    .line-1 { stroke: #00d4ff; stroke-width: 3; fill: none; filter: drop-shadow(0 0 5px rgba(0,212,255,0.4)); }
+    .line-2 { stroke: #64ffda; stroke-width: 3; fill: none; filter: drop-shadow(0 0 5px rgba(100,255,218,0.4)); }
+    .line-3 { stroke: #0080ff; stroke-width: 3; fill: none; filter: drop-shadow(0 0 5px rgba(0,128,255,0.4)); }
+    .point-1 { fill: #00d4ff; }
+    .point-2 { fill: #64ffda; }
+    .point-3 { fill: #0080ff; }
+  </style>
+
+  <defs>
+    <linearGradient id="area1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#0a1628" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="720" height="420" fill="#0a1628"/>
+  <text x="360" y="40" class="title">Consistent Growth, Year on Year</text>
+
+  <!-- Legend -->
+  <g transform="translate(540, 20)">
+    <line x1="0" y1="5" x2="20" y2="5" class="line-1" stroke-width="2"/>
+    <text x="30" y="8" class="leg-text">Projects (Cum.)</text>
+    
+    <line x1="0" y1="20" x2="20" y2="20" class="line-2" stroke-width="2"/>
+    <text x="30" y="23" class="leg-text">Client Retention %</text>
+    
+    <line x1="0" y1="35" x2="20" y2="35" class="line-3" stroke-width="2"/>
+    <text x="30" y="38" class="leg-text">Team Size</text>
+  </g>
+
+  <!-- Chart Area -->
+  <g transform="translate(80, 80)">
+    <!-- Y-Axis grids -->
+    <line x1="0" y1="0" x2="560" y2="0" class="grid"/>
+    <text x="-15" y="5" class="label" text-anchor="end">100</text>
+    
+    <line x1="0" y1="70" x2="560" y2="70" class="grid"/>
+    <text x="-15" y="75" class="label" text-anchor="end">75</text>
+    
+    <line x1="0" y1="140" x2="560" y2="140" class="grid"/>
+    <text x="-15" y="145" class="label" text-anchor="end">50</text>
+    
+    <line x1="0" y1="210" x2="560" y2="210" class="grid"/>
+    <text x="-15" y="215" class="label" text-anchor="end">25</text>
+    
+    <line x1="0" y1="280" x2="560" y2="280" class="grid" stroke-width="2"/>
+    <text x="-15" y="285" class="label" text-anchor="end">0</text>
+
+    <!-- X-Axis Labels (5 years) 560 width / 4 intervals = 140 spacing -->
+    <text x="0" y="300" class="label" text-anchor="middle">2020</text>
+    <text x="140" y="300" class="label" text-anchor="middle">2021</text>
+    <text x="280" y="300" class="label" text-anchor="middle">2022</text>
+    <text x="420" y="300" class="label" text-anchor="middle">2023</text>
+    <text x="560" y="300" class="label" text-anchor="middle">2024</text>
+
+    <!-- Line 1 Data (Projects): 10, 30, 60, 95, 120 (capped at 100 for scale) -->
+    <!-- Max=100 => Y ranges from 280 to 0. Rate = 2.8px per unit -->
+    <!-- (10->252), (30->196), (60->112), (85->42), (105-> -14) limits adjusted -->
+    <path d="M 0 252 L 140 196 L 280 112 L 420 42 L 560 -10" class="line-1"/>
+    <!-- Area under Line 1 -->
+    <path d="M 0 252 L 140 196 L 280 112 L 420 42 L 560 -10 L 560 280 L 0 280 Z" fill="url(#area1)"/>
+    <circle cx="0" cy="252" r="4" class="point-1"/>
+    <circle cx="140" cy="196" r="4" class="point-1"/>
+    <circle cx="280" cy="112" r="4" class="point-1"/>
+    <circle cx="420" cy="42" r="4" class="point-1"/>
+    <circle cx="560" cy="-10" r="4" class="point-1"/>
+
+    <!-- Line 2 Data (Retention %): 85, 90, 92, 96, 99 -->
+    <path d="M 0 42 L 140 28 L 280 22 L 420 11 L 560 3" class="line-2"/>
+    <circle cx="0" cy="42" r="4" class="point-2"/>
+    <circle cx="140" cy="28" r="4" class="point-2"/>
+    <circle cx="280" cy="22" r="4" class="point-2"/>
+    <circle cx="420" cy="11" r="4" class="point-2"/>
+    <circle cx="560" cy="3" r="4" class="point-2"/>
+
+    <!-- Line 3 Data (Team Size): 5, 12, 18, 25, 30 -->
+    <path d="M 0 266 L 140 246 L 280 230 L 420 210 L 560 196" class="line-3"/>
+    <circle cx="0" cy="266" r="4" class="point-3"/>
+    <circle cx="140" cy="246" r="4" class="point-3"/>
+    <circle cx="280" cy="230" r="4" class="point-3"/>
+    <circle cx="420" cy="210" r="4" class="point-3"/>
+    <circle cx="560" cy="196" r="4" class="point-3"/>
+
+    <!-- Annotation -->
+    <rect x="530" y="-35" width="40" height="18" rx="4" fill="#00d4ff"/>
+    <text x="550" y="-22" font-family="Orbitron" font-size="10" fill="#0a1628" font-weight="700" text-anchor="middle">100+</text>
+  </g>
+</svg>

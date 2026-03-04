@@ -1,4 +1,4 @@
-import { FaBrain, FaCode, FaMobile, FaCloud, FaPaintBrush, FaRobot, FaDatabase, FaChartLine, FaEye, FaReact, FaNodeJs, FaServer, FaAndroid, FaApple, FaCog, FaAws, FaDocker, FaGitAlt, FaFigma, FaPalette, FaUsers, FaTools, FaCamera, FaComments, FaShoppingCart, FaBuilding, FaLayerGroup, FaTruck, FaUserFriends, FaHeartbeat, FaBriefcase, FaCloudUploadAlt, FaCubes, FaCodeBranch, FaBolt, FaMagic, FaMobileAlt, FaSearchPlus, FaBullhorn, FaGoogle, FaFacebookF, FaInstagram, FaEnvelope, FaSearch, FaPencilAlt } from 'react-icons/fa';
+import { FaBrain, FaCode, FaMobile, FaCloud, FaPaintBrush, FaRobot, FaChartLine, FaEye, FaReact, FaNodeJs, FaServer, FaAndroid, FaApple, FaCog, FaAws, FaDocker, FaGitAlt, FaFigma, FaPalette, FaUsers, FaTools, FaCamera, FaComments, FaShoppingCart, FaBuilding, FaLayerGroup, FaTruck, FaUserFriends, FaHeartbeat, FaBriefcase, FaCloudUploadAlt, FaCubes, FaCodeBranch, FaBolt, FaMagic, FaMobileAlt, FaSearchPlus, FaBullhorn, FaGoogle, FaFacebookF, FaInstagram, FaEnvelope, FaSearch, FaPencilAlt } from 'react-icons/fa';
 
 export const servicesData = [
   {
@@ -16,10 +16,21 @@ export const servicesData = [
       'Scale intelligent automation across your organization'
     ],
     technologies: [
-      { name: 'TensorFlow', icon: FaBrain },
-      { name: 'PyTorch', icon: FaRobot },
-      { name: 'scikit-learn', icon: FaChartLine },
-      { name: 'OpenCV', icon: FaEye }
+      { name: 'OpenAI', iconUrl: '/images/tech-icons/openai.svg' },
+      { name: 'Codex', iconUrl: '/images/tech-icons/codex.svg' },
+      { name: 'Vertex AI', iconUrl: '/images/tech-icons/vertexai.svg' },
+      { name: 'Cloud Vision', iconUrl: '/images/tech-icons/cloudvision.svg' },
+      { name: 'OpenCV', iconUrl: '/images/tech-icons/opencv.svg' },
+      { name: 'TensorFlow', iconUrl: '/images/tech-icons/tensorflow.svg' },
+      { name: 'IBM Watson', iconUrl: '/images/tech-icons/ibm-watson.svg' },
+      { name: 'Cloud Natural Language', iconUrl: '/images/tech-icons/cloud-nlp.svg' },
+      { name: 'Cognitive Services', iconUrl: '/images/tech-icons/cognitive-services.svg' },
+      { name: 'Bot Framework', iconUrl: '/images/tech-icons/bot-framework.svg' },
+      { name: 'Mistral', iconUrl: '/images/tech-icons/mistral.svg' },
+      { name: 'Meta Llama', iconUrl: '/images/tech-icons/llama.svg' },
+      { name: 'Gemini', iconUrl: '/images/tech-icons/gemini.svg' },
+      { name: 'Anthropic', iconUrl: '/images/tech-icons/anthropic.svg' },
+      { name: 'N8N', iconUrl: '/images/tech-icons/n8n.svg' }
     ],
     process: [
       {
@@ -95,10 +106,20 @@ export const servicesData = [
       'SEO-optimized for better visibility'
     ],
     technologies: [
-      { name: 'React', icon: FaReact },
-      { name: 'Node.js', icon: FaNodeJs },
-      { name: 'MongoDB', icon: FaDatabase },
-      { name: 'REST APIs', icon: FaServer }
+      { name: 'PHP', iconUrl: '/images/tech-icons/php.svg' },
+      { name: '.NET', iconUrl: '/images/tech-icons/dotnet.svg' },
+      { name: 'Java', iconUrl: '/images/tech-icons/java.svg' },
+      { name: 'HTML5', iconUrl: '/images/tech-icons/html5.svg' },
+      { name: 'Drupal', iconUrl: '/images/tech-icons/drupal.svg' },
+      { name: 'Joomla', iconUrl: '/images/tech-icons/joomla.svg' },
+      { name: 'Wordpress', iconUrl: '/images/tech-icons/wordpress.svg' },
+      { name: 'Magento', iconUrl: '/images/tech-icons/magento.svg' },
+      { name: 'Shopify', iconUrl: '/images/tech-icons/shopify.svg' },
+      { name: 'Node .JS', iconUrl: '/images/tech-icons/nodedotjs.svg' },
+      { name: 'AngularJS', iconUrl: '/images/tech-icons/angularjs.svg' },
+      { name: 'Mongo DB', iconUrl: '/images/tech-icons/mongodb.svg' },
+      { name: 'MySQL', iconUrl: '/images/tech-icons/mysql.svg' },
+      { name: 'MsSQL', iconUrl: '/images/tech-icons/microsoftsqlserver.svg' }
     ],
     process: [
       {
@@ -174,10 +195,10 @@ export const servicesData = [
       'App store optimization and publishing support'
     ],
     technologies: [
-      { name: 'React Native', icon: FaReact },
-      { name: 'iOS', icon: FaApple },
-      { name: 'Android', icon: FaAndroid },
-      { name: 'Firebase', icon: FaDatabase }
+      { name: 'React Native', iconUrl: '/images/tech-icons/reactnative.svg' },
+      { name: 'iOS', iconUrl: '/images/tech-icons/ios.svg' },
+      { name: 'Android', iconUrl: '/images/tech-icons/android.svg' },
+      { name: 'Firebase', iconUrl: '/images/tech-icons/firebase.svg' }
     ],
     process: [
       {
@@ -253,10 +274,16 @@ export const servicesData = [
       'Faster deployment with automation'
     ],
     technologies: [
-      { name: 'AWS', icon: FaAws },
-      { name: 'Docker', icon: FaDocker },
-      { name: 'Kubernetes', icon: FaCog },
-      { name: 'CI/CD', icon: FaGitAlt }
+      { name: 'AWS', iconUrl: '/images/tech-icons/aws.svg' },
+      { name: 'Azure', iconUrl: '/images/tech-icons/azure.svg' },
+      { name: 'GCP', iconUrl: '/images/tech-icons/gcp.svg' },
+      { name: 'Docker', iconUrl: '/images/tech-icons/docker.svg' },
+      { name: 'Kubernetes', iconUrl: '/images/tech-icons/kubernetes.svg' },
+      { name: 'Terraform', iconUrl: '/images/tech-icons/terraform.svg' },
+      { name: 'GitHub Actions', iconUrl: '/images/tech-icons/githubactions.svg' },
+      { name: 'Jenkins', iconUrl: '/images/tech-icons/jenkins.svg' },
+      { name: 'GitLab', iconUrl: '/images/tech-icons/gitlab.svg' },
+      { name: 'Ansible', iconUrl: '/images/tech-icons/ansible.svg' }
     ],
     process: [
       {
@@ -332,10 +359,14 @@ export const servicesData = [
       'Build consistent brand experiences'
     ],
     technologies: [
-      { name: 'Figma', icon: FaFigma },
-      { name: 'Design Systems', icon: FaPalette },
-      { name: 'User Testing', icon: FaUsers },
-      { name: 'Prototyping', icon: FaCog }
+      { name: 'Figma', iconUrl: '/images/tech-icons/figma.svg' },
+      { name: 'Adobe XD', iconUrl: '/images/tech-icons/adobexd.svg' },
+      { name: 'Sketch', iconUrl: '/images/tech-icons/sketch.svg' },
+      { name: 'InVision', iconUrl: '/images/tech-icons/invision.svg' },
+      { name: 'Webflow', iconUrl: '/images/tech-icons/webflow.svg' },
+      { name: 'Framer', iconUrl: '/images/tech-icons/framer.svg' },
+      { name: 'Miro', iconUrl: '/images/tech-icons/miro.svg' },
+      { name: 'Zeplin', iconUrl: '/images/tech-icons/zeplin.svg' }
     ],
     process: [
       {

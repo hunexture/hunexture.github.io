@@ -38,6 +38,15 @@ const Hero = () => {
           </a>
         </div>
 
+        <div className="hero-clients">
+          <p className="hero-clients-label">Trusted technologies &amp; partnerships</p>
+          <div className="hero-clients-list">
+            {['AWS Partner', 'Google Cloud', 'React', 'ISO 9001', 'OpenAI'].map((name) => (
+              <span key={name} className="hero-client-badge">{name}</span>
+            ))}
+          </div>
+        </div>
+
         <div className="hero-stats">
           <div className="stat-item">
             <FaBrain className="stat-icon" />

@@ -1,366 +1,437 @@
-import React, { useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { FaArrowLeft, FaCheck, FaRocket, FaLightbulb } from 'react-icons/fa';
-import { getIndustryBySlug, getTechIcon, getWhyChooseUsIcon } from '../data/industriesData';
-import './IndustryDetail.css';
+import React, { useState, useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { FaArrowLeft, FaRocket, FaCheck, FaLightbulb, FaChevronDown } from 'react-icons/fa'
+// FaArrowLeft kept for not-found fallback only
+import { getIndustryBySlug, getTechIcon, getWhyChooseUsIcon } from '../data/industriesData'
+import './IndustryDetail.css'
 
 const IndustryDetail = () => {
-  const { slug } = useParams();
-  const navigate = useNavigate();
-  const industry = getIndustryBySlug(slug);
+  const { slug } = useParams()
+  const navigate = useNavigate()
+  const industry = getIndustryBySlug(slug)
+  const [openFaq, setOpenFaq] = useState(null)
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [slug]);
+    window.scrollTo(0, 0)
+  }, [slug])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('ind-visible')
+          observer.unobserve(entry.target)
+        }
+      }),
+      { threshold: 0.1 }
+    )
+    document.querySelectorAll('.ind-reveal').forEach(el => observer.observe(el))
+    return () => observer.disconnect()
+  }, [slug])
 
   if (!industry) {
     return (
-      <div className="industry-detail-container">
-        <div className="industry-not-found">
+      <div className="ind-container">
+        <div className="ind-not-found">
           <h1>Industry Not Found</h1>
           <p>The industry you're looking for doesn't exist.</p>
-          <button onClick={() => navigate('/')} className="back-button">
+          <button onClick={() => navigate('/')} className="ind-back-btn">
             <FaArrowLeft /> Back to Home
           </button>
         </div>
       </div>
-    );
+    )
   }
 
-  const IconComponent = industry.icon;
+  const IconComponent = industry.icon
+
+  const heroStats = [
+    { value: `${industry.services.length}+`, label: 'Solutions' },
+    { value: '5+',   label: 'Years Exp.' },
+    { value: '20+',  label: 'Projects' },
+    { value: '100%', label: 'Satisfaction' }
+  ]
+
+  const toggleFaq = i => setOpenFaq(prev => prev === i ? null : i)
 
   return (
-    <div className="industry-detail-container" data-industry={slug}>
-      {/* Hero Section */}
-      <motion.section
-        className="industry-hero"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="industry-hero-content">
-          <button onClick={() => navigate('/')} className="back-link">
-            <FaArrowLeft /> Back to Home
-          </button>
+    <div className="ind-container" style={{ '--ind-color': industry.color }}>
 
-          <motion.div
-            className="industry-hero-icon"
-            style={{ background: industry.image, boxShadow: `0 10px 40px ${industry.color}40` }}
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <IconComponent />
-          </motion.div>
+      {/* ─── Hero ──────────────────────────────────────────────────── */}
+      <section className="ind-hero">
+        <div className="ind-hero-bg" style={{ background: industry.image }} />
+        <div className="ind-hero-dots" />
 
-          <motion.h1
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            {industry.name}
-          </motion.h1>
-
-          <motion.p
-            className="industry-hero-description"
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            {industry.description}
-          </motion.p>
-
-          <motion.div
-            className="industry-hero-cta"
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-          >
-            <button
-              onClick={() => navigate('/#contact')}
-              className="cta-button primary"
-              style={{ background: industry.image, boxShadow: `0 10px 30px ${industry.color}40` }}
-            >
-              Get Started <FaRocket />
-            </button>
-            <button onClick={() => navigate('/#portfolio')} className="cta-button secondary">
-              View Projects
-            </button>
-          </motion.div>
-        </div>
-      </motion.section>
-
-      {/* Services Section */}
-      <section className="industry-section services-section">
-        <div className="section-container">
-          <motion.div
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2>Our Services</h2>
-            <div className="services-grid">
-              {industry.services.map((service, index) => {
-                const ServiceIcon = service.icon;
-                return (
-                  <motion.div
-                    key={index}
-                    className="service-card"
-                    style={{ borderColor: `${industry.color}33` }}
-                    initial={{ y: 50, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                  >
-                    <ServiceIcon className="service-icon" style={{ color: industry.color }} />
-                    <p>{service.name}</p>
-                  </motion.div>
-                );
-              })}
+        <div className="ind-hero-inner">
+          <div className="ind-hero-icon-wrap">
+            <div className="ind-hero-icon" style={{ background: industry.image }}>
+              <IconComponent />
             </div>
-          </motion.div>
+          </div>
+
+          <div className="ind-hero-tag">{industry.shortDescription}</div>
+          <h1 className="ind-hero-title">{industry.name}</h1>
+          <p className="ind-hero-desc">{industry.description}</p>
+
+          <div className="ind-hero-stats">
+            {heroStats.map((s, i) => (
+              <div key={i} className="ind-hero-stat">
+                <strong>{s.value}</strong>
+                <span>{s.label}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="ind-hero-cta">
+            <button className="ind-btn-primary" onClick={() => {
+              navigate('/')
+              setTimeout(() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }), 200)
+            }}>
+              Start a Project <FaRocket />
+            </button>
+            <button className="ind-btn-secondary" onClick={() => navigate('/#portfolio')}>
+              View Our Work
+            </button>
+          </div>
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section className="industry-section benefits-section">
-        <div className="section-container">
-          <motion.div
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2>Key Benefits</h2>
-            <div className="benefits-grid">
-              {industry.benefits.map((benefit, index) => (
-                <motion.div
-                  key={index}
-                  className="benefit-card"
-                  style={{ borderColor: `${industry.color}33` }}
-                  initial={{ x: index % 2 === 0 ? -50 : 50, opacity: 0 }}
-                  whileInView={{ x: 0, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <div className="benefit-icon-wrapper" style={{ background: `${industry.color}20` }}>
-                    <FaCheck style={{ color: industry.color }} />
-                  </div>
-                  <p>{benefit}</p>
-                </motion.div>
+      {/* ─── Impact Stats ──────────────────────────────────────────── */}
+      {industry.stats?.length > 0 && (
+        <section className="ind-section ind-alt-bg ind-reveal">
+          <div className="ind-inner">
+            <div className="ind-section-header">
+              <span className="ind-tag">By The Numbers</span>
+              <h2 className="ind-section-title">Impact We Deliver</h2>
+              <div className="ind-underline" />
+              <p className="ind-section-desc">
+                Real, measurable results our clients achieve with our {industry.name.toLowerCase()} solutions.
+              </p>
+            </div>
+
+            <div className="ind-stats-grid">
+              {industry.stats.map((stat, i) => (
+                <div key={i} className="ind-stat-card" style={{ '--delay': `${i * 0.1}s` }}>
+                  <strong style={{ color: industry.color }}>{stat.value}</strong>
+                  <span>{stat.label}</span>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
+        </section>
+      )}
+
+      {/* ─── Solutions / Services ──────────────────────────────────── */}
+      <section className="ind-section ind-services ind-reveal">
+        <div className="ind-inner">
+          <div className="ind-section-header">
+            <span className="ind-tag">What We Build</span>
+            <h2 className="ind-section-title">Our {industry.name} Solutions</h2>
+            <div className="ind-underline" />
+            <p className="ind-section-desc">
+              End-to-end technology solutions crafted specifically for {industry.name.toLowerCase()} businesses.
+            </p>
+          </div>
+
+          <div className="ind-services-grid">
+            {industry.services.map((svc, i) => {
+              const SIcon = svc.icon
+              return (
+                <div
+                  key={i}
+                  className="ind-service-card"
+                  style={{ '--delay': `${i * 0.08}s` }}
+                >
+                  <div
+                    className="ind-service-icon"
+                    style={{
+                      background: `${industry.color}20`,
+                      border: `1px solid ${industry.color}50`
+                    }}
+                  >
+                    <SIcon style={{ color: industry.color }} />
+                  </div>
+                  <div className="ind-service-text">
+                    <h3>{svc.name}</h3>
+                    {svc.description && <p>{svc.description}</p>}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
         </div>
       </section>
 
-      {/* Technologies Section */}
-      <section className="industry-section technologies-section">
-        <div className="section-container">
-          <motion.div
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2>Technologies We Use</h2>
-            <div className="technologies-list">
-              {industry.technologies.map((tech, index) => {
-                const TechIcon = getTechIcon(tech);
-                return (
-                  <motion.div
-                    key={index}
-                    className="tech-badge"
-                    style={{
-                      borderColor: industry.color,
-                      color: industry.color,
-                      boxShadow: `0 5px 15px ${industry.color}30`
-                    }}
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
-                    whileHover={{ scale: 1.1, y: -5 }}
+      {/* ─── Technologies ──────────────────────────────────────────── */}
+      <section className="ind-section ind-alt-bg ind-reveal">
+        <div className="ind-inner">
+          <div className="ind-section-header">
+            <span className="ind-tag">Tech Stack</span>
+            <h2 className="ind-section-title">Technologies We Use</h2>
+            <div className="ind-underline" />
+          </div>
+
+          <div className="ind-tech-grid">
+            {industry.technologies.map((tech, i) => {
+              const TIcon = getTechIcon(tech)
+              return (
+                <div key={i} className="ind-tech-badge">
+                  <TIcon />
+                  <span>{tech}</span>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Benefits ──────────────────────────────────────────────── */}
+      <section className="ind-section ind-reveal">
+        <div className="ind-inner">
+          <div className="ind-section-header">
+            <span className="ind-tag">Key Benefits</span>
+            <h2 className="ind-section-title">What You Gain</h2>
+            <div className="ind-underline" />
+          </div>
+
+          <div className="ind-benefits-grid">
+            {industry.benefits.map((benefit, i) => (
+              <div
+                key={i}
+                className="ind-benefit-card"
+                style={{ '--delay': `${i * 0.1}s` }}
+              >
+                <div
+                  className="ind-benefit-check"
+                  style={{ background: `${industry.color}20`, border: `1px solid ${industry.color}50` }}
+                >
+                  <FaCheck style={{ color: industry.color }} />
+                </div>
+                <span className="ind-benefit-num" style={{ color: industry.color }}>
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <p>{benefit}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Our Process ───────────────────────────────────────────── */}
+      {industry.process?.length > 0 && (
+        <section className="ind-section ind-alt-bg ind-reveal">
+          <div className="ind-inner">
+            <div className="ind-section-header">
+              <span className="ind-tag">How We Work</span>
+              <h2 className="ind-section-title">Our Process</h2>
+              <div className="ind-underline" />
+              <p className="ind-section-desc">
+                A proven, structured approach that delivers results on time and on budget.
+              </p>
+            </div>
+
+            <div className="ind-timeline">
+              {industry.process.map((step, i) => (
+                <div key={i} className="ind-step" style={{ '--delay': `${i * 0.12}s` }}>
+                  <div className="ind-step-left">
+                    <div
+                      className="ind-step-dot"
+                      style={{ background: industry.image, boxShadow: `0 4px 16px ${industry.color}50` }}
+                    >
+                      {step.step}
+                    </div>
+                    {i < industry.process.length - 1 && (
+                      <div className="ind-step-line" style={{ background: `${industry.color}30` }} />
+                    )}
+                  </div>
+                  <div className="ind-step-card" style={{ borderColor: `${industry.color}25` }}>
+                    <h3 style={{ color: industry.color }}>{step.title}</h3>
+                    <p>{step.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ─── Challenges ────────────────────────────────────────────── */}
+      {industry.challenges?.length > 0 && (
+        <section className="ind-section ind-reveal">
+          <div className="ind-inner">
+            <div className="ind-section-header">
+              <span className="ind-tag">Problems We Solve</span>
+              <h2 className="ind-section-title">Industry Challenges</h2>
+              <div className="ind-underline" />
+              <p className="ind-section-desc">
+                We understand the real pain points facing {industry.name.toLowerCase()} organizations today.
+              </p>
+            </div>
+
+            <div className="ind-challenges-grid">
+              {industry.challenges.map((ch, i) => (
+                <div key={i} className="ind-challenge-card">
+                  <div
+                    className="ind-challenge-icon"
+                    style={{ background: `${industry.color}20`, border: `1px solid ${industry.color}50` }}
                   >
-                    <TechIcon className="tech-icon" />
-                    <span>{tech}</span>
-                  </motion.div>
-                );
+                    <FaLightbulb style={{ color: industry.color }} />
+                  </div>
+                  <p>{ch}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ─── Why Choose Us ─────────────────────────────────────────── */}
+      {industry.whyChooseUs?.length > 0 && (
+        <section className="ind-section ind-alt-bg ind-reveal">
+          <div className="ind-inner">
+            <div className="ind-section-header">
+              <span className="ind-tag">Our Edge</span>
+              <h2 className="ind-section-title">Why Choose Hunexture</h2>
+              <div className="ind-underline" />
+            </div>
+
+            <div className="ind-why-grid">
+              {industry.whyChooseUs.map((reason, i) => {
+                const isObj = typeof reason === 'object'
+                const WIcon = getWhyChooseUsIcon(isObj ? reason.title : reason)
+                return (
+                  <div
+                    key={i}
+                    className="ind-why-card"
+                    style={{ '--delay': `${i * 0.1}s` }}
+                  >
+                    <div
+                      className="ind-why-icon"
+                      style={{
+                        background: `${industry.color}20`,
+                        border: `1px solid ${industry.color}50`
+                      }}
+                    >
+                      <WIcon style={{ color: industry.color }} />
+                    </div>
+                    <div className="ind-why-text">
+                      {isObj ? (
+                        <>
+                          <h3>{reason.title}</h3>
+                          <p>{reason.description}</p>
+                        </>
+                      ) : (
+                        <p>{reason}</p>
+                      )}
+                    </div>
+                  </div>
+                )
               })}
             </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Challenges Section */}
-      {industry.challenges && industry.challenges.length > 0 && (
-        <section className="industry-section challenges-section">
-          <div className="section-container">
-            <motion.div
-              initial={{ y: 50, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2>Industry Challenges We Solve</h2>
-              <div className="challenges-grid">
-                {industry.challenges.map((challenge, index) => (
-                  <motion.div
-                    key={index}
-                    className="challenge-card"
-                    style={{ borderColor: `${industry.color}33` }}
-                    initial={{ y: 50, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                  >
-                    <div className="challenge-icon-wrapper" style={{ background: `${industry.color}20` }}>
-                      <FaLightbulb style={{ color: industry.color }} />
-                    </div>
-                    <p>{challenge}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
           </div>
         </section>
       )}
 
-      {/* Why Choose Us Section */}
-      {industry.whyChooseUs && industry.whyChooseUs.length > 0 && (
-        <section className="industry-section why-choose-section">
-          <div className="section-container">
-            <motion.div
-              initial={{ y: 50, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2>Why Choose Us</h2>
-              <div className="why-choose-grid">
-                {industry.whyChooseUs.map((reason, index) => {
-                  const ReasonIcon = getWhyChooseUsIcon(reason);
-                  return (
-                    <motion.div
-                      key={index}
-                      className="why-choose-card"
-                      style={{ borderColor: `${industry.color}33` }}
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
+      {/* ─── Case Studies ──────────────────────────────────────────── */}
+      {industry.caseStudies?.length > 0 && (
+        <section className="ind-section ind-reveal">
+          <div className="ind-inner">
+            <div className="ind-section-header">
+              <span className="ind-tag">Success Stories</span>
+              <h2 className="ind-section-title">Real Results</h2>
+              <div className="ind-underline" />
+            </div>
+
+            <div className="ind-case-grid">
+              {industry.caseStudies.map((cs, i) => (
+                <div key={i} className="ind-case-card">
+                  <div className="ind-case-header" style={{ background: industry.image }}>
+                    <h3>{cs.title}</h3>
+                  </div>
+                  <div className="ind-case-body">
+                    <p className="ind-case-desc">{cs.description}</p>
+                    <div
+                      className="ind-case-result"
+                      style={{
+                        background: `${industry.color}12`,
+                        borderColor: `${industry.color}40`
+                      }}
                     >
-                      <div className="why-choose-icon-wrapper" style={{ background: `${industry.color}20` }}>
-                        <ReasonIcon className="check-icon" style={{ color: industry.color }} />
-                      </div>
-                      <p>{reason}</p>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </motion.div>
+                      <FaRocket style={{ color: industry.color }} />
+                      <span>{cs.results}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
       )}
 
-      {/* FAQ Section */}
-      {industry.faq && industry.faq.length > 0 && (
-        <section className="industry-section faq-section">
-          <div className="section-container">
-            <motion.div
-              initial={{ y: 50, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2>Frequently Asked Questions</h2>
-              <div className="faq-list">
-                {industry.faq.map((item, index) => (
-                  <motion.div
-                    key={index}
-                    className="faq-item"
-                    style={{ borderColor: `${industry.color}33` }}
-                    initial={{ y: 30, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
+      {/* ─── FAQ ───────────────────────────────────────────────────── */}
+      {industry.faq?.length > 0 && (
+        <section className="ind-section ind-alt-bg ind-reveal">
+          <div className="ind-inner">
+            <div className="ind-section-header">
+              <span className="ind-tag">Got Questions?</span>
+              <h2 className="ind-section-title">Frequently Asked Questions</h2>
+              <div className="ind-underline" />
+            </div>
+
+            <div className="ind-faq-list">
+              {industry.faq.map((item, i) => (
+                <div
+                  key={i}
+                  className={`ind-faq-item${openFaq === i ? ' open' : ''}`}
+                  style={{ borderColor: openFaq === i ? `${industry.color}50` : undefined }}
+                >
+                  <button
+                    className="ind-faq-q"
+                    onClick={() => toggleFaq(i)}
+                    aria-expanded={openFaq === i}
                   >
-                    <h3 style={{ color: industry.color }}>{item.question}</h3>
+                    <span>{item.question}</span>
+                    <FaChevronDown
+                      className="ind-faq-chevron"
+                      style={{ color: industry.color }}
+                    />
+                  </button>
+                  <div className="ind-faq-a">
                     <p>{item.answer}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
       )}
 
-      {/* Case Studies Section */}
-      {industry.caseStudies && industry.caseStudies.length > 0 && (
-        <section className="industry-section casestudies-section">
-          <div className="section-container">
-            <motion.div
-              initial={{ y: 50, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2>Success Stories</h2>
-              <div className="casestudies-grid">
-                {industry.caseStudies.map((caseStudy, index) => (
-                  <motion.div
-                    key={index}
-                    className="casestudy-card"
-                    style={{ borderColor: `${industry.color}33` }}
-                    initial={{ y: 50, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                  >
-                    <div className="casestudy-header" style={{ background: industry.image }}>
-                      <h3>{caseStudy.title}</h3>
-                    </div>
-                    <div className="casestudy-content">
-                      <p className="casestudy-description">{caseStudy.description}</p>
-                      <div className="casestudy-results" style={{ background: `${industry.color}10` }}>
-                        <FaRocket style={{ color: industry.color }} />
-                        <p>{caseStudy.results}</p>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </section>
-      )}
-
-      {/* CTA Section */}
-      <section className="industry-section cta-section">
-        <div className="section-container">
-          <motion.div
-            className="cta-content"
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2>Ready to Transform Your {industry.name} Business?</h2>
-            <p>Let's discuss how our solutions can help you achieve your goals.</p>
-            <button
-              onClick={() => navigate('/#contact')}
-              className="cta-button primary large"
-              style={{ background: industry.image, boxShadow: `0 10px 30px ${industry.color}40` }}
-            >
+      {/* ─── Bottom CTA ────────────────────────────────────────────── */}
+      <section className="ind-cta ind-reveal">
+        <div className="ind-cta-glow" style={{ background: industry.image }} />
+        <div className="ind-cta-inner">
+          <span className="ind-tag">Let's Build Together</span>
+          <h2>Ready to Transform Your {industry.name} Business?</h2>
+          <p>
+            Let's discuss your project. Our team responds within 24 hours
+            with a tailored proposal — no commitment required.
+          </p>
+          <div className="ind-cta-btns">
+            <button className="ind-btn-primary" onClick={() => {
+              navigate('/')
+              setTimeout(() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }), 200)
+            }}>
               Contact Us Today <FaRocket />
             </button>
-          </motion.div>
+            <button className="ind-btn-secondary" onClick={() => navigate('/#portfolio')}>
+              See Our Work
+            </button>
+          </div>
         </div>
       </section>
-    </div>
-  );
-};
 
-export default IndustryDetail;
+    </div>
+  )
+}
+
+export default IndustryDetail

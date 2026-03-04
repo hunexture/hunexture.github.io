@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 220" width="1000" height="220">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&amp;family=Inter:wght@500&amp;display=swap');
+    .stat-number { font-family: 'Orbitron', sans-serif; font-size: 64px; fill: #00d4ff; font-weight: 700; text-anchor: middle; filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5)); }
+    .stat-plus { font-family: 'Orbitron', sans-serif; font-size: 40px; fill: #0080ff; font-weight: 700; text-anchor: middle; }
+    .stat-label { font-family: 'Inter', sans-serif; font-size: 18px; fill: #8892b0; font-weight: 500; text-anchor: middle; text-transform: uppercase; letter-spacing: 1px; }
+    .divider { stroke: rgba(255,255,255,0.1); stroke-width: 1; }
+  </style>
+
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="50%" stop-color="#112240"/>
+      <stop offset="100%" stop-color="#0a1628"/>
+    </linearGradient>
+    <radialGradient id="glowTop1" cx="50%" cy="100%" r="50%">
+      <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="220" fill="url(#bgGrad)"/>
+  <rect width="1000" height="220" fill="none" stroke="rgba(0,212,255,0.2)" stroke-width="2"/>
+
+  <!-- Glows under stats -->
+  <rect x="0" y="0" width="250" height="110" fill="url(#glowTop1)"/>
+  <rect x="250" y="0" width="250" height="110" fill="url(#glowTop1)"/>
+  <rect x="500" y="0" width="250" height="110" fill="url(#glowTop1)"/>
+  <rect x="750" y="0" width="250" height="110" fill="url(#glowTop1)"/>
+
+  <!-- Dividers -->
+  <line x1="250" y1="40" x2="250" y2="180" class="divider"/>
+  <line x1="500" y1="40" x2="500" y2="180" class="divider"/>
+  <line x1="750" y1="40" x2="750" y2="180" class="divider"/>
+
+  <!-- Left/Right accent lines -->
+  <rect x="0" y="0" width="4" height="220" fill="#00d4ff"/>
+  <rect x="996" y="0" width="4" height="220" fill="#00d4ff"/>
+
+  <!-- Stat 1 -->
+  <g transform="translate(125, 120)">
+    <text x="-20" y="0" class="stat-number">5</text>
+    <text x="15" y="-15" class="stat-plus">+</text>
+    <text x="0" y="45" class="stat-label">Years of</text>
+    <text x="0" y="70" class="stat-label">Innovation</text>
+  </g>
+
+  <!-- Stat 2 -->
+  <g transform="translate(375, 120)">
+    <text x="-25" y="0" class="stat-number">20</text>
+    <text x="25" y="-15" class="stat-plus">+</text>
+    <text x="0" y="45" class="stat-label">Expert</text>
+    <text x="0" y="70" class="stat-label">Engineers</text>
+  </g>
+
+  <!-- Stat 3 -->
+  <g transform="translate(625, 120)">
+    <text x="-25" y="0" class="stat-number">30</text>
+    <text x="25" y="-15" class="stat-plus">+</text>
+    <text x="0" y="45" class="stat-label">Happy</text>
+    <text x="0" y="70" class="stat-label">Clients</text>
+  </g>
+
+  <!-- Stat 4 -->
+  <g transform="translate(875, 120)">
+    <text x="-30" y="0" class="stat-number">100</text>
+    <text x="40" y="-15" class="stat-plus">+</text>
+    <text x="0" y="45" class="stat-label">Projects</text>
+    <text x="0" y="70" class="stat-label">Delivered</text>
+  </g>
+
+</svg>

@@ -1,0 +1,123 @@
+.faq {
+  padding: 100px 0;
+  background: var(--navy-blue);
+  position: relative;
+}
+
+.faq-container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.faq .section-header {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.faq .section-header.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.faq-list {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
+}
+.faq-list.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.faq-item {
+  background: var(--card-bg);
+  border: 1px solid var(--electric-blue-10);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+}
+
+.faq-item.open {
+  border-color: var(--electric-blue-40);
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 28px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--text-white);
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  transition: color 0.3s ease;
+}
+
+.faq-question:hover {
+  color: var(--electric-blue);
+}
+
+.faq-chevron {
+  font-size: 22px;
+  color: var(--electric-blue);
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+  display: inline-block;
+  line-height: 1;
+}
+
+.faq-item.open .faq-chevron {
+  transform: rotate(90deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.faq-item.open .faq-answer {
+  max-height: 300px;
+}
+
+.faq-answer p {
+  padding: 0 28px 22px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-gray);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .faq {
+    padding: 70px 0;
+  }
+
+  .faq-container {
+    padding: 0 20px;
+  }
+
+  .faq-list {
+    margin-top: 40px;
+  }
+
+  .faq-question {
+    padding: 18px 20px;
+    font-size: 15px;
+  }
+
+  .faq-answer p {
+    padding: 0 20px 18px;
+  }
+}

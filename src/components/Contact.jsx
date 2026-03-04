@@ -194,14 +194,13 @@ const Contact = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="subject">Subject</label>
+              <label htmlFor="subject">Subject <span className="field-optional">(optional)</span></label>
               <input
                 type="text"
                 id="subject"
                 name="subject"
                 value={formData.subject}
                 onChange={handleChange}
-                required
                 placeholder="How can we help you?"
               />
             </div>
@@ -227,6 +226,10 @@ const Contact = () => {
               <button type="submit" className="submit-btn" disabled={isSubmitting}>
                 {isSubmitting ? 'Sending...' : 'Send Message'}
                 <FaEnvelope className="btn-icon" />
+              </button>
+              <button type="button" className="whatsapp-btn" onClick={handleWhatsApp}>
+                <FaWhatsapp className="btn-icon" />
+                Chat on WhatsApp
               </button>
             </div>
           </form>

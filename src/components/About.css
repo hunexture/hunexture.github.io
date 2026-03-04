@@ -75,7 +75,6 @@
   color: var(--electric-blue);
   margin-bottom: 6px;
   line-height: 1;
-  animation: textGlow 3s ease-in-out infinite;
 }
 
 .about-stat-label {

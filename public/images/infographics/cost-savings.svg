@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 420" width="700" height="420">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap');
+    .title { font-family: 'Orbitron', sans-serif; font-size: 24px; fill: #ffffff; font-weight: 700; text-anchor: middle; }
+    .label { font-family: 'Inter', sans-serif; font-size: 14px; fill: #8892b0; font-weight: 600; text-anchor: middle; }
+    .val-text { font-family: 'Orbitron', sans-serif; font-size: 20px; fill: #ffffff; font-weight: 700; text-anchor: middle; }
+    .note { font-family: 'Inter', sans-serif; font-size: 13px; fill: #8892b0; font-weight: 400; text-anchor: middle; }
+    .grid-line { stroke: rgba(255,255,255,0.05); stroke-width: 1; stroke-dasharray: 4 4; }
+    .bar-house { fill: #ef476f; rx: 6; ry: 6; opacity: 0.8; }
+    .bar-free { fill: #ff9f1c; rx: 6; ry: 6; opacity: 0.8; }
+    .bar-hunex { fill: url(#glowBlue); rx: 6; ry: 6; filter: drop-shadow(0 0 15px rgba(0,212,255,0.5)); stroke: #00d4ff; stroke-width: 2; }
+    .badge { fill: #00d4ff; rx: 4; }
+  </style>
+
+  <defs>
+    <linearGradient id="glowBlue" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00d4ff"/>
+      <stop offset="100%" stop-color="#0080ff"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="700" height="420" fill="#0a1628"/>
+  <text x="350" y="40" class="title">Why Outsource to Hunexture?</text>
+
+  <g transform="translate(100, 80)">
+    <!-- Y-Axis grids -->
+    <line x1="0" y1="20" x2="500" y2="20" class="grid-line"/>
+    <text x="-20" y="25" class="label" text-anchor="end">$200K</text>
+    <line x1="0" y1="95" x2="500" y2="95" class="grid-line"/>
+    <text x="-20" y="100" class="label" text-anchor="end">$150K</text>
+    <line x1="0" y1="170" x2="500" y2="170" class="grid-line"/>
+    <text x="-20" y="175" class="label" text-anchor="end">$100K</text>
+    <line x1="0" y1="245" x2="500" y2="245" class="grid-line"/>
+    <text x="-20" y="250" class="label" text-anchor="end">$50K</text>
+    
+    <line x1="0" y1="20" x2="0" y2="300" stroke="#1e3a5f" stroke-width="2"/>
+    <line x1="0" y1="300" x2="500" y2="300" stroke="#1e3a5f" stroke-width="2"/>
+
+    <!-- Bar 1: In-House ($180k) -> Map 0 to 200k = 300px scale.
+         150px per 100k. 180k = 270px height -->
+    <rect x="50" y="30" width="80" height="270" class="bar-house"/>
+    <text x="90" y="20" class="val-text" fill="#ef476f">$180K+</text>
+    <text x="90" y="325" class="label" fill="#e6f1ff">In-House Team</text>
+
+    <!-- Bar 2: Freelancers ($120k) -> 120 * 1.5 = 180px height -->
+    <rect x="210" y="120" width="80" height="180" class="bar-free"/>
+    <text x="250" y="110" class="val-text" fill="#ff9f1c">$120K+</text>
+    <text x="250" y="325" class="label" fill="#e6f1ff">Freelancers</text>
+
+    <!-- Bar 3: Hunexture ($60k) -> 60 * 1.5 = 90px height -->
+    <rect x="370" y="210" width="80" height="90" class="bar-hunex"/>
+    <text x="410" y="200" class="val-text" fill="#00d4ff">$60K+</text>
+    <text x="410" y="325" class="label" fill="#00d4ff">Hunexture</text>
+
+    <!-- Badge on Hunexture Bar -->
+    <rect x="360" y="120" width="100" height="24" class="badge"/>
+    <polygon points="410,150 405,144 415,144" fill="#00d4ff"/>
+    <text x="410" y="136" font-family="Inter" font-size="11" font-weight="700" fill="#0a1628" text-anchor="middle">Save up to 67%</text>
+
+  </g>
+
+  <text x="350" y="430" class="note">Full team: developers, designers, QA &amp; PM included</text>
+  <text x="350" y="415" class="note" fill="#64ffda">Best Value Guaranteed</text>
+</svg>

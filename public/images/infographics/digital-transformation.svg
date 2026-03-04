@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" width="900" height="320">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&amp;family=Inter:wght@400;500;600&amp;display=swap');
+    .title { font-family: 'Orbitron', sans-serif; font-size: 24px; fill: #ffffff; font-weight: 700; text-anchor: middle; }
+    .node-title { font-family: 'Orbitron', sans-serif; font-size: 14px; font-weight: 700; text-anchor: middle; }
+    .node-year { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; text-anchor: middle; opacity: 0.8; }
+    .path-line { fill: none; stroke: url(#pathGrad); stroke-width: 12; stroke-linecap: round; filter: drop-shadow(0 0 8px rgba(0,212,255,0.4)); }
+    .dot-grid { fill: rgba(255,255,255,0.03); }
+  </style>
+
+  <defs>
+    <linearGradient id="pathGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="25%" stop-color="#1e3a5f"/>
+      <stop offset="50%" stop-color="#004e89"/>
+      <stop offset="75%" stop-color="#0080ff"/>
+      <stop offset="100%" stop-color="#00d4ff"/>
+    </linearGradient>
+    <pattern id="dotPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.5" class="dot-grid"/>
+    </pattern>
+    <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="900" height="320" fill="#0a1628"/>
+  <rect width="900" height="320" fill="url(#dotPattern)"/>
+  
+  <text x="450" y="40" class="title">Your Digital Transformation Journey</text>
+
+  <!-- Winding Path -->
+  <path d="M 50 160 C 200 160, 200 240, 350 240 C 500 240, 500 100, 650 100 C 750 100, 800 160, 850 160" class="path-line"/>
+
+  <!-- Milestones -->
+  <!-- Node 1: Legacy Systems -->
+  <g transform="translate(100, 160)">
+    <circle cx="0" cy="0" r="12" fill="#0a1628" stroke="#334155" stroke-width="4"/>
+    <line x1="0" y1="0" x2="0" y2="-40" stroke="#334155" stroke-width="2"/>
+    <text x="0" y="-60" class="node-title" fill="#8892b0">Legacy Systems</text>
+    <text x="0" y="-45" class="node-year" fill="#8892b0">Year 0</text>
+  </g>
+
+  <!-- Node 2: Digital Audit -->
+  <g transform="translate(250, 210)">
+    <circle cx="0" cy="0" r="12" fill="#0a1628" stroke="#1e3a5f" stroke-width="4"/>
+    <line x1="0" y1="0" x2="0" y2="40" stroke="#1e3a5f" stroke-width="2"/>
+    <text x="0" y="60" class="node-title" fill="#8892b0">Digital Audit</text>
+    <text x="0" y="75" class="node-year" fill="#8892b0">Month 1-2</text>
+  </g>
+
+  <!-- Node 3: Strategy & Planning -->
+  <g transform="translate(425, 170)">
+    <circle cx="0" cy="0" r="12" fill="#0a1628" stroke="#004e89" stroke-width="4"/>
+    <line x1="0" y1="0" x2="0" y2="-40" stroke="#004e89" stroke-width="2"/>
+    <text x="0" y="-60" class="node-title" fill="#0080ff">Strategy &amp; Planning</text>
+    <text x="0" y="-45" class="node-year" fill="#0080ff">Month 3-4</text>
+  </g>
+
+  <!-- Node 4: Implementation -->
+  <g transform="translate(600, 110)">
+    <circle cx="0" cy="0" r="12" fill="#0a1628" stroke="#0080ff" stroke-width="4"/>
+    <line x1="0" y1="0" x2="0" y2="40" stroke="#0080ff" stroke-width="2"/>
+    <text x="0" y="60" class="node-title" fill="#00d4ff">Implementation</text>
+    <text x="0" y="75" class="node-year" fill="#00d4ff">Year 1</text>
+  </g>
+
+  <!-- Node 5: AI-First Future -->
+  <g transform="translate(800, 140)">
+    <circle cx="0" cy="0" r="40" fill="url(#halo)"/>
+    <circle cx="0" cy="0" r="14" fill="#00d4ff" stroke="#ffffff" stroke-width="2"/>
+    <line x1="0" y1="0" x2="0" y2="-40" stroke="#00d4ff" stroke-width="2"/>
+    <text x="0" y="-60" class="node-title" fill="#ffffff" style="filter: drop-shadow(0 0 5px #00d4ff);">AI-First Future</text>
+    <text x="0" y="-45" class="node-year" fill="#e6f1ff">Year 2 &amp; Beyond</text>
+  </g>
+
+</svg>

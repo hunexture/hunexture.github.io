@@ -1,19 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react'
 import './About.css'
 
+const aboutStatsData = [
+  { target: 5,  suffix: '+', label: 'Years of Innovation' },
+  { target: 20, suffix: '+', label: 'Expert Engineers' },
+  { target: 10, suffix: '+', label: 'Industries Served' },
+  { target: 30, suffix: '+', label: 'Happy Clients' }
+]
+
 const About = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
   const [touchStart, setTouchStart] = useState(0)
   const [touchEnd, setTouchEnd] = useState(0)
+  const [counts, setCounts] = useState(aboutStatsData.map(() => 0))
+  const [counted, setCounted] = useState(false)
   const sectionRef = useRef(null)
+  const statsRef = useRef(null)
 
-  const aboutStats = [
-    { value: '5+', label: 'Years of Innovation' },
-    { value: '20+', label: 'Expert Engineers' },
-    { value: '10+', label: 'Industries Served' },
-    { value: '30+', label: 'Happy Clients' }
-  ]
+  const aboutStats = aboutStatsData
 
   const features = [
     {
@@ -46,6 +51,39 @@ const About = () => {
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
+
+  // Count-up animation when stats enter viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !counted) {
+          setCounted(true)
+          aboutStatsData.forEach((stat, i) => {
+            const duration = 1500
+            const steps = 40
+            const stepValue = stat.target / steps
+            let current = 0
+            const timer = setInterval(() => {
+              current += stepValue
+              if (current >= stat.target) {
+                current = stat.target
+                clearInterval(timer)
+              }
+              setCounts(prev => {
+                const next = [...prev]
+                next[i] = Math.floor(current)
+                return next
+              })
+            }, duration / steps)
+          })
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.3 }
+    )
+    if (statsRef.current) observer.observe(statsRef.current)
+    return () => observer.disconnect()
+  }, [counted])
 
   // Scroll-triggered animations
   useEffect(() => {
@@ -103,14 +141,14 @@ const About = () => {
         </div>
 
         {/* Stats Bar */}
-        <div className="about-stats scroll-animate">
+        <div className="about-stats scroll-animate" ref={statsRef}>
           {aboutStats.map((stat, index) => (
             <div
               key={index}
               className="about-stat-item"
               style={{ transitionDelay: `${index * 0.1}s` }}
             >
-              <h3 className="about-stat-value">{stat.value}</h3>
+              <h3 className="about-stat-value">{counts[index]}{stat.suffix}</h3>
               <p className="about-stat-label">{stat.label}</p>
             </div>
           ))}

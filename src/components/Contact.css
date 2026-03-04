@@ -286,6 +286,13 @@
   font-weight: 600;
 }
 
+.field-optional {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-gray);
+  margin-left: 4px;
+}
+
 .form-group input,
 .form-group textarea {
   width: 100%;
