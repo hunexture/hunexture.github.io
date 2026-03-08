@@ -33,55 +33,46 @@
   margin-right: auto;
 }
 
-/* ── Services marquee — hover to scroll ── */
-.services-marquee-outer {
+/* ── Hover-scroll carousel ── */
+.services-carousel-outer {
   margin-top: 48px;
   overflow: hidden;
   position: relative;
-  cursor: pointer;
-  /* Fade edges */
+  cursor: ew-resize;
+  /* hint: sideways scroll available */
+  /* fade edges */
   -webkit-mask-image: linear-gradient(to right,
       transparent 0%,
-      black 6%,
-      black 94%,
+      black 5%,
+      black 95%,
       transparent 100%);
   mask-image: linear-gradient(to right,
       transparent 0%,
-      black 6%,
-      black 94%,
+      black 5%,
+      black 95%,
       transparent 100%);
 }
 
-.services-marquee-track {
+.services-carousel-track {
   display: flex;
-  gap: 28px;
+  gap: 24px;
+  padding: 8px 40px 20px;
+  /* side padding so first/last card shows properly */
   width: max-content;
-  /* Starts paused — only runs when hovering */
-  animation: services-scroll 30s linear infinite;
-  animation-play-state: paused;
-  padding: 8px 0 16px;
-  /* bottom padding so hover shadow isn't clipped */
+  will-change: transform;
 }
 
-/* Hovering the outer wrapper unpauses the track */
-.services-marquee-outer.is-hovered .services-marquee-track {
-  animation-play-state: running;
+/* cards inside carousel are fixed-width */
+.services-carousel-track .service-card {
+  width: 420px;
+  flex-shrink: 0;
 }
 
-@keyframes services-scroll {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-/* Hidden old grid (kept in DOM for safety) */
+/* keep grid available but hidden (not rendered currently) */
 .services-grid {
   display: none;
 }
+
 
 .service-card {
   position: relative;
@@ -94,9 +85,6 @@
   display: flex;
   flex-direction: column;
   backdrop-filter: blur(10px);
-  /* Fixed width so cards line up in one row */
-  width: 360px;
-  flex-shrink: 0;
 }
 
 .service-card:hover {
