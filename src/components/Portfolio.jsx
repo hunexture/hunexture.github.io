@@ -7,7 +7,7 @@ import './Portfolio.css'
 const Portfolio = () => {
   const [filter, setFilter] = useState('all')
   const [expanded, setExpanded] = useState(false)
-  const [initialCount, setInitialCount] = useState(4)
+  const [initialCount, setInitialCount] = useState(3)
 
   // Determine initial count based on screen size
   useEffect(() => {
@@ -15,9 +15,9 @@ const Portfolio = () => {
       if (window.innerWidth < 768) {
         setInitialCount(3) // Mobile: 3 projects
       } else if (window.innerWidth < 1024) {
-        setInitialCount(4) // Tablet: 4 projects
+        setInitialCount(3) // Tablet: 3 projects
       } else {
-        setInitialCount(4) // Desktop: 4 projects
+        setInitialCount(3) // Desktop: 3 projects
       }
     }
 
@@ -77,59 +77,64 @@ const Portfolio = () => {
         </div>
 
         <div className="portfolio-grid">
-          {displayedProjects.map((project, index) => (
-            <Link
-              key={project.id}
-              to={`/portfolio/${project.slug}`}
-              className="portfolio-card"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div
-                className="project-image"
-                style={{ background: project.image }}
+          {displayedProjects.map((project, index) => {
+            // Only first card is hero-sized, all others are equal 1×1 tiles
+            const bentoClass = index === 0 ? 'bento-large' : ''
+
+            return (
+              <Link
+                key={project.id}
+                to={`/portfolio/${project.slug}`}
+                className={`portfolio-card ${bentoClass}`.trim()}
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="project-overlay">
-                  <div className="overlay-text">
-                    <img src={`${process.env.PUBLIC_URL}/images/icons/article.svg`} alt="Read More" className="overlay-icon" />
-                    View Details
+                <div
+                  className="project-image"
+                  style={{ background: project.image }}
+                >
+                  <div className="project-overlay">
+                    <div className="overlay-text">
+                      <img src={`${process.env.PUBLIC_URL}/images/icons/article.svg`} alt="Read More" className="overlay-icon" />
+                      View Details
+                    </div>
+                    {project.liveUrl && (
+                      <button
+                        className="project-link"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          window.open(project.liveUrl, '_blank');
+                        }}
+                      >
+                        <FaExternalLinkAlt />
+                      </button>
+                    )}
+                    {project.githubUrl && (
+                      <button
+                        className="project-link"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          window.open(project.githubUrl, '_blank');
+                        }}
+                      >
+                        <FaGithub />
+                      </button>
+                    )}
                   </div>
-                  {project.liveUrl && (
-                    <button
-                      className="project-link"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        window.open(project.liveUrl, '_blank');
-                      }}
-                    >
-                      <FaExternalLinkAlt />
-                    </button>
-                  )}
-                  {project.githubUrl && (
-                    <button
-                      className="project-link"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        window.open(project.githubUrl, '_blank');
-                      }}
-                    >
-                      <FaGithub />
-                    </button>
-                  )}
                 </div>
-              </div>
 
-              <div className="project-content">
-                <h3 className="project-title">{project.title}</h3>
-                <p className="project-description">{project.shortDescription}</p>
+                <div className="project-content">
+                  <h3 className="project-title">{project.title}</h3>
+                  <p className="project-description">{project.shortDescription}</p>
 
-                <div className="project-tags">
-                  {project.tags.map((tag, idx) => (
-                    <span key={idx} className="project-tag">{tag}</span>
-                  ))}
+                  <div className="project-tags">
+                    {project.tags.map((tag, idx) => (
+                      <span key={idx} className="project-tag">{tag}</span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            )
+          })}
         </div>
 
         {hasMoreProjects && (

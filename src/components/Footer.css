@@ -1,23 +1,52 @@
 /* ---- Footer CTA Banner ---- */
 .footer-cta {
-  background: var(--electric-blue-05);
+  background: var(--navy-blue);
   border-top: 1px solid var(--electric-blue-20);
-  border-bottom: 1px solid var(--electric-blue-10);
-  padding: 56px 24px;
+  border-bottom: 1px solid var(--electric-blue-20);
+  padding: 64px 24px;
   position: relative;
   overflow: hidden;
+  z-index: 1;
 }
 
-/* Top gradient accent line */
+/* Dynamic moving gradient background */
+.footer-cta::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg at 50% 50%,
+      var(--navy-blue) 0deg,
+      var(--electric-blue-20) 120deg,
+      #9d4edd33 240deg,
+      var(--navy-blue) 360deg);
+  animation: rotateGlow 15s linear infinite;
+  z-index: -2;
+}
+
+/* Inner dark overlay to keep text readable */
 .footer-cta::after {
   content: '';
   position: absolute;
-  top: 0;
+  top: 1px;
+  bottom: 1px;
   left: 0;
   right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent 0%, var(--electric-blue-50) 50%, transparent 100%);
-  pointer-events: none;
+  background: rgba(10, 15, 28, 0.85);
+  backdrop-filter: blur(20px);
+  z-index: -1;
+}
+
+@keyframes rotateGlow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Radial glow behind content */
@@ -59,10 +88,18 @@
 }
 
 .footer-cta-title-accent {
-  background: var(--gradient-1);
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #3b82f6);
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: shineText 3s linear infinite;
+}
+
+@keyframes shineText {
+  to {
+    background-position: 200% center;
+  }
 }
 
 .footer-cta-description {
@@ -86,10 +123,28 @@
   text-decoration: none;
   white-space: nowrap;
   flex-shrink: 0;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3) !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.4) !important;
   border: 2px solid #ffffff !important;
   outline: none !important;
+  animation: pulseBtn 2s infinite ease-in-out;
+}
+
+@keyframes pulseBtn {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4) !important;
+  }
+
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.6), 0 0 20px rgba(139, 92, 246, 0.4) !important;
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4) !important;
+  }
 }
 
 .footer-cta-btn:hover,

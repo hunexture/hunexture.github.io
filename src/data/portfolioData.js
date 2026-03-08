@@ -546,6 +546,100 @@ export const portfolioData = [
     liveUrl: null,
     githubUrl: null,
     caseStudyUrl: null
+  },
+  {
+    id: 5,
+    slug: 'fintech-trading-dashboard',
+    title: 'FinTech Alpha Dashboard',
+    category: 'web',
+    categoryLabel: 'Web Apps',
+    shortDescription: 'Real-time cryptocurrency and options trading dashboard with dark-mode optimized charts.',
+    description: 'A high-performance trading interface built for proprietary traders. Features under 10ms websocket latency, customizable drag-and-drop widget layouts, and deep integration with multiple exchange APIs for unified portfolio management.',
+    image: 'linear-gradient(135deg, #111827 0%, #312e81 100%)',
+    tags: ['React', 'TypeScript', 'WebSockets', 'Tailwind'],
+    icon: FaChartLine,
+    challenge: 'Traders needed a single pane of glass to manage highly volatile assets across multiple exchanges, demanding near-zero latency data streams and a customizable UI that wouldn\'t cause eye fatigue during 12-hour sessions.',
+    solution: 'Engineered a React SPA with a highly optimized custom state management solution to handle thousands of ticking prices per second. Implemented a deep dark-mode UI with WebGL-accelerated charting for buttery smooth rendering.',
+    results: [
+      { metric: '<10ms', label: 'Data Latency' },
+      { metric: '60fps', label: 'Chart Rendering' },
+      { metric: '100+', label: 'Active Widgets' },
+      { metric: '4.9/5', label: 'User Rating' }
+    ],
+    features: [
+      { title: 'Live Orderbook', description: 'Depth-of-market visualization updating in real-time', icon: FaChartLine },
+      { title: 'Portfolio Heatmaps', description: 'Visual breakdown of asset allocation and daily performance', icon: FaDatabase },
+      { title: 'Custom Alerts', description: 'Push notifications for price actions and technical indicators', icon: FaMobile }
+    ],
+    technologies: [
+      { name: 'React', icon: FaReact, purpose: 'Frontend' },
+      { name: 'Node.js', icon: FaNodeJs, purpose: 'WS Server' },
+      { name: 'Redis', icon: SiRedis, purpose: 'Tick Cache' }
+    ],
+    timeline: '3 months',
+    teamSize: '5 Engineers',
+    industry: 'Financial Technology',
+    client: 'Alpha Quant Trading',
+    keyTakeaways: [
+      'Engineered a custom React state manager to handle 5000+ ticks/second without dropping frames',
+      'Implemented WebGL-accelerated canvas components for deep market history charting',
+      'Maintained total frontend latency under 15ms across high-volatility events',
+      'Designed an extensible drag-and-drop workspace architecture using React DnD'
+    ],
+    testimonial: {
+      quote: 'The fastest, cleanest trading interface we\'ve ever used. The websocket integration is flawless.',
+      author: 'Head Trader',
+      company: 'Alpha Quant'
+    },
+    liveUrl: null,
+    githubUrl: null
+  },
+  {
+    id: 6,
+    slug: 'ai-supply-chain',
+    title: 'Smart Supply Chain Optimizer',
+    category: 'ai',
+    categoryLabel: 'AI Solutions',
+    shortDescription: 'Computer vision and predictive modeling system for automated warehouse logistics.',
+    description: 'An end-to-end logistics platform that uses edge AI cameras to track inventory in real-time and predictive models to prevent stockouts and optimize delivery routing.',
+    image: 'linear-gradient(135deg, #047857 0%, #064e3b 100%)',
+    tags: ['Python', 'Docker', 'OpenCV', 'GCP'],
+    icon: FaBrain,
+    challenge: 'A massive logistics provider was losing 4% of revenue to inventory shrinkage and inefficient routing caused by legacy manual barcode scanning.',
+    solution: 'Deployed an edge-computing vision system that scans pallets instantly as forklifts move them. Fed this data into a cloud AI engine that predicts inventory needs up to 3 weeks in advance.',
+    results: [
+      { metric: '-98%', label: 'Scanning Time' },
+      { metric: '+22%', label: 'Route Efficiency' },
+      { metric: '0.1%', label: 'Shrinkage Rate' },
+      { metric: '$2M', label: 'Annual Savings' }
+    ],
+    features: [
+      { title: 'Edge Computer Vision', description: 'Instant multi-barcode and volumetric scanning', icon: FaLaptopCode },
+      { title: 'Demand Forecasting', description: 'ML models to predict seasonal inventory needs', icon: FaBrain },
+      { title: 'Route Optimization', description: 'Dynamic delivery routing avoiding traffic and delays', icon: FaCloud }
+    ],
+    technologies: [
+      { name: 'Python', icon: FaPython, purpose: 'Vision & ML' },
+      { name: 'TensorFlow', icon: SiTensorflow, purpose: 'Model Training' },
+      { name: 'Docker', icon: FaDocker, purpose: 'Edge Deployment' }
+    ],
+    timeline: '8 months',
+    teamSize: '9 Engineers',
+    industry: 'Supply Chain & Logistics',
+    client: 'TransGlobal Logistics',
+    keyTakeaways: [
+      'Built a hybrid edge-to-cloud architecture allowing real-time camera inference during internet outages',
+      'Trained an object detection model with 99.9% accuracy on over 400 distinct pallet types',
+      'Integrated seamlessly with the client\'s legacy 90s-era ERP system via custom middleware',
+      'Saved $2M annually in lost goods and inefficient routing'
+    ],
+    testimonial: {
+      quote: 'Hunexture\'s AI solution completely modernized our 20-year-old warehouse operation in just 8 months.',
+      author: 'VP of Operations',
+      company: 'TransGlobal'
+    },
+    liveUrl: null,
+    githubUrl: null
   }
 ];
 

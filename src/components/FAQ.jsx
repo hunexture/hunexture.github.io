@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
+import { FaArrowRight } from 'react-icons/fa'
 import './FAQ.css'
 
 const faqs = [
@@ -54,35 +56,39 @@ const FAQ = () => {
   return (
     <section id="faq" className="faq" ref={sectionRef}>
       <div className="faq-container">
-        <div className={`section-header${visible ? ' animate-in' : ''}`}>
-          <span className="section-tag">Got Questions?</span>
-          <h2 className="section-title">Frequently Asked Questions</h2>
-          <div className="title-underline"></div>
-          <p className="section-description">
-            Everything you need to know about working with us.
-          </p>
+        <div className={`faq-left ${visible ? 'animate-in' : ''}`}>
+          <div className="section-header">
+            <span className="section-tag">Got Questions?</span>
+            <h2 className="section-title">Frequently Asked Questions</h2>
+            <div className="title-underline"></div>
+            <p className="section-description">
+              Everything you need to know about working with us. Can't find the answer you're looking for?
+            </p>
+          </div>
         </div>
 
-        <div className={`faq-list${visible ? ' animate-in' : ''}`}>
-          {faqs.map((faq, i) => (
-            <div
-              key={i}
-              className={`faq-item${openIndex === i ? ' open' : ''}`}
-              style={{ transitionDelay: `${i * 0.05}s` }}
-            >
-              <button
-                className="faq-question"
-                onClick={() => toggle(i)}
-                aria-expanded={openIndex === i}
+        <div className={`faq-right ${visible ? 'animate-in' : ''}`}>
+          <div className="faq-list">
+            {faqs.map((faq, i) => (
+              <div
+                key={i}
+                className={`faq-item${openIndex === i ? ' open' : ''}`}
+                style={{ transitionDelay: `${i * 0.05}s` }}
               >
-                <span>{faq.question}</span>
-                <span className="faq-chevron">›</span>
-              </button>
-              <div className="faq-answer">
-                <p>{faq.answer}</p>
+                <button
+                  className="faq-question"
+                  onClick={() => toggle(i)}
+                  aria-expanded={openIndex === i}
+                >
+                  <span>{faq.question}</span>
+                  <span className="faq-icon">{openIndex === i ? '-' : '+'}</span>
+                </button>
+                <div className="faq-answer">
+                  <p>{faq.answer}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -73,7 +73,7 @@ const Footer = () => {
 
   const socialLinks = [
     { icon: <FaLinkedin />, url: 'https://www.linkedin.com/company/hunexture/', name: 'LinkedIn' },
-    { icon: <FaGithub />, url: 'https://github.com/hunexture', name: 'GitHub' },
+    // { icon: <FaGithub />, url: 'https://github.com/hunexture', name: 'GitHub' },
     { icon: <FaTwitter />, url: 'https://x.com/hunexture', name: 'Twitter' },
     { icon: <FaInstagram />, url: 'https://www.instagram.com/hunexture', name: 'Instagram' }
   ]
