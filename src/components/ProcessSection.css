@@ -1,7 +1,7 @@
 /* ─── Process Section ─────────────────────────────────────── */
 .process-section {
   background: var(--dark-navy);
-  padding: 40px 0;
+  padding: 50px 0;
   position: relative;
 }
 
@@ -154,7 +154,7 @@
 /* Large desktop */
 @media (min-width: 1440px) {
   .process-section {
-    padding: 50px 0;
+    padding: 60px 0;
   }
 
   .process-container {
@@ -200,7 +200,7 @@
 /* Tablet → 2 × 2 */
 @media (max-width: 1023px) and (min-width: 641px) {
   .process-section {
-    padding: 40px 0;
+    padding: 45px 0;
   }
 
   .process-container {
@@ -241,7 +241,7 @@
 /* Mobile → single column */
 @media (max-width: 640px) {
   .process-section {
-    padding: 30px 0;
+    padding: 35px 0;
   }
 
   .process-container {

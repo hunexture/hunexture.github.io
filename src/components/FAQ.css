@@ -1,5 +1,5 @@
 .faq {
-  padding: 100px 0;
+  padding: 60px 0;
   background: var(--navy-blue);
   position: relative;
 }
@@ -15,13 +15,14 @@
   transform: translateY(30px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
+
 .faq .section-header.animate-in {
   opacity: 1;
   transform: translateY(0);
 }
 
 .faq-list {
-  margin-top: 60px;
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -29,6 +30,7 @@
   transform: translateY(20px);
   transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
 }
+
 .faq-list.animate-in {
   opacity: 1;
   transform: translateY(0);
@@ -101,7 +103,7 @@
 
 @media (max-width: 768px) {
   .faq {
-    padding: 70px 0;
+    padding: 45px 0;
   }
 
   .faq-container {

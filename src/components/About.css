@@ -18,7 +18,7 @@
 .about {
   background: var(--navy-blue);
   position: relative;
-  padding: 80px 20px 40px;
+  padding: 60px 20px 30px;
   overflow: hidden;
 }
 
@@ -393,7 +393,7 @@
 /* Tablet Portrait */
 @media (max-width: 768px) and (min-width: 481px) {
   .about {
-    padding: 60px 15px 30px;
+    padding: 50px 15px 25px;
   }
 
   .about-stats {
@@ -508,7 +508,7 @@
 /* Mobile */
 @media (max-width: 480px) {
   .about {
-    padding: 50px 5px 25px;
+    padding: 40px 5px 20px;
     overflow-x: hidden;
   }
 
@@ -738,7 +738,7 @@
 /* Mobile-specific carousel adjustments */
 @media (max-width: 768px) {
   .about {
-    padding: 60px 15px;
+    padding: 50px 15px 20px;
   }
 
   .carousel-container {

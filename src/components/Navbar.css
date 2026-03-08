@@ -126,6 +126,18 @@
   display: inline-block;
 }
 
+/* Transparent hover bridge — fills the gap between trigger and dropdown menu
+   so moving the mouse into the dropdown doesn't fire onMouseLeave */
+.nav-dropdown::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: -20px;
+  right: -20px;
+  height: 20px;
+  background: transparent;
+}
+
 .dropdown-trigger {
   background: none;
   border: none;
@@ -147,7 +159,7 @@
 
 .dropdown-menu {
   position: absolute;
-  top: calc(100% + 15px);
+  top: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%);
   background: var(--overlay-bg);
@@ -159,8 +171,8 @@
   max-width: 600px;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease;
-  transform: translateX(-50%) translateY(-10px);
+  transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
+  transform: translateX(-50%) translateY(-8px);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
   z-index: 1000;
 }
@@ -184,12 +196,13 @@
   border-bottom: 6px solid var(--electric-blue-30);
 }
 
+/* Extended invisible bridge above the dropdown panel */
 .dropdown-menu::after {
   content: '';
   position: absolute;
   top: -20px;
-  left: 0;
-  width: 100%;
+  left: -20px;
+  right: -20px;
   height: 20px;
   background: transparent;
 }
@@ -237,7 +250,6 @@
   transition: color 0.2s ease;
 }
 
-.dropdown-item:hover span {}
 
 /* AI Mega Dropdown Specific Styles */
 .ai-mega-dropdown {

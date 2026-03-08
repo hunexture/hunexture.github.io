@@ -13,7 +13,7 @@
 .services {
   background: var(--dark-navy);
   position: relative;
-  padding: 24px 0 80px;
+  padding: 50px 0 80px;
 }
 
 .services-container {
@@ -33,11 +33,54 @@
   margin-right: auto;
 }
 
+/* ── Services marquee — hover to scroll ── */
+.services-marquee-outer {
+  margin-top: 48px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  /* Fade edges */
+  -webkit-mask-image: linear-gradient(to right,
+      transparent 0%,
+      black 6%,
+      black 94%,
+      transparent 100%);
+  mask-image: linear-gradient(to right,
+      transparent 0%,
+      black 6%,
+      black 94%,
+      transparent 100%);
+}
+
+.services-marquee-track {
+  display: flex;
+  gap: 28px;
+  width: max-content;
+  /* Starts paused — only runs when hovering */
+  animation: services-scroll 30s linear infinite;
+  animation-play-state: paused;
+  padding: 8px 0 16px;
+  /* bottom padding so hover shadow isn't clipped */
+}
+
+/* Hovering the outer wrapper unpauses the track */
+.services-marquee-outer.is-hovered .services-marquee-track {
+  animation-play-state: running;
+}
+
+@keyframes services-scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Hidden old grid (kept in DOM for safety) */
 .services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
-  gap: 32px;
-  margin-top: 60px;
+  display: none;
 }
 
 .service-card {
@@ -51,6 +94,9 @@
   display: flex;
   flex-direction: column;
   backdrop-filter: blur(10px);
+  /* Fixed width so cards line up in one row */
+  width: 360px;
+  flex-shrink: 0;
 }
 
 .service-card:hover {
@@ -265,7 +311,7 @@
 /* Large Desktop */
 @media (min-width: 1440px) {
   .services {
-    padding: 50px 0 100px;
+    padding: 60px 0 100px;
   }
 
   .services-container {
@@ -299,7 +345,7 @@
 /* Laptop */
 @media (max-width: 1439px) and (min-width: 1024px) {
   .services {
-    padding: 40px 0 80px;
+    padding: 50px 0 80px;
   }
 
   .services-grid {
@@ -315,7 +361,7 @@
 /* Tablet Landscape */
 @media (max-width: 1023px) and (min-width: 769px) {
   .services {
-    padding: 30px 0 70px;
+    padding: 40px 0 70px;
   }
 
   .services-grid {
@@ -355,7 +401,7 @@
 /* Tablet Portrait */
 @media (max-width: 768px) and (min-width: 481px) {
   .services {
-    padding: 30px 0 60px;
+    padding: 35px 0 60px;
   }
 
   .section-description {
@@ -410,7 +456,7 @@
 /* Mobile */
 @media (max-width: 480px) {
   .services {
-    padding: 25px 0 50px;
+    padding: 30px 0 50px;
   }
 
   .services-container {
@@ -493,7 +539,7 @@
 /* Small Mobile */
 @media (max-width: 375px) {
   .services {
-    padding: 20px 0 45px;
+    padding: 25px 0 45px;
   }
 
   .services-container {

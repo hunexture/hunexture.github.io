@@ -1,6 +1,7 @@
 .portfolio {
   background: var(--navy-blue);
   position: relative;
+  padding: 50px 0 60px;
 }
 
 .portfolio-container {
@@ -99,7 +100,7 @@
   border-color: var(--electric-blue);
   transform: translateY(-15px) rotateY(2deg) rotateX(2deg);
   box-shadow: 0 25px 60px var(--electric-blue-40),
-              0 0 40px var(--electric-blue-20);
+    0 0 40px var(--electric-blue-20);
 }
 
 .portfolio-card:hover::after {
@@ -251,10 +252,21 @@
   animation-delay: calc(var(--tag-index) * 0.1s);
 }
 
-.project-tags .project-tag:nth-child(1) { --tag-index: 1; }
-.project-tags .project-tag:nth-child(2) { --tag-index: 2; }
-.project-tags .project-tag:nth-child(3) { --tag-index: 3; }
-.project-tags .project-tag:nth-child(4) { --tag-index: 4; }
+.project-tags .project-tag:nth-child(1) {
+  --tag-index: 1;
+}
+
+.project-tags .project-tag:nth-child(2) {
+  --tag-index: 2;
+}
+
+.project-tags .project-tag:nth-child(3) {
+  --tag-index: 3;
+}
+
+.project-tags .project-tag:nth-child(4) {
+  --tag-index: 4;
+}
 
 .project-tag:hover {
   background: var(--electric-blue-25);
@@ -267,7 +279,7 @@
 .load-more-container {
   display: flex;
   justify-content: center;
-  margin-top: 60px;
+  margin-top: 40px;
   animation: fadeInUp 0.8s ease backwards;
 }
 
@@ -328,9 +340,12 @@
 }
 
 @keyframes bounce {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-5px);
   }
@@ -483,7 +498,7 @@
   }
 
   .load-more-container {
-    margin-top: 50px;
+    margin-top: 32px;
   }
 
   .load-more-btn {
@@ -549,7 +564,7 @@
   }
 
   .load-more-container {
-    margin-top: 45px;
+    margin-top: 30px;
   }
 
   .load-more-btn {

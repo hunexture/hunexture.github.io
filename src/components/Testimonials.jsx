@@ -25,6 +25,30 @@ const testimonials = [
     company: 'HealthTech SaaS',
     quote: "From MVP to production-ready in 8 weeks. Hunexture's cloud-native architecture scaled seamlessly as we grew from 100 to 10,000 users.",
     rating: 5
+  },
+  {
+    initials: 'SJ',
+    name: 'Sneha Joshi',
+    designation: 'VP Engineering',
+    company: 'RetailTech India',
+    quote: 'The mobile app Hunexture built for us has a 4.9-star App Store rating. The attention to UX detail and performance is second to none.',
+    rating: 5
+  },
+  {
+    initials: 'MC',
+    name: 'Michael Chen',
+    designation: 'Head of Digital',
+    company: 'LogiFlow USA',
+    quote: 'Our customer portal went from zero to 50,000 active users in three months. Hunexture\'s React expertise and cloud setup made all the difference.',
+    rating: 5
+  },
+  {
+    initials: 'FA',
+    name: 'Fatima Al-Rashid',
+    designation: 'COO',
+    company: 'EduSpark MENA',
+    quote: 'Hunexture delivered an AI-powered learning platform that personalises content for every student. Our engagement rates jumped 3× within the first month.',
+    rating: 5
   }
 ]
 
@@ -75,35 +99,11 @@ const Testimonials = () => {
           </p>
         </div>
 
-        {/* Desktop: 3-column grid */}
-        <div className={`testimonials-grid${visible ? ' animate-in' : ''}`}>
-          {testimonials.map((t, i) => (
-            <div
-              key={i}
-              className="testimonial-card"
-              style={{ transitionDelay: `${i * 0.15}s` }}
-            >
-              <Stars count={t.rating} />
-              <p className="testimonial-quote">"{t.quote}"</p>
-              <div className="testimonial-author">
-                <div className="testimonial-avatar">{t.initials}</div>
-                <div className="testimonial-info">
-                  <strong>{t.name}</strong>
-                  <span>{t.designation}, {t.company}</span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Mobile: carousel */}
-        <div className="testimonials-carousel">
-          <div
-            className="testimonials-track"
-            style={{ transform: `translateX(-${current * 100}%)` }}
-          >
-            {testimonials.map((t, i) => (
-              <div key={i} className="testimonial-card testimonial-slide">
+        {/* Desktop: infinite auto-scroll marquee */}
+        <div className="testimonials-marquee-outer">
+          <div className="testimonials-marquee-track">
+            {[...testimonials, ...testimonials].map((t, i) => (
+              <div key={i} className="testimonial-card testimonial-marquee-card">
                 <Stars count={t.rating} />
                 <p className="testimonial-quote">"{t.quote}"</p>
                 <div className="testimonial-author">
@@ -116,6 +116,32 @@ const Testimonials = () => {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Mobile: carousel */}
+        <div className="testimonials-carousel">
+          <div
+            className="testimonials-track"
+            style={{ transform: `translateX(-${current * 100}%)` }}
+          >
+            {testimonials.map((t, i) => (
+              <div key={i} className="testimonial-slide">
+                <div className="testimonial-card">
+                  <Stars count={t.rating} />
+                  <p className="testimonial-quote">"{t.quote}"</p>
+                  <div className="testimonial-author">
+                    <div className="testimonial-avatar">{t.initials}</div>
+                    <div className="testimonial-info">
+                      <strong>{t.name}</strong>
+                      <span>{t.designation}, {t.company}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Dot indicators */}
           <div className="carousel-dots">
             {testimonials.map((_, i) => (
               <button
