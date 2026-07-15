@@ -57,7 +57,7 @@ const ProjectDetail = () => {
             </motion.div>
 
             <motion.span
-              className="project-category-badge"
+              className="project-category-badge tech-font"
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -89,7 +89,7 @@ const ProjectDetail = () => {
               transition={{ duration: 0.6, delay: 0.6 }}
             >
               {project.tags.map((tag, index) => (
-                <span key={index} className="hero-tag">
+                <span key={index} className="hero-tag tech-font">
                   {tag}
                 </span>
               ))}
@@ -192,7 +192,7 @@ const ProjectDetail = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <div className="result-metric">{result.metric}</div>
+                  <div className="result-metric tech-font">{result.metric}</div>
                   <div className="result-label">{result.label}</div>
                 </motion.div>
               ))}

@@ -1,0 +1,322 @@
+.al-container {
+  min-height: 100vh;
+  background: var(--navy-blue);
+  color: var(--text-white);
+  padding: 140px 40px 100px;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Computational Vector grid background */
+.al-network-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.55;
+  transition: opacity 0.5s ease;
+}
+
+.al-network-svg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.al-net-path {
+  transition: stroke 0.4s ease, stroke-width 0.4s ease, stroke-dasharray 0.4s ease;
+  opacity: 0.2;
+}
+
+.al-net-group.active .al-net-path {
+  stroke: var(--light-blue);
+  opacity: 0.8;
+  animation: ai-dash 25s linear infinite;
+}
+
+@keyframes ai-dash {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+.al-net-pulse {
+  animation: ai-pulse-glow 2s infinite ease-in-out;
+}
+
+@keyframes ai-pulse-glow {
+  0%, 100% {
+    r: 6;
+    fill-opacity: 0.5;
+    filter: drop-shadow(0 0 2px var(--light-blue));
+  }
+  50% {
+    r: 10;
+    fill-opacity: 0.9;
+    filter: drop-shadow(0 0 8px var(--light-blue));
+  }
+}
+
+.al-header {
+  text-align: center;
+  margin-bottom: 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.al-subtitle {
+  color: var(--light-blue);
+  letter-spacing: 4px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px var(--glow-color);
+}
+
+.al-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  margin: 20px 0 15px;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  background: linear-gradient(135deg, var(--text-white) 0%, var(--light-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.al-underline {
+  width: 60px;
+  height: 3px;
+  background: var(--light-blue);
+  margin: 0 auto 30px;
+  border-radius: 2px;
+  box-shadow: 0 0 8px var(--light-blue);
+}
+
+.al-desc {
+  max-width: 650px;
+  margin: 0 auto;
+  color: var(--text-gray);
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
+.al-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Card Styling: Glassmorphism with custom glows */
+.al-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 48px 36px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease,
+              box-shadow 0.4s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.al-card-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(800px circle at var(--x, 50%) var(--y, 50%), rgba(255, 255, 255, 0.03), transparent 40%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.al-card:hover .al-card-glow {
+  opacity: 1;
+}
+
+.al-card-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.al-icon-wrapper {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: rgba(100, 255, 218, 0.05);
+  border: 1px solid rgba(100, 255, 218, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32px;
+  color: var(--light-blue);
+  box-shadow: inset 0 0 12px rgba(100, 255, 218, 0.05);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.al-icon {
+  font-size: 28px;
+  transition: transform 0.4s ease;
+}
+
+.al-card-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text-white);
+  letter-spacing: -0.02em;
+  transition: color 0.3s ease;
+}
+
+.al-card-headline {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--light-blue);
+  margin-bottom: 20px;
+}
+
+.al-card-desc {
+  color: var(--text-gray);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  flex-grow: 1;
+}
+
+.al-offers {
+  margin-bottom: 36px;
+  border-top: 1px solid var(--glass-border);
+  padding-top: 24px;
+}
+
+.al-offers-title {
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--text-gray);
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+
+.al-offers-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.al-offer-tag {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: var(--text-gray);
+  transition: all 0.3s ease;
+}
+
+.al-card-footer {
+  margin-top: auto;
+}
+
+.al-card-link {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--light-blue);
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: gap 0.3s ease;
+}
+
+.al-arrow {
+  transition: transform 0.3s ease;
+}
+
+/* Hover effects */
+.al-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--light-blue);
+  box-shadow: 0 20px 40px var(--glow-color), 
+              0 0 0 1px rgba(100, 255, 218, 0.15);
+}
+
+.al-card:hover .al-icon-wrapper {
+  background: var(--light-blue);
+  color: var(--navy-blue);
+  border-color: var(--light-blue);
+  box-shadow: 0 0 20px var(--light-blue);
+}
+
+.al-card:hover .al-icon {
+  transform: scale(1.1);
+}
+
+.al-card:hover .al-card-title {
+  color: var(--light-blue);
+}
+
+.al-card:hover .al-offer-tag {
+  color: var(--text-white);
+  border-color: rgba(255,255,255,0.15);
+}
+
+.al-card:hover .al-card-link {
+  gap: 12px;
+}
+
+.al-card:hover .al-arrow {
+  transform: translateX(4px);
+}
+
+.al-card:focus-visible {
+  outline: 2px solid var(--light-blue);
+  outline-offset: 4px;
+}
+
+/* Theme specifics override for White Theme */
+:root[data-theme="white"] .al-network-bg {
+  opacity: 0.25;
+}
+
+:root[data-theme="white"] .al-card:hover {
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+}
+
+/* Responsive adjustment */
+@media (max-width: 768px) {
+  .al-container {
+    padding: 110px 24px 60px;
+  }
+  .al-header {
+    margin-bottom: 50px;
+  }
+  .al-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .al-card {
+    padding: 36px 28px;
+  }
+  .al-network-bg {
+    display: none;
+  }
+}

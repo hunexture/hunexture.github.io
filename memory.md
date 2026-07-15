@@ -286,20 +286,3 @@ image: `url(${process.env.PUBLIC_URL}/images/portfolio/<name>.svg)`
 All components should handle these breakpoints via media queries in their own CSS files.
 
 ---
-
-## 📝 Change Log
-
-> **Update this section whenever a significant feature is added or changed.**
-
-| Date | Change | Files Affected |
-|---|---|---|
-| 2026-03-08 | Replaced all hardcoded hex/rgba colors with CSS variables (full theme compatibility) | `AISolutionsPage.css` |
-| 2026-03-08 | Fixed submenu hover bug — added transparent hover bridge pseudo-element on `.nav-dropdown`, reduced gap from 15px to 8px | `Navbar.css` |
-| 2026-03-08 | Fixed excessive whitespace between sections — reduced About top padding 80px→60px, added proper top padding to Services (24px→50px), balanced ProcessSection padding across all breakpoints | `About.css`, `ProcessSection.css`, `Services.css` |
-| 2026-03-04 | Fixed AI page background to use CSS variables (removed hardcoded colors) | `AISolutionsPage.css` |
-| 2026-03-04 | Fixed hero/stat font colors to stay white in white theme | `Hero.css`, `About.css` |
-| 2026-03-01 | Fixed submenu hover bug in Navbar | `Navbar.css` |
-| 2026-03-01 | Removed white hover effect from text | `Navbar.css` |
-| 2026-03-01 | Added contact form email submission to clever.pathway@gmail.com | `Contact.jsx` |
-| 2026-02-28 | Fixed blog page bug | `BlogList.jsx` |
-| 2026-02-28 | Fixed spacing/whitespace in ProcessSection and between sections | `ProcessSection.css`, `About.css`, `Services.css` |

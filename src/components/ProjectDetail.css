@@ -146,9 +146,11 @@
 
 /* Info Bar */
 .project-info-bar {
-  background: var(--dark-navy);
-  border-top: 1px solid var(--electric-blue-20);
-  border-bottom: 1px solid var(--electric-blue-20);
+  background: var(--glass-bg);
+  border-top: 1px solid var(--glass-border);
+  border-bottom: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   padding: 2rem;
 }
 
@@ -218,18 +220,20 @@
 
 .challenge-box,
 .solution-box {
-  background: var(--electric-blue-05);
-  border: 2px solid var(--electric-blue-20);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
   border-radius: 20px;
   padding: 3rem;
-  transition: all 0.3s ease;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .challenge-box:hover,
 .solution-box:hover {
   border-color: var(--electric-blue);
   transform: translateY(-5px);
-  box-shadow: 0 15px 40px var(--electric-blue-20);
+  box-shadow: 0 15px 40px var(--glow-color);
 }
 
 .challenge-box h2,
@@ -257,19 +261,21 @@
 }
 
 .result-card {
-  background: var(--dark-navy);
-  border: 2px solid var(--electric-blue-30);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
   border-radius: 20px;
   padding: 3rem 2rem;
   text-align: center;
-  transition: all 0.3s ease;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
 }
 
 .result-card:hover {
   border-color: var(--electric-blue);
   transform: translateY(-10px);
-  box-shadow: 0 20px 50px var(--electric-blue-30);
+  box-shadow: 0 20px 50px var(--glow-color);
 }
 
 .result-metric {
@@ -299,17 +305,19 @@
 }
 
 .feature-card {
-  background: var(--electric-blue-05);
-  border: 2px solid var(--electric-blue-20);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
   border-radius: 20px;
   padding: 2.5rem;
-  transition: all 0.3s ease;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
 }
 
 .feature-card:hover {
   border-color: var(--electric-blue);
-  box-shadow: 0 15px 50px var(--electric-blue-20);
+  box-shadow: 0 15px 50px var(--glow-color);
 }
 
 .feature-icon {
@@ -337,20 +345,22 @@
 }
 
 .tech-card {
-  background: var(--dark-navy);
-  border: 2px solid var(--electric-blue-20);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
   border-radius: 20px;
   padding: 2rem;
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  transition: all 0.3s ease;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
 }
 
 .tech-card:hover {
   border-color: var(--electric-blue);
-  box-shadow: 0 10px 40px var(--electric-blue-20);
+  box-shadow: 0 10px 40px var(--glow-color);
 }
 
 .tech-card .tech-icon {

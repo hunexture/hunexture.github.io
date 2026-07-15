@@ -1,4 +1,4 @@
-import { FaBrain, FaCode, FaMobile, FaCloud, FaPaintBrush, FaRobot, FaChartLine, FaEye, FaReact, FaNodeJs, FaServer, FaAndroid, FaApple, FaCog, FaAws, FaDocker, FaGitAlt, FaFigma, FaPalette, FaUsers, FaTools, FaCamera, FaComments, FaShoppingCart, FaBuilding, FaLayerGroup, FaTruck, FaUserFriends, FaHeartbeat, FaBriefcase, FaCloudUploadAlt, FaCubes, FaCodeBranch, FaBolt, FaMagic, FaMobileAlt, FaSearchPlus, FaBullhorn, FaGoogle, FaFacebookF, FaInstagram, FaEnvelope, FaSearch, FaPencilAlt } from 'react-icons/fa';
+import { FaBrain, FaCode, FaMobile, FaCloud, FaPaintBrush, FaRobot, FaChartLine, FaTools, FaCamera, FaComments, FaShoppingCart, FaBuilding, FaLayerGroup, FaTruck, FaUserFriends, FaHeartbeat, FaBriefcase, FaCloudUploadAlt, FaCubes, FaCodeBranch, FaBolt, FaMagic, FaMobileAlt, FaSearchPlus, FaBullhorn, FaGoogle, FaFacebookF, FaInstagram, FaEnvelope, FaSearch, FaPencilAlt } from 'react-icons/fa';
 
 export const servicesData = [
   {

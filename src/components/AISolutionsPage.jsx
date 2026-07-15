@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
     FaBrain, FaRobot, FaComments, FaEye, FaMagic, FaChartLine,
@@ -281,7 +281,7 @@ const whyChooseUs = [
 const AISolutionsPage = () => {
     const navigate = useNavigate()
     const [openExpertise, setOpenExpertise] = useState(null)
-    const revealRefs = useRef([])
+
 
     useEffect(() => {
         window.scrollTo(0, 0)

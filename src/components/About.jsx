@@ -22,22 +22,45 @@ const About = () => {
 
   const features = [
     {
-      icon: '💡',
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="about-svg-icon">
+          <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A5 5 0 0 0 8 8c0 1 .3 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+          <path d="M9 18h6" />
+          <path d="M10 22h4" />
+        </svg>
+      ),
       title: 'Innovation First',
       description: 'We stay 3 steps ahead of the curve — bringing bleeding-edge AI and engineering to every project we touch.'
     },
     {
-      icon: '👥',
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="about-svg-icon">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+      ),
       title: 'Human-Centered',
       description: 'Technology serves people. We design intelligent systems that amplify human potential, not replace it.'
     },
     {
-      icon: '🚀',
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="about-svg-icon">
+          <path d="M4.5 16.5c-1.5 1.26-2.5 3.19-2.5 5.5h8c0-2.31-1-4.24-2.5-5.5" />
+          <path d="M12 2C6 2 2 6 2 12c0 2.5 1 4.5 2.5 6l6-6 7.5-7.5-6-1.5Z" />
+        </svg>
+      ),
       title: 'Rapid Delivery',
       description: 'Agile by default. We ship production-ready solutions fast, with regular demos and zero compromises on quality.'
     },
     {
-      icon: '📈',
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="about-svg-icon">
+          <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+          <polyline points="16 7 22 7 22 13" />
+        </svg>
+      ),
       title: 'Built to Scale',
       description: 'From MVP to enterprise — our architectures grow with your business, engineered for today and tomorrow.'
     }
@@ -131,7 +154,7 @@ const About = () => {
     <section id="about" className="about" ref={sectionRef}>
       <div className="about-container">
         <div className="section-header scroll-animate">
-          <span className="section-tag">Who We Are</span>
+          <span className="section-tag tech-font">Who We Are</span>
           <h2 className="section-title">About Hunexture</h2>
           <div className="title-underline"></div>
           <p className="section-description">
@@ -141,15 +164,15 @@ const About = () => {
         </div>
 
         {/* Stats Bar */}
-        <div className="about-stats scroll-animate" ref={statsRef}>
+        <div className="about-stats scroll-animate glass-panel" ref={statsRef}>
           {aboutStats.map((stat, index) => (
             <div
               key={index}
               className="about-stat-item"
               style={{ transitionDelay: `${index * 0.1}s` }}
             >
-              <h3 className="about-stat-value">{counts[index]}{stat.suffix}</h3>
-              <p className="about-stat-label">{stat.label}</p>
+              <h3 className="about-stat-value tech-font">{counts[index]}{stat.suffix}</h3>
+              <p className="about-stat-label tech-font">{stat.label}</p>
             </div>
           ))}
         </div>
@@ -177,15 +200,15 @@ const About = () => {
             </p>
 
             <div className="about-vision">
-              <div className="vision-item">
-                <h4>Our Mission</h4>
+              <div className="vision-item glass-panel">
+                <h4 className="tech-font">Our Mission</h4>
                 <p>
                   Empower businesses with intelligent technology that drives innovation,
                   efficiency, and compounding growth in an ever-evolving digital landscape.
                 </p>
               </div>
-              <div className="vision-item">
-                <h4>Our Vision</h4>
+              <div className="vision-item glass-panel">
+                <h4 className="tech-font">Our Vision</h4>
                 <p>
                   To be the defining force in human-centered AI — shaping a future where
                   intelligent systems seamlessly amplify every dimension of business and life.
@@ -206,7 +229,7 @@ const About = () => {
                   style={{ transform: `translateX(-${currentSlide * 100}%)` }}
                 >
                   {features.map((feature, index) => (
-                    <div key={index} className="feature-card carousel-card">
+                    <div key={index} className="feature-card carousel-card glass-panel">
                       <div className="feature-icon">{feature.icon}</div>
                       <h3 className="feature-title">{feature.title}</h3>
                       <p className="feature-description">{feature.description}</p>
@@ -233,7 +256,7 @@ const About = () => {
                 {features.map((feature, index) => (
                   <div
                     key={index}
-                    className="feature-card scroll-animate"
+                    className="feature-card scroll-animate glass-panel"
                     style={{ transitionDelay: `${index * 0.12}s` }}
                   >
                     <div className="feature-icon">{feature.icon}</div>

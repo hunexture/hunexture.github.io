@@ -1,0 +1,320 @@
+.sl-container {
+  min-height: 100vh;
+  background: var(--navy-blue);
+  color: var(--text-white);
+  padding: 140px 40px 100px;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dynamic SVG network background container */
+.sl-network-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.65;
+  transition: opacity 0.5s ease;
+}
+
+.sl-network-svg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.sl-net-path {
+  transition: stroke 0.4s ease, stroke-width 0.4s ease, stroke-dasharray 0.4s ease;
+  opacity: 0.25;
+}
+
+.sl-net-group.active .sl-net-path {
+  stroke: var(--electric-blue);
+  opacity: 0.85;
+  animation: dash 30s linear infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+.sl-net-pulse {
+  animation: pulse-glow 2s infinite ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    r: 6;
+    fill-opacity: 0.6;
+    filter: drop-shadow(0 0 2px var(--electric-blue));
+  }
+  50% {
+    r: 10;
+    fill-opacity: 1;
+    filter: drop-shadow(0 0 8px var(--electric-blue));
+  }
+}
+
+.sl-header {
+  text-align: center;
+  margin-bottom: 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.sl-subtitle {
+  color: var(--electric-blue);
+  letter-spacing: 4px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px var(--glow-color);
+}
+
+.sl-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  margin: 20px 0 15px;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  background: linear-gradient(135deg, var(--text-white) 0%, var(--light-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sl-underline {
+  width: 60px;
+  height: 3px;
+  background: var(--electric-blue);
+  margin: 0 auto 30px;
+  border-radius: 2px;
+  box-shadow: 0 0 8px var(--electric-blue);
+}
+
+.sl-desc {
+  max-width: 650px;
+  margin: 0 auto;
+  color: var(--text-gray);
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
+.sl-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Card Styling: Glassmorphism with custom glows */
+.sl-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 48px 36px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease,
+              box-shadow 0.4s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Background hover radial glow */
+.sl-card-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(800px circle at var(--x, 50%) var(--y, 50%), rgba(255, 255, 255, 0.03), transparent 40%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.sl-card:hover .sl-card-glow {
+  opacity: 1;
+}
+
+.sl-card-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sl-icon-wrapper {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: var(--electric-blue-05);
+  border: 1px solid var(--electric-blue-15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32px;
+  color: var(--electric-blue);
+  box-shadow: inset 0 0 12px var(--electric-blue-05);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sl-icon {
+  font-size: 28px;
+  transition: transform 0.4s ease;
+}
+
+.sl-card-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-white);
+  letter-spacing: -0.02em;
+  transition: color 0.3s ease;
+}
+
+.sl-card-desc {
+  color: var(--text-gray);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  flex-grow: 1;
+}
+
+.sl-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 1px solid var(--glass-border);
+  padding-top: 24px;
+}
+
+.sl-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sl-bullet {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--electric-blue);
+  box-shadow: 0 0 8px var(--electric-blue);
+  transition: transform 0.3s ease;
+}
+
+.sl-feature-text {
+  font-size: 0.95rem;
+  color: var(--text-gray);
+  transition: color 0.3s ease;
+}
+
+.sl-card-footer {
+  margin-top: auto;
+}
+
+.sl-card-link {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--electric-blue);
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: gap 0.3s ease;
+}
+
+.sl-arrow {
+  transition: transform 0.3s ease;
+}
+
+/* Hover effects */
+.sl-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--electric-blue);
+  box-shadow: 0 20px 40px var(--glow-color), 
+              0 0 0 1px var(--electric-blue-20);
+}
+
+.sl-card:hover .sl-icon-wrapper {
+  background: var(--electric-blue);
+  color: var(--navy-blue);
+  border-color: var(--electric-blue);
+  box-shadow: 0 0 20px var(--electric-blue);
+}
+
+.sl-card:hover .sl-icon {
+  transform: scale(1.1);
+}
+
+.sl-card:hover .sl-card-title {
+  color: var(--electric-blue);
+}
+
+.sl-card:hover .sl-feature-text {
+  color: var(--text-white);
+}
+
+.sl-card:hover .sl-bullet {
+  transform: scale(1.5);
+}
+
+.sl-card:hover .sl-card-link {
+  gap: 12px;
+}
+
+.sl-card:hover .sl-arrow {
+  transform: translateX(4px);
+}
+
+/* Focus Outline for Accessibility */
+.sl-card:focus-visible {
+  outline: 2px solid var(--electric-blue);
+  outline-offset: 4px;
+}
+
+/* Theme specifics override for White Theme */
+:root[data-theme="white"] .sl-network-bg {
+  opacity: 0.3;
+}
+
+:root[data-theme="white"] .sl-card:hover {
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+}
+
+/* Responsive adjustment */
+@media (max-width: 768px) {
+  .sl-container {
+    padding: 110px 24px 60px;
+  }
+  .sl-header {
+    margin-bottom: 50px;
+  }
+  .sl-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .sl-card {
+    padding: 36px 28px;
+  }
+  .sl-network-bg {
+    display: none; /* Hide background grid lines on mobile to avoid layout crowding */
+  }
+}

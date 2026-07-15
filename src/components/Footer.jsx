@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { FaLinkedin, FaGithub, FaTwitter, FaInstagram, FaArrowUp, FaRocket } from 'react-icons/fa'
+import { FaLinkedin, FaTwitter, FaInstagram, FaArrowUp, FaRocket } from 'react-icons/fa'
 import Logo from './Logo'
 import './Footer.css'
 

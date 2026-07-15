@@ -1,0 +1,167 @@
+.il-container {
+  min-height: 100vh;
+  background: var(--navy-blue);
+  color: var(--text-white);
+  padding: 120px 40px 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Subtle tech grid background */
+.il-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.il-header {
+  text-align: center;
+  margin-bottom: 70px;
+  position: relative;
+  z-index: 2;
+}
+
+.il-subtitle {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--electric-blue);
+  letter-spacing: 3px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.il-title {
+  font-family: inherit;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  margin: 15px 0;
+  letter-spacing: -0.03em;
+  text-shadow: 0 0 20px var(--electric-blue-20);
+}
+
+.il-underline {
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--electric-blue) 0%, var(--light-blue) 100%);
+  margin: 0 auto 25px;
+  border-radius: 2px;
+}
+
+.il-desc {
+  max-width: 600px;
+  margin: 0 auto;
+  color: var(--text-gray);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.il-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  position: relative;
+  z-index: 2;
+}
+
+.il-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 40px 30px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.il-card-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, var(--accent-color), transparent 60%);
+  opacity: 0;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.il-icon-wrapper {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  color: var(--accent-color);
+  transition: all 0.4s ease;
+}
+
+.il-icon {
+  font-size: 28px;
+}
+
+.il-card-title {
+  font-family: inherit;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  letter-spacing: -0.02em;
+}
+
+.il-card-desc {
+  color: var(--text-gray);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.il-card-link {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-color);
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+/* Hover effects */
+.il-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--accent-color);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4),
+              0 0 20px var(--accent-color);
+}
+
+.il-card:hover .il-card-glow {
+  opacity: 0.08;
+}
+
+.il-card:hover .il-icon-wrapper {
+  background: var(--accent-color);
+  color: var(--navy-blue);
+  box-shadow: 0 0 15px var(--accent-color);
+}
+
+.il-card:hover .il-card-link {
+  letter-spacing: 2px;
+}
+
+/* Responsive adjustment */
+@media (max-width: 768px) {
+  .il-container {
+    padding: 100px 20px 60px;
+  }
+  .il-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}

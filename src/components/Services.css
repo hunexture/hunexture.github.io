@@ -74,24 +74,30 @@
 }
 
 
+.services-carousel-track:active {
+  cursor: grabbing !important;
+}
+
 .service-card {
   position: relative;
   padding: 40px 32px;
-  background: var(--card-overlay);
-  border: 1px solid var(--electric-blue-20);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
   border-radius: 12px;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .service-card:hover {
   transform: translateY(-8px);
-  border-color: var(--electric-blue);
-  background: var(--card-overlay-dark);
-  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+  border-color: var(--electric-blue-30);
+  box-shadow: 0 20px 40px var(--glow-color);
 }
 
 .service-card::before {
@@ -101,7 +107,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--electric-blue), #06b6d4);
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -576,4 +582,38 @@
     padding: 10px 16px;
     font-size: 13px;
   }
+}
+
+/* Custom Scroll Progress Bar */
+.services-scroll-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 50px;
+  width: 100%;
+}
+
+.services-progress-track {
+  width: 240px;
+  height: 4px;
+  background: var(--glass-border);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.services-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+  width: 0%;
+  transition: width 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.services-scroll-hint {
+  font-size: 10px;
+  color: var(--text-gray);
+  letter-spacing: 0.15em;
+  font-weight: 600;
 }

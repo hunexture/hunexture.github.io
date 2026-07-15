@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { FaArrowRight } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { servicesData } from '../data/servicesData'
@@ -7,15 +7,18 @@ import './Services.css'
 const Services = () => {
   const sectionRef = useRef(null)
   const trackRef = useRef(null)
-  const hoveredRef = useRef(false)
+  const [scrollProgress, setScrollProgress] = useState(0)
+  const isDraggingRef = useRef(false)
+  const startXRef = useRef(0)
+  const startOffsetRef = useRef(0)
   const offsetRef = useRef(0)
-  const velocityRef = useRef(0)
-  const rafRef = useRef(null)
 
   const services = servicesData.map(service => ({
     ...service,
     icon: <service.icon />
   }))
+
+  const isMovedRef = useRef(false)
 
   // scroll-in animation observer
   useEffect(() => {
@@ -37,67 +40,102 @@ const Services = () => {
     return () => observer.disconnect()
   }, [])
 
-  // wheel → horizontal scroll
+  // Recalculate track constraints on resize
   useEffect(() => {
-    const track = trackRef.current
-    if (!track) return
-
-    const getMaxOffset = () => {
-      // max we can slide left = total card row width minus visible container width
-      return -(track.scrollWidth - track.parentElement.clientWidth)
-    }
-
-    const tick = () => {
-      if (Math.abs(velocityRef.current) < 0.3) {
-        velocityRef.current = 0
-        rafRef.current = null
-        return
+    const handleResize = () => {
+      const track = trackRef.current
+      if (!track) return
+      const maxOffset = -(track.scrollWidth - track.parentElement.clientWidth)
+      if (offsetRef.current < maxOffset) {
+        offsetRef.current = maxOffset
+        track.style.transform = `translateX(${maxOffset}px)`
       }
-
-      velocityRef.current *= 0.94              // smooth deceleration
-      offsetRef.current += velocityRef.current
-
-      // Hard clamp — stop at first card (0) or last card (maxOffset)
-      const max = getMaxOffset()
       if (offsetRef.current > 0) {
         offsetRef.current = 0
-        velocityRef.current = 0
+        track.style.transform = `translateX(0px)`
       }
-      if (offsetRef.current < max) {
-        offsetRef.current = max
-        velocityRef.current = 0
-      }
-
-      track.style.transform = `translateX(${offsetRef.current}px)`
-      rafRef.current = requestAnimationFrame(tick)
+      updateProgress()
     }
 
-    const onWheel = (e) => {
-      if (!hoveredRef.current) return
-      e.preventDefault()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
-      const delta = e.deltaY * 0.35           // scroll sensitivity
-      velocityRef.current -= delta
-      // cap max speed
-      velocityRef.current = Math.max(-12, Math.min(12, velocityRef.current))
+  // Manage drag pointer move and up events on window to handle pointer leaving the element
+  useEffect(() => {
+    const handlePointerMove = (e) => {
+      if (!isDraggingRef.current) return
+      const track = trackRef.current
+      if (!track) return
 
-      if (!rafRef.current) {
-        rafRef.current = requestAnimationFrame(tick)
+      const dx = e.clientX - startXRef.current
+      if (Math.abs(dx) > 5) {
+        isMovedRef.current = true
       }
+
+      let newOffset = startOffsetRef.current + dx
+      const maxOffset = -(track.scrollWidth - track.parentElement.clientWidth)
+      if (newOffset > 0) newOffset = 0
+      if (newOffset < maxOffset) newOffset = maxOffset
+
+      offsetRef.current = newOffset
+      track.style.transform = `translateX(${newOffset}px)`
+      updateProgress()
     }
 
-    window.addEventListener('wheel', onWheel, { passive: false })
+    const handlePointerUp = () => {
+      if (!isDraggingRef.current) return
+      isDraggingRef.current = false
+      const track = trackRef.current
+      if (track) {
+        track.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
+      }
+      // Reset isMoved after a tiny delay so the click event interceptor has time to read it
+      setTimeout(() => {
+        isMovedRef.current = false
+      }, 50)
+    }
+
+    window.addEventListener('pointermove', handlePointerMove)
+    window.addEventListener('pointerup', handlePointerUp)
     return () => {
-      window.removeEventListener('wheel', onWheel)
-      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+      window.removeEventListener('pointermove', handlePointerMove)
+      window.removeEventListener('pointerup', handlePointerUp)
     }
   }, [])
+
+  const updateProgress = () => {
+    const track = trackRef.current
+    if (!track) return
+    const maxOffset = -(track.scrollWidth - track.parentElement.clientWidth)
+    if (maxOffset === 0) {
+      setScrollProgress(0)
+      return
+    }
+    const progress = (offsetRef.current / maxOffset) * 100
+    setScrollProgress(Math.min(100, Math.max(0, progress)))
+  }
+
+  const handlePointerDown = (e) => {
+    // Only drag with primary mouse button or touch
+    if (e.button !== 0 && e.pointerType === 'mouse') return
+
+    isDraggingRef.current = true
+    isMovedRef.current = false
+    startXRef.current = e.clientX
+    startOffsetRef.current = offsetRef.current
+    
+    const track = trackRef.current
+    if (track) {
+      track.style.transition = 'none'
+    }
+  }
 
   return (
     <section id="services" className="services" ref={sectionRef}>
       <div className="services-container">
         <div className="section-header scroll-animate">
-          <span className="section-tag">What We Do</span>
+          <span className="section-tag tech-font">What We Do</span>
           <h2 className="section-title">Our Services</h2>
           <div className="title-underline"></div>
           <p className="section-description">
@@ -107,15 +145,16 @@ const Services = () => {
         </div>
       </div>
 
-      {/* Hover-scroll carousel */}
-      <div
-        className="services-carousel-outer"
-        onMouseEnter={() => { hoveredRef.current = true }}
-        onMouseLeave={() => { hoveredRef.current = false }}
-      >
-        <div className="services-carousel-track" ref={trackRef}>
+      {/* Hover-drag carousel */}
+      <div className="services-carousel-outer">
+        <div
+          className="services-carousel-track"
+          ref={trackRef}
+          onPointerDown={handlePointerDown}
+          style={{ cursor: 'grab' }}
+        >
           {services.map((service, index) => (
-            <div key={index} className="service-card scroll-animate" style={{ transitionDelay: `${index * 0.08}s` }}>
+            <div key={index} className="service-card scroll-animate glass-panel" style={{ transitionDelay: `${index * 0.08}s` }}>
               <div className="service-header">
                 <div className="service-icon">{service.icon}</div>
                 <h3 className="service-title">{service.title}</h3>
@@ -129,15 +168,33 @@ const Services = () => {
                   </li>
                 ))}
               </ul>
-              <Link to={`/services/${service.slug}`} className="service-cta">
+              <Link 
+                to={`/services/${service.slug}`} 
+                className="service-cta"
+                onClick={(e) => {
+                  if (isMovedRef.current) {
+                    e.preventDefault()
+                  }
+                }}
+              >
                 <img src={`${process.env.PUBLIC_URL}/images/icons/learn-more.svg`} alt="Learn More" className="learn-icon" />
                 Learn More
                 <FaArrowRight className="cta-icon" />
               </Link>
-              <div className="card-glow"></div>
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Custom Scroll Progress Bar */}
+      <div className="services-scroll-indicator scroll-animate">
+        <div className="services-progress-track">
+          <div
+            className="services-progress-bar"
+            style={{ width: `${scrollProgress}%` }}
+          ></div>
+        </div>
+        <span className="services-scroll-hint tech-font">DRAG TO EXPLORE</span>
       </div>
     </section>
   )

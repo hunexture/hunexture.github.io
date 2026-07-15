@@ -69,14 +69,14 @@ const IndustryDetail = () => {
             </div>
           </div>
 
-          <div className="ind-hero-tag">{industry.shortDescription}</div>
+          <div className="ind-hero-tag tech-font">{industry.shortDescription}</div>
           <h1 className="ind-hero-title">{industry.name}</h1>
           <p className="ind-hero-desc">{industry.description}</p>
 
           <div className="ind-hero-stats">
             {heroStats.map((s, i) => (
               <div key={i} className="ind-hero-stat">
-                <strong>{s.value}</strong>
+                <strong className="tech-font">{s.value}</strong>
                 <span>{s.label}</span>
               </div>
             ))}
@@ -101,7 +101,7 @@ const IndustryDetail = () => {
         <section className="ind-section ind-alt-bg ind-reveal">
           <div className="ind-inner">
             <div className="ind-section-header">
-              <span className="ind-tag">By The Numbers</span>
+              <span className="ind-tag tech-font">By The Numbers</span>
               <h2 className="ind-section-title">Impact We Deliver</h2>
               <div className="ind-underline" />
               <p className="ind-section-desc">
@@ -112,7 +112,7 @@ const IndustryDetail = () => {
             <div className="ind-stats-grid">
               {industry.stats.map((stat, i) => (
                 <div key={i} className="ind-stat-card" style={{ '--delay': `${i * 0.1}s` }}>
-                  <strong style={{ color: industry.color }}>{stat.value}</strong>
+                  <strong className="tech-font" style={{ color: industry.color }}>{stat.value}</strong>
                   <span>{stat.label}</span>
                 </div>
               ))}
@@ -125,7 +125,7 @@ const IndustryDetail = () => {
       <section className="ind-section ind-services ind-reveal">
         <div className="ind-inner">
           <div className="ind-section-header">
-            <span className="ind-tag">What We Build</span>
+            <span className="ind-tag tech-font">What We Build</span>
             <h2 className="ind-section-title">Our {industry.name} Solutions</h2>
             <div className="ind-underline" />
             <p className="ind-section-desc">
@@ -166,7 +166,7 @@ const IndustryDetail = () => {
       <section className="ind-section ind-alt-bg ind-reveal">
         <div className="ind-inner">
           <div className="ind-section-header">
-            <span className="ind-tag">Tech Stack</span>
+            <span className="ind-tag tech-font">Tech Stack</span>
             <h2 className="ind-section-title">Technologies We Use</h2>
             <div className="ind-underline" />
           </div>
@@ -189,7 +189,7 @@ const IndustryDetail = () => {
       <section className="ind-section ind-reveal">
         <div className="ind-inner">
           <div className="ind-section-header">
-            <span className="ind-tag">Key Benefits</span>
+            <span className="ind-tag tech-font">Key Benefits</span>
             <h2 className="ind-section-title">What You Gain</h2>
             <div className="ind-underline" />
           </div>
@@ -207,7 +207,7 @@ const IndustryDetail = () => {
                 >
                   <FaCheck style={{ color: industry.color }} />
                 </div>
-                <span className="ind-benefit-num" style={{ color: industry.color }}>
+                <span className="ind-benefit-num tech-font" style={{ color: industry.color }}>
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <p>{benefit}</p>
@@ -222,7 +222,7 @@ const IndustryDetail = () => {
         <section className="ind-section ind-alt-bg ind-reveal">
           <div className="ind-inner">
             <div className="ind-section-header">
-              <span className="ind-tag">How We Work</span>
+              <span className="ind-tag tech-font">How We Work</span>
               <h2 className="ind-section-title">Our Process</h2>
               <div className="ind-underline" />
               <p className="ind-section-desc">
@@ -235,7 +235,7 @@ const IndustryDetail = () => {
                 <div key={i} className="ind-step" style={{ '--delay': `${i * 0.12}s` }}>
                   <div className="ind-step-left">
                     <div
-                      className="ind-step-dot"
+                      className="ind-step-dot tech-font"
                       style={{ background: industry.image, boxShadow: `0 4px 16px ${industry.color}50` }}
                     >
                       {step.step}
@@ -260,7 +260,7 @@ const IndustryDetail = () => {
         <section className="ind-section ind-reveal">
           <div className="ind-inner">
             <div className="ind-section-header">
-              <span className="ind-tag">Problems We Solve</span>
+              <span className="ind-tag tech-font">Problems We Solve</span>
               <h2 className="ind-section-title">Industry Challenges</h2>
               <div className="ind-underline" />
               <p className="ind-section-desc">
@@ -290,7 +290,7 @@ const IndustryDetail = () => {
         <section className="ind-section ind-alt-bg ind-reveal">
           <div className="ind-inner">
             <div className="ind-section-header">
-              <span className="ind-tag">Our Edge</span>
+              <span className="ind-tag tech-font">Our Edge</span>
               <h2 className="ind-section-title">Why Choose Hunexture</h2>
               <div className="ind-underline" />
             </div>
@@ -337,7 +337,7 @@ const IndustryDetail = () => {
         <section className="ind-section ind-reveal">
           <div className="ind-inner">
             <div className="ind-section-header">
-              <span className="ind-tag">Success Stories</span>
+              <span className="ind-tag tech-font">Success Stories</span>
               <h2 className="ind-section-title">Real Results</h2>
               <div className="ind-underline" />
             </div>
@@ -358,7 +358,7 @@ const IndustryDetail = () => {
                       }}
                     >
                       <FaRocket style={{ color: industry.color }} />
-                      <span>{cs.results}</span>
+                      <span className="tech-font">{cs.results}</span>
                     </div>
                   </div>
                 </div>
@@ -373,7 +373,7 @@ const IndustryDetail = () => {
         <section className="ind-section ind-alt-bg ind-reveal">
           <div className="ind-inner">
             <div className="ind-section-header">
-              <span className="ind-tag">Got Questions?</span>
+              <span className="ind-tag tech-font">Got Questions?</span>
               <h2 className="ind-section-title">Frequently Asked Questions</h2>
               <div className="ind-underline" />
             </div>
@@ -410,7 +410,7 @@ const IndustryDetail = () => {
       <section className="ind-cta ind-reveal">
         <div className="ind-cta-glow" style={{ background: industry.image }} />
         <div className="ind-cta-inner">
-          <span className="ind-tag">Let's Build Together</span>
+          <span className="ind-tag tech-font">Let's Build Together</span>
           <h2>Ready to Transform Your {industry.name} Business?</h2>
           <p>
             Let's discuss your project. Our team responds within 24 hours

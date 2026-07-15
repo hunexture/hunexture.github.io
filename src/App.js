@@ -17,6 +17,9 @@ import ProjectDetail from './components/ProjectDetail'
 import IndustryDetail from './components/IndustryDetail'
 import AIDetail from './components/AIDetail'
 import AISolutionsPage from './components/AISolutionsPage'
+import ServicesList from './components/ServicesList'
+import IndustriesList from './components/IndustriesList'
+import AIList from './components/AIList'
 import PrivacyPolicy from './components/PrivacyPolicy'
 import TermsOfService from './components/TermsOfService'
 import CookiePolicy from './components/CookiePolicy'
@@ -46,14 +49,14 @@ const HomePage = () => (
 // Layout wrapper to conditionally show backgrounds
 const Layout = ({ children }) => {
   const location = useLocation()
-  const isDetailPage = location.pathname.startsWith('/services/') ||
-    location.pathname.startsWith('/portfolio/') ||
-    location.pathname.startsWith('/industries/') ||
-    location.pathname.startsWith('/ai/') ||
+  const isDetailPage = location.pathname.startsWith('/services') ||
+    location.pathname.startsWith('/portfolio') ||
+    location.pathname.startsWith('/industries') ||
+    location.pathname.startsWith('/ai') ||
     location.pathname.startsWith('/privacy-policy') ||
     location.pathname.startsWith('/terms-of-service') ||
     location.pathname.startsWith('/cookie-policy') ||
-    location.pathname.startsWith('/blog/')
+    location.pathname.startsWith('/blog')
 
   // Check if it's a blog post page (has slug) vs blog list page
   const pathParts = location.pathname.split('/').filter(Boolean)
@@ -82,10 +85,18 @@ function App() {
         <Layout>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/services" element={<ServicesList />} />
             <Route path="/services/ai-solutions" element={<AISolutionsPage />} />
+            <Route path="/services/web-development" element={<ServiceDetail serviceSlug="web-development" />} />
+            <Route path="/services/app-development" element={<ServiceDetail serviceSlug="app-development" />} />
+            <Route path="/services/cloud-integration" element={<ServiceDetail serviceSlug="cloud-integration" />} />
+            <Route path="/services/uiux-design" element={<ServiceDetail serviceSlug="uiux-design" />} />
+            <Route path="/services/digital-marketing" element={<ServiceDetail serviceSlug="digital-marketing" />} />
             <Route path="/services/:slug" element={<ServiceDetail />} />
             <Route path="/portfolio/:slug" element={<ProjectDetail />} />
+            <Route path="/industries" element={<IndustriesList />} />
             <Route path="/industries/:slug" element={<IndustryDetail />} />
+            <Route path="/ai" element={<AIList />} />
             <Route path="/ai/:slug" element={<AIDetail />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
