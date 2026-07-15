@@ -1,5 +1,6 @@
 # GitHub Pages Setup Guide
 
+
 ## Repository Configuration
 
 This project is configured to deploy to GitHub Pages using the repository: `hunexture/hunexture.github.io`
