@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Orange Magento Hexagon Shape -->
+  <polygon points="50,5 90,28 90,72 50,95 10,72 10,28" fill="#f26322" />
+  <!-- Inside Cutouts to form the M -->
+  <polygon points="50,22 80,39 80,68 62,58 62,43 50,36 38,43 38,58 20,68 20,39" fill="#ffffff" />
+  <polygon points="50,52 62,59 50,66 38,59" fill="#ffffff" />
+</svg>
