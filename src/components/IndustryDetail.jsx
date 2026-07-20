@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { FaArrowLeft, FaRocket, FaCheck, FaLightbulb, FaChevronDown } from 'react-icons/fa'
-// FaArrowLeft kept for not-found fallback only
-import { getIndustryBySlug, getTechIcon, getWhyChooseUsIcon } from '../data/industriesData'
+import { 
+  FaArrowLeft, FaRocket, FaCheck, FaLightbulb, FaChevronDown, 
+  FaArrowRight, FaHome, FaChevronRight
+} from 'react-icons/fa'
+import { getIndustryBySlug, industriesData, getTechIcon, getWhyChooseUsIcon } from '../data/industriesData'
 import './IndustryDetail.css'
 
 const IndustryDetail = () => {
@@ -10,11 +12,20 @@ const IndustryDetail = () => {
   const navigate = useNavigate()
   const industry = getIndustryBySlug(slug)
   const [openFaq, setOpenFaq] = useState(null)
+  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [slug])
 
+  // Scroll detection for sticky nav
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 80)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  // Scroll-reveal via IntersectionObserver
   useEffect(() => {
     const observer = new IntersectionObserver(
       entries => entries.forEach(entry => {
@@ -23,10 +34,12 @@ const IndustryDetail = () => {
           observer.unobserve(entry.target)
         }
       }),
-      { threshold: 0.1 }
+      { threshold: 0.08 }
     )
-    document.querySelectorAll('.ind-reveal').forEach(el => observer.observe(el))
-    return () => observer.disconnect()
+    const timer = setTimeout(() => {
+      document.querySelectorAll('.ind-reveal').forEach(el => observer.observe(el))
+    }, 100)
+    return () => { clearTimeout(timer); observer.disconnect() }
   }, [slug])
 
   if (!industry) {
@@ -35,8 +48,8 @@ const IndustryDetail = () => {
         <div className="ind-not-found">
           <h1>Industry Not Found</h1>
           <p>The industry you're looking for doesn't exist.</p>
-          <button onClick={() => navigate('/')} className="ind-back-btn">
-            <FaArrowLeft /> Back to Home
+          <button onClick={() => navigate('/industries')} className="ind-back-btn">
+            <FaArrowLeft /> Back to Industries
           </button>
         </div>
       </div>
@@ -54,8 +67,41 @@ const IndustryDetail = () => {
 
   const toggleFaq = i => setOpenFaq(prev => prev === i ? null : i)
 
+  // Related industries (exclude current)
+  const relatedIndustries = industriesData
+    .filter(ind => ind.slug !== slug)
+    .slice(0, 4)
+
   return (
     <div className="ind-container" style={{ '--ind-color': industry.color }}>
+
+      {/* ─── Sticky Breadcrumb Bar ──────────────────────────────── */}
+      <div className={`ind-breadcrumb-bar${scrolled ? ' ind-breadcrumb-visible' : ''}`}>
+        <div className="ind-breadcrumb-inner">
+          <div className="ind-breadcrumb-path">
+            <button className="ind-breadcrumb-link" onClick={() => navigate('/')}>
+              <FaHome /> Home
+            </button>
+            <FaChevronRight className="ind-breadcrumb-sep" />
+            <button className="ind-breadcrumb-link" onClick={() => navigate('/industries')}>
+              Industries
+            </button>
+            <FaChevronRight className="ind-breadcrumb-sep" />
+            <span className="ind-breadcrumb-current" style={{ color: industry.color }}>
+              {industry.name}
+            </span>
+          </div>
+          <button 
+            className="ind-btn-primary ind-breadcrumb-cta"
+            onClick={() => {
+              navigate('/')
+              setTimeout(() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }), 200)
+            }}
+          >
+            Start a Project <FaRocket />
+          </button>
+        </div>
+      </div>
 
       {/* ─── Hero ──────────────────────────────────────────────────── */}
       <section className="ind-hero">
@@ -89,8 +135,8 @@ const IndustryDetail = () => {
             }}>
               Start a Project <FaRocket />
             </button>
-            <button className="ind-btn-secondary" onClick={() => navigate('/#portfolio')}>
-              View Our Work
+            <button className="ind-btn-secondary" onClick={() => navigate('/industries')}>
+              <FaArrowLeft /> All Industries
             </button>
           </div>
         </div>
@@ -169,6 +215,9 @@ const IndustryDetail = () => {
             <span className="ind-tag tech-font">Tech Stack</span>
             <h2 className="ind-section-title">Technologies We Use</h2>
             <div className="ind-underline" />
+            <p className="ind-section-desc">
+              Modern, battle-tested technologies chosen for performance, scalability, and longevity.
+            </p>
           </div>
 
           <div className="ind-tech-grid">
@@ -192,6 +241,9 @@ const IndustryDetail = () => {
             <span className="ind-tag tech-font">Key Benefits</span>
             <h2 className="ind-section-title">What You Gain</h2>
             <div className="ind-underline" />
+            <p className="ind-section-desc">
+              Tangible business advantages delivered through our purpose-built {industry.name.toLowerCase()} solutions.
+            </p>
           </div>
 
           <div className="ind-benefits-grid">
@@ -293,6 +345,9 @@ const IndustryDetail = () => {
               <span className="ind-tag tech-font">Our Edge</span>
               <h2 className="ind-section-title">Why Choose Hunexture</h2>
               <div className="ind-underline" />
+              <p className="ind-section-desc">
+                What sets us apart when building {industry.name.toLowerCase()} solutions.
+              </p>
             </div>
 
             <div className="ind-why-grid">
@@ -340,6 +395,9 @@ const IndustryDetail = () => {
               <span className="ind-tag tech-font">Success Stories</span>
               <h2 className="ind-section-title">Real Results</h2>
               <div className="ind-underline" />
+              <p className="ind-section-desc">
+                Projects we've delivered that made a measurable difference.
+              </p>
             </div>
 
             <div className="ind-case-grid">
@@ -376,6 +434,9 @@ const IndustryDetail = () => {
               <span className="ind-tag tech-font">Got Questions?</span>
               <h2 className="ind-section-title">Frequently Asked Questions</h2>
               <div className="ind-underline" />
+              <p className="ind-section-desc">
+                Answers to common questions about our {industry.name.toLowerCase()} solutions.
+              </p>
             </div>
 
             <div className="ind-faq-list">
@@ -406,6 +467,38 @@ const IndustryDetail = () => {
         </section>
       )}
 
+      {/* ─── Related Industries ────────────────────────────────────── */}
+      <section className="ind-section ind-reveal">
+        <div className="ind-inner">
+          <div className="ind-section-header">
+            <span className="ind-tag tech-font">Explore More</span>
+            <h2 className="ind-section-title">Other Industry Solutions</h2>
+            <div className="ind-underline" />
+          </div>
+          <div className="ind-related-grid">
+            {relatedIndustries.map((rel) => {
+              const RelIcon = rel.icon
+              return (
+                <div
+                  key={rel.id}
+                  className="ind-related-card"
+                  style={{ '--rel-color': rel.color }}
+                  onClick={() => navigate(`/industries/${rel.slug}`)}
+                >
+                  <div className="ind-related-icon-wrap">
+                    <div className="ind-related-icon" style={{ background: rel.image }}>
+                      <RelIcon />
+                    </div>
+                  </div>
+                  <span className="ind-related-name">{rel.name}</span>
+                  <FaArrowRight className="ind-related-arrow" />
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* ─── Bottom CTA ────────────────────────────────────────────── */}
       <section className="ind-cta ind-reveal">
         <div className="ind-cta-glow" style={{ background: industry.image }} />
@@ -423,8 +516,8 @@ const IndustryDetail = () => {
             }}>
               Contact Us Today <FaRocket />
             </button>
-            <button className="ind-btn-secondary" onClick={() => navigate('/#portfolio')}>
-              See Our Work
+            <button className="ind-btn-secondary" onClick={() => navigate('/industries')}>
+              <FaArrowLeft /> All Industries
             </button>
           </div>
         </div>

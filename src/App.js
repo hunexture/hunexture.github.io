@@ -17,6 +17,7 @@ import ProjectDetail from './components/ProjectDetail'
 import IndustryDetail from './components/IndustryDetail'
 import AIDetail from './components/AIDetail'
 import AISolutionsPage from './components/AISolutionsPage'
+import WebDevelopmentPage from './components/WebDevelopmentPage'
 import ServicesList from './components/ServicesList'
 import IndustriesList from './components/IndustriesList'
 import AIList from './components/AIList'
@@ -87,7 +88,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/services" element={<ServicesList />} />
             <Route path="/services/ai-solutions" element={<AISolutionsPage />} />
-            <Route path="/services/web-development" element={<ServiceDetail serviceSlug="web-development" />} />
+            <Route path="/services/web-development" element={<WebDevelopmentPage />} />
             <Route path="/services/app-development" element={<ServiceDetail serviceSlug="app-development" />} />
             <Route path="/services/cloud-integration" element={<ServiceDetail serviceSlug="cloud-integration" />} />
             <Route path="/services/uiux-design" element={<ServiceDetail serviceSlug="uiux-design" />} />

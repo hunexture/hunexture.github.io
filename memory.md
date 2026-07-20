@@ -50,6 +50,7 @@ All routes are defined in `src/App.js`:
 |---|---|---|
 | `/` | `HomePage` | Composed of Hero, TechMarquee, About, ProcessSection, Testimonials, Services, Portfolio, FAQ, Contact |
 | `/services/ai-solutions` | `AISolutionsPage` | Special dedicated AI page (not a slug route) |
+| `/services/web-development` | `WebDevelopmentPage` | Special dedicated Web Development page (not a slug route) |
 | `/services/:slug` | `ServiceDetail` | Dynamic service detail page |
 | `/portfolio/:slug` | `ProjectDetail` | Dynamic portfolio project page |
 | `/industries/:slug` | `IndustryDetail` | Dynamic industry detail page |
@@ -140,6 +141,7 @@ Also has alpha-channel variants: `--electric-blue-03` through `--electric-blue-8
 | `ProjectDetail` | `ProjectDetail.jsx / ProjectDetail.css` | Dynamic portfolio project page (driven by `portfolioData`) |
 | `IndustryDetail` | `IndustryDetail.jsx / IndustryDetail.css` | Dynamic industry page (driven by `industriesData`) |
 | `AISolutionsPage` | `AISolutionsPage.jsx / AISolutionsPage.css` | Full dedicated AI solutions page |
+| `WebDevelopmentPage` | `WebDevelopmentPage.jsx / WebDevelopmentPage.css` | Full dedicated Web Development page |
 | `AIDetail` | `AIDetail.jsx / AIDetail.css` | AI concept detail page |
 
 ### Blog Components
@@ -286,3 +288,14 @@ image: `url(${process.env.PUBLIC_URL}/images/portfolio/<name>.svg)`
 All components should handle these breakpoints via media queries in their own CSS files.
 
 ---
+
+## 🖥️ Session: Industry Pages Redesign (2026-07-20)
+
+### What was done
+- **IndustriesList.css** — Complete cinematic rewrite with dual floating blobs, fine grid overlay, Blueprint Sandbox, card grid with per-industry color tokens
+- **IndustryDetail.jsx** — Added sticky breadcrumb bar, Related Industries section, improved back-navigation to `/industries`
+- **IndustryDetail.css** — Full cinematic redesign: dark navy, animated hero blobs, glass stat strip, premium hover cards, accordion FAQ, breadcrumb + related grid CSS
+
+### Active industry routes
+- `/industries` → `IndustriesList`
+- `/industries/:slug` → `IndustryDetail` (healthcare, legal, logistics, education, media-ott, travel, retail, construction, + more)
