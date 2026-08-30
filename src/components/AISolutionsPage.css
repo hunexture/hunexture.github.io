@@ -5,7 +5,6 @@
     color: var(--text-white);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     min-height: 100vh;
-    overflow-x: hidden;
     position: relative;
 }
 

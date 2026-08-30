@@ -481,17 +481,20 @@ const IndustryDetail = () => {
               return (
                 <div
                   key={rel.id}
-                  className="ind-related-card"
+                  className="ind-rel-card"
                   style={{ '--rel-color': rel.color }}
                   onClick={() => navigate(`/industries/${rel.slug}`)}
                 >
-                  <div className="ind-related-icon-wrap">
-                    <div className="ind-related-icon" style={{ background: rel.image }}>
+                  <div className="ind-rel-icon-wrap">
+                    <div className="ind-rel-icon" style={{ background: `${rel.color}18`, color: rel.color }}>
                       <RelIcon />
                     </div>
                   </div>
-                  <span className="ind-related-name">{rel.name}</span>
-                  <FaArrowRight className="ind-related-arrow" />
+                  <h3>{rel.name}</h3>
+                  <p>{rel.shortDescription}</p>
+                  <span className="ind-rel-link tech-font" style={{ color: rel.color }}>
+                    View Blueprint <FaArrowRight />
+                  </span>
                 </div>
               )
             })}
@@ -500,24 +503,23 @@ const IndustryDetail = () => {
       </section>
 
       {/* ─── Bottom CTA ────────────────────────────────────────────── */}
-      <section className="ind-cta ind-reveal">
-        <div className="ind-cta-glow" style={{ background: industry.image }} />
-        <div className="ind-cta-inner">
+      <section className="ind-cta-section ind-reveal">
+        <div className="ind-cta-card">
           <span className="ind-tag tech-font">Let's Build Together</span>
-          <h2>Ready to Transform Your {industry.name} Business?</h2>
+          <h2>Ready to Transform Your {industry.name} Architecture?</h2>
           <p>
-            Let's discuss your project. Our team responds within 24 hours
-            with a tailored proposal — no commitment required.
+            Let's discuss your enterprise requirements. Our solution architects respond within 24 hours
+            with a tailored technical proposal and compliance scoping.
           </p>
-          <div className="ind-cta-btns">
+          <div className="ind-hero-cta">
             <button className="ind-btn-primary" onClick={() => {
               navigate('/')
               setTimeout(() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }), 200)
             }}>
-              Contact Us Today <FaRocket />
+              Schedule Architecture Call <FaRocket />
             </button>
             <button className="ind-btn-secondary" onClick={() => navigate('/industries')}>
-              <FaArrowLeft /> All Industries
+              <FaArrowLeft /> All 18 Industries
             </button>
           </div>
         </div>
@@ -528,3 +530,4 @@ const IndustryDetail = () => {
 }
 
 export default IndustryDetail
+

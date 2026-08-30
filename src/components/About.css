@@ -525,7 +525,6 @@
 @media (max-width: 480px) {
   .about {
     padding: 40px 5px 20px;
-    overflow-x: hidden;
   }
 
   .about-stats {
@@ -556,7 +555,6 @@
   .about-container {
     padding: 0 5px;
     max-width: 100%;
-    overflow-x: hidden;
   }
 
   .section-header {
@@ -578,7 +576,6 @@
   .about-content {
     gap: 30px;
     max-width: 100%;
-    overflow-x: hidden;
   }
 
   .about-text {

@@ -7,7 +7,6 @@
   min-height: 100vh;
   background: var(--navy-blue);
   color: var(--text-white);
-  overflow-x: hidden;
 }
 
 .sd-not-found {

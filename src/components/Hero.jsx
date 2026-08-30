@@ -4,13 +4,18 @@ import './Hero.css'
 
 const Hero = () => {
   return (
-    <section
-      id="hero"
-      className="hero"
-      style={{
-        backgroundImage: `url(${process.env.PUBLIC_URL}/images/hero/tech-background.svg)`
-      }}
-    >
+    <section id="hero" className="hero">
+      {/* Rich Tech Background matching hunexture.com */}
+      <div className="hero-tech-bg" aria-hidden="true">
+        <div
+          className="hero-bg-svg-layer"
+          style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/images/hero/tech-background.svg)` }}
+        />
+        <div className="hero-orb-magenta" />
+        <div className="hero-orb-indigo" />
+        <div className="hero-grid-lines" />
+      </div>
+
       <div className="hero-content">
         <div className="hero-badge tech-font">
           <span className="badge-dot"></span>
@@ -18,7 +23,8 @@ const Hero = () => {
         </div>
 
         <h1 className="hero-title">
-          Building the Next Human Future
+          Building the Next <br />
+          <span className="hero-title-highlight">Human Future</span>
         </h1>
 
         <p className="hero-description">

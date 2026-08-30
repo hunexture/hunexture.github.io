@@ -27,14 +27,15 @@ const AnimatedBackground = () => {
     resizeCanvas()
     window.addEventListener('resize', resizeCanvas)
 
-    // Particle system
+    // Particle system with cyber glow
     class Particle {
       constructor() {
         this.x = Math.random() * canvas.width
         this.y = Math.random() * canvas.height
-        this.vx = (Math.random() - 0.5) * 0.5
-        this.vy = (Math.random() - 0.5) * 0.5
-        this.radius = Math.random() * 2
+        this.vx = (Math.random() - 0.5) * 0.6
+        this.vy = (Math.random() - 0.5) * 0.6
+        this.radius = Math.random() * 2.2 + 0.8
+        this.color = Math.random() > 0.4 ? '#00f2fe' : '#667eea'
       }
 
       update() {
@@ -48,25 +49,16 @@ const AnimatedBackground = () => {
       draw() {
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2)
-        const themeColor = getThemeColor()
-        // Convert hex to rgba for opacity support
-        const hexToRgba = (hex, alpha) => {
-          if (hex.startsWith('#')) {
-            const r = parseInt(hex.slice(1, 3), 16)
-            const g = parseInt(hex.slice(3, 5), 16)
-            const b = parseInt(hex.slice(5, 7), 16)
-            return `rgba(${r}, ${g}, ${b}, ${alpha})`
-          }
-          // If already rgb or rgba, use as is
-          return hex.replace(')', `, ${alpha})`).replace('rgb(', 'rgba(')
-        }
-        ctx.fillStyle = hexToRgba(themeColor, 0.5)
+        ctx.fillStyle = this.color
+        ctx.shadowColor = this.color
+        ctx.shadowBlur = 8
         ctx.fill()
+        ctx.shadowBlur = 0
       }
     }
 
     // Initialize particles
-    for (let i = 0; i < 80; i++) {
+    for (let i = 0; i < 95; i++) {
       particles.push(new Particle())
     }
 
@@ -80,28 +72,18 @@ const AnimatedBackground = () => {
       })
 
       // Draw connections
-      const themeColor = getThemeColor()
-      const hexToRgba = (hex, alpha) => {
-        if (hex.startsWith('#')) {
-          const r = parseInt(hex.slice(1, 3), 16)
-          const g = parseInt(hex.slice(3, 5), 16)
-          const b = parseInt(hex.slice(5, 7), 16)
-          return `rgba(${r}, ${g}, ${b}, ${alpha})`
-        }
-        return hex.replace(')', `, ${alpha})`).replace('rgb(', 'rgba(')
-      }
-
       particles.forEach((p1, i) => {
         particles.slice(i + 1).forEach(p2 => {
           const dx = p1.x - p2.x
           const dy = p1.y - p2.y
           const distance = Math.sqrt(dx * dx + dy * dy)
 
-          if (distance < 150) {
+          if (distance < 140) {
             ctx.beginPath()
             ctx.moveTo(p1.x, p1.y)
             ctx.lineTo(p2.x, p2.y)
-            ctx.strokeStyle = hexToRgba(themeColor, 0.2 * (1 - distance / 150))
+            const alpha = 0.28 * (1 - distance / 140)
+            ctx.strokeStyle = p1.color === '#00f2fe' ? `rgba(0, 242, 254, ${alpha})` : `rgba(102, 126, 234, ${alpha})`
             ctx.lineWidth = 1
             ctx.stroke()
           }
