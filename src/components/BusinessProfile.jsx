@@ -81,11 +81,11 @@ const BusinessProfile = () => {
                 <FaLinkedin style={{ marginRight: '8px', color: 'var(--electric-blue)' }} />
                 <strong>LinkedIn:</strong>{' '}
                 <a
-                  href="https://www.linkedin.com/in/hunexture-tech-175766391/"
+                  href="https://www.linkedin.com/company/hunexture/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  linkedin.com/in/hunexture-tech
+                  linkedin.com/company/hunexture
                 </a>
               </li>
             </ul>

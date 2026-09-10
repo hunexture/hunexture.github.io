@@ -89,7 +89,7 @@ const Contact = () => {
   ]
 
   const socialLinks = [
-    { icon: <FaLinkedin />, name: 'LinkedIn', url: 'https://www.linkedin.com/in/hunexture-tech-175766391/' },
+    { icon: <FaLinkedin />, name: 'LinkedIn', url: 'https://www.linkedin.com/company/hunexture/' },
     { icon: <FaTwitter />, name: 'Twitter', url: 'https://x.com/hunexture' },
     { icon: <FaInstagram />, name: 'Instagram', url: 'https://www.instagram.com/hunexture' }
   ]
