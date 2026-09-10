@@ -65,6 +65,7 @@ const Footer = () => {
       { name: 'Digital Marketing', href: 'services/digital-marketing' }
     ],
     legal: [
+      { name: 'Business Profile', href: 'business-profile' },
       { name: 'Privacy Policy', href: 'privacy-policy' },
       { name: 'Terms of Service', href: 'terms-of-service' },
       { name: 'Cookie Policy', href: 'cookie-policy' },

@@ -21,6 +21,7 @@ import WebDevelopmentPage from './components/WebDevelopmentPage'
 import ServicesList from './components/ServicesList'
 import IndustriesList from './components/IndustriesList'
 import AIList from './components/AIList'
+import BusinessProfile from './components/BusinessProfile'
 import PrivacyPolicy from './components/PrivacyPolicy'
 import TermsOfService from './components/TermsOfService'
 import CookiePolicy from './components/CookiePolicy'
@@ -54,6 +55,7 @@ const Layout = ({ children }) => {
     location.pathname.startsWith('/portfolio') ||
     location.pathname.startsWith('/industries') ||
     location.pathname.startsWith('/ai') ||
+    location.pathname.startsWith('/business-profile') ||
     location.pathname.startsWith('/privacy-policy') ||
     location.pathname.startsWith('/terms-of-service') ||
     location.pathname.startsWith('/cookie-policy') ||
@@ -99,6 +101,7 @@ function App() {
             <Route path="/industries/:slug" element={<IndustryDetail />} />
             <Route path="/ai" element={<AIList />} />
             <Route path="/ai/:slug" element={<AIDetail />} />
+            <Route path="/business-profile" element={<BusinessProfile />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/cookie-policy" element={<CookiePolicy />} />
