@@ -1,34 +1,25 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useContext, useEffect } from 'react';
 
-const ThemeContext = createContext();
+// The site uses a single "blueprint" theme (light). The context is kept so
+// components can still read `theme` (e.g. Logo picks the light-background logo).
+const THEME = 'white';
 
-export const useTheme = () => {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
-  return context;
-};
+const ThemeContext = createContext({ theme: THEME });
+
+export const useTheme = () => useContext(ThemeContext);
 
 export const ThemeProvider = ({ children }) => {
-  // Get saved theme from localStorage, default to 'black'
-  const [theme, setTheme] = useState(() => {
-    const savedTheme = localStorage.getItem('hunexture-theme');
-    return savedTheme || 'black';
-  });
-
-  // Apply theme to document root
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('hunexture-theme', theme);
-  }, [theme]);
-
-  const toggleTheme = (newTheme) => {
-    setTheme(newTheme);
-  };
+    document.documentElement.setAttribute('data-theme', THEME);
+    try {
+      localStorage.removeItem('hunexture-theme');
+    } catch (e) {
+      // storage unavailable — nothing to clean up
+    }
+  }, []);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme: THEME }}>
       {children}
     </ThemeContext.Provider>
   );

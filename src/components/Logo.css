@@ -40,7 +40,7 @@
 }
 
 .logo-text {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-display);
   font-weight: 800;
   letter-spacing: 3px;
   display: inline-block;

@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
     FaCode, FaRocket, FaCheck, FaChevronDown, FaServer, FaDatabase,
-    FaGlobe, FaMobileAlt, FaLaptopCode, FaChartLine, FaArrowRight,
-    FaBolt, FaLock, FaUsers, FaArrowLeft, FaSitemap
+    FaLaptopCode, FaArrowRight, FaArrowLeft
 } from 'react-icons/fa'
 import { SiReact, SiNodedotjs, SiPython, SiTypescript, SiPostgresql, SiRedis, SiDocker, SiAmazonwebservices } from 'react-icons/si'
 import { getServiceBySlug } from '../data/servicesData'

@@ -1,0 +1,422 @@
+/* ─── Hero live drawing: one AI request, looped ─────────────────────
+   Timeline (one 9s cycle, shared by every animation below):
+     0–25%   Ask     — question types into the app
+     25–50%  Think   — packet travels to the model, layers fire in turn
+     50–75%  Answer  — packet returns, answer and chart stream in
+     75–93%  Check   — eval, latency and cost tick in
+     93–100%         — content fades, loop restarts
+   Base styles are the finished frame (used when motion is reduced). */
+
+.hl-figure {
+  --hl-cycle: 9s;
+  margin: 0;
+}
+
+.hl-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hl-caption {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+}
+
+/* ── Static parts ── */
+.hl-sheet {
+  fill: var(--paper-raised);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.hl-frame {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.hl-zone {
+  font-family: var(--font-annot);
+  font-size: 9px;
+  fill: var(--ink-muted);
+}
+
+.hl-ink {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.hl-thin {
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: 1;
+}
+
+.hl-dashed {
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: 1.2;
+  stroke-dasharray: 5 4;
+}
+
+.hl-text {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  fill: var(--ink);
+}
+
+.hl-mono {
+  font-family: var(--font-annot);
+  font-size: 11px;
+  fill: var(--ink);
+}
+
+.hl-mono--muted {
+  fill: var(--ink-muted);
+}
+
+.hl-bubble-user {
+  fill: var(--signal-tint);
+  stroke: var(--signal);
+  stroke-width: 1.2;
+}
+
+.hl-bubble-reply {
+  fill: var(--paper-raised);
+  stroke: var(--line-strong);
+  stroke-width: 1.2;
+}
+
+.hl-cover {
+  transform-box: fill-box;
+  transform-origin: right center;
+  transform: scaleX(0);
+}
+
+.hl-cover--tint {
+  fill: var(--signal-tint);
+}
+
+.hl-cover--paper {
+  fill: var(--paper-raised);
+}
+
+.hl-bar {
+  fill: var(--signal);
+  transform-box: fill-box;
+  transform-origin: left center;
+}
+
+.hl-bar--mid {
+  fill: #5B82E6;
+}
+
+.hl-bar--low {
+  fill: #9DB5F0;
+}
+
+.hl-checkbox {
+  fill: var(--signal);
+}
+
+.hl-checkmark {
+  fill: none;
+  stroke: #FFFFFF;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hl-edges line {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.hl-edges-lit line {
+  stroke: var(--signal);
+  stroke-width: 1.2;
+}
+
+.hl-edges-lit {
+  opacity: 0;
+}
+
+.hl-node {
+  fill: var(--paper-raised);
+  stroke: var(--signal);
+  stroke-width: 1.5;
+}
+
+.hl-a-n3 {
+  fill: var(--signal);
+}
+
+.hl-trace {
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: 1.2;
+}
+
+.hl-via {
+  fill: var(--paper-raised);
+  stroke: var(--ink-muted);
+  stroke-width: 1;
+}
+
+.hl-packet {
+  fill: none;
+  stroke: var(--signal);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 0.14 2;
+  opacity: 0;
+}
+
+.hl-caret {
+  stroke: var(--signal);
+  stroke-width: 1.5;
+  animation: hl-blink 1.1s steps(1) infinite;
+}
+
+.hl-progress {
+  fill: var(--signal);
+  transform-box: fill-box;
+  transform-origin: left center;
+}
+
+.hl-phase {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  fill: var(--ink-muted);
+}
+
+.hl-playhead {
+  fill: var(--signal);
+}
+
+.hl-playhead-line {
+  stroke: var(--signal);
+  stroke-width: 1.5;
+}
+
+/* ── Animation bindings ── */
+.hl-a-content   { animation: hl-content   var(--hl-cycle) linear infinite; }
+.hl-a-type1     { animation: hl-type1     var(--hl-cycle) steps(21, end) infinite; }
+.hl-a-type2     { animation: hl-type2     var(--hl-cycle) steps(15, end) infinite; }
+.hl-a-out       { animation: hl-out       var(--hl-cycle) ease-in-out infinite; }
+.hl-a-e1        { animation: hl-e1        var(--hl-cycle) ease infinite; }
+.hl-a-e2        { animation: hl-e2        var(--hl-cycle) ease infinite; }
+.hl-a-n1        { animation: hl-n1        var(--hl-cycle) ease infinite; }
+.hl-a-n2        { animation: hl-n2        var(--hl-cycle) ease infinite; }
+.hl-a-n3        { animation: hl-n3        var(--hl-cycle) ease infinite; }
+.hl-a-back      { animation: hl-back      var(--hl-cycle) ease-in-out infinite; }
+.hl-a-replybox  { animation: hl-replybox  var(--hl-cycle) ease infinite; }
+.hl-a-type3     { animation: hl-type3     var(--hl-cycle) steps(21, end) infinite; }
+.hl-a-bar1      { animation: hl-bar1      var(--hl-cycle) cubic-bezier(0.2, 0.7, 0.2, 1) infinite; }
+.hl-a-bar2      { animation: hl-bar2      var(--hl-cycle) cubic-bezier(0.2, 0.7, 0.2, 1) infinite; }
+.hl-a-bar3      { animation: hl-bar3      var(--hl-cycle) cubic-bezier(0.2, 0.7, 0.2, 1) infinite; }
+.hl-a-lab1      { animation: hl-lab1      var(--hl-cycle) ease infinite; }
+.hl-a-lab2      { animation: hl-lab2      var(--hl-cycle) ease infinite; }
+.hl-a-lab3      { animation: hl-lab3      var(--hl-cycle) ease infinite; }
+.hl-a-sources   { animation: hl-sources   var(--hl-cycle) ease infinite; }
+.hl-a-check1    { animation: hl-check1    var(--hl-cycle) ease infinite; }
+.hl-a-check2    { animation: hl-check2    var(--hl-cycle) ease infinite; }
+.hl-a-check3    { animation: hl-check3    var(--hl-cycle) ease infinite; }
+.hl-a-progress  { animation: hl-progress  var(--hl-cycle) linear infinite; }
+.hl-a-playhead  { animation: hl-playhead  var(--hl-cycle) linear infinite; }
+.hl-a-ph1       { animation: hl-ph1       var(--hl-cycle) linear infinite; }
+.hl-a-ph2       { animation: hl-ph2       var(--hl-cycle) linear infinite; }
+.hl-a-ph3       { animation: hl-ph3       var(--hl-cycle) linear infinite; }
+.hl-a-ph4       { animation: hl-ph4       var(--hl-cycle) linear infinite; }
+
+/* Off screen: freeze everything together so the loop stays in sync */
+.hl-figure.is-paused * {
+  animation-play-state: paused !important;
+}
+
+/* ── Keyframes ── */
+@keyframes hl-blink { 50% { opacity: 0; } }
+
+@keyframes hl-content {
+  0% { opacity: 0; }
+  2%, 93% { opacity: 1; }
+  99%, 100% { opacity: 0; }
+}
+
+/* Ask */
+@keyframes hl-type1 {
+  0%, 3% { transform: scaleX(1); }
+  14%, 100% { transform: scaleX(0); }
+}
+
+@keyframes hl-type2 {
+  0%, 14% { transform: scaleX(1); }
+  22%, 100% { transform: scaleX(0); }
+}
+
+/* Think */
+@keyframes hl-out {
+  0%, 25% { stroke-dashoffset: 0.14; opacity: 0; }
+  25.5% { opacity: 1; }
+  31.5% { stroke-dashoffset: -1; opacity: 1; }
+  32%, 100% { stroke-dashoffset: -1; opacity: 0; }
+}
+
+@keyframes hl-n1 {
+  0%, 31% { fill: var(--paper-raised); }
+  33%, 45% { fill: var(--signal); }
+  52%, 100% { fill: var(--paper-raised); }
+}
+
+@keyframes hl-e1 {
+  0%, 33% { opacity: 0; }
+  37% { opacity: 1; }
+  46%, 100% { opacity: 0; }
+}
+
+@keyframes hl-n2 {
+  0%, 37% { fill: var(--paper-raised); }
+  39%, 47% { fill: var(--signal); }
+  54%, 100% { fill: var(--paper-raised); }
+}
+
+@keyframes hl-e2 {
+  0%, 39% { opacity: 0; }
+  43% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes hl-n3 {
+  0%, 43% { fill: var(--paper-raised); }
+  45%, 56% { fill: var(--signal); }
+  62%, 100% { fill: var(--paper-raised); }
+}
+
+/* Answer */
+@keyframes hl-back {
+  0%, 50% { stroke-dashoffset: 0.14; opacity: 0; }
+  50.5% { opacity: 1; }
+  56% { stroke-dashoffset: -1; opacity: 1; }
+  56.5%, 100% { stroke-dashoffset: -1; opacity: 0; }
+}
+
+@keyframes hl-replybox {
+  0%, 53% { opacity: 0; }
+  56%, 94% { opacity: 1; }
+  99%, 100% { opacity: 0; }
+}
+
+@keyframes hl-type3 {
+  0%, 57% { transform: scaleX(1); }
+  64%, 100% { transform: scaleX(0); }
+}
+
+@keyframes hl-bar1 {
+  0%, 62% { transform: scaleX(0); }
+  68%, 100% { transform: scaleX(1); }
+}
+
+@keyframes hl-bar2 {
+  0%, 64.5% { transform: scaleX(0); }
+  70%, 100% { transform: scaleX(1); }
+}
+
+@keyframes hl-bar3 {
+  0%, 67% { transform: scaleX(0); }
+  72%, 100% { transform: scaleX(1); }
+}
+
+@keyframes hl-lab1 {
+  0%, 65% { opacity: 0; }
+  68%, 100% { opacity: 1; }
+}
+
+@keyframes hl-lab2 {
+  0%, 67.5% { opacity: 0; }
+  70%, 100% { opacity: 1; }
+}
+
+@keyframes hl-lab3 {
+  0%, 70% { opacity: 0; }
+  72.5%, 100% { opacity: 1; }
+}
+
+@keyframes hl-sources {
+  0%, 71% { opacity: 0; }
+  74%, 100% { opacity: 1; }
+}
+
+/* Check */
+@keyframes hl-check1 {
+  0%, 76% { opacity: 0; }
+  78%, 100% { opacity: 1; }
+}
+
+@keyframes hl-check2 {
+  0%, 80% { opacity: 0; }
+  82%, 100% { opacity: 1; }
+}
+
+@keyframes hl-check3 {
+  0%, 84% { opacity: 0; }
+  86%, 100% { opacity: 1; }
+}
+
+/* Timeline */
+@keyframes hl-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes hl-playhead {
+  from { transform: translateX(0); }
+  to { transform: translateX(376px); }
+}
+
+@keyframes hl-ph1 {
+  0%, 24.9% { fill: var(--signal); }
+  25%, 100% { fill: var(--ink-muted); }
+}
+
+@keyframes hl-ph2 {
+  0%, 24.9% { fill: var(--ink-muted); }
+  25%, 49.9% { fill: var(--signal); }
+  50%, 100% { fill: var(--ink-muted); }
+}
+
+@keyframes hl-ph3 {
+  0%, 49.9% { fill: var(--ink-muted); }
+  50%, 74.9% { fill: var(--signal); }
+  75%, 100% { fill: var(--ink-muted); }
+}
+
+@keyframes hl-ph4 {
+  0%, 74.9% { fill: var(--ink-muted); }
+  75%, 100% { fill: var(--signal); }
+}
+
+/* Reduced motion: show the finished frame, no loop */
+@media (prefers-reduced-motion: reduce) {
+  .hl-figure *,
+  .hl-figure *::before,
+  .hl-figure *::after {
+    animation: none !important;
+  }
+
+  .hl-a-progress {
+    transform: scaleX(1);
+  }
+
+  .hl-a-playhead {
+    transform: translateX(376px);
+  }
+
+  .hl-a-ph4 {
+    fill: var(--signal);
+  }
+}

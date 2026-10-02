@@ -106,7 +106,7 @@
 
 .sl-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(380px, 100%), 1fr));
   gap: 40px;
   position: relative;
   z-index: 2;
@@ -246,7 +246,6 @@
 
 /* Hover effects */
 .sl-card:hover {
-  transform: translateY(-8px);
   border-color: var(--electric-blue);
   box-shadow: 0 20px 40px var(--glow-color), 
               0 0 0 1px var(--electric-blue-20);

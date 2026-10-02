@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { FaRocket, FaCheck, FaChevronDown } from 'react-icons/fa'
 import { getServiceBySlug } from '../data/servicesData'
+import { textTone } from '../utils/color'
 import './ServiceDetail.css'
 
 const colorSchemes = {
@@ -499,7 +500,7 @@ const ServiceDetail = ({ serviceSlug }) => {
   ]
 
   return (
-    <div className="sd-container" style={{ '--sd-color': colors.primary, '--sd-gradient': colors.gradient }}>
+    <div className="sd-container" style={{ '--sd-color': textTone(colors.primary), '--sd-gradient': colors.gradient }}>
 
       {/* ─── Hero ────────────────────────────────────────────────────── */}
       <section className="sd-hero">
@@ -588,9 +589,9 @@ const ServiceDetail = ({ serviceSlug }) => {
                     className="sd-benefit-check"
                     style={{ background: `${colors.primary}20`, border: `1px solid ${colors.primary}50` }}
                   >
-                    <FaCheck style={{ color: colors.primary }} />
+                    <FaCheck style={{ color: textTone(colors.primary) }} />
                   </div>
-                  <span className="sd-benefit-num tech-font" style={{ color: colors.primary }}>
+                  <span className="sd-benefit-num tech-font" style={{ color: textTone(colors.primary) }}>
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <p>{benefit}</p>
@@ -663,7 +664,7 @@ const ServiceDetail = ({ serviceSlug }) => {
                     className="sd-step-card"
                     style={{ borderColor: `${colors.primary}25` }}
                   >
-                    <h3 style={{ color: colors.primary }}>{step.title}</h3>
+                    <h3 style={{ color: textTone(colors.primary) }}>{step.title}</h3>
                     <p>{step.description}</p>
                   </div>
                 </div>
@@ -695,7 +696,7 @@ const ServiceDetail = ({ serviceSlug }) => {
                       className="sd-usecase-icon"
                       style={{ background: `${colors.primary}18`, border: `1px solid ${colors.primary}40` }}
                     >
-                      <UCIcon style={{ color: colors.primary }} />
+                      <UCIcon style={{ color: textTone(colors.primary) }} />
                     </div>
                     <h3>{uc.title}</h3>
                     <p>{uc.description}</p>
@@ -732,7 +733,7 @@ const ServiceDetail = ({ serviceSlug }) => {
                     <span>{item.question}</span>
                     <FaChevronDown
                       className="sd-faq-chevron"
-                      style={{ color: colors.primary }}
+                      style={{ color: textTone(colors.primary) }}
                     />
                   </button>
                   <div className="sd-faq-a">

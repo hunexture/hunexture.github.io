@@ -25,7 +25,6 @@
 }
 
 .whatsapp-fab:hover {
-  transform: scale(1.1);
   box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
 }
 
@@ -92,3 +91,31 @@
   }
 }
 
+
+/* Blueprint layout: FAB sits above the back-to-top button; no endless pulse */
+.whatsapp-fab-wrapper {
+  bottom: 84px;
+  right: 24px;
+}
+
+.whatsapp-fab {
+  width: 52px;
+  height: 52px;
+  box-shadow: 0 4px 14px rgba(11, 31, 58, 0.2);
+}
+
+.whatsapp-fab:hover {
+  transform: none;
+  box-shadow: 0 6px 18px rgba(11, 31, 58, 0.28);
+}
+
+.whatsapp-pulse {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .whatsapp-fab-wrapper {
+    bottom: 76px;
+    right: 16px;
+  }
+}

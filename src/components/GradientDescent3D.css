@@ -39,7 +39,6 @@
 }
 
 .back-button-gd3d:hover {
-    transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 123, 255, 0.5);
 }
 
@@ -245,7 +244,6 @@ input:checked+.slider-toggle:before {
 
 .btn-play:hover {
     background-color: #16a34a;
-    transform: translateY(-1px);
 }
 
 .btn-pause {
@@ -254,7 +252,6 @@ input:checked+.slider-toggle:before {
 
 .btn-pause:hover {
     background-color: #dc2626;
-    transform: translateY(-1px);
 }
 
 .btn-reset {
@@ -263,7 +260,6 @@ input:checked+.slider-toggle:before {
 
 .btn-reset:hover {
     background-color: #475569;
-    transform: translateY(-1px);
 }
 
 /* Slider */

@@ -48,7 +48,7 @@ All routes are defined in `src/App.js`:
 
 | Path | Component | Notes |
 |---|---|---|
-| `/` | `HomePage` | Composed of Hero, TechMarquee, About, ProcessSection, Testimonials, Services, Portfolio, FAQ, Contact |
+| `/` | `HomePage` | Hero, About, Services, WorkingWithUs, Portfolio, Testimonials (example engagements), EngagementModels, FAQ, Contact |
 | `/services/ai-solutions` | `AISolutionsPage` | Special dedicated AI page (not a slug route) |
 | `/services/web-development` | `WebDevelopmentPage` | Special dedicated Web Development page (not a slug route) |
 | `/services/:slug` | `ServiceDetail` | Dynamic service detail page |
@@ -70,41 +70,32 @@ All routes are defined in `src/App.js`:
 
 ---
 
-## 🎨 Theming System
+## 🎨 Design System — "Blueprint" (single theme)
 
-### CSS Variables (`src/index.css`)
-Three themes powered by `data-theme` attribute on `:root`:
+The site has **one theme** (light, engineering-blueprint style). The black/white/blue switcher was removed in Oct 2026.
+`ThemeContext` still exists but always reports `theme: 'white'` and sets `data-theme="white"` (so `Logo` picks the light-background logo).
 
-| Variable | Black (default) | White | Blue |
-|---|---|---|---|
-| `--navy-blue` | `#000000` | `#ffffff` | `#0a192f` |
-| `--dark-navy` | `#0a0a0a` | `#f5f5f5` | `#020c1b` |
-| `--electric-blue` | `#ffffff` | `#000000` | `#00d4ff` |
-| `--bright-blue` | `#cccccc` | `#333333` | `#0080ff` |
-| `--light-blue` | `#999999` | `#666666` | `#64ffda` |
-| `--text-white` | `#ffffff` | `#000000` | `#e6f1ff` |
-| `--text-gray` | `#888888` | `#666666` | `#8892b0` |
-| `--card-bg` | `#1a1a1a` | `#f9f9f9` | `#112240` |
-| `--border-color` | `#333333` | `#e0e0e0` | `#00d4ff` |
+### Core tokens (`src/index.css` `:root`)
+| Token | Value | Use |
+|---|---|---|
+| `--paper` | `#F4F7FB` | page background |
+| `--paper-raised` | `#FFFFFF` | cards, forms, drawings |
+| `--paper-sunk` | `#E9EFF7` | alternate section bands |
+| `--ink` | `#0B1F3A` | text, strong rules |
+| `--ink-muted` | `#47597A` | secondary text |
+| `--line` / `--line-strong` | `#CBD6E6` / `#9DB0CB` | hairlines, borders |
+| `--signal` / `--signal-deep` / `--signal-tint` | `#1D4ED8` / `#1E3A8A` / `#E3EBFC` | the one accent (links, buttons, focus) |
+| `--font-display` / `--font-body` | Archivo (variable width) | headings use `font-stretch` 105–118% |
+| `--font-annot` | IBM Plex Mono | ONLY for drawing annotations/labels |
 
-Also has alpha-channel variants: `--electric-blue-03` through `--electric-blue-80`, plus `--overlay-bg`, `--overlay-light`, `--card-overlay`, `--card-overlay-dark`.
+Legacy names (`--navy-blue`, `--text-white`, `--electric-blue`, `--card-bg`, …) are kept as **aliases** of the tokens above so older components still work. Don't add new usages of legacy names.
 
-### ThemeContext (`src/context/ThemeContext.js`)
-- Persists to `localStorage` with key `hunexture-theme`
-- Default theme: `'black'`
-- Toggle: `const { theme, toggleTheme } = useTheme()`
-- Applied via: `document.documentElement.setAttribute('data-theme', theme)`
-
-### Typography
-- **Body font:** `Inter` (from Google Fonts via public/index.html)
-- **Heading font:** `Orbitron` (h1–h6 all use this)
-
-### ⚠️ Theme Rules
-- **NEVER hardcode background colors** in component CSS. Always use CSS variables.
-- For background, use `var(--navy-blue)` or `var(--dark-navy)`.
-- For text, use `var(--text-white)` or `var(--text-gray)`.
-- For borders, use `var(--border-color)`.
-- For cards, use `var(--card-bg)`.
+### Rules
+- Never hardcode colours for text on paper. Per-item accent colours from data files (industry/service/AI `color`) must go through `textTone()` from `src/utils/color.js` when used as text — it darkens them to WCAG AA.
+- Dark "screen" widgets (terminals, phone mockups) may keep a dark surface but must re-point `--text-white`/`--ink` to light values on the container (see end of `WebDevelopmentPage.css`, `ServiceDetail.css`).
+- Grids: use `minmax(min(Npx, 100%), 1fr)`, never a bare fixed minimum (overflows on phones).
+- Sections that paint a background must be full-bleed — the global `section { max-width: 1400px }` in `App.css` is overridden for hero/alt-bg/cta bands.
+- Fonts load from Google Fonts in `public/index.html` (not via CSS `@import`).
 
 ---
 
@@ -328,3 +319,13 @@ Hero → TechMarquee → About → ProcessSection → WorkingWithUs → Services
 - Cards use the `glass-panel` utility class (FAQ items, contact info items, service cards, new sections) instead of re-declaring glass backgrounds.
 - `.visually-hidden` utility lives in `index.css`.
 - Reduced motion: hero video is paused in JS; marquees become static wrapped rows; HUD/orb animations stop.
+
+
+---
+
+## 📐 Session: Blueprint redesign + style bug sweep (2026-10-02)
+
+- Home page rebuilt in the blueprint style: hero is a drafted delivery-pipeline drawing (HTML/CSS, not video); About = title-block stats; Services = schedule table; Portfolio = blueprint-tinted sheets; Testimonials = honest "Example engagements" table; FAQ = accessible accordion.
+- Removed: theme toggle, TechMarquee, ProcessSection, AnimatedBackground, BackgroundEffect, Carousel, hero video usage, AI-detail fake telemetry console.
+- Bugs fixed: undefined CSS vars (`--primary-color`, `--dark-black`, `--background-color`, `--text-color`); a global `*:not(...)` transition rule that overrode every component transition; fonts never loaded properly; white-on-white text across detail pages; per-item accent colours failing contrast; fixed-min grids overflowing phones; section max-width gutters; relative footer hrefs breaking from sub-pages; floating buttons overlapping; unused imports that failed `CI=true` builds.
+- Verification: automated contrast/overflow audit across 19 routes at 1440px and 390px — zero failures; `CI=true npm run build` passes.

@@ -1,219 +1,88 @@
-.testimonials {
-  padding: 60px 0;
-  background: var(--dark-navy);
-  position: relative;
+.outcomes-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 1.5px solid var(--ink);
+  font-size: 0.98rem;
 }
 
-.testimonials-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 40px;
+.outcomes-table thead th {
+  text-align: left;
+  font-family: var(--font-annot);
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line-strong);
 }
 
-/* Section header animation */
-.testimonials .section-header {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+.outcomes-table tbody th,
+.outcomes-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 20px 16px;
+  border-bottom: 1px solid var(--line);
+  line-height: 1.55;
 }
 
-.testimonials .section-header.animate-in {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Desktop: marquee strip */
-.testimonials-marquee {
-  margin-top: 50px;
-}
-
-.testimonials-marquee-outer {
-  overflow: hidden;
-  position: relative;
-  /* Fade edges so cards ghost in/out smoothly */
-  -webkit-mask-image: linear-gradient(to right,
-      transparent 0%,
-      black 8%,
-      black 92%,
-      transparent 100%);
-  mask-image: linear-gradient(to right,
-      transparent 0%,
-      black 8%,
-      black 92%,
-      transparent 100%);
-}
-
-.testimonials-marquee-track,
-.testimonials-marquee-clone {
-  display: flex;
-  gap: 24px;
-}
-
-.testimonials-marquee-track {
-  width: max-content;
-  padding: 12px 0;
-  animation: testimonials-scroll 40s linear infinite;
-}
-
-/* Pause on hover, keyboard focus, or the visible pause button */
-.testimonials-marquee-outer:hover .testimonials-marquee-track,
-.testimonials-marquee-outer:focus-within .testimonials-marquee-track,
-.testimonials-marquee.is-paused .testimonials-marquee-track {
-  animation-play-state: paused;
-}
-
-@keyframes testimonials-scroll {
-  0% {
-    transform: translateX(0);
-  }
-
-  /* shift by exactly one copy of the set (track gap included) */
-  100% {
-    transform: translateX(calc(-50% - 12px));
-  }
-}
-
-.testimonial-marquee-card {
-  width: 340px;
-  flex-shrink: 0;
-}
-
-.marquee-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin: 20px auto 0;
-  padding: 8px 18px;
-  border-radius: 999px;
-  border: 1px solid var(--border-color);
-  background: var(--card-bg);
-  color: var(--text-white);
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: border-color 0.2s ease, color 0.2s ease;
-}
-
-.testimonials-marquee {
-  display: flex;
-  flex-direction: column;
-}
-
-.marquee-toggle:hover {
-  border-color: var(--electric-blue);
-  color: var(--electric-blue);
-}
-
-/* Card */
-.testimonial-card {
-  border-radius: 16px;
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.testimonial-card:hover {
-  border-color: var(--electric-blue-40);
-  box-shadow: 0 20px 40px var(--electric-blue-10);
-}
-
-.outcome-label {
-  align-self: flex-start;
-  padding: 4px 10px;
-  border-radius: 999px;
-  border: 1px dashed var(--electric-blue-40);
-  color: var(--text-gray);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.outcome-scenario {
-  font-size: 18px;
-  color: var(--text-white);
-  margin: 0;
-}
-
-.outcome-details {
-  margin: 0;
-  display: grid;
-  gap: 4px;
-}
-
-.outcome-details dt {
-  font-size: 12px;
+.outcomes-table tbody th {
+  font-family: var(--font-display);
+  font-stretch: 112%;
   font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--text-white);
-  margin-top: 6px;
+  font-size: 1.05rem;
+  color: var(--ink);
+  width: 20%;
 }
 
-.outcome-details dd {
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--text-gray);
+.outcomes-table td {
+  color: var(--ink-muted);
 }
 
-.outcome-result {
-  margin: auto 0 0;
-  padding-top: 12px;
-  border-top: 1px solid var(--electric-blue-10);
-  font-size: 14px;
+.outcomes-table td.outcomes-target {
+  color: var(--signal-deep);
   font-weight: 600;
-  color: var(--electric-blue);
 }
 
-/* Mobile carousel — hidden on desktop */
-.testimonials-carousel {
-  display: none;
-}
-
-@media (max-width: 900px) {
-  .testimonial-marquee-card {
-    width: 300px;
-  }
-}
-
-@media (max-width: 768px) {
-  .testimonials {
-    padding: 45px 0;
+/* Stack rows on small screens */
+@media (max-width: 860px) {
+  .outcomes-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
   }
 
-  .testimonials-container {
-    padding: 0 16px;
-  }
-
-  .testimonials-marquee {
-    display: none;
-  }
-
-  .testimonials-carousel {
+  .outcomes-table,
+  .outcomes-table tbody,
+  .outcomes-table tr,
+  .outcomes-table th,
+  .outcomes-table td {
     display: block;
-    margin-top: 24px;
-  }
-}
-
-/* Reduced motion: no auto-scroll — show a static, wrapping grid instead */
-@media (prefers-reduced-motion: reduce) {
-  .testimonials-marquee-outer {
-    -webkit-mask-image: none;
-    mask-image: none;
+    width: 100%;
   }
 
-  .testimonials-marquee-track {
-    animation: none;
-    width: auto;
-    flex-wrap: wrap;
-    justify-content: center;
+  .outcomes-table tr {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line-strong);
   }
 
-  .testimonials-marquee-clone,
-  .marquee-toggle {
-    display: none;
+  .outcomes-table tbody th {
+    width: 100%;
+    padding: 0 0 8px;
+    border: 0;
+  }
+
+  .outcomes-table td {
+    padding: 6px 0;
+    border: 0;
+  }
+
+  .outcomes-table td::before {
+    content: attr(data-label);
+    display: block;
+    font-family: var(--font-annot);
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    margin-bottom: 2px;
   }
 }

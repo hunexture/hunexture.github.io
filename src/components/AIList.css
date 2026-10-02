@@ -106,7 +106,7 @@
 
 .al-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(380px, 100%), 1fr));
   gap: 40px;
   position: relative;
   z-index: 2;
@@ -252,7 +252,6 @@
 
 /* Hover effects */
 .al-card:hover {
-  transform: translateY(-8px);
   border-color: var(--light-blue);
   box-shadow: 0 20px 40px var(--glow-color), 
               0 0 0 1px rgba(100, 255, 218, 0.15);

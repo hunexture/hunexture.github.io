@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { industriesData } from '../data/industriesData'
-import { 
-    FaArrowRight, FaRocket, FaCheckCircle, FaLaptopCode, FaCogs, 
-    FaDatabase, FaServer, FaShieldAlt, FaChartLine, FaNetworkWired,
-    FaSearch, FaBrain, FaCloud, FaLock, FaMicrochip, FaUsers
+import {
+    FaArrowRight, FaRocket, FaShieldAlt, FaNetworkWired,
+    FaSearch, FaBrain, FaCloud
 } from 'react-icons/fa'
 import { formatStat, getStat } from '../data/companyData'
+import { textTone } from '../utils/color'
 import './IndustriesList.css'
 
 // Custom architecture pipeline for each industry sector in the interactive simulator
@@ -346,7 +346,7 @@ const IndustriesList = () => {
                             <div className="il-display-glow" />
                             <div className="il-display-left">
                                 <div className="display-industry-title">
-                                    <activeIndustry.icon style={{ color: activeIndustry.color }} />
+                                    <activeIndustry.icon style={{ color: textTone(activeIndustry.color) }} />
                                     <h3>{activeIndustry.name} Blueprint</h3>
                                 </div>
                                 <p className="display-industry-desc">{activeIndustry.description}</p>
@@ -354,7 +354,7 @@ const IndustriesList = () => {
                                 <div className="display-stats-grid">
                                     {activeIndustry.stats?.slice(0, 3).map((stat, i) => (
                                         <div key={i} className="display-stat-card">
-                                            <strong style={{ color: activeIndustry.color }}>{stat.value}</strong>
+                                            <strong style={{ color: textTone(activeIndustry.color) }}>{stat.value}</strong>
                                             <span>{stat.label}</span>
                                         </div>
                                     ))}
@@ -486,15 +486,15 @@ const IndustriesList = () => {
                                 <div 
                                     key={industry.id} 
                                     className="il-card glass-panel" 
-                                    style={{ '--accent-color': industry.color, '--delay': `${index * 0.04}s` }}
+                                    style={{ '--accent-color': textTone(industry.color), '--delay': `${index * 0.04}s` }}
                                     onClick={() => navigate(`/industries/${industry.slug}`)}
                                 >
                                     <div className="il-card-glow" />
                                     <div className="il-card-top">
                                         <div className="il-icon-wrapper" style={{ background: `${industry.color}15`, borderColor: `${industry.color}40` }}>
-                                            <Icon className="il-icon" style={{ color: industry.color }} />
+                                            <Icon className="il-icon" style={{ color: textTone(industry.color) }} />
                                         </div>
-                                        <span className="il-card-badge tech-font" style={{ color: industry.color, borderColor: `${industry.color}30` }}>
+                                        <span className="il-card-badge tech-font" style={{ color: textTone(industry.color), borderColor: `${industry.color}30` }}>
                                             {industry.services.length}+ Solutions
                                         </span>
                                     </div>
@@ -504,7 +504,7 @@ const IndustriesList = () => {
                                     <div className="il-card-stats-mini">
                                         {industry.stats?.slice(0, 2).map((st, i) => (
                                             <div key={i} className="mini-stat">
-                                                <strong style={{ color: industry.color }}>{st.value}</strong>
+                                                <strong style={{ color: textTone(industry.color) }}>{st.value}</strong>
                                                 <span>{st.label}</span>
                                             </div>
                                         ))}

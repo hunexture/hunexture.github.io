@@ -6,6 +6,7 @@ import {
 } from 'react-icons/fa'
 import { getIndustryBySlug, industriesData, getTechIcon, getWhyChooseUsIcon } from '../data/industriesData'
 import { formatStat, getStat } from '../data/companyData'
+import { textTone } from '../utils/color'
 import './IndustryDetail.css'
 
 const IndustryDetail = () => {
@@ -74,7 +75,7 @@ const IndustryDetail = () => {
     .slice(0, 4)
 
   return (
-    <div className="ind-container" style={{ '--ind-color': industry.color }}>
+    <div className="ind-container" style={{ '--ind-color': textTone(industry.color) }}>
 
       {/* ─── Sticky Breadcrumb Bar ──────────────────────────────── */}
       <div className={`ind-breadcrumb-bar${scrolled ? ' ind-breadcrumb-visible' : ''}`}>
@@ -88,7 +89,7 @@ const IndustryDetail = () => {
               Industries
             </button>
             <FaChevronRight className="ind-breadcrumb-sep" />
-            <span className="ind-breadcrumb-current" style={{ color: industry.color }}>
+            <span className="ind-breadcrumb-current" style={{ color: textTone(industry.color) }}>
               {industry.name}
             </span>
           </div>
@@ -159,7 +160,7 @@ const IndustryDetail = () => {
             <div className="ind-stats-grid">
               {industry.stats.map((stat, i) => (
                 <div key={i} className="ind-stat-card" style={{ '--delay': `${i * 0.1}s` }}>
-                  <strong className="tech-font" style={{ color: industry.color }}>{stat.value}</strong>
+                  <strong className="tech-font" style={{ color: textTone(industry.color) }}>{stat.value}</strong>
                   <span>{stat.label}</span>
                 </div>
               ))}
@@ -196,7 +197,7 @@ const IndustryDetail = () => {
                       border: `1px solid ${industry.color}50`
                     }}
                   >
-                    <SIcon style={{ color: industry.color }} />
+                    <SIcon style={{ color: textTone(industry.color) }} />
                   </div>
                   <div className="ind-service-text">
                     <h3>{svc.name}</h3>
@@ -258,9 +259,9 @@ const IndustryDetail = () => {
                   className="ind-benefit-check"
                   style={{ background: `${industry.color}20`, border: `1px solid ${industry.color}50` }}
                 >
-                  <FaCheck style={{ color: industry.color }} />
+                  <FaCheck style={{ color: textTone(industry.color) }} />
                 </div>
-                <span className="ind-benefit-num tech-font" style={{ color: industry.color }}>
+                <span className="ind-benefit-num tech-font" style={{ color: textTone(industry.color) }}>
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <p>{benefit}</p>
@@ -298,7 +299,7 @@ const IndustryDetail = () => {
                     )}
                   </div>
                   <div className="ind-step-card" style={{ borderColor: `${industry.color}25` }}>
-                    <h3 style={{ color: industry.color }}>{step.title}</h3>
+                    <h3 style={{ color: textTone(industry.color) }}>{step.title}</h3>
                     <p>{step.description}</p>
                   </div>
                 </div>
@@ -328,7 +329,7 @@ const IndustryDetail = () => {
                     className="ind-challenge-icon"
                     style={{ background: `${industry.color}20`, border: `1px solid ${industry.color}50` }}
                   >
-                    <FaLightbulb style={{ color: industry.color }} />
+                    <FaLightbulb style={{ color: textTone(industry.color) }} />
                   </div>
                   <p>{ch}</p>
                 </div>
@@ -368,7 +369,7 @@ const IndustryDetail = () => {
                         border: `1px solid ${industry.color}50`
                       }}
                     >
-                      <WIcon style={{ color: industry.color }} />
+                      <WIcon style={{ color: textTone(industry.color) }} />
                     </div>
                     <div className="ind-why-text">
                       {isObj ? (
@@ -417,7 +418,7 @@ const IndustryDetail = () => {
                         borderColor: `${industry.color}40`
                       }}
                     >
-                      <FaRocket style={{ color: industry.color }} />
+                      <FaRocket style={{ color: textTone(industry.color) }} />
                       <span>{cs.results}</span>
                     </div>
                   </div>
@@ -456,7 +457,7 @@ const IndustryDetail = () => {
                     <span>{item.question}</span>
                     <FaChevronDown
                       className="ind-faq-chevron"
-                      style={{ color: industry.color }}
+                      style={{ color: textTone(industry.color) }}
                     />
                   </button>
                   <div className="ind-faq-a">
@@ -488,13 +489,13 @@ const IndustryDetail = () => {
                   onClick={() => navigate(`/industries/${rel.slug}`)}
                 >
                   <div className="ind-rel-icon-wrap">
-                    <div className="ind-rel-icon" style={{ background: `${rel.color}18`, color: rel.color }}>
+                    <div className="ind-rel-icon" style={{ background: `${rel.color}18`, color: textTone(rel.color) }}>
                       <RelIcon />
                     </div>
                   </div>
                   <h3>{rel.name}</h3>
                   <p>{rel.shortDescription}</p>
-                  <span className="ind-rel-link tech-font" style={{ color: rel.color }}>
+                  <span className="ind-rel-link tech-font" style={{ color: textTone(rel.color) }}>
                     View Blueprint <FaArrowRight />
                   </span>
                 </div>

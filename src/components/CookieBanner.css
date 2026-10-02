@@ -83,7 +83,6 @@
 
 .cookie-accept:hover {
   opacity: 0.85;
-  transform: translateY(-2px);
 }
 
 @media (max-width: 600px) {

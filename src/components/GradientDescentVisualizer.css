@@ -30,7 +30,6 @@
 }
 
 .back-button-gd:hover {
-    transform: translateX(-5px);
     box-shadow: 0 5px 15px rgba(0, 123, 255, 0.5);
 }
 
@@ -198,7 +197,6 @@
 
 .btn-primary-gd:hover {
     background: #2563eb;
-    transform: translateY(-1px);
 }
 
 .btn-danger-gd {
@@ -208,7 +206,6 @@
 
 .btn-danger-gd:hover {
     background: #dc2626;
-    transform: translateY(-1px);
 }
 
 .btn-secondary-gd {
@@ -219,7 +216,6 @@
 
 .btn-secondary-gd:hover {
     background: #334155;
-    transform: translateY(-1px);
 }
 
 /* Stats Panel */

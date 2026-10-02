@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { FaLinkedin, FaTwitter, FaInstagram, FaArrowUp, FaRocket } from 'react-icons/fa'
+import { FaLinkedin, FaTwitter, FaInstagram, FaArrowUp } from 'react-icons/fa'
 import Logo from './Logo'
 import './Footer.css'
 
@@ -51,7 +51,7 @@ const Footer = () => {
 
   const footerLinks = {
     company: [
-      { name: 'About Us', href: '#about' },
+      { name: 'About', href: '#about' },
       { name: 'Services', href: '#services' },
       { name: 'Portfolio', href: '#portfolio' },
       { name: 'Contact', href: '#contact' }
@@ -81,34 +81,35 @@ const Footer = () => {
 
   return (
     <footer className="footer">
-      {/* Footer CTA Banner */}
-      <div className="footer-cta">
-        <div className="footer-cta-inner">
-          <div className="footer-cta-text">
-            <h3 className="footer-cta-title">Ready to Build Something <span className="footer-cta-title-accent">Extraordinary?</span></h3>
-            <p className="footer-cta-description">
-              Turn your vision into an intelligent, scalable reality.
-              We reply within 24 hours — always.
-            </p>
+      {/* CTA banner — skipped on the home page, where the contact section sits right above */}
+      {location.pathname !== '/' && (
+        <div className="footer-cta">
+          <div className="footer-cta-inner">
+            <div className="footer-cta-text">
+              <h2 className="footer-cta-title">Have a project in mind?</h2>
+              <p className="footer-cta-description">
+                Book a free discovery call. We reply within one business day.
+              </p>
+            </div>
+            <a
+              href="/#contact"
+              className="footer-cta-btn"
+              onClick={(e) => handleLinkClick(e, '#contact')}
+            >
+              Book a discovery call
+            </a>
           </div>
-          <a
-            href="#contact"
-            className="footer-cta-btn"
-            onClick={(e) => handleLinkClick(e, '#contact')}
-          >
-            Start a Project <FaRocket className="footer-cta-icon" />
-          </a>
         </div>
-      </div>
+      )}
 
       <div className="footer-container">
         <div className="footer-content">
           <div className="footer-brand">
-            <Logo size="large" variant="image" />
+            <Logo size="large" variant="image" surface="dark" />
             <p className="footer-tagline">Building the Next Human Future</p>
             <p className="footer-description">
-              Empowering businesses with cutting-edge AI solutions and innovative technology
-              that transforms ideas into intelligent digital experiences.
+              AI and software engineering for startups and growing businesses.
+              Based in Ahmedabad, India, working with clients worldwide.
             </p>
             <div className="footer-social">
               {socialLinks.map((social, index) => (
@@ -116,6 +117,8 @@ const Footer = () => {
                   key={index}
                   href={social.url}
                   className="footer-social-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={social.name}
                   title={social.name}
                 >
@@ -127,33 +130,33 @@ const Footer = () => {
 
           <div className="footer-links-grid">
             <div className="footer-links-column">
-              <h4 className="footer-links-title">Company</h4>
+              <h2 className="footer-links-title">Company</h2>
               <ul className="footer-links-list">
                 {footerLinks.company.map((link, index) => (
                   <li key={index}>
-                    <a href={link.href} onClick={(e) => handleLinkClick(e, link.href)}>{link.name}</a>
+                    <a href={`/${link.href}`} onClick={(e) => handleLinkClick(e, link.href)}>{link.name}</a>
                   </li>
                 ))}
               </ul>
             </div>
 
             <div className="footer-links-column">
-              <h4 className="footer-links-title">Services</h4>
+              <h2 className="footer-links-title">Services</h2>
               <ul className="footer-links-list">
                 {footerLinks.services.map((link, index) => (
                   <li key={index}>
-                    <a href={link.href} onClick={(e) => handleLinkClick(e, link.href)}>{link.name}</a>
+                    <a href={`/${link.href}`} onClick={(e) => handleLinkClick(e, link.href)}>{link.name}</a>
                   </li>
                 ))}
               </ul>
             </div>
 
             <div className="footer-links-column">
-              <h4 className="footer-links-title">Legal</h4>
+              <h2 className="footer-links-title">Legal</h2>
               <ul className="footer-links-list">
                 {footerLinks.legal.map((link, index) => (
                   <li key={index}>
-                    <a href={link.href} onClick={(e) => handleLinkClick(e, link.href)}>{link.name}</a>
+                    <a href={`/${link.href}`} onClick={(e) => handleLinkClick(e, link.href)}>{link.name}</a>
                   </li>
                 ))}
               </ul>
@@ -163,13 +166,13 @@ const Footer = () => {
 
         <div className="footer-bottom">
           <p className="footer-copyright">
-            &copy; {new Date().getFullYear()} Hunexture. All rights reserved. Made by the Hunexture Team.
+            &copy; {new Date().getFullYear()} Hunexture. All rights reserved.
           </p>
         </div>
       </div>
 
       {showScrollTop && (
-        <button className="scroll-to-top" onClick={scrollToTop} aria-label="Scroll to top">
+        <button type="button" className="scroll-to-top" onClick={scrollToTop} aria-label="Back to top">
           <FaArrowUp />
         </button>
       )}

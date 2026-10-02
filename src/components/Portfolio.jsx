@@ -1,151 +1,79 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FaExternalLinkAlt, FaGithub, FaChevronDown } from 'react-icons/fa'
 import { portfolioData } from '../data/portfolioData'
 import './Portfolio.css'
+
+const categories = [
+  { id: 'all', label: 'All' },
+  { id: 'ai', label: 'AI' },
+  { id: 'web', label: 'Web' },
+  { id: 'mobile', label: 'Mobile' },
+  { id: 'cloud', label: 'Cloud' },
+  { id: 'marketing', label: 'Marketing' }
+]
+
+const INITIAL_COUNT = 6
 
 const Portfolio = () => {
   const [filter, setFilter] = useState('all')
   const [expanded, setExpanded] = useState(false)
-  const [initialCount, setInitialCount] = useState(3)
 
-  // Determine initial count based on screen size
-  useEffect(() => {
-    const updateInitialCount = () => {
-      if (window.innerWidth < 768) {
-        setInitialCount(3) // Mobile: 3 projects
-      } else if (window.innerWidth < 1024) {
-        setInitialCount(3) // Tablet: 3 projects
-      } else {
-        setInitialCount(3) // Desktop: 3 projects
-      }
-    }
+  // Only offer filters that have projects behind them
+  const available = categories.filter(c => c.id === 'all' || portfolioData.some(p => p.category === c.id))
+  const filtered = filter === 'all' ? portfolioData : portfolioData.filter(p => p.category === filter)
+  const shown = expanded ? filtered : filtered.slice(0, INITIAL_COUNT)
+  const hidden = filtered.length - shown.length
 
-    updateInitialCount()
-    window.addEventListener('resize', updateInitialCount)
-    return () => window.removeEventListener('resize', updateInitialCount)
-  }, [])
-
-  // Reset expanded state when filter changes
-  useEffect(() => {
+  const selectFilter = (id) => {
+    setFilter(id)
     setExpanded(false)
-  }, [filter])
-
-  const projects = portfolioData
-
-  const categories = [
-    { id: 'all', label: 'All Projects' },
-    { id: 'ai', label: 'AI Solutions' },
-    { id: 'web', label: 'Web Apps' },
-    { id: 'mobile', label: 'Mobile Apps' },
-    { id: 'cloud', label: 'Cloud Services' },
-    { id: 'marketing', label: 'Digital Marketing' }
-  ]
-
-  const filteredProjects = filter === 'all'
-    ? projects
-    : projects.filter(project => project.category === filter)
-
-  const displayedProjects = expanded
-    ? filteredProjects
-    : filteredProjects.slice(0, initialCount)
-
-  const hasMoreProjects = filteredProjects.length > initialCount
+  }
 
   return (
-    <section id="portfolio" className="portfolio">
-      <div className="portfolio-container">
-        <div className="section-header">
-          <span className="section-tag">Our Work</span>
-          <h2 className="section-title">Portfolio</h2>
-          <div className="title-underline"></div>
-          <p className="section-description">
-            Sample and concept builds that show how we work. Metrics on project pages are
-            illustrative — published client case studies are coming soon.
+    <section id="portfolio" className="bp-section bp-section--sunk" aria-labelledby="portfolio-title">
+      <div className="bp-container">
+        <div className="bp-head">
+          <h2 id="portfolio-title">Sample work</h2>
+          <p>
+            Concept and sample builds that show how we approach a problem. Metrics on project
+            pages are illustrative — published client case studies are coming soon.
           </p>
         </div>
 
-        <div className="filter-tabs">
-          {categories.map(category => (
+        <div className="pf-filters" role="group" aria-label="Filter projects by type">
+          {available.map(c => (
             <button
-              key={category.id}
-              className={`filter-btn ${filter === category.id ? 'active' : ''}`}
-              onClick={() => setFilter(category.id)}
+              key={c.id}
+              type="button"
+              className={`pf-filter${filter === c.id ? ' is-active' : ''}`}
+              aria-pressed={filter === c.id}
+              onClick={() => selectFilter(c.id)}
             >
-              {category.label}
+              {c.label}
             </button>
           ))}
         </div>
 
-        <div className="portfolio-grid">
-          {displayedProjects.map((project, index) => {
-            // Only first card is hero-sized, all others are equal 1×1 tiles
-            const bentoClass = index === 0 ? 'bento-large' : ''
-
-            return (
-              <Link
-                key={project.id}
-                to={`/portfolio/${project.slug}`}
-                className={`portfolio-card ${bentoClass}`.trim()}
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div
-                  className="project-image"
-                  style={{ background: project.image }}
-                >
-                  <div className="project-overlay">
-                    <div className="overlay-text">
-                      <img src={`${process.env.PUBLIC_URL}/images/icons/article.svg`} alt="Read More" className="overlay-icon" />
-                      View Details
-                    </div>
-                    {project.liveUrl && (
-                      <button
-                        className="project-link"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          window.open(project.liveUrl, '_blank');
-                        }}
-                      >
-                        <FaExternalLinkAlt />
-                      </button>
-                    )}
-                    {project.githubUrl && (
-                      <button
-                        className="project-link"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          window.open(project.githubUrl, '_blank');
-                        }}
-                      >
-                        <FaGithub />
-                      </button>
-                    )}
-                  </div>
-                </div>
-
-                <div className="project-content">
-                  <h3 className="project-title">{project.title}</h3>
-                  <p className="project-description">{project.shortDescription}</p>
-
-                  <div className="project-tags">
-                    {project.tags.map((tag, idx) => (
-                      <span key={idx} className="project-tag">{tag}</span>
-                    ))}
-                  </div>
-                </div>
+        <ul className="pf-grid">
+          {shown.map(project => (
+            <li key={project.id}>
+              <Link to={`/portfolio/${project.slug}`} className="pf-sheet">
+                <span className="pf-image" style={{ background: project.image }} aria-hidden="true" />
+                <span className="pf-body">
+                  <span className="pf-category">{project.categoryLabel}</span>
+                  <span className="pf-title">{project.title}</span>
+                  <span className="pf-desc">{project.shortDescription}</span>
+                  <span className="pf-tags">{project.tags.join(', ')}</span>
+                </span>
               </Link>
-            )
-          })}
-        </div>
+            </li>
+          ))}
+        </ul>
 
-        {hasMoreProjects && (
-          <div className="load-more-container">
-            <button
-              className="load-more-btn"
-              onClick={() => setExpanded(!expanded)}
-            >
-              {expanded ? 'Show Less' : `Load More Projects (${filteredProjects.length - initialCount} more)`}
-              <FaChevronDown className={`chevron-icon ${expanded ? 'rotated' : ''}`} />
+        {(hidden > 0 || expanded) && (
+          <div className="pf-more">
+            <button type="button" className="bp-btn bp-btn-ghost" onClick={() => setExpanded(e => !e)}>
+              {expanded ? 'Show fewer projects' : `Show ${hidden} more`}
             </button>
           </div>
         )}

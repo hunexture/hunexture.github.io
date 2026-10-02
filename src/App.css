@@ -263,3 +263,15 @@ a, button {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Full-bleed bands: sections that paint a background must span the viewport.
+   (The generic section rule above caps width at 1400px, which left visible
+   gutters beside hero, alternate-background and CTA bands on wide screens.) */
+section[class*="-hero"],
+section[class*="alt-bg"],
+section[class*="-cta"],
+section[class*="cta-section"],
+section.project-section,
+section.project-info-bar {
+  max-width: none;
+}

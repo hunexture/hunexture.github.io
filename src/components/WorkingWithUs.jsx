@@ -11,14 +11,13 @@ const practiceIcons = {
 }
 
 const WorkingWithUs = () => (
-  <section id="working-with-us" className="working-with-us">
-    <div className="wwu-container">
-      <div className="section-header">
-        <span className="section-tag">Working With Us</span>
-        <h2 className="section-title">Trust Is Built Into the Process</h2>
-        <div className="title-underline"></div>
-        <p className="section-description">
-          What you can expect from day one: confidentiality, ownership, and full visibility into the work.
+  <section id="working-with-us" className="bp-section" aria-labelledby="wwu-title">
+    <div className="bp-container">
+      <div className="bp-head">
+        <h2 id="wwu-title">How we work with you</h2>
+        <p>
+          The terms we put in writing before any code is written: confidentiality,
+          ownership, access and how you'll see progress.
         </p>
       </div>
 
@@ -26,7 +25,7 @@ const WorkingWithUs = () => (
         {trustPractices.map((practice) => {
           const Icon = practiceIcons[practice.key]
           return (
-            <li key={practice.key} className="wwu-card glass-panel">
+            <li key={practice.key} className="wwu-card">
               <div className="wwu-icon" aria-hidden="true"><Icon /></div>
               <h3 className="wwu-title">{practice.title}</h3>
               <p className="wwu-desc">{practice.description}</p>
@@ -35,10 +34,10 @@ const WorkingWithUs = () => (
         })}
       </ul>
 
-      <div className="wwu-security glass-panel">
+      <div className="wwu-security">
         <div className="wwu-security-icon" aria-hidden="true"><FaShieldAlt /></div>
         <div>
-          <h3 className="wwu-security-title">Security &amp; Compliance</h3>
+          <h3 className="wwu-security-title">Security and compliance</h3>
           <p className="wwu-security-text">{securityStatement}</p>
         </div>
       </div>

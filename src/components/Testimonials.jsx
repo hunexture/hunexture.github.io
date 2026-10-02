@@ -1,95 +1,46 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { FaPause, FaPlay } from 'react-icons/fa'
+import React from 'react'
 import { illustrativeOutcomes } from '../data/companyData'
-import Carousel from './Carousel'
 import './Testimonials.css'
 
-// Framed honestly as example scenarios, not attributed client quotes.
-// Swap illustrativeOutcomes for real, permissioned testimonials when available.
-const OutcomeCard = ({ item, className = '' }) => (
-  <article className={`testimonial-card glass-panel ${className}`.trim()}>
-    <span className="outcome-label">Illustrative example</span>
-    <h3 className="outcome-scenario">{item.scenario}</h3>
-    <dl className="outcome-details">
-      <dt>Challenge</dt>
-      <dd>{item.challenge}</dd>
-      <dt>Approach</dt>
-      <dd>{item.approach}</dd>
-    </dl>
-    <p className="outcome-result">{item.outcome}</p>
-  </article>
-)
-
-const Testimonials = () => {
-  const sectionRef = useRef(null)
-  const [visible, setVisible] = useState(false)
-  const [paused, setPaused] = useState(false)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.15 }
-    )
-    if (sectionRef.current) observer.observe(sectionRef.current)
-    return () => observer.disconnect()
-  }, [])
-
-  return (
-    <section id="testimonials" className="testimonials" ref={sectionRef}>
-      <div className="testimonials-container">
-        <div className={`section-header${visible ? ' animate-in' : ''}`}>
-          <span className="section-tag">Example Engagements</span>
-          <h2 className="section-title">Illustrative Outcomes</h2>
-          <div className="title-underline"></div>
-          <p className="section-description">
-            Representative scenarios showing how we approach a problem and the outcomes we
-            design for. These are examples, not client testimonials — published case studies
-            are on the way.
-          </p>
-        </div>
-
-        {/* Desktop: auto-scrolling strip with pause control (pauses on hover/focus too) */}
-        <div className={`testimonials-marquee${paused ? ' is-paused' : ''}`}>
-          <div className="testimonials-marquee-outer" role="region" aria-label="Illustrative outcomes">
-            <div className="testimonials-marquee-track">
-              {illustrativeOutcomes.map((item, i) => (
-                <OutcomeCard key={i} item={item} className="testimonial-marquee-card" />
-              ))}
-              {/* Duplicate set for a seamless loop — hidden from assistive tech */}
-              <div className="testimonials-marquee-clone" aria-hidden="true">
-                {illustrativeOutcomes.map((item, i) => (
-                  <OutcomeCard key={i} item={item} className="testimonial-marquee-card" />
-                ))}
-              </div>
-            </div>
-          </div>
-          <button
-            type="button"
-            className="marquee-toggle"
-            onClick={() => setPaused(p => !p)}
-            aria-pressed={paused}
-          >
-            {paused ? <FaPlay aria-hidden="true" /> : <FaPause aria-hidden="true" />}
-            {paused ? 'Play' : 'Pause'}
-          </button>
-        </div>
-
-        {/* Mobile: shared accessible carousel */}
-        <div className="testimonials-carousel">
-          <Carousel label="Illustrative outcomes" slideWidth="85%" gap="16px">
-            {illustrativeOutcomes.map((item, i) => (
-              <OutcomeCard key={i} item={item} />
-            ))}
-          </Carousel>
-        </div>
+// Example scenarios, clearly labelled — not attributed client quotes.
+// Replace illustrativeOutcomes with real, permissioned case studies when available.
+const Testimonials = () => (
+  <section id="testimonials" className="bp-section" aria-labelledby="outcomes-title">
+    <div className="bp-container">
+      <div className="bp-head">
+        <h2 id="outcomes-title">Example engagements</h2>
+        <p>
+          How we approach typical problems, and the outcome each project is designed for.
+          These are illustrative scenarios, not client testimonials — published case studies
+          are on the way.
+        </p>
       </div>
-    </section>
-  )
-}
+
+      <table className="outcomes-table">
+        <caption className="visually-hidden">Illustrative example engagements</caption>
+        <thead>
+          <tr>
+            <th scope="col">Scenario</th>
+            <th scope="col">Challenge</th>
+            <th scope="col">Approach</th>
+            <th scope="col">Designed for</th>
+          </tr>
+        </thead>
+        <tbody>
+          {illustrativeOutcomes.map(item => (
+            <tr key={item.scenario}>
+              <th scope="row">{item.scenario}</th>
+              <td data-label="Challenge">{item.challenge}</td>
+              <td data-label="Approach">{item.approach}</td>
+              <td data-label="Designed for" className="outcomes-target">
+                {item.outcome.replace(/^Target:\s*/, '')}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+)
 
 export default Testimonials

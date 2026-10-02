@@ -1,17 +1,6 @@
-.engagement-models {
-  padding: 80px 0;
-  background: var(--dark-navy);
-}
-
-.em-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 40px;
-}
-
 .em-grid {
   list-style: none;
-  margin: 48px 0 0;
+  margin: 0;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -19,48 +8,72 @@
 }
 
 .em-card {
-  border-radius: 12px;
-  padding: 32px 28px;
+  padding: 28px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  transition: border-color 0.3s ease;
+  gap: 12px;
+  background: var(--paper-raised);
+  border: 1px solid var(--line-strong);
+  border-top: 4px solid var(--signal);
 }
 
-.em-card:hover {
-  border-color: var(--electric-blue-40);
+.em-diagram {
+  display: block;
+  width: 160px;
+  height: 64px;
+  margin-bottom: 8px;
+}
+
+.em-d-fill {
+  fill: var(--signal-tint);
+  stroke: var(--signal);
+  stroke-width: 1.5;
+}
+
+.em-d-line {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.em-d-dim {
+  stroke: var(--line-strong);
+  stroke-width: 1;
 }
 
 .em-name {
-  font-size: 20px;
-  color: var(--text-white);
+  font-size: 1.35rem;
+  color: var(--ink);
   margin: 0;
 }
 
-.em-best-for,
+.em-best-for {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
 .em-how {
   margin: 0;
-  font-size: 14px;
+  font-size: 0.98rem;
   line-height: 1.65;
-  color: var(--text-gray);
-}
-
-.em-best-for strong {
-  color: var(--text-white);
+  color: var(--ink-muted);
 }
 
 .em-pricing {
   margin: auto 0 0;
-  padding-top: 14px;
-  border-top: 1px solid var(--electric-blue-10);
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--electric-blue);
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-family: var(--font-annot);
+  font-size: 0.88rem;
+  color: var(--signal-deep);
 }
 
 .em-cta {
-  display: flex;
-  justify-content: center;
   margin-top: 40px;
 }
 
@@ -68,22 +81,5 @@
   .em-grid {
     grid-template-columns: 1fr;
     max-width: 640px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-@media (max-width: 768px) {
-  .engagement-models {
-    padding: 50px 0;
-  }
-
-  .em-container {
-    padding: 0 16px;
-  }
-
-  .em-grid {
-    margin-top: 28px;
-    gap: 16px;
   }
 }

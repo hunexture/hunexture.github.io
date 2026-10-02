@@ -4,14 +4,10 @@ import { ThemeProvider } from './context/ThemeContext'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
-import TechMarquee from './components/TechMarquee'
-import ProcessSection from './components/ProcessSection'
 import Services from './components/Services'
 import Portfolio from './components/Portfolio'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
-import BackgroundEffect from './components/BackgroundEffect'
-import AnimatedBackground from './components/AnimatedBackground'
 import ServiceDetail from './components/ServiceDetail'
 import ProjectDetail from './components/ProjectDetail'
 import IndustryDetail from './components/IndustryDetail'
@@ -37,33 +33,22 @@ import './App.css'
 
 // Home page component
 const HomePage = () => (
-  <>
+  <main id="main">
     <Hero />
-    <TechMarquee />
     <About />
-    <ProcessSection />
-    <WorkingWithUs />
     <Services />
+    <WorkingWithUs />
     <Portfolio />
     <Testimonials />
     <EngagementModels />
     <FAQ />
     <Contact />
-  </>
+  </main>
 )
 
-// Layout wrapper to conditionally show backgrounds
+// Layout wrapper: hides navbar/footer on full-screen blog posts
 const Layout = ({ children }) => {
   const location = useLocation()
-  const isDetailPage = location.pathname.startsWith('/services') ||
-    location.pathname.startsWith('/portfolio') ||
-    location.pathname.startsWith('/industries') ||
-    location.pathname.startsWith('/ai') ||
-    location.pathname.startsWith('/business-profile') ||
-    location.pathname.startsWith('/privacy-policy') ||
-    location.pathname.startsWith('/terms-of-service') ||
-    location.pathname.startsWith('/cookie-policy') ||
-    location.pathname.startsWith('/blog')
 
   // Check if it's a blog post page (has slug) vs blog list page
   const pathParts = location.pathname.split('/').filter(Boolean)
@@ -74,8 +59,6 @@ const Layout = ({ children }) => {
 
   return (
     <div className="App">
-      {!isDetailPage && <AnimatedBackground />}
-      {!isDetailPage && <BackgroundEffect />}
       {showNavbar && <Navbar />}
       {children}
       {showFooter && <Footer />}

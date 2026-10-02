@@ -3,7 +3,7 @@
 .aip-page {
     background: var(--dark-navy);
     color: var(--text-white);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-body);
     min-height: 100vh;
     position: relative;
 }
@@ -85,7 +85,7 @@
     background: var(--electric-blue-05);
     border: 1px solid var(--electric-blue-20);
     border-radius: 50px;
-    font-family: 'Orbitron', sans-serif;
+    font-family: var(--font-display);
     font-size: 0.8rem;
     font-weight: 700;
     color: var(--electric-blue);
@@ -136,7 +136,7 @@
     color: var(--navy-blue);
     border: none;
     border-radius: 50px;
-    font-family: 'Orbitron', sans-serif;
+    font-family: var(--font-display);
     font-size: 0.95rem;
     font-weight: 800;
     letter-spacing: 1px;
@@ -147,7 +147,6 @@
 }
 
 .aip-btn-primary:hover {
-    transform: translateY(-4px);
     box-shadow: 0 15px 40px var(--glow-color), 0 0 15px var(--electric-blue);
 }
 
@@ -160,7 +159,7 @@
     color: var(--text-white);
     border: 1px solid var(--glass-border);
     border-radius: 50px;
-    font-family: 'Orbitron', sans-serif;
+    font-family: var(--font-display);
     font-size: 0.95rem;
     font-weight: 700;
     letter-spacing: 1px;
@@ -173,7 +172,6 @@
 .aip-btn-secondary:hover {
     background: rgba(255, 255, 255, 0.05);
     border-color: var(--text-white);
-    transform: translateY(-4px);
 }
 
 .aip-btn-outline {
@@ -185,7 +183,7 @@
     color: var(--electric-blue);
     border: 1px solid var(--electric-blue-40);
     border-radius: 50px;
-    font-family: 'Orbitron', sans-serif;
+    font-family: var(--font-display);
     font-size: 0.9rem;
     font-weight: 700;
     letter-spacing: 1px;
@@ -196,7 +194,6 @@
 .aip-btn-outline:hover {
     background: var(--electric-blue-08);
     border-color: var(--electric-blue);
-    transform: translateY(-3px);
 }
 
 .aip-hero-stats {
@@ -215,7 +212,7 @@
 
 .aip-hero-stat strong {
     display: block;
-    font-family: 'Orbitron', sans-serif;
+    font-family: var(--font-display);
     font-size: clamp(1.8rem, 4vw, 2.5rem);
     font-weight: 900;
     color: var(--electric-blue);
@@ -255,7 +252,7 @@
 }
 
 .aip-tag {
-    font-family: 'Orbitron', sans-serif;
+    font-family: var(--font-display);
     color: var(--electric-blue);
     font-size: 0.85rem;
     font-weight: 700;
@@ -294,7 +291,7 @@
 /* ── Services Grid ────────────────────────────────────────── */
 .aip-services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(360px, 100%), 1fr));
     gap: 32px;
 }
 
@@ -338,7 +335,7 @@
 }
 
 .aip-read-more {
-    font-family: 'Orbitron', sans-serif;
+    font-family: var(--font-display);
     font-size: 0.85rem;
     font-weight: 700;
     background: none;
@@ -358,7 +355,6 @@
 
 /* Hover service card */
 .aip-service-card:hover {
-    transform: translateY(-8px);
     border-color: var(--card-color);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 0 25px rgba(255, 255, 255, 0.02);
 }
@@ -564,7 +560,6 @@
 }
 
 .aip-industry-card:hover {
-    transform: translateY(-6px);
     border-color: var(--ind-color);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
@@ -621,7 +616,6 @@
 }
 
 .aip-why-card:hover {
-    transform: translateY(-6px);
     border-color: var(--why-color);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
@@ -753,7 +747,7 @@
 
 .aip-future-card strong {
     display: block;
-    font-family: 'Orbitron', sans-serif;
+    font-family: var(--font-display);
     font-size: 3.5rem;
     font-weight: 900;
     color: var(--text-white);
@@ -795,7 +789,7 @@
 }
 
 .aip-tech-badge span {
-    font-family: 'Orbitron', sans-serif;
+    font-family: var(--font-display);
     font-size: 0.85rem;
     font-weight: 700;
     color: var(--text-gray);
@@ -803,7 +797,6 @@
 }
 
 .aip-tech-badge:hover {
-    transform: translateY(-4px);
     border-color: var(--electric-blue-30);
     box-shadow: 0 8px 20px var(--glow-color);
 }

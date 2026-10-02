@@ -110,14 +110,13 @@
   border: none;
   cursor: pointer;
   box-shadow: 0 8px 24px var(--glow-color);
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-display);
   letter-spacing: 1px;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .sd-btn-primary:hover {
-  transform: translateY(-4px);
   box-shadow: 0 15px 35px var(--glow-color), 0 0 15px var(--sd-color);
 }
 
@@ -135,7 +134,7 @@
   cursor: pointer;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-display);
   letter-spacing: 1px;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -143,7 +142,6 @@
 .sd-btn-secondary:hover {
   background: rgba(255, 255, 255, 0.05);
   border-color: var(--text-white);
-  transform: translateY(-4px);
 }
 
 /* ── Hero Layout ─────────────────────────────────────────────── */
@@ -378,7 +376,7 @@
 .sd-dot.green { background: #27c93f; }
 
 .sd-viz-title {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-display);
   font-size: 0.75rem;
   color: var(--text-gray);
   margin-left: 10px;
@@ -444,7 +442,7 @@
   background: var(--sd-color);
   color: var(--navy-blue);
   border: none;
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-display);
   font-size: 0.8rem;
   font-weight: 800;
   padding: 10px 20px;
@@ -608,7 +606,7 @@
   background: var(--sd-color);
   color: var(--navy-blue);
   border: none;
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-display);
   font-size: 0.65rem;
   font-weight: 800;
   padding: 6px 12px;
@@ -819,7 +817,7 @@
 }
 
 .card-logo {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-display);
   font-weight: 800;
   font-size: 0.85rem;
   letter-spacing: 1px;
@@ -840,7 +838,7 @@
 
 .card-badge {
   display: inline-block;
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-display);
   font-size: 0.65rem;
   font-weight: 700;
   padding: 4px 10px;
@@ -957,7 +955,7 @@
   border-radius: 6px;
   font-size: 0.72rem;
   cursor: pointer;
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-display);
   transition: all 0.3s ease;
 }
 
@@ -989,7 +987,6 @@
 }
 
 .sd-benefit-card:hover {
-  transform: translateY(-6px);
   border-color: var(--sd-color);
 }
 
@@ -1035,7 +1032,6 @@
 }
 
 .sd-tech-badge:hover {
-  transform: translateY(-4px);
   border-color: var(--sd-color);
 }
 
@@ -1058,7 +1054,7 @@
 }
 
 .sd-tech-badge span {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-display);
   font-size: 0.85rem;
   font-weight: 700;
   color: var(--text-gray);
@@ -1152,7 +1148,6 @@
 }
 
 .sd-usecase-card:hover {
-  transform: translateY(-6px);
   border-color: var(--sd-color);
   box-shadow: 0 15px 35px var(--glow-color);
 }
@@ -1344,4 +1339,24 @@
   .sd-benefits-grid, .sd-usecases-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Dark device mockups keep a dark screen; re-point text tokens to light values */
+.web-terminal,
+.phone-container,
+.phone-screen {
+  --text-white: #E6ECF5;
+  --text-gray: #A9B6CB;
+  --ink: #E6ECF5;
+  --ink-muted: #A9B6CB;
+  color: #E6ECF5;
+}
+
+/* Accents inside dark device screens need a light tone */
+.phone-screen .phone-nav-item.active {
+  color: #8DB4FF;
+}
+
+.node-status.active {
+  color: #0E7A45;
 }

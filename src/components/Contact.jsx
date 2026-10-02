@@ -96,25 +96,19 @@ const Contact = () => {
   ]
 
   return (
-    <section id="contact" className="contact">
-      <div className="contact-container">
-        <div className="section-header">
-          <span className="section-tag">Get In Touch</span>
-          <h2 className="section-title">Contact Us</h2>
-          <div className="title-underline"></div>
-          <p className="section-description">
-            Ready to build something extraordinary? Tell us about your project
-            and we'll get back to you within 24 hours.
+    <section id="contact" className="bp-section contact" aria-labelledby="contact-title">
+      <div className="bp-container">
+        <div className="bp-head">
+          <h2 id="contact-title">Start with a discovery call</h2>
+          <p>
+            Tell us what you're building. We'll reply within one business day, sign an NDA
+            if you need one, and send a written proposal within 48 hours of our call.
           </p>
         </div>
 
         <div className="contact-content">
           <div className="contact-info">
-            <h3 className="info-title">Let's Build Something Amazing Together</h3>
-            <p className="info-description">
-              Whether you have a question about our services, pricing, or anything else,
-              our team is ready to answer all your questions.
-            </p>
+            <h3 className="info-title">Other ways to reach us</h3>
 
             <div className="info-items">
               {contactInfo.map((item, index) => (
@@ -122,8 +116,7 @@ const Contact = () => {
                   key={index}
                   href={item.link}
                   {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                  className="info-item glass-panel"
-                  style={{ animationDelay: `${index * 0.1}s` }}
+                  className="info-item"
                 >
                   <div className="info-icon" aria-hidden="true">{item.icon}</div>
                   <div className="info-content">
@@ -135,7 +128,7 @@ const Contact = () => {
             </div>
 
             <div className="social-links">
-              <h4 className="social-title">Follow Us</h4>
+              <h4 className="social-title">Follow us</h4>
               <div className="social-icons">
                 {socialLinks.map((social, index) => (
                   <a
@@ -155,24 +148,23 @@ const Contact = () => {
           </div>
 
           {submitSuccess ? (
-            <div className="form-success">
+            <div className="form-success" role="status">
               <div className="success-check">✓</div>
-              <h3 className="success-title">Message Sent!</h3>
+              <h3 className="success-title">Message sent</h3>
               <p className="success-message">
-                Thank you for reaching out. Our team will review your message
-                and respond within 24 hours.
+                Thanks for reaching out. We'll reply within one business day.
               </p>
               <button
-                className="btn-secondary success-reset-btn"
+                className="bp-btn bp-btn-ghost success-reset-btn"
                 onClick={() => setSubmitSuccess(false)}
               >
-                Send Another Message
+                Send another message
               </button>
             </div>
           ) : (
           <form className="contact-form" onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="name">Your Name</label>
+              <label htmlFor="name">Your name</label>
               <input
                 type="text"
                 id="name"
@@ -185,7 +177,7 @@ const Contact = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="email">Your Email</label>
+              <label htmlFor="email">Work email</label>
               <input
                 type="email"
                 id="email"
@@ -193,7 +185,7 @@ const Contact = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                placeholder="info@example.com"
+                placeholder="you@company.com"
               />
             </div>
 
@@ -223,16 +215,15 @@ const Contact = () => {
             </div>
 
             {submitError && (
-              <p className="form-error">{submitError}</p>
+              <p className="form-error" role="alert">{submitError}</p>
             )}
 
             <div className="form-buttons">
               <button type="submit" className="submit-btn" disabled={isSubmitting}>
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-                <FaEnvelope className="btn-icon" />
+                {isSubmitting ? 'Sending…' : 'Send message'}
               </button>
               <button type="button" className="whatsapp-btn" onClick={handleWhatsApp}>
-                <FaWhatsapp className="btn-icon" />
+                <FaWhatsapp className="btn-icon" aria-hidden="true" />
                 Chat on WhatsApp
               </button>
             </div>

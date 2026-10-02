@@ -1,146 +1,74 @@
-import React, { useEffect, useRef } from 'react'
-import { FaRocket, FaUsers, FaHandshake } from 'react-icons/fa'
-import { getStat, formatStat, builtOnStack } from '../data/companyData'
+import React from 'react'
+import { builtOnStack } from '../data/companyData'
+import HeroLiveDrawing from './HeroLiveDrawing'
 import './Hero.css'
 
-const heroStats = [
-  { stat: getStat('years'), icon: FaRocket },
-  { stat: getStat('engineers'), icon: FaUsers },
-  { stat: getStat('clients'), icon: FaHandshake }
+// The delivery pipeline drawn as an engineering schematic.
+// Stages are a real sequence, so they are numbered.
+const stages = [
+  { name: 'Discover', note: 'Goals, users, risks and a written scope' },
+  { name: 'Design', note: 'UX flows and system architecture' },
+  { name: 'Build', note: 'Two-week sprints with a working demo each time', loop: true },
+  { name: 'Deliver', note: 'Deploy, monitor, iterate and hand over' }
 ]
 
-const Hero = () => {
-  const videoRef = useRef(null)
-
-  // Respect prefers-reduced-motion: don't autoplay the background video
-  useEffect(() => {
-    const video = videoRef.current
-    if (!video || !window.matchMedia) return
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const apply = () => {
-      if (mq.matches) {
-        video.pause()
-      } else {
-        video.play().catch(() => {})
-      }
-    }
-    apply()
-    mq.addEventListener?.('change', apply)
-    return () => mq.removeEventListener?.('change', apply)
-  }, [])
-
-  return (
-    <section id="hero" className="hero">
-      {/* Rich Tech Background matching hunexture.com */}
-      <div className="hero-tech-bg" aria-hidden="true">
-        <div
-          className="hero-bg-svg-layer"
-          style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/images/hero/tech-background.svg)` }}
-        />
-        <div className="hero-orb-magenta" />
-        <div className="hero-orb-indigo" />
-        <div className="hero-grid-lines" />
-      </div>
-
-      <div className="hero-content">
-        <div className="hero-badge tech-font">
-          <span className="badge-dot"></span>
-          AI &amp; Software Engineering Partner
-        </div>
-
-        <h1 className="hero-title">
-          Building the Next <br />
-          <span className="hero-title-highlight">Human Future</span>
-        </h1>
-
-        <p className="hero-description">
-          We design, build and run AI-powered products for startups and growing businesses —
-          from custom ML models to cloud-native platforms. NDA-first, demo every two weeks,
-          and you own the code.
-        </p>
-
-        <div className="hero-cta">
-          <a href="#contact" className="btn-primary">
-            Book a Discovery Call
-            <FaRocket className="btn-icon" />
-          </a>
-          <a href="#portfolio" className="btn-secondary">
-            View Our Work
-          </a>
-        </div>
-
-        <div className="hero-clients">
-          <p className="hero-clients-label">Built on</p>
-          <ul className="hero-clients-list">
-            {builtOnStack.map((name) => (
-              <li key={name} className="hero-client-badge tech-font">{name}</li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="hero-stats">
-          {heroStats.map(({ stat, icon: Icon }) => (
-            <div key={stat.key} className="stat-item glass-panel">
-              <Icon className="stat-icon" aria-hidden="true" />
-              <div className="stat-content">
-                <h3 className="tech-font">{formatStat(stat)}</h3>
-                <p>{stat.label}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="hero-visual" aria-hidden="true">
-        <div className="hero-video-container">
-          <video
-            ref={videoRef}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="hero-video"
-            tabIndex={-1}
-          >
-            <source src={`${process.env.PUBLIC_URL}/video/ai-video-v3.mp4`} type="video/mp4" />
-          </video>
-
-          {/* Decorative card: summarises our real delivery cadence (not live telemetry) */}
-          <div className="hero-hud-panel glass-panel">
-            <div className="hud-header">
-              <span className="hud-dot"></span>
-              <span className="tech-font">DELIVERY CADENCE</span>
-            </div>
-            <div className="hud-content">
-              <div className="hud-row">
-                <span className="hud-label">Typical MVP</span>
-                <span className="hud-val tech-font text-gradient">6–10 wks</span>
-              </div>
-              <div className="hud-row">
-                <span className="hud-label">Working demo</span>
-                <span className="hud-val tech-font">every 2 wks</span>
-              </div>
-              <div className="hud-chart">
-                <div className="hud-bar" style={{ '--height': '35%' }}></div>
-                <div className="hud-bar" style={{ '--height': '60%' }}></div>
-                <div className="hud-bar" style={{ '--height': '85%' }}></div>
-                <div className="hud-bar" style={{ '--height': '45%' }}></div>
-                <div className="hud-bar" style={{ '--height': '70%' }}></div>
-                <div className="hud-bar" style={{ '--height': '95%' }}></div>
-              </div>
-            </div>
+const Hero = () => (
+  <section id="hero" className="bp-hero" aria-labelledby="hero-title">
+    <div className="bp-hero-inner">
+      <div className="bp-hero-top">
+        <div className="bp-hero-copy">
+          <h1 id="hero-title" className="bp-hero-title">
+            AI software, engineered to spec.
+          </h1>
+          <p className="bp-hero-lede">
+            Hunexture designs, builds and runs AI-powered products for startups and growing
+            businesses. You get a clear plan, a working demo every two weeks, and code you own.
+          </p>
+          <div className="bp-hero-actions">
+            <a href="#contact" className="bp-btn bp-btn-primary">Book a discovery call</a>
+            <a href="#portfolio" className="bp-btn bp-btn-ghost">See our work</a>
           </div>
+          <p className="bp-hero-stack">
+            Built on {builtOnStack.slice(0, -1).join(', ')} and {builtOnStack[builtOnStack.length - 1]}.
+          </p>
         </div>
+
+        <HeroLiveDrawing />
       </div>
 
-      <div className="scroll-indicator" aria-hidden="true">
-        <div className="mouse">
-          <div className="wheel"></div>
+      <figure className="bp-drawing" aria-label="How a project moves from discovery to delivery">
+        <ol className="bp-stages">
+          {stages.map((stage, i) => (
+            <li key={stage.name} className="bp-stage" style={{ '--i': i }}>
+              <span className="bp-stage-num" aria-hidden="true">{i + 1}</span>
+              <span className="bp-stage-name">{stage.name}</span>
+              <span className="bp-stage-note">{stage.note}</span>
+              {stage.loop && (
+                <span className="bp-stage-loop">
+                  <svg viewBox="0 0 40 24" aria-hidden="true" focusable="false">
+                    <path d="M6 18 A12 10 0 1 1 34 18" fill="none" />
+                    <path d="M30 14 L34 18 L37 13" fill="none" />
+                  </svg>
+                  repeats every 2 weeks
+                </span>
+              )}
+            </li>
+          ))}
+        </ol>
+
+        <div className="bp-dimension" aria-hidden="true">
+          <span className="bp-dimension-label">Typical MVP: 6–10 weeks</span>
         </div>
-        <p className="tech-font">Scroll to explore</p>
-      </div>
-    </section>
-  )
-}
+        <p className="visually-hidden">A typical MVP takes 6 to 10 weeks from discovery to delivery.</p>
+
+        <figcaption className="bp-titleblock">
+          <span><b>Drawing</b> Delivery pipeline</span>
+          <span><b>Contract</b> NDA before discovery</span>
+          <span><b>Ownership</b> Code and IP transfer to you</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+)
 
 export default Hero

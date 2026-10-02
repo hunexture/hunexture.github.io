@@ -63,34 +63,6 @@
   gap: 20px;
 }
 
-.theme-toggle {
-  background: none;
-  border: 2px solid var(--electric-blue);
-  color: var(--electric-blue);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 18px;
-}
-
-.navbar.scrolled .theme-toggle {
-  width: 36px;
-  height: 36px;
-  font-size: 16px;
-}
-
-.theme-toggle:hover {
-  background: var(--electric-blue);
-  color: var(--navy-blue);
-  transform: rotate(180deg) scale(1.1);
-  box-shadow: 0 0 20px var(--electric-blue-50);
-}
-
 .nav-link {
   color: var(--text-white);
   text-decoration: none;
@@ -113,7 +85,6 @@
 }
 
 .nav-link:hover {
-  transform: translateY(-2px);
 }
 
 .nav-link:hover::after {
@@ -132,8 +103,8 @@
   content: '';
   position: absolute;
   top: 100%;
-  left: -20px;
-  right: -20px;
+  left: 0;
+  right: 0;
   height: 20px;
   background: transparent;
 }
@@ -183,6 +154,18 @@
   transform: translateX(-50%) translateY(0);
 }
 
+/* A closed (or fading-out) panel must never catch the mouse — otherwise a
+   panel that is still fading re-triggers its parent's hover and blinks. */
+.dropdown-menu:not(.show) {
+  pointer-events: none;
+}
+
+/* When switching straight from one dropdown to another, hide the old panel
+   instantly so two mega menus are never on screen at the same time. */
+.nav-menu.has-open-dropdown .dropdown-menu:not(.show) {
+  transition: none;
+}
+
 .dropdown-menu::before {
   content: '';
   position: absolute;
@@ -201,8 +184,8 @@
   content: '';
   position: absolute;
   top: -20px;
-  left: -20px;
-  right: -20px;
+  left: 0;
+  right: 0;
   height: 20px;
   background: transparent;
 }
@@ -229,7 +212,6 @@
 
 .dropdown-item:hover {
   background: var(--electric-blue-10);
-  transform: translateX(3px);
 }
 
 .dropdown-icon {
@@ -348,7 +330,6 @@
 }
 
 .btn-view-more:hover {
-  transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -472,18 +453,6 @@
 
   .nav-actions {
     gap: 12px;
-  }
-
-  .theme-toggle {
-    width: 38px;
-    height: 38px;
-    font-size: 17px;
-  }
-
-  .navbar.scrolled .theme-toggle {
-    width: 34px;
-    height: 34px;
-    font-size: 15px;
   }
 
   .mobile-overlay {
@@ -830,18 +799,6 @@
     gap: 10px;
   }
 
-  .theme-toggle {
-    width: 36px;
-    height: 36px;
-    font-size: 16px;
-  }
-
-  .navbar.scrolled .theme-toggle {
-    width: 32px;
-    height: 32px;
-    font-size: 14px;
-  }
-
   .nav-menu {
     width: 85%;
     max-width: 280px;
@@ -902,5 +859,139 @@
 
   .dropdown-item-desc {
     font-size: 12px !important;
+  }
+}
+
+/* ─── Blueprint navbar (overrides the legacy floating-pill styles above) ─── */
+.navbar,
+.navbar.scrolled {
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  border-bottom: 1px solid var(--line);
+  background: rgba(244, 247, 251, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: none;
+}
+
+.navbar.scrolled {
+  border-bottom-color: var(--line-strong);
+}
+
+.nav-container,
+.navbar.scrolled .nav-container {
+  max-width: 1264px;
+  height: 72px;
+  padding: 0 32px;
+}
+
+.navbar.scrolled .logo {
+  transform: none;
+}
+
+.nav-menu,
+.navbar.scrolled .nav-menu {
+  gap: 28px;
+}
+
+.nav-link {
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  transform: none;
+  color: var(--signal);
+}
+
+.nav-link::after {
+  background: var(--signal);
+  height: 1.5px;
+}
+
+.dropdown-menu {
+  background: var(--paper-raised);
+  backdrop-filter: none;
+  border: 1.5px solid var(--ink);
+  border-radius: 2px;
+  box-shadow: 0 12px 32px rgba(11, 31, 58, 0.12);
+}
+
+.dropdown-menu::before {
+  border-bottom-color: var(--ink);
+}
+
+.dropdown-item {
+  border-radius: 2px;
+}
+
+.dropdown-item:hover {
+  background: var(--signal-tint);
+  transform: none;
+}
+
+.dropdown-item span,
+.dropdown-item-title {
+  color: var(--ink);
+}
+
+.dropdown-item-desc {
+  color: var(--ink-muted);
+}
+
+.dropdown-icon {
+  color: var(--ink-muted);
+}
+
+.dropdown-item:hover .dropdown-icon {
+  color: var(--signal);
+}
+
+.ai-promo-card {
+  background: var(--paper);
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+}
+
+.btn-view-more {
+  background: var(--signal);
+  color: #FFFFFF;
+  border: 0;
+  border-radius: 4px;
+}
+
+.btn-view-more:hover {
+  background: var(--signal-deep);
+}
+
+.hamburger span {
+  background: var(--ink);
+}
+
+@media (max-width: 768px) {
+  .nav-container,
+  .navbar.scrolled .nav-container {
+    height: 64px;
+    padding: 0 16px;
+  }
+
+  .nav-menu {
+    background: var(--paper-raised);
+    box-shadow: -8px 0 24px rgba(11, 31, 58, 0.15);
+    border-left: 1.5px solid var(--ink);
+  }
+
+  .mobile-overlay {
+    background: rgba(11, 31, 58, 0.35);
+  }
+
+  .dropdown-menu {
+    border: 0;
+    box-shadow: none;
   }
 }

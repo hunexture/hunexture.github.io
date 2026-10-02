@@ -4,7 +4,7 @@
 .il-page-wrapper {
     background: var(--dark-navy);
     color: var(--text-white);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-body);
     min-height: 100vh;
 }
 
@@ -199,7 +199,6 @@
 }
 
 .il-btn-primary:hover {
-    transform: translateY(-3px) scale(1.02);
     box-shadow: 0 14px 30px var(--glow-color);
 }
 
@@ -214,7 +213,6 @@
     border-color: var(--electric-blue);
     color: var(--electric-blue);
     background: var(--electric-blue-05);
-    transform: translateY(-3px);
 }
 
 /* ── Interactive Mesh Preview Frame ────────────────────────── */
@@ -426,7 +424,6 @@
 .il-sandbox-tab-btn:hover {
     background: var(--electric-blue-05);
     color: var(--text-white);
-    transform: translateX(4px);
 }
 
 .il-sandbox-tab-btn.active {
@@ -604,7 +601,6 @@
 }
 
 .il-cap-card:hover {
-    transform: translateY(-6px);
     border-color: var(--electric-blue-30);
     box-shadow: 0 15px 35px var(--glow-color);
 }
@@ -682,7 +678,7 @@
 
 .il-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
     gap: 28px;
 }
 
@@ -698,7 +694,6 @@
 }
 
 .il-card:hover {
-    transform: translateY(-8px);
     border-color: var(--accent-color, var(--electric-blue));
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(79, 172, 254, 0.15);
 }

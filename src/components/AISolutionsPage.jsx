@@ -7,6 +7,7 @@ import {
     FaIndustry, FaTruck, FaUsers, FaLayerGroup, FaShieldAlt, FaCode, FaGlobe
 } from 'react-icons/fa'
 import { formatStat, getStat } from '../data/companyData'
+import { textTone } from '../utils/color'
 import './AISolutionsPage.css'
 
 const aiServices = [
@@ -379,14 +380,14 @@ const AISolutionsPage = () => {
                                 <div
                                     key={i}
                                     className="aip-service-card"
-                                    style={{ '--delay': `${i * 0.06}s`, '--card-color': svc.color }}
+                                    style={{ '--delay': `${i * 0.06}s`, '--card-color': textTone(svc.color) }}
                                 >
                                     <div className="aip-service-icon" style={{ background: `${svc.color}20`, borderColor: `${svc.color}40` }}>
-                                        <Icon style={{ color: svc.color }} />
+                                        <Icon style={{ color: textTone(svc.color) }} />
                                     </div>
                                     <h3>{svc.title}</h3>
                                     <p>{svc.desc}</p>
-                                    <button className="aip-read-more" style={{ color: svc.color }} onClick={handleContact}>
+                                    <button className="aip-read-more" style={{ color: textTone(svc.color) }} onClick={handleContact}>
                                         Read More <FaArrowRight />
                                     </button>
                                 </div>
@@ -424,11 +425,11 @@ const AISolutionsPage = () => {
                                     >
                                         <div className="aip-expertise-title">
                                             <div className="aip-expertise-icon" style={{ background: `${exp.color}20`, borderColor: `${exp.color}40` }}>
-                                                <Icon style={{ color: exp.color }} />
+                                                <Icon style={{ color: textTone(exp.color) }} />
                                             </div>
-                                            <h3 style={{ color: isOpen ? exp.color : undefined }}>{exp.title}</h3>
+                                            <h3 style={{ color: isOpen ? textTone(exp.color) : undefined }}>{exp.title}</h3>
                                         </div>
-                                        {isOpen ? <FaChevronUp style={{ color: exp.color }} /> : <FaChevronDown />}
+                                        {isOpen ? <FaChevronUp style={{ color: textTone(exp.color) }} /> : <FaChevronDown />}
                                     </button>
 
                                     {isOpen && (
@@ -437,7 +438,7 @@ const AISolutionsPage = () => {
                                                 <div key={j} className="aip-expertise-item">
                                                     <div className="aip-expertise-bullet" style={{ background: exp.color }} />
                                                     <div>
-                                                        <strong style={{ color: exp.color }}>{item.subtitle}</strong>
+                                                        <strong style={{ color: textTone(exp.color) }}>{item.subtitle}</strong>
                                                         <p>{item.desc}</p>
                                                     </div>
                                                 </div>
@@ -478,9 +479,9 @@ const AISolutionsPage = () => {
                         {industries.map((ind, i) => {
                             const Icon = ind.icon
                             return (
-                                <div key={i} className="aip-industry-card" style={{ '--delay': `${i * 0.1}s`, '--ind-color': ind.color }}>
+                                <div key={i} className="aip-industry-card" style={{ '--delay': `${i * 0.1}s`, '--ind-color': textTone(ind.color) }}>
                                     <div className="aip-industry-icon" style={{ background: `${ind.color}18`, borderColor: `${ind.color}40` }}>
-                                        <Icon style={{ color: ind.color }} />
+                                        <Icon style={{ color: textTone(ind.color) }} />
                                     </div>
                                     <h3>{ind.title}</h3>
                                     <p>{ind.desc}</p>
@@ -514,9 +515,9 @@ const AISolutionsPage = () => {
                         {whyChooseUs.map((item, i) => {
                             const Icon = item.icon
                             return (
-                                <div key={i} className="aip-why-card" style={{ '--delay': `${i * 0.08}s`, '--why-color': item.color }}>
+                                <div key={i} className="aip-why-card" style={{ '--delay': `${i * 0.08}s`, '--why-color': textTone(item.color) }}>
                                     <div className="aip-why-icon" style={{ background: `${item.color}18`, borderColor: `${item.color}40` }}>
-                                        <Icon style={{ color: item.color }} />
+                                        <Icon style={{ color: textTone(item.color) }} />
                                     </div>
                                     <h3>{item.title}</h3>
                                     <p>{item.desc}</p>

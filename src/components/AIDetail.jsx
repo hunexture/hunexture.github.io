@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import {
   FaRocket, FaCheck, FaChevronDown, FaCode, FaLightbulb,
-  FaStar, FaShieldAlt, FaChartBar, FaBolt, FaMousePointer, FaEye, FaTerminal
+  FaStar, FaShieldAlt, FaChartBar, FaBolt, FaMousePointer
 } from 'react-icons/fa'
 import { aiData } from '../data/aiData'
 import { formatStat, getStat } from '../data/companyData'
+import { textTone } from '../utils/color'
 import './AIDetail.css'
 
 // Extract first hex color from gradient string
@@ -60,11 +61,6 @@ const CustomAIVisualizer = ({ accentColor }) => {
             <span className="step-icon">✦</span>
             <span>Output API</span>
           </div>
-        </div>
-        <div className="pipeline-logs tech-font">
-          <div>[STATUS] pipeline check complete</div>
-          <div>[SPEED] latency: 12ms</div>
-          <div>[THROUGHPUT] 10,000 token/sec</div>
         </div>
       </div>
     </div>
@@ -420,7 +416,7 @@ const AIDetail = () => {
   }
 
   const CategoryIcon = aiCategory.icon
-  const accentColor = extractAccentColor(aiCategory.image)
+  const accentColor = textTone(extractAccentColor(aiCategory.image))
 
   const heroStats = [
     { value: `${aiCategory.whatWeOffer?.length || 3}+`, label: 'Solutions' },

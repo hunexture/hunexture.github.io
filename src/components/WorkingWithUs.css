@@ -1,34 +1,23 @@
-.working-with-us {
-  padding: 80px 0;
-  background: var(--navy-blue);
-}
-
-.wwu-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 40px;
-}
-
+/* Practices as a 4-column spec sheet with hairline dividers */
 .wwu-grid {
   list-style: none;
-  margin: 48px 0 0;
+  margin: 0;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  border-top: 1.5px solid var(--ink);
+  border-bottom: 1px solid var(--line-strong);
 }
 
 .wwu-card {
-  border-radius: 12px;
-  padding: 28px 24px;
+  padding: 28px 24px 32px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  transition: border-color 0.3s ease;
 }
 
-.wwu-card:hover {
-  border-color: var(--electric-blue-40);
+.wwu-card + .wwu-card {
+  border-left: 1px solid var(--line);
 }
 
 .wwu-icon,
@@ -36,79 +25,82 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  background: var(--electric-blue-10);
-  color: var(--electric-blue);
-  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid var(--signal);
+  color: var(--signal);
+  font-size: 1.05rem;
   flex-shrink: 0;
 }
 
 .wwu-title {
-  font-size: 17px;
-  color: var(--text-white);
-  margin: 0;
+  font-size: 1.15rem;
+  color: var(--ink);
+  margin: 4px 0 0;
 }
 
 .wwu-desc {
   margin: 0;
-  font-size: 14px;
+  font-size: 0.98rem;
   line-height: 1.65;
-  color: var(--text-gray);
+  color: var(--ink-muted);
 }
 
 .wwu-security {
-  margin-top: 24px;
-  border-radius: 12px;
+  margin-top: 40px;
   padding: 28px;
   display: flex;
   gap: 20px;
   align-items: flex-start;
+  background: var(--paper-raised);
+  border: 1px solid var(--line-strong);
+  border-left: 4px solid var(--signal);
 }
 
 .wwu-security-title {
-  font-size: 18px;
-  color: var(--text-white);
+  font-size: 1.15rem;
+  color: var(--ink);
   margin: 0 0 8px;
 }
 
 .wwu-security-text {
   margin: 0;
-  font-size: 15px;
+  font-size: 1rem;
   line-height: 1.7;
-  color: var(--text-gray);
-  max-width: 900px;
+  color: var(--ink-muted);
+  max-width: 80ch;
 }
 
 @media (max-width: 1023px) {
   .wwu-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .wwu-card:nth-child(3) {
+    border-left: 0;
+  }
+
+  .wwu-card:nth-child(n + 3) {
+    border-top: 1px solid var(--line);
+  }
 }
 
-@media (max-width: 768px) {
-  .working-with-us {
-    padding: 50px 0;
-  }
-
-  .wwu-container {
-    padding: 0 16px;
-  }
-
+@media (max-width: 600px) {
   .wwu-grid {
-    margin-top: 28px;
-    gap: 16px;
+    grid-template-columns: 1fr;
+  }
+
+  .wwu-card + .wwu-card {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .wwu-card {
+    padding: 24px 0;
   }
 
   .wwu-security {
     flex-direction: column;
     padding: 22px;
-  }
-}
-
-@media (max-width: 480px) {
-  .wwu-grid {
-    grid-template-columns: 1fr;
   }
 }

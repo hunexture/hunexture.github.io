@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { useTheme } from '../context/ThemeContext'
-import { FaSun, FaMoon, FaChevronDown } from 'react-icons/fa'
+import { FaChevronDown } from 'react-icons/fa'
 import Logo from './Logo'
 import { industriesData } from '../data/industriesData'
 import { blogData } from '../data/blogData'
@@ -12,12 +11,43 @@ import './Navbar.css'
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [industriesOpen, setIndustriesOpen] = useState(false)
-  const [aiOpen, setAiOpen] = useState(false)
-  const [blogOpen, setBlogOpen] = useState(false)
-  const { theme, toggleTheme } = useTheme()
+  // Only one dropdown can be open at a time: 'industries' | 'ai' | 'blog' | null.
+  // A single value (instead of one flag per menu) stops two mega menus from
+  // overlapping while the mouse moves between triggers.
+  const [openMenu, setOpenMenu] = useState(null)
+  const closeTimer = useRef(null)
   const navigate = useNavigate()
   const location = useLocation()
+
+  useEffect(() => () => clearTimeout(closeTimer.current), [])
+
+  const isDesktop = () => window.innerWidth > 768
+
+  // Desktop hover: open immediately, close after a short grace period so a
+  // diagonal mouse path into the panel doesn't flicker it shut.
+  const hoverOpen = (name) => {
+    if (!isDesktop()) return
+    clearTimeout(closeTimer.current)
+    setOpenMenu(name)
+  }
+
+  const hoverClose = () => {
+    if (!isDesktop()) return
+    clearTimeout(closeTimer.current)
+    closeTimer.current = setTimeout(() => setOpenMenu(null), 150)
+  }
+
+  // Mobile tap toggles the submenu
+  const tapToggle = (name) => {
+    if (isDesktop()) return
+    setOpenMenu((current) => (current === name ? null : name))
+  }
+
+  const closeAll = () => {
+    clearTimeout(closeTimer.current)
+    setMenuOpen(false)
+    setOpenMenu(null)
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,24 +70,18 @@ const Navbar = () => {
   }, [location])
 
   const handleIndustryClick = (slug) => {
-    setMenuOpen(false)
-    setIndustriesOpen(false)
-    setAiOpen(false)
+    closeAll()
     navigate(`/industries/${slug}`)
   }
 
   const handleAiClick = (slug) => {
-    setMenuOpen(false)
-    setIndustriesOpen(false)
-    setAiOpen(false)
+    closeAll()
     navigate(`/ai/${slug}`)
   }
 
   const handleNavClick = (e, href) => {
     e.preventDefault()
-    setMenuOpen(false)
-    setIndustriesOpen(false)
-    setAiOpen(false)
+    closeAll()
 
     // If we're not on the home page, navigate to home first
     if (location.pathname !== '/') {
@@ -73,10 +97,7 @@ const Navbar = () => {
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen)
-    if (menuOpen) {
-      setIndustriesOpen(false)
-      setAiOpen(false)
-    }
+    if (menuOpen) setOpenMenu(null)
   }
 
   return (
@@ -96,7 +117,7 @@ const Navbar = () => {
           <Logo size="medium" variant="image" />
         </a>
 
-        <div className={`nav-menu ${menuOpen ? 'active' : ''}`}>
+        <div className={`nav-menu ${menuOpen ? 'active' : ''} ${openMenu ? 'has-open-dropdown' : ''}`}>
           {/* About */}
           <a
             href="#about"
@@ -118,21 +139,22 @@ const Navbar = () => {
           {/* Industries Dropdown */}
           <div
             className="nav-dropdown ai-nav-dropdown"
-            onMouseEnter={() => window.innerWidth > 768 && setIndustriesOpen(true)}
-            onMouseLeave={() => window.innerWidth > 768 && setIndustriesOpen(false)}
+            onMouseEnter={() => hoverOpen('industries')}
+            onMouseLeave={hoverClose}
           >
             <button
               className="nav-link dropdown-trigger"
-              onClick={() => window.innerWidth <= 768 && setIndustriesOpen(!industriesOpen)}
+              onClick={() => tapToggle('industries')}
+              aria-expanded={openMenu === 'industries'}
             >
-              Industries <FaChevronDown className={`dropdown-arrow ${industriesOpen ? 'open' : ''}`} />
+              Industries <FaChevronDown className={`dropdown-arrow ${openMenu === 'industries' ? 'open' : ''}`} />
             </button>
-            <div className={`dropdown-menu ai-mega-dropdown ${industriesOpen ? 'show' : ''}`}>
+            <div className={`dropdown-menu ai-mega-dropdown ${openMenu === 'industries' ? 'show' : ''}`}>
               {/* Mobile Submenu Header */}
               <div className="mobile-submenu-header">
-                <button className="mobile-submenu-close" onClick={() => { setIndustriesOpen(false); setMenuOpen(false); }}>&times;</button>
+                <button className="mobile-submenu-close" onClick={closeAll}>&times;</button>
                 <div className="mobile-breadcrumb">
-                  <span onClick={(e) => { e.stopPropagation(); setIndustriesOpen(false); }}>HOME</span> &gt; <strong>INDUSTRIES</strong>
+                  <span onClick={(e) => { e.stopPropagation(); setOpenMenu(null); }}>HOME</span> &gt; <strong>INDUSTRIES</strong>
                 </div>
               </div>
 
@@ -184,21 +206,22 @@ const Navbar = () => {
           {/* AI Dropdown */}
           <div
             className="nav-dropdown ai-nav-dropdown"
-            onMouseEnter={() => window.innerWidth > 768 && setAiOpen(true)}
-            onMouseLeave={() => window.innerWidth > 768 && setAiOpen(false)}
+            onMouseEnter={() => hoverOpen('ai')}
+            onMouseLeave={hoverClose}
           >
             <button
               className="nav-link dropdown-trigger"
-              onClick={() => window.innerWidth <= 768 && setAiOpen(!aiOpen)}
+              onClick={() => tapToggle('ai')}
+              aria-expanded={openMenu === 'ai'}
             >
-              AI <FaChevronDown className={`dropdown-arrow ${aiOpen ? 'open' : ''}`} />
+              AI <FaChevronDown className={`dropdown-arrow ${openMenu === 'ai' ? 'open' : ''}`} />
             </button>
-            <div className={`dropdown-menu ai-mega-dropdown ${aiOpen ? 'show' : ''}`}>
+            <div className={`dropdown-menu ai-mega-dropdown ${openMenu === 'ai' ? 'show' : ''}`}>
               {/* Mobile Submenu Header */}
               <div className="mobile-submenu-header">
-                <button className="mobile-submenu-close" onClick={() => { setAiOpen(false); setMenuOpen(false); }}>&times;</button>
+                <button className="mobile-submenu-close" onClick={closeAll}>&times;</button>
                 <div className="mobile-breadcrumb">
-                  <span onClick={(e) => { e.stopPropagation(); setAiOpen(false); }}>HOME</span> &gt; <strong>AI</strong>
+                  <span onClick={(e) => { e.stopPropagation(); setOpenMenu(null); }}>HOME</span> &gt; <strong>AI</strong>
                 </div>
               </div>
 
@@ -244,24 +267,23 @@ const Navbar = () => {
           {/* Blog Dropdown */}
           <div
             className="nav-dropdown"
-            onMouseEnter={() => window.innerWidth > 768 && setBlogOpen(true)}
-            onMouseLeave={() => window.innerWidth > 768 && setBlogOpen(false)}
+            onMouseEnter={() => hoverOpen('blog')}
+            onMouseLeave={hoverClose}
           >
             <button
               className="nav-link dropdown-trigger"
-              onClick={() => window.innerWidth <= 768 && setBlogOpen(!blogOpen)}
+              onClick={() => tapToggle('blog')}
+              aria-expanded={openMenu === 'blog'}
             >
-              Blog <FaChevronDown className={`dropdown-arrow ${blogOpen ? 'open' : ''}`} />
+              Blog <FaChevronDown className={`dropdown-arrow ${openMenu === 'blog' ? 'open' : ''}`} />
             </button>
-            <div className={`dropdown-menu ${blogOpen ? 'show' : ''}`}>
+            <div className={`dropdown-menu ${openMenu === 'blog' ? 'show' : ''}`}>
               {Object.keys(blogData).map((categorySlug) => (
                 <div
                   key={categorySlug}
                   className="dropdown-item"
                   onClick={() => {
-                    setMenuOpen(false);
-                    setBlogOpen(false);
-                    setAiOpen(false);
+                    closeAll();
                     navigate(`/blog/${categorySlug}`);
                   }}
                 >
@@ -291,15 +313,6 @@ const Navbar = () => {
         </div>
 
         <div className="nav-actions">
-          <button
-            className="theme-toggle"
-            onClick={() => toggleTheme(theme === 'black' ? 'white' : 'black')}
-            aria-label="Toggle theme"
-            title={theme === 'black' ? 'Switch to White Theme' : 'Switch to Black Theme'}
-          >
-            {theme === 'black' ? <FaSun /> : <FaMoon />}
-          </button>
-
           <button
             className={`hamburger ${menuOpen ? 'active' : ''}`}
             onClick={toggleMenu}
