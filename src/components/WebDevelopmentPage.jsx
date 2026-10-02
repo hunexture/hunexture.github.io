@@ -6,6 +6,7 @@ import {
 } from 'react-icons/fa'
 import { SiReact, SiNodedotjs, SiPython, SiTypescript, SiPostgresql, SiRedis, SiDocker, SiAmazonwebservices } from 'react-icons/si'
 import { getServiceBySlug } from '../data/servicesData'
+import { ServiceSchematic } from './ServiceSchematic'
 import './WebDevelopmentPage.css'
 
 const WebDevelopmentPage = () => {
@@ -13,12 +14,6 @@ const WebDevelopmentPage = () => {
     const service = getServiceBySlug('web-development')
     const [openFaq, setOpenFaq] = useState(null)
     const [activeTechTab, setActiveTechTab] = useState('frontend')
-
-    // Performance Sandbox State
-    const [webp, setWebp] = useState(false)
-    const [splitting, setSplitting] = useState(false)
-    const [brotli, setBrotli] = useState(false)
-    const [cdn, setCdn] = useState(false)
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -50,47 +45,6 @@ const WebDevelopmentPage = () => {
             </div>
         )
     }
-
-    // Dynamic metrics based on toggles
-    const getMetrics = () => {
-        const activeCount = [webp, splitting, brotli, cdn].filter(Boolean).length
-        
-        let score = 45
-        let size = '4.8 MB'
-        let speed = '3.4s'
-        let speedColor = 'red'
-        let scoreColor = 'red'
-
-        if (activeCount === 1) {
-            score = 62
-            size = '2.3 MB'
-            speed = '1.9s'
-            speedColor = 'orange'
-            scoreColor = 'orange'
-        } else if (activeCount === 2) {
-            score = 78
-            size = '1.1 MB'
-            speed = '1.1s'
-            speedColor = 'yellow'
-            scoreColor = 'yellow'
-        } else if (activeCount === 3) {
-            score = 92
-            size = '480 KB'
-            speed = '0.5s'
-            speedColor = 'cyan'
-            scoreColor = 'cyan'
-        } else if (activeCount === 4) {
-            score = 100
-            size = '180 KB'
-            speed = '0.18s'
-            speedColor = 'green'
-            scoreColor = 'green'
-        }
-
-        return { score, size, speed, speedColor, scoreColor }
-    }
-
-    const { score, size, speed, speedColor, scoreColor } = getMetrics()
 
     // Tech Stack Matrix Data
     const techStack = {
@@ -186,168 +140,8 @@ const WebDevelopmentPage = () => {
                             </div>
                         </div>
 
-                        {/* Right Column: Signature Interactive Widget */}
-                        <div className="wd-hero-visualizer">
-                            <div className="wd-viz-container">
-                                <div className="wd-viz-header">
-                                    <span className="viz-dot red" />
-                                    <span className="viz-dot yellow" />
-                                    <span className="viz-dot green" />
-                                    <span className="viz-header-title">core-perf-optimizer.sh</span>
-                                </div>
-                                <div className="wd-viz-body">
-                                    <div className="wd-viz-stats-grid">
-                                        <div className="viz-stat-card">
-                                            <span>LIGHTHOUSE SCORE</span>
-                                            <strong className={`score-${scoreColor} tech-font`}>{score}</strong>
-                                            <div className="score-bar-bg">
-                                                <div className={`score-bar fill-${scoreColor}`} style={{ width: `${score}%` }} />
-                                            </div>
-                                        </div>
-                                        <div className="viz-stat-card">
-                                            <span>PAGE WEIGHT</span>
-                                            <strong className="text-white tech-font">{size}</strong>
-                                        </div>
-                                        <div className="viz-stat-card">
-                                            <span>LCP SPEED</span>
-                                            <strong className={`speed-${speedColor} tech-font`}>{speed}</strong>
-                                        </div>
-                                    </div>
-
-                                    {/* SVG Interactive Pipeline Visualizer */}
-                                    <div className="wd-pipeline-box">
-                                        <svg viewBox="0 0 400 120" className="wd-pipeline-svg">
-                                            {/* Glow Filters */}
-                                            <defs>
-                                                <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
-                                                    <feGaussianBlur stdDeviation="3" result="blur" />
-                                                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                                                </filter>
-                                            </defs>
-
-                                            {/* Node Paths */}
-                                            <g stroke="#ffffff" strokeOpacity="0.08" strokeWidth="2" fill="none">
-                                                <path d="M40,60 L120,60" />
-                                                <path d="M120,60 L200,60" />
-                                                <path d="M200,60 L280,60" />
-                                                <path d="M280,60 L360,60" />
-                                            </g>
-
-                                            {/* Dynamic Packet Path (CDN Bypass) */}
-                                            {cdn ? (
-                                                /* CDN is active: packets short-circuit between Client and Edge CDN node */
-                                                <path 
-                                                    d="M40,60 Q120,20 200,60 Q120,20 40,60" 
-                                                    fill="none" 
-                                                    stroke="var(--electric-cyan)" 
-                                                    strokeWidth="2.5" 
-                                                    strokeDasharray="6 6"
-                                                    className="packet-flow-fast"
-                                                />
-                                            ) : (
-                                                /* CDN is inactive: packets travel all the way to DB node */
-                                                <path 
-                                                    d="M40,60 L360,60 L40,60" 
-                                                    fill="none" 
-                                                    stroke="var(--electric-indigo)" 
-                                                    strokeWidth="2" 
-                                                    strokeDasharray="8 8"
-                                                    className={brotli ? "packet-flow-fast" : "packet-flow-slow"}
-                                                />
-                                            )}
-
-                                            {/* Nodes */}
-                                            {/* Client Node */}
-                                            <g transform="translate(40,60)">
-                                                <circle r="18" fill="#0d0e1b" stroke="var(--text-gray)" strokeWidth="1.5" />
-                                                <text textAnchor="middle" y="4" fill="var(--text-white)" fontSize="10" className="tech-font">🖥️</text>
-                                                <text textAnchor="middle" y="32" fill="var(--text-gray)" fontSize="8">Client</text>
-                                            </g>
-
-                                            {/* Network Node (DNS/Bypass) */}
-                                            <g transform="translate(120,60)">
-                                                <circle r="16" fill="#0d0e1b" stroke={splitting ? "var(--electric-cyan)" : "rgba(255,255,255,0.15)"} strokeWidth="1.5" />
-                                                <text textAnchor="middle" y="3" fill="var(--text-white)" fontSize="9" className="tech-font">🕸️</text>
-                                                <text textAnchor="middle" y="30" fill="var(--text-gray)" fontSize="8">Router</text>
-                                            </g>
-
-                                            {/* CDN Node */}
-                                            <g transform="translate(200,60)">
-                                                <circle r="18" fill="#0d0e1b" stroke={cdn ? "var(--electric-cyan)" : "rgba(255,255,255,0.15)"} strokeWidth="1.5" style={{ filter: cdn ? 'url(#glow-cyan)' : 'none' }} />
-                                                <text textAnchor="middle" y="4" fill="var(--text-white)" fontSize="10">☁️</text>
-                                                <text textAnchor="middle" y="32" fill="var(--text-gray)" fontSize="8">Edge CDN</text>
-                                            </g>
-
-                                            {/* App Server Node */}
-                                            <g transform="translate(280,60)">
-                                                <circle r="16" fill="#0d0e1b" stroke={brotli ? "var(--electric-cyan)" : "rgba(255,255,255,0.15)"} strokeWidth="1.5" />
-                                                <text textAnchor="middle" y="3" fill="var(--text-white)" fontSize="9">⚙️</text>
-                                                <text textAnchor="middle" y="30" fill="var(--text-gray)" fontSize="8">Server</text>
-                                            </g>
-
-                                            {/* Database Node */}
-                                            <g transform="translate(360,60)">
-                                                <circle r="18" fill="#0d0e1b" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" />
-                                                <text textAnchor="middle" y="4" fill="var(--text-white)" fontSize="10">🖳</text>
-                                                <text textAnchor="middle" y="32" fill="var(--text-gray)" fontSize="8">Database</text>
-                                            </g>
-                                        </svg>
-                                    </div>
-
-                                    {/* Optimization Controls */}
-                                    <div className="wd-viz-controls">
-                                        <div className="viz-control-row">
-                                            <div className="control-label-wrap">
-                                                <strong>Optimize Image Delivery</strong>
-                                                <span>Convert site media to WebP/AVIF file formats</span>
-                                            </div>
-                                            <button 
-                                                className={`toggle-switch ${webp ? 'active' : ''}`}
-                                                onClick={() => setWebp(!webp)}
-                                            >
-                                                <span className="toggle-thumb" />
-                                            </button>
-                                        </div>
-                                        <div className="viz-control-row">
-                                            <div className="control-label-wrap">
-                                                <strong>Split Bundle Payloads</strong>
-                                                <span>Use dynamic imports and code splitting</span>
-                                            </div>
-                                            <button 
-                                                className={`toggle-switch ${splitting ? 'active' : ''}`}
-                                                onClick={() => setSplitting(!splitting)}
-                                            >
-                                                <span className="toggle-thumb" />
-                                            </button>
-                                        </div>
-                                        <div className="viz-control-row">
-                                            <div className="control-label-wrap">
-                                                <strong>Brotli Compression</strong>
-                                                <span>Compress response headers at server runtime</span>
-                                            </div>
-                                            <button 
-                                                className={`toggle-switch ${brotli ? 'active' : ''}`}
-                                                onClick={() => setBrotli(!brotli)}
-                                            >
-                                                <span className="toggle-thumb" />
-                                            </button>
-                                        </div>
-                                        <div className="viz-control-row">
-                                            <div className="control-label-wrap">
-                                                <strong>Global CDN Caching</strong>
-                                                <span>Short-circuit routes by serving from edge caches</span>
-                                            </div>
-                                            <button 
-                                                className={`toggle-switch ${cdn ? 'active' : ''}`}
-                                                onClick={() => setCdn(!cdn)}
-                                            >
-                                                <span className="toggle-thumb" />
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {/* Right Column: schematic */}
+                        <div className="sch-panel"><ServiceSchematic slug={'web-development'} /></div>
 
                     </div>
 
@@ -469,73 +263,54 @@ const WebDevelopmentPage = () => {
                 </div>
             </section>
 
-            {/* ─── Structured Development Process ───────────────────────── */}
-            {service.process?.length > 0 && (
+            {/* ─── Process + Case Applications (side by side) ───────────── */}
+            {(service.process?.length > 0 || service.useCases?.length > 0) && (
                 <section className="wd-section wd-alt-bg wd-reveal">
-                    <div className="wd-inner">
-                        <div className="wd-section-header">
-                            <span className="wd-tag tech-font">Development Pipeline</span>
-                            <h2 className="wd-section-title">Our Working Process</h2>
-                            <div className="wd-underline" />
-                            <p className="wd-section-desc">
-                                We maintain a rigorous, sprint-based approach from initial user wireframing to automated production releases.
-                            </p>
-                        </div>
-
-                        <div className="wd-timeline">
-                            {service.process.map((step, i) => (
-                                <div key={i} className="wd-step" style={{ '--delay': `${i * 0.1}s` }}>
-                                    <div className="wd-step-tracker">
-                                        <div className="wd-step-number tech-font">
-                                            {step.step}
-                                        </div>
-                                        {i < service.process.length - 1 && <div className="wd-step-line" />}
-                                    </div>
-                                    <div className="wd-step-card">
-                                        <h3>{step.title}</h3>
-                                        <p>{step.description}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-            )}
-
-            {/* ─── Industry Use Cases ───────────────────────────────────── */}
-            {service.useCases?.length > 0 && (
-                <section className="wd-section wd-reveal">
-                    <div className="wd-inner">
-                        <div className="wd-section-header">
-                            <span className="wd-tag tech-font">Proven Solutions</span>
-                            <h2 className="wd-section-title">Case Applications</h2>
-                            <div className="wd-underline" />
-                            <p className="wd-section-desc">
-                                Explore how custom web platforms solve industry-specific efficiency and integration problems.
-                            </p>
-                        </div>
-
-                        <div className="wd-usecases-grid">
-                            {service.useCases.map((uc, i) => {
-                                const UCIcon = uc.icon || FaCode
-                                return (
-                                    <div key={i} className="wd-usecase-card" style={{ '--delay': `${i * 0.08}s` }}>
-                                        <div className="wd-usecase-icon-box">
-                                            <UCIcon />
-                                        </div>
-                                        <h3>{uc.title}</h3>
-                                        <p>{uc.description}</p>
-                                    </div>
-                                )
-                            })}
-                        </div>
+                    <div className="wd-inner wd-duo">
+                        {service.process?.length > 0 && (
+                            <div className="wd-duo-col">
+                                <span className="wd-tag tech-font">Development Pipeline</span>
+                                <h2 className="wd-section-title">Our Working Process</h2>
+                                <ol className="wd-steps">
+                                    {service.process.map((step) => (
+                                        <li key={step.step} className="wd-step-row">
+                                            <span className="wd-step-num tech-font" aria-hidden="true">{step.step}</span>
+                                            <div>
+                                                <h3>{step.title}</h3>
+                                                <p>{step.description}</p>
+                                            </div>
+                                        </li>
+                                    ))}
+                                </ol>
+                            </div>
+                        )}
+                        {service.useCases?.length > 0 && (
+                            <div className="wd-duo-col">
+                                <span className="wd-tag tech-font">Proven Solutions</span>
+                                <h2 className="wd-section-title">Case Applications</h2>
+                                <ul className="wd-uc-list">
+                                    {service.useCases.map((uc) => {
+                                        const UCIcon = uc.icon || FaCode
+                                        return (
+                                            <li key={uc.title} className="wd-uc-row">
+                                                <span className="wd-uc-icon" aria-hidden="true"><UCIcon /></span>
+                                                <div>
+                                                    <h3>{uc.title}</h3>
+                                                    <p>{uc.description}</p>
+                                                </div>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </div>
+                        )}
                     </div>
                 </section>
             )}
 
             {/* ─── FAQ Section ─────────────────────────────────────────── */}
             {service.faq?.length > 0 && (
-                <section className="wd-section wd-alt-bg wd-reveal">
+                <section className="wd-section wd-reveal">
                     <div className="wd-inner">
                         <div className="wd-section-header">
                             <span className="wd-tag tech-font">FAQ</span>
@@ -544,7 +319,7 @@ const WebDevelopmentPage = () => {
                         </div>
 
                         <div className="wd-faq-list">
-                            {service.faq.map((item, i) => (
+                            {service.faq.slice(0, 4).map((item, i) => (
                                 <div 
                                     key={i} 
                                     className={`wd-faq-item ${openFaq === i ? 'open' : ''}`}

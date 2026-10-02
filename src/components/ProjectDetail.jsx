@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaArrowLeft, FaCheck, FaExternalLinkAlt, FaGithub, FaClock, FaUsers, FaIndustry, FaQuoteLeft } from 'react-icons/fa';
 import { getProjectBySlug, getRelatedProjects } from '../data/portfolioData';
+import CoverArt from './CoverArt';
 import './ProjectDetail.css';
 
 const ProjectDetail = () => {
@@ -36,14 +37,14 @@ const ProjectDetail = () => {
       {/* Hero Section */}
       <motion.section
         className="project-hero"
-        style={{ background: project.image }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
+        <CoverArt category={project.category} seed={project.id} className="project-hero-art" />
         <div className="project-hero-overlay">
           <div className="project-hero-content">
-            <button onClick={() => navigate('/#portfolio')} className="back-link">
+            <button onClick={() => navigate('/portfolio')} className="back-link">
               <FaArrowLeft /> Back to Portfolio
             </button>
 
@@ -338,7 +339,6 @@ const ProjectDetail = () => {
               <h2>Related Projects</h2>
               <div className="related-projects-grid">
                 {relatedProjects.map((relatedProject, index) => {
-                  const RelatedIcon = relatedProject.icon;
                   return (
                     <motion.div
                       key={relatedProject.id}
@@ -350,11 +350,8 @@ const ProjectDetail = () => {
                       onClick={() => navigate(`/portfolio/${relatedProject.slug}`)}
                       whileHover={{ y: -10 }}
                     >
-                      <div
-                        className="related-project-image"
-                        style={{ background: relatedProject.image }}
-                      >
-                        <RelatedIcon className="related-project-icon" />
+                      <div className="related-project-image">
+                        <CoverArt category={relatedProject.category} seed={relatedProject.id} />
                       </div>
                       <div className="related-project-content">
                         <span className="related-category">{relatedProject.categoryLabel}</span>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { portfolioData } from '../data/portfolioData'
+import CoverArt from './CoverArt'
 import './Portfolio.css'
 
 const categories = [
@@ -58,7 +59,7 @@ const Portfolio = () => {
           {shown.map(project => (
             <li key={project.id}>
               <Link to={`/portfolio/${project.slug}`} className="pf-sheet">
-                <span className="pf-image" style={{ background: project.image }} aria-hidden="true" />
+                <span className="pf-image" aria-hidden="true"><CoverArt category={project.category} seed={project.id} /></span>
                 <span className="pf-body">
                   <span className="pf-category">{project.categoryLabel}</span>
                   <span className="pf-title">{project.title}</span>

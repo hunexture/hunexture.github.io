@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { FaChevronDown } from 'react-icons/fa'
 import Logo from './Logo'
 import { industriesData } from '../data/industriesData'
-import { blogData } from '../data/blogData'
 import { aiData } from '../data/aiData'
 import { companyStats, formatStat, getStat } from '../data/companyData'
 import './Navbar.css'
@@ -264,40 +263,11 @@ const Navbar = () => {
           </div>
 
 
-          {/* Blog Dropdown */}
-          <div
-            className="nav-dropdown"
-            onMouseEnter={() => hoverOpen('blog')}
-            onMouseLeave={hoverClose}
-          >
-            <button
-              className="nav-link dropdown-trigger"
-              onClick={() => tapToggle('blog')}
-              aria-expanded={openMenu === 'blog'}
-            >
-              Blog <FaChevronDown className={`dropdown-arrow ${openMenu === 'blog' ? 'open' : ''}`} />
-            </button>
-            <div className={`dropdown-menu ${openMenu === 'blog' ? 'show' : ''}`}>
-              {Object.keys(blogData).map((categorySlug) => (
-                <div
-                  key={categorySlug}
-                  className="dropdown-item"
-                  onClick={() => {
-                    closeAll();
-                    navigate(`/blog/${categorySlug}`);
-                  }}
-                >
-                  <span>{blogData[categorySlug].title}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
           {/* Portfolio */}
           <a
-            href="#portfolio"
+            href="/portfolio"
             className="nav-link"
-            onClick={(e) => handleNavClick(e, '#portfolio')}
+            onClick={(e) => { e.preventDefault(); navigate('/portfolio') }}
           >
             Portfolio
           </a>

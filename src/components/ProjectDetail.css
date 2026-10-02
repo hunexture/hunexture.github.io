@@ -816,3 +816,30 @@
   border-color: var(--signal);
   color: var(--signal);
 }
+
+/* Cover art replaces flat gradients */
+.project-hero-art { position: absolute; inset: 0; width: 100%; height: 100%; }
+.project-hero .project-hero-overlay {
+  background: rgba(6, 12, 28, 0.78);
+  backdrop-filter: none;
+}
+.related-project-image { overflow: hidden; }
+.related-project-image .ca { position: absolute; inset: 0; }
+
+/* Text over the dark cover art */
+.project-hero .project-hero-content h1,
+.project-hero .project-hero-content .project-hero-description,
+.project-hero .project-hero-content .project-hero-tags span {
+  color: #fff;
+}
+.project-hero .project-hero-description { opacity: 0.9; }
+.project-hero .project-category-badge {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.project-hero .project-hero-tags span {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+.project-hero .project-hero-icon { color: #fff; }

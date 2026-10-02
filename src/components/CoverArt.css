@@ -1,0 +1,23 @@
+.ca { display: block; width: 100%; height: 100%; }
+
+.ca-panel { fill: rgba(255, 255, 255, 0.08); stroke: rgba(255, 255, 255, 0.85); stroke-width: 1.6; }
+.ca-line  { stroke: rgba(255, 255, 255, 0.28); stroke-width: 1; fill: none; }
+.ca-line--hot { stroke: var(--ca-light); stroke-width: 1.6; opacity: 0.9; }
+.ca-node  { fill: rgba(255, 255, 255, 0.95); }
+.ca-fill  { fill: var(--ca-light); }
+.ca-soft  { fill: rgba(255, 255, 255, 0.55); }
+.ca-bar   { fill: rgba(255, 255, 255, 0.35); transform-box: fill-box; transform-origin: bottom; animation: ca-rise 3.2s ease-in-out infinite; }
+.ca-trace { fill: none; stroke: var(--ca-light); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.ca-trace--flow { stroke: #fff; stroke-width: 3; stroke-dasharray: 8 200; animation: ca-flow 2.6s linear infinite; }
+.ca-ping  { fill: var(--ca-light); transform-box: fill-box; transform-origin: center; animation: ca-ping 2s ease-out infinite; }
+.ca-drop  { fill: var(--ca-light); animation: ca-drop 2.4s ease-in infinite; }
+
+@keyframes ca-rise { 0%, 100% { transform: scaleY(0.82); } 50% { transform: scaleY(1); } }
+@keyframes ca-flow { from { stroke-dashoffset: 8; } to { stroke-dashoffset: -120; } }
+@keyframes ca-ping { 0% { transform: scale(0.7); opacity: 1; } 100% { transform: scale(2.2); opacity: 0; } }
+@keyframes ca-drop { 0% { opacity: 0; transform: translateY(0); } 20% { opacity: 1; } 100% { opacity: 0; transform: translateY(80px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .ca-bar, .ca-trace--flow, .ca-ping, .ca-drop { animation: none; }
+  .ca-trace--flow { display: none; }
+}

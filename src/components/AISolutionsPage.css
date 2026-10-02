@@ -901,3 +901,362 @@
         padding: 80px 24px;
     }
 }
+/* ═════════════════════════════════════════════════════════════
+   Blueprint layer: aligns this page with the Home page style.
+   Paper / ink / signal, square corners, no glow or glass.
+   ═════════════════════════════════════════════════════════════ */
+.aip-page { background: var(--paper); color: var(--ink); }
+
+.aip-page .aip-hero {
+    min-height: 0;
+    display: block;
+    overflow: visible;
+    padding: 130px 0 0;
+    background-color: var(--paper);
+    background-image:
+        linear-gradient(rgba(157, 176, 203, 0.35) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(157, 176, 203, 0.35) 1px, transparent 1px),
+        linear-gradient(rgba(203, 214, 230, 0.35) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(203, 214, 230, 0.35) 1px, transparent 1px);
+    background-size: 96px 96px, 96px 96px, 24px 24px, 24px 24px;
+    background-position: -1px -1px;
+    border-bottom: 1px solid var(--line);
+}
+
+.aip-page .aip-hero-bg,
+.aip-page .aip-hero-grid,
+.aip-page .aip-hero-blob,
+.aip-page .aip-bottom-cta-glow,
+.aip-page .aip-underline,
+.aip-page .aip-orb { display: none; }
+
+.aip-page .aip-hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    text-align: left;
+}
+
+.aip-page .aip-hero-badge {
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    font-family: var(--font-annot);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--signal-deep);
+    margin-bottom: 16px;
+}
+
+.aip-page .aip-hero-title {
+    font-stretch: 118%;
+    font-size: clamp(2.3rem, 5vw, 3.75rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    max-width: 18ch;
+    margin-bottom: 20px;
+}
+
+.aip-page .aip-hero-gradient {
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    color: var(--signal);
+}
+
+.aip-page .aip-hero-subtitle {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--ink-muted);
+    max-width: 62ch;
+    margin: 0 0 28px;
+}
+
+.aip-page .aip-hero-cta { justify-content: flex-start; gap: 12px; margin-bottom: 56px; }
+
+.aip-page .aip-btn-primary,
+.aip-page .aip-btn-secondary,
+.aip-page .aip-btn-outline {
+    min-height: 48px;
+    padding: 0 24px;
+    border-radius: 4px;
+    border: 1.5px solid var(--signal);
+    box-shadow: none;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    transform: none;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.aip-page .aip-btn-primary { background: var(--signal); color: #FFFFFF; }
+.aip-page .aip-btn-primary:hover { background: var(--signal-deep); border-color: var(--signal-deep); transform: none; box-shadow: none; }
+.aip-page .aip-btn-secondary,
+.aip-page .aip-btn-outline { background: var(--paper-raised); color: var(--signal); }
+.aip-page .aip-btn-secondary:hover,
+.aip-page .aip-btn-outline:hover { background: var(--signal-tint); transform: none; box-shadow: none; }
+
+.aip-page .aip-btn-primary:focus-visible,
+.aip-page .aip-btn-secondary:focus-visible,
+.aip-page .aip-btn-outline:focus-visible,
+.aip-page .aip-expertise-header:focus-visible {
+    outline: 3px solid var(--signal);
+    outline-offset: 3px;
+}
+
+/* Stats as a drawing title block */
+.aip-page .aip-hero-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    max-width: none;
+    margin: 0 0 -1px;
+    padding: 0;
+    background: var(--paper-raised);
+    border: 1.5px solid var(--ink);
+    border-bottom: 0;
+    border-radius: 0;
+}
+
+.aip-page .aip-hero-stat { padding: 18px 24px; text-align: left; background: none; border: 0; }
+.aip-page .aip-hero-stat + .aip-hero-stat { border-left: 1px solid var(--line-strong); }
+
+.aip-page .aip-hero-stat strong {
+    display: block;
+    font-family: var(--font-display);
+    font-stretch: 118%;
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--ink);
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    margin-bottom: 6px;
+}
+
+.aip-page .aip-hero-stat span {
+    font-family: var(--font-annot);
+    font-size: 0.78rem;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--ink-muted);
+}
+
+/* Sections */
+.aip-page .aip-section {
+    max-width: none;
+    margin: 0;
+    padding: 96px 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+}
+
+.aip-page .aip-section.aip-alt-bg { background: var(--paper-sunk); }
+.aip-page .aip-inner { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+.aip-page .aip-section-header {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: 12px 64px;
+    align-items: end;
+    text-align: left;
+    max-width: none;
+    margin: 0 0 56px;
+}
+
+.aip-page .aip-tag {
+    grid-column: 1 / -1;
+    display: block;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    font-family: var(--font-annot);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--signal-deep);
+    margin: 0;
+}
+
+.aip-page .aip-section-header h2 {
+    font-stretch: 105%;
+    font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    margin: 0;
+}
+
+.aip-page .aip-section-desc { margin: 0; max-width: 60ch; font-size: 1.1rem; line-height: 1.65; color: var(--ink-muted); }
+
+/* Cards */
+.aip-page .aip-service-card,
+.aip-page .aip-industry-card,
+.aip-page .aip-why-card,
+.aip-page .aip-expertise-card,
+.aip-page .aip-tech-badge {
+    background: var(--paper-raised);
+    border: 1px solid var(--line-strong);
+    border-radius: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    transform: none;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.aip-page .aip-service-card,
+.aip-page .aip-why-card { padding: 28px; border-top: 4px solid var(--signal); }
+.aip-page .aip-industry-card { padding: 28px; }
+
+.aip-page .aip-service-card:hover,
+.aip-page .aip-industry-card:hover,
+.aip-page .aip-why-card:hover,
+.aip-page .aip-expertise-card:hover,
+.aip-page .aip-expertise-card.open,
+.aip-page .aip-tech-badge:hover {
+    background: var(--paper-raised);
+    border-color: var(--signal);
+    box-shadow: none;
+    transform: none;
+}
+
+.aip-page .aip-service-icon,
+.aip-page .aip-expertise-icon,
+.aip-page .aip-industry-icon,
+.aip-page .aip-why-icon {
+    border-radius: 0;
+    background: transparent !important;
+    border: 1.5px solid var(--signal) !important;
+    color: var(--signal) !important;
+    box-shadow: none;
+}
+
+.aip-page .aip-service-icon svg,
+.aip-page .aip-expertise-icon svg,
+.aip-page .aip-industry-icon svg,
+.aip-page .aip-why-icon svg { color: var(--signal) !important; }
+
+.aip-page .aip-service-card:hover .aip-service-icon { background: transparent !important; transform: none; }
+.aip-page .aip-service-card:hover .aip-service-icon svg { transform: none; }
+
+.aip-page .aip-service-card h3,
+.aip-page .aip-industry-card h3,
+.aip-page .aip-why-card h3,
+.aip-page .aip-expertise-title h3 { color: var(--ink); }
+
+.aip-page .aip-service-card p,
+.aip-page .aip-industry-card p,
+.aip-page .aip-why-card p,
+.aip-page .aip-expertise-item p { color: var(--ink-muted); }
+
+.aip-page .aip-read-more {
+    color: var(--signal) !important;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.aip-page .aip-expertise-bullet { background: var(--signal) !important; border-radius: 0; box-shadow: none; }
+.aip-page .aip-expertise-item strong { color: var(--ink); }
+
+.aip-page .aip-tech-badge span { color: var(--ink); }
+.aip-page .aip-tech-badge:hover span { color: var(--ink); }
+
+/* Future block */
+.aip-page .aip-future-content h2 { font-stretch: 105%; letter-spacing: -0.01em; color: var(--ink); }
+.aip-page .aip-future-content p { color: var(--ink-muted); }
+.aip-page .aip-future-list li { color: var(--ink); }
+.aip-page .aip-check-icon { color: var(--signal); }
+
+.aip-page .aip-future-visual { display: flex; justify-content: center; }
+
+.aip-page .aip-future-card {
+    background: var(--paper-raised);
+    border: 1.5px solid var(--ink);
+    border-radius: 2px;
+    box-shadow: inset 0 0 0 6px var(--paper-raised), inset 0 0 0 7px var(--line);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    animation: none;
+}
+
+.aip-page .aip-future-icon { color: var(--signal); filter: none; }
+.aip-page .aip-future-card p,
+.aip-page .aip-future-card span { color: var(--ink-muted); }
+.aip-page .aip-future-card strong { color: var(--ink); background: none; -webkit-text-fill-color: currentColor; }
+
+/* CTA band + bottom CTA: solid signal, like the footer CTA on the Home page */
+.aip-page .aip-cta-band,
+.aip-page .aip-bottom-cta {
+    background: var(--signal);
+    border: 0;
+    padding: 72px 0;
+    text-align: left;
+    color: #FFFFFF;
+}
+
+.aip-page .aip-cta-band-inner,
+.aip-page .aip-bottom-cta-inner { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+.aip-page .aip-cta-band h2,
+.aip-page .aip-bottom-cta h2 {
+    font-size: clamp(1.7rem, 3vw, 2.3rem);
+    letter-spacing: -0.01em;
+    color: #FFFFFF;
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    margin-bottom: 12px;
+}
+
+.aip-page .aip-cta-band p,
+.aip-page .aip-bottom-cta p { color: #E6EEFF; max-width: 60ch; font-size: 1.05rem; margin: 0 0 28px; }
+
+.aip-page .aip-bottom-cta .aip-tag { color: #DCE7FF; margin-bottom: 8px; }
+.aip-page .aip-bottom-cta-btns { justify-content: flex-start; gap: 12px; }
+
+.aip-page .aip-cta-band .aip-btn-primary,
+.aip-page .aip-bottom-cta .aip-btn-primary { background: #FFFFFF; color: var(--signal-deep); border-color: #FFFFFF; }
+.aip-page .aip-cta-band .aip-btn-primary:hover,
+.aip-page .aip-bottom-cta .aip-btn-primary:hover { background: var(--signal-tint); border-color: var(--signal-tint); }
+.aip-page .aip-bottom-cta .aip-btn-secondary { background: transparent; color: #FFFFFF; border-color: #FFFFFF; }
+.aip-page .aip-bottom-cta .aip-btn-secondary:hover { background: rgba(255, 255, 255, 0.14); }
+
+.aip-page .aip-reveal { transition: opacity 0.45s ease, transform 0.45s ease; transform: translateY(16px); }
+.aip-page .aip-reveal.aip-visible { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+    .aip-page .aip-reveal { opacity: 1; transform: none; transition: none; }
+}
+
+@media (max-width: 1024px) {
+    .aip-page .aip-hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .aip-page .aip-hero-stat:nth-child(3) { border-left: 0; }
+    .aip-page .aip-hero-stat:nth-child(n + 3) { border-top: 1px solid var(--line-strong); }
+}
+
+@media (max-width: 900px) {
+    .aip-page .aip-section-header { grid-template-columns: 1fr; margin-bottom: 36px; }
+}
+
+@media (max-width: 768px) {
+    .aip-page .aip-section { padding: 64px 0; }
+    .aip-page .aip-inner,
+    .aip-page .aip-hero-inner,
+    .aip-page .aip-cta-band-inner,
+    .aip-page .aip-bottom-cta-inner { padding: 0 16px; }
+    .aip-page .aip-hero { padding-top: 104px; }
+    .aip-page .aip-cta-band,
+    .aip-page .aip-bottom-cta { padding: 56px 0; }
+}

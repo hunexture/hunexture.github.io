@@ -22,8 +22,8 @@
   --signal-deep: #1E3A8A;
   --signal-tint: #E3EBFC;
 
-  --font-display: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-body: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Bricolage Grotesque', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body: 'Figtree', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-annot: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
 
   /* Legacy aliases (do not add new usages — prefer the tokens above) */
@@ -496,3 +496,9 @@ html {
     padding: 0 16px;
   }
 }
+
+/* Section palettes: each area of the site gets its own signal colour.
+   Everything that reads var(--signal) recolours automatically. */
+.theme-ai  { --signal: #6D28D9; --signal-deep: #4C1D95; --signal-tint: #EDE5FB; --accent-color: #6D28D9; }
+.theme-ind { --signal: #0F766E; --signal-deep: #134E4A; --signal-tint: #D8F1ED; --accent-color: #0F766E; }
+.theme-pf  { --signal: #C2410C; --signal-deep: #7C2D12; --signal-tint: #FCE6D8; --accent-color: #C2410C; }

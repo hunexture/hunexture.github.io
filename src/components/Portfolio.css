@@ -60,23 +60,16 @@
   box-shadow: 0 0 0 1px var(--signal);
 }
 
-/* Blueprint print: grayscale artwork tinted with the signal colour */
 .pf-image {
   position: relative;
   display: block;
   aspect-ratio: 16 / 10;
-  background-size: cover !important;
-  background-position: center !important;
+  overflow: hidden;
   border-bottom: 1px solid var(--line-strong);
 }
 
-.pf-image::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--signal);
-  mix-blend-mode: color;
-}
+.pf-image .ca { transition: transform 0.5s ease; }
+.pf-sheet:hover .pf-image .ca { transform: scale(1.04); }
 
 .pf-body {
   display: flex;

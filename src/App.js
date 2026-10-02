@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { ThemeProvider } from './context/ThemeContext'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -18,11 +18,10 @@ import ServicesList from './components/ServicesList'
 import IndustriesList from './components/IndustriesList'
 import AIList from './components/AIList'
 import BusinessProfile from './components/BusinessProfile'
+import PortfolioPage from './components/PortfolioPage'
 import PrivacyPolicy from './components/PrivacyPolicy'
 import TermsOfService from './components/TermsOfService'
 import CookiePolicy from './components/CookiePolicy'
-import BlogList from './components/BlogList'
-import BlogPost from './components/BlogPost'
 import Testimonials from './components/Testimonials'
 import FAQ from './components/FAQ'
 import WorkingWithUs from './components/WorkingWithUs'
@@ -83,6 +82,7 @@ function App() {
             <Route path="/services/uiux-design" element={<ServiceDetail serviceSlug="uiux-design" />} />
             <Route path="/services/digital-marketing" element={<ServiceDetail serviceSlug="digital-marketing" />} />
             <Route path="/services/:slug" element={<ServiceDetail />} />
+            <Route path="/portfolio" element={<PortfolioPage />} />
             <Route path="/portfolio/:slug" element={<ProjectDetail />} />
             <Route path="/industries" element={<IndustriesList />} />
             <Route path="/industries/:slug" element={<IndustryDetail />} />
@@ -92,9 +92,7 @@ function App() {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/cookie-policy" element={<CookiePolicy />} />
-            <Route path="/blog" element={<BlogList />} />
-            <Route path="/blog/:category" element={<BlogList />} />
-            <Route path="/blog/:category/:slug" element={<BlogPost />} />
+            <Route path="/blog/*" element={<Navigate to="/" replace />} />
           </Routes>
         </Layout>
       </Router>
