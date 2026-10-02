@@ -13,7 +13,7 @@ const faqs = [
   },
   {
     question: 'Do you provide post-launch support and maintenance?',
-    answer: 'Yes. We offer flexible support packages including bug fixes, performance monitoring, feature updates, and 24/7 uptime monitoring. We treat every project as a long-term partnership.'
+    answer: 'Yes. We offer flexible support packages including bug fixes, performance monitoring, feature updates, and uptime monitoring with automated alerting. We treat every project as a long-term partnership.'
   },
   {
     question: 'What AI and ML technologies do you specialize in?',
@@ -71,7 +71,7 @@ const FAQ = () => {
             {faqs.map((faq, i) => (
               <div
                 key={i}
-                className={`faq-item${openIndex === i ? ' open' : ''}`}
+                className={`faq-item glass-panel${openIndex === i ? ' open' : ''}`}
                 style={{ transitionDelay: `${i * 0.05}s` }}
               >
                 <button

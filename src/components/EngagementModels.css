@@ -1,0 +1,89 @@
+.engagement-models {
+  padding: 80px 0;
+  background: var(--dark-navy);
+}
+
+.em-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.em-grid {
+  list-style: none;
+  margin: 48px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.em-card {
+  border-radius: 12px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.em-card:hover {
+  border-color: var(--electric-blue-40);
+}
+
+.em-name {
+  font-size: 20px;
+  color: var(--text-white);
+  margin: 0;
+}
+
+.em-best-for,
+.em-how {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--text-gray);
+}
+
+.em-best-for strong {
+  color: var(--text-white);
+}
+
+.em-pricing {
+  margin: auto 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--electric-blue-10);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--electric-blue);
+}
+
+.em-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+@media (max-width: 1023px) {
+  .em-grid {
+    grid-template-columns: 1fr;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .engagement-models {
+    padding: 50px 0;
+  }
+
+  .em-container {
+    padding: 0 16px;
+  }
+
+  .em-grid {
+    margin-top: 28px;
+    gap: 16px;
+  }
+}

@@ -1,6 +1,9 @@
 import { FaBrain, FaMobile, FaCloud, FaLaptopCode, FaHome, FaChartLine, FaPython, FaReact, FaAws, FaNodeJs, FaVuejs, FaDocker, FaDatabase, FaBullhorn, FaGoogle, FaInstagram, FaUsers } from 'react-icons/fa';
 import { SiTensorflow, SiMongodb, SiStripe, SiKubernetes, SiGraphql, SiPostgresql, SiWebrtc, SiMqtt, SiRedis, SiGo, SiFlutter, SiGoogleads, SiFacebook, SiGoogleanalytics } from 'react-icons/si';
 
+// Portfolio entries are sample/concept builds. `results` are illustrative example metrics,
+// rendered under an "Illustrative Results" label — replace with real before/after numbers
+// from client engagements as case studies are approved.
 export const portfolioData = [
   {
     id: 1,
@@ -59,7 +62,7 @@ export const portfolioData = [
 
     timeline: '6 months',
     teamSize: '8 members',
-    client: 'Fortune 500 Financial Services Company',
+    client: null, // TODO: real client name (with written permission) once available
     industry: 'Financial Services',
 
     keyTakeaways: [
@@ -69,11 +72,7 @@ export const portfolioData = [
       'Cloud infrastructure enables cost-effective scaling'
     ],
 
-    testimonial: {
-      quote: 'This platform has transformed how we make data-driven decisions. The predictive insights have helped us identify opportunities we would have otherwise missed.',
-      author: 'Chief Data Officer',
-      company: 'Client Company'
-    },
+    testimonial: null, // TODO: add a real, permissioned client quote
 
     liveUrl: null,
     githubUrl: null,
@@ -137,7 +136,7 @@ export const portfolioData = [
 
     timeline: '4 months',
     teamSize: '6 members',
-    client: 'Premium Furniture Retailer',
+    client: null, // TODO: real client name (with written permission) once available
     industry: 'Retail & E-Commerce',
 
     keyTakeaways: [
@@ -147,11 +146,7 @@ export const portfolioData = [
       'Push notifications drive re-engagement when used strategically'
     ],
 
-    testimonial: {
-      quote: 'The AR feature has been a game-changer. Our customers love being able to see how furniture looks in their homes before buying.',
-      author: 'VP of Digital Commerce',
-      company: 'Client Company'
-    },
+    testimonial: null, // TODO: add a real, permissioned client quote
 
     liveUrl: null,
     githubUrl: null,
@@ -215,7 +210,7 @@ export const portfolioData = [
 
     timeline: '8 months',
     teamSize: '10 members',
-    client: 'Global Technology Corporation',
+    client: null, // TODO: real client name (with written permission) once available
     industry: 'Enterprise Software',
 
     keyTakeaways: [
@@ -225,11 +220,7 @@ export const portfolioData = [
       'Containerization simplifies multi-cloud deployments'
     ],
 
-    testimonial: {
-      quote: 'This dashboard has given us complete visibility across our cloud infrastructure. The cost savings alone have paid for the project many times over.',
-      author: 'Cloud Infrastructure Director',
-      company: 'Client Company'
-    },
+    testimonial: null, // TODO: add a real, permissioned client quote
 
     liveUrl: null,
     githubUrl: null,
@@ -293,7 +284,7 @@ export const portfolioData = [
 
     timeline: '10 months',
     teamSize: '12 members',
-    client: 'Regional Healthcare Network',
+    client: null, // TODO: real client name (with written permission) once available
     industry: 'Healthcare',
 
     keyTakeaways: [
@@ -303,11 +294,7 @@ export const portfolioData = [
       'Security and usability must work together, not against each other'
     ],
 
-    testimonial: {
-      quote: 'This platform has revolutionized how we deliver care. Our patients love the convenience of telehealth, and our providers appreciate the intuitive interface.',
-      author: 'Chief Medical Information Officer',
-      company: 'Client Healthcare Network'
-    },
+    testimonial: null, // TODO: add a real, permissioned client quote
 
     liveUrl: null,
     githubUrl: null,
@@ -371,7 +358,7 @@ export const portfolioData = [
 
     timeline: '7 months',
     teamSize: '9 members',
-    client: 'Smart Home Technology Startup',
+    client: null, // TODO: real client name (with written permission) once available
     industry: 'IoT & Home Automation',
 
     keyTakeaways: [
@@ -381,11 +368,7 @@ export const portfolioData = [
       'Energy optimization is a key selling point for consumers'
     ],
 
-    testimonial: {
-      quote: 'The predictive automation is incredible. The system knows what I need before I do. It\'s like having a smart assistant for my entire home.',
-      author: 'Product Manager',
-      company: 'Client Company'
-    },
+    testimonial: null, // TODO: add a real, permissioned client quote
 
     liveUrl: null,
     githubUrl: null,
@@ -449,7 +432,7 @@ export const portfolioData = [
 
     timeline: '5 months',
     teamSize: '7 members',
-    client: 'Fintech Trading Platform',
+    client: null, // TODO: real client name (with written permission) once available
     industry: 'Financial Technology',
 
     keyTakeaways: [
@@ -459,11 +442,7 @@ export const portfolioData = [
       'Security and compliance are non-negotiable in fintech'
     ],
 
-    testimonial: {
-      quote: 'The app is incredibly fast and reliable. I can execute trades in milliseconds and the charting tools rival desktop platforms.',
-      author: 'CEO',
-      company: 'Client Fintech Company'
-    },
+    testimonial: null, // TODO: add a real, permissioned client quote
 
     liveUrl: null,
     githubUrl: null,
@@ -527,7 +506,7 @@ export const portfolioData = [
 
     timeline: '6 months',
     teamSize: '5 members',
-    client: 'Fashion E-Commerce Brand',
+    client: null, // TODO: real client name (with written permission) once available
     industry: 'Retail & E-Commerce',
 
     keyTakeaways: [
@@ -537,11 +516,7 @@ export const portfolioData = [
       'Data-driven decision making leads to sustainable growth'
     ],
 
-    testimonial: {
-      quote: 'This team transformed our entire digital presence. The results exceeded our expectations, and we\'re now the leading brand in our category online.',
-      author: 'Marketing Director',
-      company: 'Client E-Commerce Company'
-    },
+    testimonial: null, // TODO: add a real, permissioned client quote
 
     liveUrl: null,
     githubUrl: null,
@@ -579,18 +554,14 @@ export const portfolioData = [
     timeline: '3 months',
     teamSize: '5 Engineers',
     industry: 'Financial Technology',
-    client: 'Alpha Quant Trading',
+    client: null, // TODO: real client name (with written permission) once available
     keyTakeaways: [
       'Engineered a custom React state manager to handle 5000+ ticks/second without dropping frames',
       'Implemented WebGL-accelerated canvas components for deep market history charting',
       'Maintained total frontend latency under 15ms across high-volatility events',
       'Designed an extensible drag-and-drop workspace architecture using React DnD'
     ],
-    testimonial: {
-      quote: 'The fastest, cleanest trading interface we\'ve ever used. The websocket integration is flawless.',
-      author: 'Head Trader',
-      company: 'Alpha Quant'
-    },
+    testimonial: null, // TODO: add a real, permissioned client quote
     liveUrl: null,
     githubUrl: null
   },
@@ -626,18 +597,14 @@ export const portfolioData = [
     timeline: '8 months',
     teamSize: '9 Engineers',
     industry: 'Supply Chain & Logistics',
-    client: 'TransGlobal Logistics',
+    client: null, // TODO: real client name (with written permission) once available
     keyTakeaways: [
       'Built a hybrid edge-to-cloud architecture allowing real-time camera inference during internet outages',
       'Trained an object detection model with 99.9% accuracy on over 400 distinct pallet types',
       'Integrated seamlessly with the client\'s legacy 90s-era ERP system via custom middleware',
       'Saved $2M annually in lost goods and inefficient routing'
     ],
-    testimonial: {
-      quote: 'Hunexture\'s AI solution completely modernized our 20-year-old warehouse operation in just 8 months.',
-      author: 'VP of Operations',
-      company: 'TransGlobal'
-    },
+    testimonial: null, // TODO: add a real, permissioned client quote
     liveUrl: null,
     githubUrl: null
   }

@@ -60,7 +60,8 @@ const Portfolio = () => {
           <h2 className="section-title">Portfolio</h2>
           <div className="title-underline"></div>
           <p className="section-description">
-            Showcasing our latest projects and innovative solutions
+            Sample and concept builds that show how we work. Metrics on project pages are
+            illustrative — published client case studies are coming soon.
           </p>
         </div>
 

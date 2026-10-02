@@ -6,6 +6,7 @@ import Logo from './Logo'
 import { industriesData } from '../data/industriesData'
 import { blogData } from '../data/blogData'
 import { aiData } from '../data/aiData'
+import { companyStats, formatStat, getStat } from '../data/companyData'
 import './Navbar.css'
 
 const Navbar = () => {
@@ -138,31 +139,15 @@ const Navbar = () => {
               <div className="ai-dropdown-container">
                 {/* Left Promo Card */}
                 <div className="ai-promo-card desktop-only">
-                  <div className="stats-grid" style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    gap: '15px',
-                    marginBottom: '20px',
-                    color: 'white'
-                  }}>
-                    <div>
-                      <div style={{ fontSize: '12px', opacity: 0.8 }}>Countries</div>
-                      <div style={{ fontSize: '24px', fontWeight: 'bold' }}>90+</div>
-                    </div>
-                    <div>
-                      <div style={{ fontSize: '12px', opacity: 0.8 }}>Since</div>
-                      <div style={{ fontSize: '24px', fontWeight: 'bold' }}>1998</div>
-                    </div>
-                    <div>
-                      <div style={{ fontSize: '12px', opacity: 0.8 }}>Projects</div>
-                      <div style={{ fontSize: '24px', fontWeight: 'bold' }}>7000+</div>
-                    </div>
-                    <div>
-                      <div style={{ fontSize: '12px', opacity: 0.8 }}>Clients</div>
-                      <div style={{ fontSize: '24px', fontWeight: 'bold' }}>3000+</div>
-                    </div>
-                  </div>
-                  <p style={{ marginTop: 'auto', marginBottom: '20px' }}>Our learning from variety of industries over more than two decades have helped us bring immediate impact.</p>
+                  <dl className="promo-stats-grid">
+                    {companyStats.map((stat) => (
+                      <div key={stat.key} className="promo-stat">
+                        <dt>{stat.label}</dt>
+                        <dd className="tech-font">{formatStat(stat)}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                  <p className="promo-stats-copy">Lessons from building across {formatStat(getStat('industries'))} industries, applied to your product from day one.</p>
                   <button onClick={(e) => handleNavClick(e, '#contact')} className="btn-view-more">Contact Us</button>
                 </div>
 

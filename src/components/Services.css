@@ -33,37 +33,14 @@
   margin-right: auto;
 }
 
-/* ── Hover-scroll carousel ── */
+/* ── Carousel (shared accessible Carousel component) ── */
 .services-carousel-outer {
-  margin-top: 48px;
-  overflow: hidden;
-  position: relative;
-  cursor: ew-resize;
-  /* hint: sideways scroll available */
-  /* fade edges */
-  -webkit-mask-image: linear-gradient(to right,
-      transparent 0%,
-      black 5%,
-      black 95%,
-      transparent 100%);
-  mask-image: linear-gradient(to right,
-      transparent 0%,
-      black 5%,
-      black 95%,
-      transparent 100%);
+  max-width: 1280px;
+  margin: 48px auto 0;
+  padding: 0 40px;
 }
 
-.services-carousel-track {
-  display: flex;
-  gap: 24px;
-  padding: 8px 40px 20px;
-  /* side padding so first/last card shows properly */
-  width: max-content;
-  will-change: transform;
-}
-
-/* cards inside carousel are fixed-width */
-.services-carousel-track .service-card {
+.service-card {
   width: 420px;
   flex-shrink: 0;
 }
@@ -81,17 +58,11 @@
 .service-card {
   position: relative;
   padding: 40px 32px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
   border-radius: 12px;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  user-select: none;
-  -webkit-user-drag: none;
 }
 
 .service-card:hover {
@@ -584,36 +555,8 @@
   }
 }
 
-/* Custom Scroll Progress Bar */
-.services-scroll-indicator {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  margin-top: 50px;
-  width: 100%;
-}
-
-.services-progress-track {
-  width: 240px;
-  height: 4px;
-  background: var(--glass-border);
-  border-radius: 2px;
-  overflow: hidden;
-  position: relative;
-}
-
-.services-progress-bar {
-  height: 100%;
-  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
-  width: 0%;
-  transition: width 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 0 10px var(--neon-cyan);
-}
-
-.services-scroll-hint {
-  font-size: 10px;
-  color: var(--text-gray);
-  letter-spacing: 0.15em;
-  font-weight: 600;
+@media (max-width: 768px) {
+  .services-carousel-outer {
+    padding: 0 16px;
+  }
 }

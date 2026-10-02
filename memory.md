@@ -299,3 +299,32 @@ All components should handle these breakpoints via media queries in their own CS
 ### Active industry routes
 - `/industries` → `IndustriesList`
 - `/industries/:slug` → `IndustryDetail` (healthcare, legal, logistics, education, media-ott, travel, retail, construction, + more)
+
+---
+
+## 🛡️ Session: Trust & Accessibility Overhaul (2026-10-02)
+
+### Single source of truth: `src/data/companyData.js`
+- `companyStats` (5+ years, 20+ engineers, 10+ industries, 30+ clients) — **the only verified stats**. Hero, About, Navbar, AISolutionsPage, AIDetail, IndustryDetail and IndustriesList all read from here via `getStat(key)` / `formatStat(stat)`. Never hardcode a company number in a component.
+- `contactDetails` (email, phone, WhatsApp, location) — used by `Contact.jsx`; mirror changes in the schema.org block in `public/index.html`.
+- `builtOnStack` — technologies we use (NOT certifications/partnerships).
+- `trustPractices`, `securityStatement` → `WorkingWithUs.jsx` (contains a TODO to confirm with founders).
+- `engagementModels` → `EngagementModels.jsx`.
+- `illustrativeOutcomes` → `Testimonials.jsx` (labelled "Illustrative Outcomes"). Replace with real, permissioned testimonials when available.
+
+### Honesty rules
+- No fabricated stats, client names, testimonials or certifications. Portfolio `client`/`testimonial` are `null` until real; project `results` render under "Illustrative Results".
+- Industry `stats` are capability descriptors (standards/integrations), and `caseStudies` are "Solution Blueprints" whose `results` start with "Designed for:".
+
+### Shared `Carousel` component (`Carousel.jsx/.css`)
+Scroll-snap carousel with prev/next buttons, dots, swipe, arrow-key/Home/End navigation, optional autoplay (pauses on hover/focus, visible pause control, disabled under reduced motion). Props: `label`, `slideWidth`, `gap`, `autoPlay`. Used by About (mobile), Services, Testimonials (mobile). Don't hand-roll new carousels.
+
+### Home page order
+Hero → TechMarquee → About → ProcessSection → WorkingWithUs → Services → Portfolio → Testimonials (Illustrative Outcomes) → EngagementModels → FAQ → Contact
+
+### Other conventions
+- Canonical domain is `https://hunexture.com` everywhere (`SITE_URL` in companyData).
+- Hero sits on a fixed purple background in all themes → hero muted text uses `--hero-text-muted`, not `--text-gray`.
+- Cards use the `glass-panel` utility class (FAQ items, contact info items, service cards, new sections) instead of re-declaring glass backgrounds.
+- `.visually-hidden` utility lives in `index.css`.
+- Reduced motion: hero video is paused in JS; marquees become static wrapped rows; HUD/orb animations stop.

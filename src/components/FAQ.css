@@ -84,12 +84,9 @@
 }
 
 .faq-item {
-  background: var(--card-overlay);
-  border: 1px solid var(--electric-blue-20);
   border-radius: 16px;
   overflow: hidden;
   transition: all 0.4s ease;
-  backdrop-filter: blur(10px);
 }
 
 .faq-item:hover {

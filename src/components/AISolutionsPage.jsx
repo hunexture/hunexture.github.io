@@ -6,6 +6,7 @@ import {
     FaChevronDown, FaChevronUp, FaHospital, FaDollarSign, FaShoppingBag,
     FaIndustry, FaTruck, FaUsers, FaLayerGroup, FaShieldAlt, FaCode, FaGlobe
 } from 'react-icons/fa'
+import { formatStat, getStat } from '../data/companyData'
 import './AISolutionsPage.css'
 
 const aiServices = [
@@ -345,10 +346,10 @@ const AISolutionsPage = () => {
 
                     <div className="aip-hero-stats">
                         {[
-                            { value: '200+', label: 'AI Projects Delivered' },
-                            { value: '50+', label: 'ML Models Deployed' },
-                            { value: '98%', label: 'Client Satisfaction' },
-                            { value: '10+', label: 'Years of Expertise' }
+                            { value: formatStat(getStat('years')), label: 'Years of Innovation' },
+                            { value: formatStat(getStat('engineers')), label: 'Expert Engineers' },
+                            { value: formatStat(getStat('industries')), label: 'Industries Served' },
+                            { value: formatStat(getStat('clients')), label: 'Happy Clients' }
                         ].map((s, i) => (
                             <div key={i} className="aip-hero-stat">
                                 <strong>{s.value}</strong>
@@ -534,7 +535,7 @@ const AISolutionsPage = () => {
                             <span className="aip-tag">The Future</span>
                             <h2>The Future of Business is<br /><span className="aip-hero-gradient">Intelligent Automation with AI</span></h2>
                             <p>
-                                AI is reshaping industries and revolutionizing business operations worldwide. As a leading AI solutions company serving clients in India and the USA, Hunexture empowers businesses to leverage advanced AI technologies — including machine learning, deep learning, NLP, and computer vision — to achieve measurable results.
+                                AI is reshaping industries and revolutionizing business operations worldwide. As an AI solutions company serving clients in India and the USA, Hunexture empowers businesses to leverage advanced AI technologies — including machine learning, deep learning, NLP, and computer vision — to achieve measurable results.
                             </p>
                             <ul className="aip-future-list">
                                 {[

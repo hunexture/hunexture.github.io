@@ -355,8 +355,8 @@ const WebDevelopmentPage = () => {
                     {/* Stats Summary Bar */}
                     <div className="wd-hero-stats">
                         <div className="wd-hero-stat">
-                            <strong className="tech-font text-gradient">99.9%</strong>
-                            <span>Uptime SLA Guaranteed</span>
+                            <strong className="tech-font text-gradient">CI/CD</strong>
+                            <span>Automated, Reviewed Deploys</span>
                         </div>
                         <div className="wd-hero-stat">
                             <strong className="tech-font text-gradient">&lt;200ms</strong>

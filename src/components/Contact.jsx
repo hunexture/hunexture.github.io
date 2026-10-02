@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { FaEnvelope, FaLinkedin, FaTwitter, FaInstagram, FaWhatsapp } from 'react-icons/fa'
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaTwitter, FaInstagram, FaWhatsapp } from 'react-icons/fa'
+import { contactDetails } from '../data/companyData'
 import './Contact.css'
 
 const Contact = () => {
@@ -13,8 +14,7 @@ const Contact = () => {
   const [submitSuccess, setSubmitSuccess] = useState(false)
   const [submitError, setSubmitError] = useState('')
 
-  // WhatsApp number (with country code, no + or spaces)
-  const whatsappNumber = '919067262552'
+  const { whatsappNumber } = contactDetails
 
   const handleChange = (e) => {
     setFormData({
@@ -29,7 +29,7 @@ const Contact = () => {
 
     try {
       // Using FormSubmit.co - a free form backend service
-      const response = await fetch('https://formsubmit.co/info@hunexture.com', {
+      const response = await fetch(`https://formsubmit.co/${contactDetails.email}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ const Contact = () => {
       }
     } catch (error) {
       console.error('Error submitting form:', error)
-      setSubmitError('Something went wrong. Please try again or email us directly at info@hunexture.com')
+      setSubmitError(`Something went wrong. Please try again or email us directly at ${contactDetails.email}`)
     } finally {
       setIsSubmitting(false)
     }
@@ -71,21 +71,22 @@ const Contact = () => {
     {
       icon: <FaEnvelope />,
       title: 'Email',
-      content: 'info@hunexture.com',
-      link: 'mailto:info@hunexture.com'
+      content: contactDetails.email,
+      link: `mailto:${contactDetails.email}`
     },
-    // {
-    //   icon: <FaPhone />,
-    //   title: 'Phone',
-    //   content: '+91 9067262552',
-    //   link: 'tel:+919067262552'
-    // },
-    // {
-    //   icon: <FaMapMarkerAlt />,
-    //   title: 'Location',
-    //   content: 'Ahmedabad, Gujarat',
-    //   link: '#'
-    // }
+    {
+      icon: <FaPhone />,
+      title: 'Phone',
+      content: contactDetails.phoneDisplay,
+      link: contactDetails.phoneHref
+    },
+    {
+      icon: <FaMapMarkerAlt />,
+      title: 'Location',
+      content: contactDetails.location,
+      link: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contactDetails.location)}`,
+      external: true
+    }
   ]
 
   const socialLinks = [
@@ -120,10 +121,11 @@ const Contact = () => {
                 <a
                   key={index}
                   href={item.link}
-                  className="info-item"
+                  {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  className="info-item glass-panel"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <div className="info-icon">{item.icon}</div>
+                  <div className="info-icon" aria-hidden="true">{item.icon}</div>
                   <div className="info-content">
                     <h4>{item.title}</h4>
                     <p>{item.content}</p>
@@ -139,6 +141,8 @@ const Contact = () => {
                   <a
                     key={index}
                     href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="social-link"
                     aria-label={social.name}
                     title={social.name}

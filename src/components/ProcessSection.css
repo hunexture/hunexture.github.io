@@ -288,3 +288,26 @@
     text-align: center;
   }
 }
+/* Layout overrides (moved from inline styles) */
+.process-section.process-section {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.process-section .process-container {
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.process-header.section-header {
+  margin-bottom: 20px;
+}
+
+.process-header .section-title {
+  margin-bottom: 10px;
+}
+
+.process-header .section-description {
+  margin-top: 5px;
+  margin-bottom: 20px;
+}

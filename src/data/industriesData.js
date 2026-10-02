@@ -96,10 +96,10 @@ export const industriesData = [
     image: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
     color: '#667eea',
     stats: [
-      { value: '40%', label: 'EHR Efficiency Gain' },
-      { value: '99.9%', label: 'Platform Uptime' },
-      { value: '60%', label: 'Faster Claims' },
-      { value: '50K+', label: 'Patients Served' }
+      { value: 'HIPAA', label: 'Compliance-Ready Builds' },
+      { value: 'HL7/FHIR', label: 'Interoperability' },
+      { value: 'EHR', label: 'System Integrations' },
+      { value: '6–10 wks', label: 'Typical MVP' }
     ],
     services: [
       { name: 'Electronic Health Records (EHR)', icon: FaFileAlt },
@@ -137,18 +137,18 @@ export const industriesData = [
     caseStudies: [
       {
         title: 'Telemedicine Platform',
-        description: 'Built a comprehensive telehealth solution serving 50,000+ patients with video consultations, prescriptions, and lab results.',
-        results: '10,000+ virtual consultations per month'
+        description: 'A telehealth solution with video consultations, e-prescriptions and lab results in one patient app.',
+        results: 'Designed for: fewer in-person visits for routine follow-ups'
       },
       {
         title: 'Hospital EHR Migration',
-        description: 'Migrated paper-based records and legacy systems to a modern cloud EHR for a 200-bed multispecialty hospital.',
-        results: '70% reduction in administrative overhead'
+        description: 'Migrating paper records and legacy systems to a modern, compliant cloud EHR.',
+        results: 'Designed for: less administrative overhead for clinical staff'
       },
       {
         title: 'Mental Health App',
-        description: 'Developed a teletherapy platform connecting patients with certified therapists, including mood tracking and crisis support.',
-        results: '15K+ therapy sessions delivered monthly'
+        description: 'A teletherapy platform connecting patients with licensed therapists, with mood tracking and crisis support.',
+        results: 'Designed for: easier access to ongoing care'
       }
     ],
     faq: [
@@ -187,10 +187,10 @@ export const industriesData = [
     image: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
     color: '#4facfe',
     stats: [
-      { value: '70%', label: 'Docs Automated' },
-      { value: '500+', label: 'Law Firms Served' },
-      { value: '80%', label: 'Less Admin Time' },
-      { value: '99%', label: 'Uptime SLA' }
+      { value: 'NLP', label: 'Document AI' },
+      { value: 'E-Sign', label: 'Workflow Integration' },
+      { value: 'RBAC', label: 'Matter-Level Access' },
+      { value: '6–10 wks', label: 'Typical MVP' }
     ],
     services: [
       { name: 'Case Management Systems', icon: FaGavel },
@@ -228,18 +228,18 @@ export const industriesData = [
     caseStudies: [
       {
         title: 'Case Management Platform',
-        description: 'Developed comprehensive legal practice management software for a national law firm network across 20 offices.',
-        results: '500+ law firms using the platform'
+        description: 'Practice management software covering matters, deadlines, billing and client communication.',
+        results: 'Designed for: one source of truth across offices'
       },
       {
         title: 'Document Automation Platform',
-        description: 'Built AI-powered contract drafting and review system reducing manual document preparation for a global law firm.',
-        results: '90% reduction in document preparation time'
+        description: 'AI-assisted contract drafting and review with clause libraries and approval workflows.',
+        results: 'Designed for: faster document preparation with lawyer review in the loop'
       },
       {
         title: 'Legal Research AI Tool',
-        description: 'Developed NLP-based research assistant for case law analysis, statute lookup, and precedent identification.',
-        results: '3x faster case research for attorneys'
+        description: 'An NLP research assistant for case law analysis, statute lookup and precedent identification.',
+        results: 'Designed for: faster first-pass research for attorneys'
       }
     ],
     faq: [
@@ -278,10 +278,10 @@ export const industriesData = [
     image: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
     color: '#f093fb',
     stats: [
-      { value: '30%', label: 'Fuel Cost Savings' },
-      { value: '99.9%', label: 'Tracking Accuracy' },
-      { value: '25%', label: 'Faster Delivery' },
-      { value: '1000+', label: 'Vehicles Tracked' }
+      { value: 'GPS/IoT', label: 'Live Tracking' },
+      { value: 'Route', label: 'Optimization Models' },
+      { value: 'WMS/ERP', label: 'Integrations' },
+      { value: 'iOS + Android', label: 'Driver Apps' }
     ],
     services: [
       { name: 'Fleet Management Systems', icon: FaTruck },
@@ -314,23 +314,23 @@ export const industriesData = [
       { title: 'AI Route Optimization', description: 'Machine learning algorithms cut delivery times by up to 30% while reducing fuel consumption, vehicle wear, and driver fatigue.' },
       { title: 'Real-Time GPS Precision', description: 'Sub-30-second location updates with 99.9% accuracy — complete fleet visibility across any geography, 24/7.' },
       { title: 'Scalable Cloud Platform', description: 'Handles fleets from 10 to 10,000+ vehicles on the same architecture with automatic scaling during peak periods.' },
-      { title: 'Carrier Ecosystem', description: 'Pre-built integrations with 200+ carriers, freight brokers, and logistics networks worldwide — no renegotiation needed.' }
+      { title: 'Carrier Ecosystem', description: 'Integrations with carrier, freight broker and aggregator APIs so shipments, rates and tracking flow into one system.' }
     ],
     caseStudies: [
       {
         title: 'Fleet Tracking System',
-        description: 'Real-time tracking and dispatch optimization solution for a national FMCG distributor with 1,000+ vehicles.',
-        results: '30% reduction in fuel costs'
+        description: 'Real-time vehicle tracking with dispatch and route optimization for distribution fleets.',
+        results: 'Designed for: lower fuel costs and fewer empty miles'
       },
       {
         title: 'Last-Mile Delivery App',
-        description: 'Driver mobile app and dispatch platform for an e-commerce fulfillment company handling hyperlocal deliveries.',
-        results: '95% on-time delivery rate achieved'
+        description: 'A driver app and dispatch console for hyperlocal and same-day deliveries.',
+        results: 'Designed for: higher on-time delivery rates'
       },
       {
         title: 'Warehouse Management System',
-        description: 'Implemented WMS with barcode/RFID picking for a 3PL provider across 5 distribution centers.',
-        results: '40% improvement in order accuracy'
+        description: 'A WMS with barcode/RFID picking, slotting and multi-site inventory visibility.',
+        results: 'Designed for: better order accuracy'
       }
     ],
     faq: [
@@ -369,10 +369,10 @@ export const industriesData = [
     image: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
     color: '#30cfd0',
     stats: [
-      { value: '95%', label: 'Satisfaction Rate' },
-      { value: '100K+', label: 'Students Served' },
-      { value: '40%', label: 'Engagement Increase' },
-      { value: '4.8★', label: 'App Store Rating' }
+      { value: 'LMS', label: 'Platform Builds' },
+      { value: 'Live + VOD', label: 'Class Delivery' },
+      { value: 'AI', label: 'Adaptive Learning' },
+      { value: 'SCORM/LTI', label: 'Standards Support' }
     ],
     services: [
       { name: 'Learning Management Systems', icon: FaBook },
@@ -410,18 +410,18 @@ export const industriesData = [
     caseStudies: [
       {
         title: 'Online Learning Platform',
-        description: 'Built a multi-subject LMS platform serving K-12 and higher education students with live and recorded classes.',
-        results: '95% student satisfaction rate'
+        description: 'A multi-subject LMS with live and recorded classes, assignments and progress tracking.',
+        results: 'Designed for: higher learner engagement'
       },
       {
         title: 'Corporate Training Platform',
-        description: 'Built enterprise LMS for a Fortune 500 company with 50,000+ employees across 30 countries.',
-        results: 'Course completion rate jumped from 45% to 85%'
+        description: 'An enterprise LMS for distributed workforces with compliance tracking and multilingual content.',
+        results: 'Designed for: higher course completion rates'
       },
       {
         title: 'Adaptive Assessment Tool',
-        description: 'Developed adaptive testing platform for a school district using AI to personalize question difficulty per student.',
-        results: '28% improvement in standardized test scores'
+        description: 'An AI-driven adaptive testing tool that personalises question difficulty per student.',
+        results: 'Designed for: more accurate measurement of learning gaps'
       }
     ],
     faq: [
@@ -460,10 +460,10 @@ export const industriesData = [
     image: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
     color: '#fa709a',
     stats: [
-      { value: '10M+', label: 'Hours Streamed' },
-      { value: '4K HDR', label: 'Video Quality' },
-      { value: '99%', label: 'CDN Uptime' },
-      { value: '1M+', label: 'Subscribers' }
+      { value: 'HLS/DASH', label: 'Adaptive Streaming' },
+      { value: 'DRM', label: 'Content Protection' },
+      { value: 'Multi-Device', label: 'Web, Mobile, TV' },
+      { value: 'CDN', label: 'Global Delivery' }
     ],
     services: [
       { name: 'OTT Platform Development', icon: FaTv },
@@ -501,18 +501,18 @@ export const industriesData = [
     caseStudies: [
       {
         title: 'OTT Streaming Platform',
-        description: 'Developed a Netflix-like entertainment platform with original content, live TV, and multi-device apps for a media conglomerate.',
-        results: '10M+ hours of content streamed monthly'
+        description: 'A subscription streaming platform with live TV, on-demand content and multi-device apps.',
+        results: 'Designed for: smooth playback at scale'
       },
       {
         title: 'Live Sports Streaming',
-        description: 'Built low-latency live streaming infrastructure for a national sports league with concurrent multi-match viewing.',
-        results: '2M concurrent viewers at peak, <4s latency'
+        description: 'Low-latency live streaming infrastructure with multi-match viewing.',
+        results: 'Designed for: low latency under match-day traffic spikes'
       },
       {
         title: 'Podcast & Audio Platform',
-        description: 'Developed end-to-end podcast creation, hosting, and distribution platform with creator monetization tools.',
-        results: '50K+ creator accounts, 5M monthly listeners'
+        description: 'An end-to-end podcast creation, hosting and distribution platform with creator monetization.',
+        results: 'Designed for: creator growth and listener retention'
       }
     ],
     faq: [
@@ -551,10 +551,10 @@ export const industriesData = [
     image: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
     color: '#667eea',
     stats: [
-      { value: '500K+', label: 'Annual Bookings' },
-      { value: '40%', label: 'Less Abandonment' },
-      { value: '150+', label: 'API Integrations' },
-      { value: '98%', label: 'Uptime SLA' }
+      { value: 'GDS/API', label: 'Supplier Integrations' },
+      { value: 'Dynamic', label: 'Packaging Engines' },
+      { value: 'Multi-Currency', label: 'Payments' },
+      { value: '6–10 wks', label: 'Typical MVP' }
     ],
     services: [
       { name: 'Booking Management Systems', icon: FaCalendarAlt },
@@ -592,18 +592,18 @@ export const industriesData = [
     caseStudies: [
       {
         title: 'Travel Booking Platform',
-        description: 'Built a comprehensive multi-supplier booking system for a travel aggregator covering flights, hotels, and packages.',
-        results: '500K+ bookings processed annually'
+        description: 'A multi-supplier booking system covering flights, hotels and packages.',
+        results: 'Designed for: fewer abandoned bookings'
       },
       {
         title: 'Tour Operator Platform',
-        description: 'B2C booking platform for an adventure travel operator with 200+ tours, dynamic packaging, and group booking management.',
-        results: '60% increase in direct bookings vs. OTA'
+        description: 'A direct booking platform with dynamic packaging and group booking management.',
+        results: 'Designed for: more direct bookings vs. OTAs'
       },
       {
         title: 'Corporate Travel Management',
-        description: 'Developed TMC platform managing business travel policy compliance, approvals, and expense reporting for enterprise clients.',
-        results: '25% reduction in travel spend per trip'
+        description: 'A travel management platform for policy compliance, approvals and expense reporting.',
+        results: 'Designed for: lower travel spend per trip'
       }
     ],
     faq: [
@@ -642,10 +642,10 @@ export const industriesData = [
     image: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
     color: '#4facfe',
     stats: [
-      { value: '3x', label: 'Conversion Rate' },
-      { value: '45%', label: 'Return Rate Down' },
-      { value: '200+', label: 'Stores Served' },
-      { value: '$10M+', label: 'Monthly Revenue' }
+      { value: 'Omnichannel', label: 'Online + In-Store' },
+      { value: 'AI', label: 'Recommendations' },
+      { value: 'POS/ERP', label: 'Integrations' },
+      { value: 'PCI DSS', label: 'Payment-Ready' }
     ],
     services: [
       { name: 'E-Commerce Platforms', icon: FaShoppingCart },
@@ -676,25 +676,25 @@ export const industriesData = [
     ],
     whyChooseUs: [
       { title: 'Omnichannel Mastery', description: 'Seamless experience across web, mobile, in-store, and social commerce with unified inventory and a single customer profile.' },
-      { title: 'Conversion Experts', description: 'Data-driven UX, checkout optimization, and A/B testing consistently deliver 2–3x conversion rate improvements for our retail clients.' },
+      { title: 'Conversion Focused', description: 'Data-driven UX, checkout optimization and A/B testing built in from launch, so every change is measured against conversion.' },
       { title: 'AI Personalization Engine', description: 'Product recommendations, dynamic pricing, and targeted promotions increase average order value by 35% and repeat purchase rates.' },
       { title: 'Peak Traffic Ready', description: 'Auto-scaling cloud infrastructure handles flash sales, Black Friday, and holiday traffic spikes without slowdowns or checkout failures.' }
     ],
     caseStudies: [
       {
         title: 'E-Commerce Platform',
-        description: 'Built a modern online store with AR product visualization and AI recommendations for a fashion retailer.',
-        results: '3x increase in online conversion rate'
+        description: 'A modern online store with AR product visualization and AI recommendations.',
+        results: 'Designed for: higher online conversion'
       },
       {
         title: 'Omnichannel Retail Platform',
-        description: 'Unified commerce platform for a 50-store fashion retailer, connecting online, in-store, and app channels.',
-        results: '45% online revenue growth in 6 months'
+        description: 'Unified commerce connecting online, in-store and app channels with shared inventory.',
+        results: 'Designed for: consistent customer experience across channels'
       },
       {
         title: 'D2C Brand Launch',
-        description: 'End-to-end D2C e-commerce experience for an FMCG brand entering the direct-to-consumer market.',
-        results: '100K customers acquired in first 90 days'
+        description: 'An end-to-end D2C e-commerce experience for brands moving direct-to-consumer.',
+        results: 'Designed for: fast launch and early customer acquisition'
       }
     ],
     faq: [
@@ -733,10 +733,10 @@ export const industriesData = [
     image: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
     color: '#f093fb',
     stats: [
-      { value: '50+', label: 'Projects Managed' },
-      { value: '35%', label: 'Delay Reduction' },
-      { value: '20%', label: 'Cost Savings' },
-      { value: '99%', label: 'Safety Compliance' }
+      { value: 'Field', label: 'Mobile-First Apps' },
+      { value: 'BIM', label: 'Data Integration' },
+      { value: 'Offline', label: 'Site Sync' },
+      { value: 'Real-Time', label: 'Safety Reporting' }
     ],
     services: [
       { name: 'Project Management Software', icon: FaBuilding },
@@ -774,18 +774,18 @@ export const industriesData = [
     caseStudies: [
       {
         title: 'Construction Management Platform',
-        description: 'Comprehensive project management solution for a construction company managing 50+ active commercial projects simultaneously.',
-        results: '50+ construction projects managed simultaneously'
+        description: 'Project management for multiple concurrent sites: schedules, RFIs, documents and budgets.',
+        results: 'Designed for: fewer delays across active projects'
       },
       {
         title: 'Infrastructure Project Tracker',
-        description: 'Project management platform for a $500M highway infrastructure project with 200+ subcontractors and daily reporting.',
-        results: 'Delivered 3 weeks ahead of schedule, 12% under budget'
+        description: 'A tracker for large infrastructure projects with subcontractor coordination and daily reporting.',
+        results: 'Designed for: earlier visibility of schedule and budget risk'
       },
       {
         title: 'Safety Compliance System',
-        description: 'Real-time safety monitoring and incident reporting system deployed across a construction conglomerate with 30 active sites.',
-        results: '65% reduction in site incidents in 18 months'
+        description: 'Real-time safety monitoring and incident reporting across construction sites.',
+        results: 'Designed for: fewer site incidents'
       }
     ],
     faq: [
@@ -824,10 +824,10 @@ export const industriesData = [
     image: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
     color: '#30cfd0',
     stats: [
-      { value: '1M+', label: 'Active Users' },
-      { value: '50ms', label: 'Update Latency' },
-      { value: '10+', label: 'Leagues Served' },
-      { value: '99.99%', label: 'Event Uptime' }
+      { value: 'Real-Time', label: 'Live Scoring Feeds' },
+      { value: 'Fantasy', label: 'Game Engines' },
+      { value: 'Push', label: 'Fan Engagement' },
+      { value: 'Scalable', label: 'Match-Day Traffic' }
     ],
     services: [
       { name: 'Fan Engagement Apps', icon: FaMobileAlt },
@@ -865,18 +865,18 @@ export const industriesData = [
     caseStudies: [
       {
         title: 'Sports Fan App',
-        description: 'Fan engagement platform for a major cricket league with live scores, fantasy game, and exclusive content.',
-        results: '1M+ active users during cricket season'
+        description: 'A fan engagement app with live scores, fantasy games and exclusive content.',
+        results: 'Designed for: higher season-long engagement'
       },
       {
         title: 'Daily Fantasy Sports Platform',
-        description: 'Built a real-money daily fantasy platform with live scoring, prize pools, and responsible gaming features.',
-        results: '5M registered users, 500K daily active players'
+        description: 'A daily fantasy platform with live scoring, prize pools and responsible gaming features.',
+        results: 'Designed for: reliability during peak match windows'
       },
       {
         title: 'Stadium Experience App',
-        description: 'In-stadium companion app with AR player stats overlay, seat upgrades, food ordering, and instant replay.',
-        results: '85% adoption rate among in-stadium attendees'
+        description: 'An in-stadium companion app with AR stats overlay, seat upgrades and food ordering.',
+        results: 'Designed for: higher in-venue spend and satisfaction'
       }
     ],
     faq: [
@@ -915,10 +915,10 @@ export const industriesData = [
     image: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
     color: '#fa709a',
     stats: [
-      { value: '10K+', label: 'Active Vendors' },
-      { value: '$10M+', label: 'Monthly GMV' },
-      { value: '4.7★', label: 'Average Rating' },
-      { value: '99%', label: 'Payment Success' }
+      { value: 'Multi-Vendor', label: 'Platforms' },
+      { value: 'Escrow', label: 'Split Payments' },
+      { value: 'KYC', label: 'Vendor Onboarding' },
+      { value: 'Search', label: 'Discovery & Ranking' }
     ],
     services: [
       { name: 'Multi-Vendor Platforms', icon: FaStore },
@@ -956,18 +956,18 @@ export const industriesData = [
     caseStudies: [
       {
         title: 'Online Marketplace',
-        description: 'Built a multi-category marketplace platform connecting 10,000+ vendors with millions of buyers.',
-        results: '$10M+ in monthly transactions processed'
+        description: 'A multi-category marketplace connecting vendors and buyers with split payments.',
+        results: 'Designed for: smooth vendor onboarding at scale'
       },
       {
         title: 'B2B Industrial Marketplace',
-        description: 'Built a procurement marketplace connecting industrial suppliers with manufacturers, with RFQ and bulk ordering.',
-        results: '$25M+ in B2B transactions in year 1'
+        description: 'A procurement marketplace with RFQs, bulk ordering and supplier management.',
+        results: 'Designed for: shorter procurement cycles'
       },
       {
         title: 'Freelance Services Platform',
-        description: 'Developed a professional services marketplace with escrow payments, milestone billing, and dispute resolution.',
-        results: '80K freelancers onboarded in first 4 months'
+        description: 'A services marketplace with escrow payments, milestone billing and dispute resolution.',
+        results: 'Designed for: trust between clients and freelancers'
       }
     ],
     faq: [
@@ -1006,10 +1006,10 @@ export const industriesData = [
     image: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
     color: '#667eea',
     stats: [
-      { value: '500K+', label: 'Active Users' },
-      { value: '99.9%', label: 'Transaction Success' },
-      { value: '$1B+', label: 'Processed Annually' },
-      { value: '<0.1%', label: 'Fraud Rate' }
+      { value: 'KYC/AML', label: 'Compliance Flows' },
+      { value: 'PCI DSS', label: 'Payment-Ready' },
+      { value: 'AI', label: 'Risk & Fraud Models' },
+      { value: 'Open Banking', label: 'API Integrations' }
     ],
     services: [
       { name: 'Banking Applications', icon: FaWallet },
@@ -1047,18 +1047,18 @@ export const industriesData = [
     caseStudies: [
       {
         title: 'Digital Banking Platform',
-        description: 'Built a mobile-first neobank app for a regional bank with accounts, cards, payments, and AI-powered financial insights.',
-        results: '500K+ active users in 12 months'
+        description: 'A mobile-first banking app with accounts, cards, payments and AI-powered insights.',
+        results: 'Designed for: fast, compliant customer onboarding'
       },
       {
         title: 'Investment Platform',
-        description: 'Built a robo-advisory and direct stock trading platform for retail investors with SIP automation and goal-based investing.',
-        results: '₹500Cr AUM reached in 12 months'
+        description: 'A robo-advisory and trading platform with SIP automation and goal-based investing.',
+        results: 'Designed for: simpler investing for retail users'
       },
       {
         title: 'Digital Lending App',
-        description: 'AI credit scoring and instant loan disbursement platform for an NBFC with bureau integration and e-sign workflows.',
-        results: '10,000 loans per month, 30-second approval time'
+        description: 'AI credit scoring and digital loan disbursement with bureau integration and e-sign.',
+        results: 'Designed for: faster, more consistent credit decisions'
       }
     ],
     faq: [
@@ -1097,10 +1097,10 @@ export const industriesData = [
     image: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
     color: '#4facfe',
     stats: [
-      { value: '2M+', label: 'Registered Users' },
-      { value: '50M+', label: 'Monthly Posts' },
-      { value: '99%', label: 'Platform Uptime' },
-      { value: '<3s', label: 'Global Load Time' }
+      { value: 'Real-Time', label: 'Feeds & Chat' },
+      { value: 'AI', label: 'Feed Ranking' },
+      { value: 'Moderation', label: 'Trust & Safety Tools' },
+      { value: 'Creator', label: 'Monetization' }
     ],
     services: [
       { name: 'Social Network Development', icon: FaUserFriends },
@@ -1138,18 +1138,18 @@ export const industriesData = [
     caseStudies: [
       {
         title: 'Niche Social Platform',
-        description: 'Developed a professional social network for a specific vertical industry with matching, feeds, and groups.',
-        results: '2M+ registered users in first year'
+        description: 'A professional social network for a vertical industry with matching, feeds and groups.',
+        results: 'Designed for: strong early community engagement'
       },
       {
         title: 'Professional Network',
-        description: 'LinkedIn-inspired platform for creative professionals with portfolio showcasing and collaboration tools.',
-        results: '500K professionals joined in first 6 months'
+        description: 'A network for creative professionals with portfolio showcasing and collaboration tools.',
+        results: 'Designed for: profile completion and repeat visits'
       },
       {
         title: 'Short-Form Video Platform',
-        description: 'Creator platform with AI feed algorithm, real-time comments, live streaming, and creator monetization.',
-        results: '2M creators, 100M+ monthly video views'
+        description: 'A creator platform with AI feed ranking, real-time comments, live streaming and monetization.',
+        results: 'Designed for: creator retention and watch time'
       }
     ],
     faq: [
@@ -1188,10 +1188,10 @@ export const industriesData = [
     image: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
     color: '#f093fb',
     stats: [
-      { value: '100K+', label: 'Policies Managed' },
-      { value: '85%', label: 'Faster Claims' },
-      { value: '60%', label: 'Fraud Reduction' },
-      { value: '4.5★', label: 'Customer NPS' }
+      { value: 'Digital', label: 'Underwriting Flows' },
+      { value: 'Claims', label: 'Automation' },
+      { value: 'AI', label: 'Fraud Detection' },
+      { value: 'Telematics', label: 'Usage-Based Models' }
     ],
     services: [
       { name: 'Policy Management Systems', icon: FaFileAlt },
@@ -1229,18 +1229,18 @@ export const industriesData = [
     caseStudies: [
       {
         title: 'Insurance Management Platform',
-        description: 'Built a comprehensive policy and claims management system for a multi-line insurer covering health, motor, and property.',
-        results: '100K+ policies managed on the platform'
+        description: 'A policy and claims management system for multi-line insurers.',
+        results: 'Designed for: faster claims handling'
       },
       {
         title: 'Auto Insurance Telematics App',
-        description: 'Usage-based insurance mobile app with telematics scoring, in-app claims reporting, and instant policy issuance.',
-        results: '35% lower claims ratio through driver behavior scoring'
+        description: 'A usage-based insurance app with telematics scoring, in-app claims and instant policy issuance.',
+        results: 'Designed for: risk-based pricing from real driving data'
       },
       {
         title: 'Digital Life Insurance Portal',
-        description: 'End-to-end digital underwriting, e-sign, and policy issuance portal reducing policy turnaround from 7 days to minutes.',
-        results: 'Policy issuance in under 20 minutes end-to-end'
+        description: 'A digital underwriting, e-sign and policy issuance portal.',
+        results: 'Designed for: policy turnaround in minutes, not days'
       }
     ],
     faq: [
@@ -1279,10 +1279,10 @@ export const industriesData = [
     image: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
     color: '#30cfd0',
     stats: [
-      { value: '40%', label: 'Productivity Gain' },
-      { value: '60%', label: 'Less Downtime' },
-      { value: '30%', label: 'Energy Savings' },
-      { value: '100+', label: 'Machines Connected' }
+      { value: 'IoT', label: 'Machine Connectivity' },
+      { value: 'Vision AI', label: 'Quality Inspection' },
+      { value: 'MES/ERP', label: 'Integrations' },
+      { value: 'OEE', label: 'Dashboards' }
     ],
     services: [
       { name: 'Production Planning Systems', icon: FaCogs },
@@ -1312,7 +1312,7 @@ export const industriesData = [
       'Maintaining product quality consistency'
     ],
     whyChooseUs: [
-      { title: 'Industry 4.0 Pioneer', description: 'Delivered 30+ Industry 4.0 transformation projects connecting legacy equipment with modern cloud analytics platforms.' },
+      { title: 'Industry 4.0 Ready', description: 'We connect legacy equipment to modern cloud analytics using standard industrial protocols, without replacing working machinery.' },
       { title: 'Deep IoT Expertise', description: 'Protocol-agnostic gateway solutions supporting OPC-UA, MQTT, Modbus, Profibus, and proprietary machine communication standards.' },
       { title: 'Predictive AI Models', description: 'LSTM-based failure prediction models achieving 92% accuracy, giving maintenance teams 48+ hours of advance warning to prevent failures.' },
       { title: 'Real-Time OEE Monitoring', description: 'Sub-second sensor data processing with customizable OEE dashboards for production managers, quality teams, and plant executives.' }
@@ -1320,18 +1320,18 @@ export const industriesData = [
     caseStudies: [
       {
         title: 'Smart Factory Solution',
-        description: 'IoT-based manufacturing intelligence platform connecting 100+ machines across 3 plants for a precision parts manufacturer.',
-        results: '40% increase in overall equipment effectiveness (OEE)'
+        description: 'An IoT manufacturing intelligence platform connecting machines across plants.',
+        results: 'Designed for: higher overall equipment effectiveness (OEE)'
       },
       {
         title: 'Vision Quality Control System',
-        description: 'Computer vision defect detection system deployed on an automotive parts production line with real-time rejection.',
-        results: '99.8% defect detection accuracy, 80% less manual inspection'
+        description: 'Computer-vision defect detection on production lines with real-time rejection.',
+        results: 'Designed for: less manual inspection effort'
       },
       {
         title: 'Supply Chain Visibility Platform',
-        description: 'End-to-end supply chain tracking from supplier to finished goods for a major electronics manufacturer.',
-        results: '50% reduction in excess safety stock inventory'
+        description: 'End-to-end supply chain tracking from supplier to finished goods.',
+        results: 'Designed for: lower excess safety stock'
       }
     ],
     faq: [
@@ -1349,7 +1349,7 @@ export const industriesData = [
       },
       {
         question: 'Can you integrate with our existing ERP system (SAP, Oracle)?',
-        answer: 'Yes, we have certified integrations with SAP MES, Oracle Manufacturing Cloud, and custom ERP systems for real-time production order and material data exchange.'
+        answer: 'Yes, we build integrations with SAP MES, Oracle Manufacturing Cloud, and custom ERP systems for real-time production order and material data exchange.'
       },
       {
         question: 'How do you monitor energy consumption across the factory?',
@@ -1370,10 +1370,10 @@ export const industriesData = [
     image: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
     color: '#fa709a',
     stats: [
-      { value: '1M+', label: 'Subscribers Served' },
-      { value: '99.99%', label: 'Network Uptime' },
-      { value: '50%', label: 'Billing Error Reduction' },
-      { value: '24/7', label: 'Support Coverage' }
+      { value: 'BSS/OSS', label: 'Platform Builds' },
+      { value: 'Billing', label: 'Automation' },
+      { value: 'UCaaS', label: 'Voice & Video' },
+      { value: 'Cloud', label: 'Native Infrastructure' }
     ],
     services: [
       { name: 'Network Management Systems', icon: FaNetworkWired },
@@ -1411,18 +1411,18 @@ export const industriesData = [
     caseStudies: [
       {
         title: 'Telecom Management Platform',
-        description: 'Built a comprehensive network management and BSS solution for a regional mobile operator covering 1M+ subscribers.',
-        results: 'Serving 1M+ subscribers with 99.99% uptime'
+        description: 'Network management and BSS tooling for mobile operators.',
+        results: 'Designed for: reliable service and fewer billing errors'
       },
       {
         title: '5G Network Management Platform',
-        description: 'OSS platform for managing 5G network rollout, configuration, and performance monitoring for a tier-1 mobile operator.',
-        results: '60% faster provisioning, 3M subscribers migrated'
+        description: 'An OSS platform for 5G rollout, configuration and performance monitoring.',
+        results: 'Designed for: faster provisioning'
       },
       {
         title: 'Cloud UCaaS Platform',
-        description: 'Cloud-based unified communications platform for enterprise customers with voice, video, messaging, and contact center.',
-        results: '10,000 enterprise seats, 99.99% call quality SLA'
+        description: 'Cloud unified communications with voice, video, messaging and contact center.',
+        results: 'Designed for: consistent call quality for distributed teams'
       }
     ],
     faq: [
@@ -1461,10 +1461,10 @@ export const industriesData = [
     image: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
     color: '#667eea',
     stats: [
-      { value: '50K+', label: 'Monthly Bookings' },
-      { value: '80%', label: 'No-Show Reduction' },
-      { value: '35%', label: 'Revenue Growth' },
-      { value: '4.8★', label: 'App Store Rating' }
+      { value: 'Online', label: 'Booking & Scheduling' },
+      { value: 'Reminders', label: 'SMS & Email' },
+      { value: 'Loyalty', label: 'Gift Cards & Rewards' },
+      { value: 'AR', label: 'Virtual Try-On' }
     ],
     services: [
       { name: 'Salon Booking Systems', icon: FaCalendarAlt },
@@ -1502,18 +1502,18 @@ export const industriesData = [
     caseStudies: [
       {
         title: 'Beauty Booking Platform',
-        description: 'Appointment booking and client management platform for a salon chain with 200+ stylists.',
-        results: '50K+ appointments booked monthly'
+        description: 'Appointment booking and client management for salon chains.',
+        results: 'Designed for: fewer no-shows via automated reminders'
       },
       {
         title: 'Multi-Location Spa Chain',
-        description: 'Unified booking and operations platform for a 25-location day spa chain with loyalty and gift card programs.',
-        results: '65% online booking rate, $2M additional annual revenue'
+        description: 'Unified booking and operations for multi-location spas with loyalty and gift cards.',
+        results: 'Designed for: a higher share of online bookings'
       },
       {
         title: 'Beauty Product Marketplace',
-        description: 'D2C marketplace for indie beauty brands with AR virtual try-on and subscriptions for replenishment products.',
-        results: '40% conversion lift from AR feature, 10K+ products listed'
+        description: 'A D2C marketplace for indie beauty brands with AR try-on and replenishment subscriptions.',
+        results: 'Designed for: higher conversion and repeat purchase'
       }
     ],
     faq: [
@@ -1552,10 +1552,10 @@ export const industriesData = [
     image: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
     color: '#4facfe',
     stats: [
-      { value: '100K+', label: 'Service Providers' },
-      { value: '<5min', label: 'Avg Response Time' },
-      { value: '4.7★', label: 'Provider Rating' },
-      { value: '95%', label: 'Job Completion Rate' }
+      { value: 'Live', label: 'Tracking & Dispatch' },
+      { value: 'Escrow', label: 'In-App Payments' },
+      { value: 'Matching', label: 'Provider Algorithms' },
+      { value: 'iOS + Android', label: 'Customer & Provider Apps' }
     ],
     services: [
       { name: 'Service Marketplace Platforms', icon: FaStore },
@@ -1585,7 +1585,7 @@ export const industriesData = [
       'Balancing pricing and provider availability'
     ],
     whyChooseUs: [
-      { title: 'Marketplace DNA', description: 'Built 20+ on-demand platforms — we bring proven matching algorithms, surge pricing models, and operations frameworks from day one.' },
+      { title: 'Marketplace DNA', description: 'We bring matching algorithms, dynamic pricing models and operations tooling patterns to your platform from day one.' },
       { title: 'Real-Time GPS Precision', description: 'Hyper-accurate provider tracking with ETAs, route visualization, and live status updates that reduce customer anxiety and cancellations.' },
       { title: 'Dynamic Pricing Engine', description: 'Surge pricing, demand-based rate adjustment, and promotional pricing rules — all configurable in real time without code changes.' },
       { title: 'Background Verification', description: 'Integrated KYC, criminal background check APIs, and document verification workflows to onboard trusted providers at scale.' }
@@ -1593,18 +1593,18 @@ export const industriesData = [
     caseStudies: [
       {
         title: 'On-Demand Home Services Platform',
-        description: 'Uber-like platform for home cleaning, plumbing, and electrical services across 5 metro cities.',
-        results: '100K+ service providers onboarded'
+        description: 'A platform for booking cleaning, plumbing and electrical services with provider matching.',
+        results: 'Designed for: quick provider response times'
       },
       {
         title: 'Hyperlocal Food Delivery',
-        description: 'Built a hyperlocal food delivery app connecting 500+ restaurants with customers in 5 cities.',
-        results: '50K daily orders, <30 min average delivery time'
+        description: 'A food delivery app connecting restaurants, riders and customers with live tracking.',
+        results: 'Designed for: short, predictable delivery times'
       },
       {
         title: 'Home Services App',
-        description: 'On-demand home maintenance platform with real-time booking, live tracking, and in-app payment escrow.',
-        results: '25K jobs completed monthly, 4.8★ average rating'
+        description: 'An on-demand maintenance app with real-time booking, live tracking and payment escrow.',
+        results: 'Designed for: high job completion rates'
       }
     ],
     faq: [
@@ -1643,10 +1643,10 @@ export const industriesData = [
     image: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
     color: '#f093fb',
     stats: [
-      { value: '$50M+', label: 'Revenue Driven' },
-      { value: '3x', label: 'Conversion Rate' },
-      { value: '45%', label: 'Mobile Sales Share' },
-      { value: '99.9%', label: 'Checkout Success' }
+      { value: 'Headless', label: 'Commerce Builds' },
+      { value: 'AI', label: 'Recommendations' },
+      { value: 'Multi-Gateway', label: 'Payments' },
+      { value: 'ERP', label: 'Order & Inventory Sync' }
     ],
     services: [
       { name: 'E-Commerce Website Development', icon: FaShoppingCart },
@@ -1679,23 +1679,23 @@ export const industriesData = [
       { title: 'Revenue-Driven Architecture', description: 'Every decision — page speed, checkout flow, personalization — is optimized for conversion rate and revenue per visitor.' },
       { title: 'Mobile Commerce First', description: 'Progressive Web Apps, native mobile apps, and AMP pages ensure a best-in-class shopping experience for mobile-first customers.' },
       { title: 'Platform Agnostic', description: 'We build on custom React storefronts, Shopify, Magento, or WooCommerce — whichever fits your business model, budget, and scale.' },
-      { title: 'Growth-Focused Integrations', description: 'Pre-built connectors for Google Ads, Meta, Klaviyo, Afterpay, and 50+ marketing tools to drive traffic and maximize retention.' }
+      { title: 'Growth-Focused Integrations', description: 'Integrations with Google Ads, Meta, Klaviyo, Afterpay and other marketing tools to drive traffic and maximize retention.' }
     ],
     caseStudies: [
       {
         title: 'Enterprise E-Commerce Platform',
-        description: 'Built an enterprise-grade online store with AI recommendations, AR product visualization, and 15 payment methods.',
-        results: '$50M+ annual revenue driven through the platform'
+        description: 'An enterprise online store with AI recommendations, AR visualization and multiple payment methods.',
+        results: 'Designed for: higher revenue per visitor'
       },
       {
         title: 'Subscription Commerce Platform',
-        description: 'Subscription box e-commerce platform with personalized curation, recurring billing, and skip/pause controls.',
-        results: '60K active subscribers, 85% retention at 12 months'
+        description: 'A subscription commerce platform with personalised curation, recurring billing and skip/pause controls.',
+        results: 'Designed for: long-term subscriber retention'
       },
       {
         title: 'B2B E-Commerce Portal',
-        description: 'Wholesale portal with customer-specific pricing, net payment terms, bulk order management, and ERP integration.',
-        results: '$20M+ in B2B orders processed in year 1'
+        description: 'A wholesale portal with customer-specific pricing, payment terms, bulk orders and ERP integration.',
+        results: 'Designed for: fewer manual orders for sales teams'
       }
     ],
     faq: [

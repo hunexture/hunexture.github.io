@@ -766,3 +766,10 @@
     font-size: 2rem;
   }
 }
+
+.results-disclaimer {
+  margin: -8px 0 28px;
+  font-size: 14px;
+  color: var(--text-gray);
+  text-align: center;
+}

@@ -40,8 +40,12 @@ const TechMarquee = () => {
           {doubled.map((item, i) => {
             const Icon = item.icon
             return (
-              <div key={i} className="tech-marquee-item">
-                <Icon className="tech-marquee-icon" style={{ color: item.color }} />
+              <div
+                key={i}
+                className={`tech-marquee-item${i >= techItems.length ? ' tech-marquee-clone' : ''}`}
+                aria-hidden={i >= techItems.length ? 'true' : undefined}
+              >
+                <Icon className="tech-marquee-icon" style={{ color: item.color }} aria-hidden="true" />
                 <span className="tech-marquee-name">{item.name}</span>
               </div>
             )

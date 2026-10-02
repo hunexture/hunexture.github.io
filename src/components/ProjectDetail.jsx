@@ -181,7 +181,10 @@ const ProjectDetail = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2>Results & Impact</h2>
+            <h2>Illustrative Results</h2>
+            <p className="results-disclaimer">
+              Example metrics for a project of this kind — not figures reported by a named client.
+            </p>
             <div className="results-grid">
               {project.results.map((result, index) => (
                 <motion.div

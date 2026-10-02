@@ -1,24 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { companyStats } from '../data/companyData'
+import Carousel from './Carousel'
 import './About.css'
 
-const aboutStatsData = [
-  { target: 5,  suffix: '+', label: 'Years of Innovation' },
-  { target: 20, suffix: '+', label: 'Expert Engineers' },
-  { target: 10, suffix: '+', label: 'Industries Served' },
-  { target: 30, suffix: '+', label: 'Happy Clients' }
-]
-
 const About = () => {
-  const [currentSlide, setCurrentSlide] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
-  const [touchStart, setTouchStart] = useState(0)
-  const [touchEnd, setTouchEnd] = useState(0)
-  const [counts, setCounts] = useState(aboutStatsData.map(() => 0))
+  const [counts, setCounts] = useState(companyStats.map(() => 0))
   const [counted, setCounted] = useState(false)
   const sectionRef = useRef(null)
   const statsRef = useRef(null)
-
-  const aboutStats = aboutStatsData
 
   const features = [
     {
@@ -81,7 +71,13 @@ const About = () => {
       ([entry]) => {
         if (entry.isIntersecting && !counted) {
           setCounted(true)
-          aboutStatsData.forEach((stat, i) => {
+          const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+          if (reduceMotion) {
+            setCounts(companyStats.map(stat => stat.target))
+            observer.disconnect()
+            return
+          }
+          companyStats.forEach((stat, i) => {
             const duration = 1500
             const steps = 40
             const stepValue = stat.target / steps
@@ -130,26 +126,6 @@ const About = () => {
     return () => observer.disconnect()
   }, [isMobile])
 
-  // Auto-scroll carousel on mobile
-  useEffect(() => {
-    if (!isMobile) return
-    const autoScrollInterval = setInterval(() => {
-      setCurrentSlide(prev => (prev + 1) % features.length)
-    }, 4000)
-    return () => clearInterval(autoScrollInterval)
-  }, [isMobile, features.length])
-
-  const nextSlide = () => setCurrentSlide(prev => (prev + 1) % features.length)
-  const prevSlide = () => setCurrentSlide(prev => (prev - 1 + features.length) % features.length)
-  const goToSlide = (index) => setCurrentSlide(index)
-
-  const handleTouchStart = (e) => setTouchStart(e.targetTouches[0].clientX)
-  const handleTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX)
-  const handleTouchEnd = () => {
-    if (touchStart - touchEnd > 75) nextSlide()
-    if (touchStart - touchEnd < -75) prevSlide()
-  }
-
   return (
     <section id="about" className="about" ref={sectionRef}>
       <div className="about-container">
@@ -165,14 +141,14 @@ const About = () => {
 
         {/* Stats Bar */}
         <div className="about-stats scroll-animate glass-panel" ref={statsRef}>
-          {aboutStats.map((stat, index) => (
+          {companyStats.map((stat, index) => (
             <div
               key={index}
               className="about-stat-item"
               style={{ transitionDelay: `${index * 0.1}s` }}
             >
               <h3 className="about-stat-value tech-font">{counts[index]}{stat.suffix}</h3>
-              <p className="about-stat-label tech-font">{stat.label}</p>
+              <p className="about-stat-label">{stat.label}</p>
             </div>
           ))}
         </div>
@@ -220,37 +196,15 @@ const About = () => {
           {/* Right: Feature Cards */}
           <div className="about-features-wrapper">
             {isMobile ? (
-              <div className="carousel-container">
-                <div
-                  className="about-features-carousel"
-                  onTouchStart={handleTouchStart}
-                  onTouchMove={handleTouchMove}
-                  onTouchEnd={handleTouchEnd}
-                  style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-                >
-                  {features.map((feature, index) => (
-                    <div key={index} className="feature-card carousel-card glass-panel">
-                      <div className="feature-icon">{feature.icon}</div>
-                      <h3 className="feature-title">{feature.title}</h3>
-                      <p className="feature-description">{feature.description}</p>
-                    </div>
-                  ))}
-                </div>
-
-                <button className="carousel-btn prev-btn" onClick={prevSlide} aria-label="Previous slide">‹</button>
-                <button className="carousel-btn next-btn" onClick={nextSlide} aria-label="Next slide">›</button>
-
-                <div className="carousel-dots">
-                  {features.map((_, index) => (
-                    <button
-                      key={index}
-                      className={`dot ${currentSlide === index ? 'active' : ''}`}
-                      onClick={() => goToSlide(index)}
-                      aria-label={`Go to slide ${index + 1}`}
-                    />
-                  ))}
-                </div>
-              </div>
+              <Carousel label="What makes us different">
+                {features.map((feature, index) => (
+                  <div key={index} className="feature-card carousel-card glass-panel">
+                    <div className="feature-icon">{feature.icon}</div>
+                    <h3 className="feature-title">{feature.title}</h3>
+                    <p className="feature-description">{feature.description}</p>
+                  </div>
+                ))}
+              </Carousel>
             ) : (
               <div className="about-features">
                 {features.map((feature, index) => (

@@ -152,3 +152,18 @@
     width: 40px;
   }
 }
+
+/* Reduced motion: static, wrapping logo row with the duplicate set hidden */
+@media (prefers-reduced-motion: reduce) {
+  .tech-marquee-track {
+    animation: none;
+    width: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .tech-marquee-clone,
+  .tech-marquee-fade {
+    display: none;
+  }
+}

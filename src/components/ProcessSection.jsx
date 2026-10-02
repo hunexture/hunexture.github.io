@@ -56,15 +56,15 @@ const ProcessSection = () => {
   }, [])
 
   return (
-    <section className="process-section" ref={sectionRef} style={{ paddingTop: '20px', paddingBottom: '20px' }}>
-      <div className="process-container" style={{ margin: '0 auto', padding: '0 20px' }}>
+    <section className="process-section" ref={sectionRef}>
+      <div className="process-container">
 
         {/* Section header — no entry animation so it never hides itself */}
-        <div className="section-header" style={{ marginBottom: '20px' }}>
+        <div className="section-header process-header">
           <span className="section-tag">How We Work</span>
-          <h2 className="section-title" style={{ marginBottom: '10px' }}>We Simplify the AI Development Process</h2>
+          <h2 className="section-title">We Simplify the AI Development Process</h2>
 
-          <p className="section-description" style={{ marginTop: '5px', marginBottom: '20px' }}>
+          <p className="section-description">
             From first conversation to live product — a clear, collaborative process
             that keeps you informed and in control at every stage.
           </p>

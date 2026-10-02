@@ -29,6 +29,8 @@ import BlogList from './components/BlogList'
 import BlogPost from './components/BlogPost'
 import Testimonials from './components/Testimonials'
 import FAQ from './components/FAQ'
+import WorkingWithUs from './components/WorkingWithUs'
+import EngagementModels from './components/EngagementModels'
 import CookieBanner from './components/CookieBanner'
 import WhatsAppFAB from './components/WhatsAppFAB'
 import './App.css'
@@ -40,9 +42,11 @@ const HomePage = () => (
     <TechMarquee />
     <About />
     <ProcessSection />
-    <Testimonials />
+    <WorkingWithUs />
     <Services />
     <Portfolio />
+    <Testimonials />
+    <EngagementModels />
     <FAQ />
     <Contact />
   </>

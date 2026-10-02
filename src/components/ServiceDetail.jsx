@@ -495,7 +495,7 @@ const ServiceDetail = ({ serviceSlug }) => {
     { value: `${service.features?.length || 4}+`, label: 'Key Features' },
     { value: `${service.useCases?.length || 4}+`, label: 'Use Cases' },
     { value: `${service.process?.length || 4}`, label: 'Step Process' },
-    { value: '100%', label: 'Satisfaction' }
+    { value: 'NDA', label: 'Before Discovery' }
   ]
 
   return (
@@ -577,7 +577,7 @@ const ServiceDetail = ({ serviceSlug }) => {
               <h2 className="sd-section-title">Key Benefits</h2>
               <div className="sd-underline" />
               <p className="sd-section-desc">
-                Measurable outcomes our clients experience with {service.title.toLowerCase()}.
+                What {service.title.toLowerCase()} is designed to deliver for your business.
               </p>
             </div>
 

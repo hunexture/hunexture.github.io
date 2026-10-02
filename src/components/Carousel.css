@@ -1,0 +1,112 @@
+/* Shared accessible carousel — used by About, Services and Testimonials */
+.carousel {
+  position: relative;
+  width: 100%;
+}
+
+.carousel-viewport {
+  display: flex;
+  column-gap: var(--carousel-gap, 24px);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  padding: 8px 4px 16px;
+  border-radius: 12px;
+}
+
+.carousel-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-viewport:focus-visible {
+  outline: 2px solid var(--electric-blue);
+  outline-offset: 4px;
+}
+
+.carousel-slide {
+  flex: 0 0 var(--carousel-slide-width, 100%);
+  max-width: var(--carousel-slide-width, 100%);
+  scroll-snap-align: start;
+  display: flex;
+}
+
+.carousel-slide > * {
+  width: 100%;
+}
+
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.carousel-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-white);
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+
+.carousel-arrow:hover:not(:disabled) {
+  border-color: var(--electric-blue);
+  color: var(--electric-blue);
+}
+
+.carousel-arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.carousel-dots {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  min-width: 10px;
+  min-height: 10px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background: var(--electric-blue-20, var(--border-color));
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.carousel-dot.active {
+  background: var(--electric-blue);
+  transform: scale(1.25);
+}
+
+/* Keep dots visually small on touch devices but give them a larger hit area */
+@media (hover: none) and (pointer: coarse) {
+  .carousel-dot {
+    position: relative;
+  }
+  .carousel-dot::after {
+    content: '';
+    position: absolute;
+    inset: -12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-viewport {
+    scroll-behavior: auto;
+  }
+}

@@ -196,7 +196,7 @@ export const aiData = [
     whyChooseUs: [
       { title: 'Edge Computing Experts', description: 'Running heavy vision models directly on localized hardware for zero-latency.' },
       { title: 'Lighting & Environment Resilient', description: 'Training networks to perform reliably regardless of glare or shadows.' },
-      { title: 'Deep Hardware Integration', description: 'We partner directly with camera hardware manufacturers for optimized ISP pipelines.' },
+      { title: 'Deep Hardware Integration', description: 'We tune models and image pipelines for your specific cameras and edge hardware.' },
       { title: 'Custom Dataset Generation', description: 'Using synthetic data to train models even when real-world examples are rare.' }
     ],
     technologiesSummary: [
@@ -626,7 +626,7 @@ export const aiData = [
     ],
     whyChooseUs: [
       { title: 'Global Scale Execution', description: 'Proven ability to manage rollouts affecting tens of thousands of employees globally.' },
-      { title: 'Security Above All', description: 'Ensuring enterprise transformation adheres to strict Infosec and ISO standards.' },
+      { title: 'Security Above All', description: 'Secure-by-default engineering aligned with your Infosec policies and the standards your industry requires.' },
       { title: 'Vast Industry Knowledge', description: 'Deep domain expertise across Healthcare, Finance, Logistics, and Retail.' },
       { title: 'Sponsorship Alignment', description: 'We operate closely with your board and C-suite to secure unwavering mandate.' }
     ],

@@ -1,8 +1,34 @@
-import React from 'react'
-import { FaRocket, FaBrain, FaCode } from 'react-icons/fa'
+import React, { useEffect, useRef } from 'react'
+import { FaRocket, FaUsers, FaHandshake } from 'react-icons/fa'
+import { getStat, formatStat, builtOnStack } from '../data/companyData'
 import './Hero.css'
 
+const heroStats = [
+  { stat: getStat('years'), icon: FaRocket },
+  { stat: getStat('engineers'), icon: FaUsers },
+  { stat: getStat('clients'), icon: FaHandshake }
+]
+
 const Hero = () => {
+  const videoRef = useRef(null)
+
+  // Respect prefers-reduced-motion: don't autoplay the background video
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video || !window.matchMedia) return
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const apply = () => {
+      if (mq.matches) {
+        video.pause()
+      } else {
+        video.play().catch(() => {})
+      }
+    }
+    apply()
+    mq.addEventListener?.('change', apply)
+    return () => mq.removeEventListener?.('change', apply)
+  }, [])
+
   return (
     <section id="hero" className="hero">
       {/* Rich Tech Background matching hunexture.com */}
@@ -19,7 +45,7 @@ const Hero = () => {
       <div className="hero-content">
         <div className="hero-badge tech-font">
           <span className="badge-dot"></span>
-          AI-Powered Solutions
+          AI &amp; Software Engineering Partner
         </div>
 
         <h1 className="hero-title">
@@ -28,14 +54,14 @@ const Hero = () => {
         </h1>
 
         <p className="hero-description">
-          We engineer AI-first solutions that automate intelligently, scale effortlessly,
-          and deliver measurable results — from custom ML models to cloud-native platforms,
-          built for businesses that refuse to settle.
+          We design, build and run AI-powered products for startups and growing businesses —
+          from custom ML models to cloud-native platforms. NDA-first, demo every two weeks,
+          and you own the code.
         </p>
 
         <div className="hero-cta">
           <a href="#contact" className="btn-primary">
-            Get Started
+            Book a Discovery Call
             <FaRocket className="btn-icon" />
           </a>
           <a href="#portfolio" className="btn-secondary">
@@ -44,66 +70,55 @@ const Hero = () => {
         </div>
 
         <div className="hero-clients">
-          <p className="hero-clients-label tech-font">Trusted technologies &amp; partnerships</p>
-          <div className="hero-clients-list">
-            {['AWS Partner', 'Google Cloud', 'React', 'ISO 9001', 'OpenAI'].map((name) => (
-              <span key={name} className="hero-client-badge tech-font">{name}</span>
+          <p className="hero-clients-label">Built on</p>
+          <ul className="hero-clients-list">
+            {builtOnStack.map((name) => (
+              <li key={name} className="hero-client-badge tech-font">{name}</li>
             ))}
-          </div>
+          </ul>
         </div>
 
         <div className="hero-stats">
-          <div className="stat-item glass-panel">
-            <FaBrain className="stat-icon" />
-            <div className="stat-content">
-              <h3 className="tech-font">50+</h3>
-              <p>AI Projects</p>
+          {heroStats.map(({ stat, icon: Icon }) => (
+            <div key={stat.key} className="stat-item glass-panel">
+              <Icon className="stat-icon" aria-hidden="true" />
+              <div className="stat-content">
+                <h3 className="tech-font">{formatStat(stat)}</h3>
+                <p>{stat.label}</p>
+              </div>
             </div>
-          </div>
-          <div className="stat-item glass-panel">
-            <FaCode className="stat-icon" />
-            <div className="stat-content">
-              <h3 className="tech-font">100+</h3>
-              <p>Solutions Delivered</p>
-            </div>
-          </div>
-          <div className="stat-item glass-panel">
-            <FaRocket className="stat-icon" />
-            <div className="stat-content">
-              <h3 className="tech-font">99%</h3>
-              <p>Client Satisfaction</p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
-      <div className="hero-visual">
+      <div className="hero-visual" aria-hidden="true">
         <div className="hero-video-container">
           <video
+            ref={videoRef}
             autoPlay
             loop
             muted
             playsInline
             className="hero-video"
+            tabIndex={-1}
           >
             <source src={`${process.env.PUBLIC_URL}/video/ai-video-v3.mp4`} type="video/mp4" />
-            Your browser does not support the video tag.
           </video>
-          
-          {/* Floating glassmorphic HUD */}
+
+          {/* Decorative card: summarises our real delivery cadence (not live telemetry) */}
           <div className="hero-hud-panel glass-panel">
             <div className="hud-header">
               <span className="hud-dot"></span>
-              <span className="tech-font">ENGINE SYSTEM v2.6</span>
+              <span className="tech-font">DELIVERY CADENCE</span>
             </div>
             <div className="hud-content">
               <div className="hud-row">
-                <span className="hud-label">NEURAL NODE:</span>
-                <span className="hud-val tech-font text-gradient">ACTIVE</span>
+                <span className="hud-label">Typical MVP</span>
+                <span className="hud-val tech-font text-gradient">6–10 wks</span>
               </div>
               <div className="hud-row">
-                <span className="hud-label">SYS LATENCY:</span>
-                <span className="hud-val tech-font">0.02ms</span>
+                <span className="hud-label">Working demo</span>
+                <span className="hud-val tech-font">every 2 wks</span>
               </div>
               <div className="hud-chart">
                 <div className="hud-bar" style={{ '--height': '35%' }}></div>
@@ -118,7 +133,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="scroll-indicator">
+      <div className="scroll-indicator" aria-hidden="true">
         <div className="mouse">
           <div className="wheel"></div>
         </div>

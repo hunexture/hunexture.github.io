@@ -127,8 +127,6 @@
   align-items: center;
   gap: 20px;
   padding: 20px;
-  background: var(--electric-blue-05);
-  border: 1px solid var(--electric-blue-20);
   border-radius: 15px;
   transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   text-decoration: none;

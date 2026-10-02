@@ -5,6 +5,7 @@ import {
   FaArrowRight, FaHome, FaChevronRight
 } from 'react-icons/fa'
 import { getIndustryBySlug, industriesData, getTechIcon, getWhyChooseUsIcon } from '../data/industriesData'
+import { formatStat, getStat } from '../data/companyData'
 import './IndustryDetail.css'
 
 const IndustryDetail = () => {
@@ -60,9 +61,9 @@ const IndustryDetail = () => {
 
   const heroStats = [
     { value: `${industry.services.length}+`, label: 'Solutions' },
-    { value: '5+',   label: 'Years Exp.' },
-    { value: '20+',  label: 'Projects' },
-    { value: '100%', label: 'Satisfaction' }
+    { value: formatStat(getStat('years')), label: 'Years Exp.' },
+    { value: formatStat(getStat('engineers')), label: 'Engineers' },
+    { value: 'NDA', label: 'Before Discovery' }
   ]
 
   const toggleFaq = i => setOpenFaq(prev => prev === i ? null : i)
@@ -147,11 +148,11 @@ const IndustryDetail = () => {
         <section className="ind-section ind-alt-bg ind-reveal">
           <div className="ind-inner">
             <div className="ind-section-header">
-              <span className="ind-tag tech-font">By The Numbers</span>
-              <h2 className="ind-section-title">Impact We Deliver</h2>
+              <span className="ind-tag tech-font">At a Glance</span>
+              <h2 className="ind-section-title">What We Bring</h2>
               <div className="ind-underline" />
               <p className="ind-section-desc">
-                Real, measurable results our clients achieve with our {industry.name.toLowerCase()} solutions.
+                Standards, integrations and delivery scope for {industry.name.toLowerCase()} projects.
               </p>
             </div>
 
@@ -392,11 +393,12 @@ const IndustryDetail = () => {
         <section className="ind-section ind-reveal">
           <div className="ind-inner">
             <div className="ind-section-header">
-              <span className="ind-tag tech-font">Success Stories</span>
-              <h2 className="ind-section-title">Real Results</h2>
+              <span className="ind-tag tech-font">Solution Blueprints</span>
+              <h2 className="ind-section-title">What We Can Build</h2>
               <div className="ind-underline" />
               <p className="ind-section-desc">
-                Projects we've delivered that made a measurable difference.
+                Illustrative examples of solutions in this sector and the outcomes each is designed for.
+                These are blueprints, not attributed client results.
               </p>
             </div>
 
@@ -416,7 +418,7 @@ const IndustryDetail = () => {
                       }}
                     >
                       <FaRocket style={{ color: industry.color }} />
-                      <span className="tech-font">{cs.results}</span>
+                      <span>{cs.results}</span>
                     </div>
                   </div>
                 </div>

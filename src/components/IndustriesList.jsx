@@ -6,6 +6,7 @@ import {
     FaDatabase, FaServer, FaShieldAlt, FaChartLine, FaNetworkWired,
     FaSearch, FaBrain, FaCloud, FaLock, FaMicrochip, FaUsers
 } from 'react-icons/fa'
+import { formatStat, getStat } from '../data/companyData'
 import './IndustriesList.css'
 
 // Custom architecture pipeline for each industry sector in the interactive simulator
@@ -241,16 +242,16 @@ const IndustriesList = () => {
 
                             <div className="il-hero-stats-row">
                                 <div className="il-hero-stat-pill">
-                                    <strong className="tech-font">18+</strong>
-                                    <span>Industry Verticals</span>
+                                    <strong className="tech-font">{industriesData.length}</strong>
+                                    <span>Industry Blueprints</span>
                                 </div>
                                 <div className="il-hero-stat-pill">
-                                    <strong className="tech-font">99.9%</strong>
-                                    <span>Compliance Rate</span>
-                                </div>
-                                <div className="il-hero-stat-pill">
-                                    <strong className="tech-font">20+</strong>
+                                    <strong className="tech-font">{formatStat(getStat('years'))}</strong>
                                     <span>Years Engineering</span>
+                                </div>
+                                <div className="il-hero-stat-pill">
+                                    <strong className="tech-font">{formatStat(getStat('engineers'))}</strong>
+                                    <span>Engineers</span>
                                 </div>
                             </div>
 

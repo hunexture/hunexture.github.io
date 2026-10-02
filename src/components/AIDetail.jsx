@@ -5,6 +5,7 @@ import {
   FaStar, FaShieldAlt, FaChartBar, FaBolt, FaMousePointer, FaEye, FaTerminal
 } from 'react-icons/fa'
 import { aiData } from '../data/aiData'
+import { formatStat, getStat } from '../data/companyData'
 import './AIDetail.css'
 
 // Extract first hex color from gradient string
@@ -423,9 +424,9 @@ const AIDetail = () => {
 
   const heroStats = [
     { value: `${aiCategory.whatWeOffer?.length || 3}+`, label: 'Solutions' },
-    { value: '5+', label: 'Years Exp.' },
-    { value: '20+', label: 'Projects' },
-    { value: '100%', label: 'Success Rate' }
+    { value: formatStat(getStat('years')), label: 'Years Exp.' },
+    { value: formatStat(getStat('engineers')), label: 'Engineers' },
+    { value: 'NDA', label: 'Before Discovery' }
   ]
 
   const toggleOffer = i => setOpenOffer(prev => prev === i ? null : i)
