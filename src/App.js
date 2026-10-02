@@ -28,6 +28,7 @@ import WorkingWithUs from './components/WorkingWithUs'
 import EngagementModels from './components/EngagementModels'
 import CookieBanner from './components/CookieBanner'
 import WhatsAppFAB from './components/WhatsAppFAB'
+import RouteSeo from './components/RouteSeo'
 import './App.css'
 
 // Home page component
@@ -58,6 +59,7 @@ const Layout = ({ children }) => {
 
   return (
     <div className="App">
+      <RouteSeo />
       {showNavbar && <Navbar />}
       {children}
       {showFooter && <Footer />}

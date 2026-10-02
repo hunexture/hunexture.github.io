@@ -1,0 +1,135 @@
+/* Hero artifact for AI detail pages. Ink for structure, signal for what moves. */
+.ax {
+  margin: 0;
+  width: 100%;
+  max-width: 520px;
+  margin-left: auto;
+  padding: 16px 20px 12px;
+  background-color: var(--paper-raised);
+  background-image:
+    linear-gradient(rgba(203, 214, 230, 0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(203, 214, 230, 0.5) 1px, transparent 1px);
+  background-size: 20px 20px;
+  border: 1px solid var(--line-strong);
+  border-top: 4px solid var(--signal);
+}
+.ax-head { display: flex; align-items: center; gap: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--line-strong); }
+.ax-ico { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; background: var(--signal); color: #fff; font-size: 0.9rem; animation: ax-tilt 4s ease-in-out infinite; }
+.ax-status { font: 600 0.84rem var(--font-annot); color: var(--ink); }
+.ax-live { margin-left: auto; width: 9px; height: 9px; border-radius: 50%; background: #16A34A; animation: a-blink 1.6s ease-in-out infinite; }
+.ax-svg { display: block; width: 100%; height: auto; overflow: visible; margin-top: 8px; }
+.ax-foot { display: flex; justify-content: space-between; padding-top: 8px; border-top: 1px solid var(--line-strong); font: 500 0.72rem var(--font-annot); color: var(--ink-muted); }
+
+/* Shapes */
+.a-line { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; opacity: 0; animation: a-in 0.7s ease forwards; }
+.a-line.a-thin, .a-thin { stroke: var(--line-strong); stroke-width: 1.1; }
+.a-line.a-sigline { stroke: var(--signal); stroke-width: 2.4; }
+.a-line.a-fill, .a-fill { fill: var(--signal-tint); }
+.a-fill2 { fill: var(--line-strong); }
+.a-fill3 { fill: var(--signal-tint); }
+.a-fill4 { fill: var(--paper-sunk); }
+.a-sig { fill: var(--signal); }
+.a-node { fill: var(--paper-raised); stroke: var(--ink); stroke-width: 1.5; }
+.a-node--on { fill: var(--signal); stroke: var(--signal); }
+.a-text { font-family: var(--font-annot); font-size: 10px; fill: var(--ink-muted); }
+.a-text--c { fill: var(--ink); font-weight: 600; }
+.a-text--w { fill: #fff; font-weight: 600; }
+.a-badge { fill: var(--signal); animation: a-float 3s ease-in-out infinite; }
+.a-arrow { fill: var(--signal); }
+
+/* Draw-in line (trend lines) */
+.a-trend { stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 1; animation: a-draw 2.4s ease-in-out 0.6s infinite alternate; }
+
+/* Packets travelling along a connection */
+.a-flow { fill: none; stroke: var(--signal); stroke-width: 3.4; stroke-linecap: round; stroke-dasharray: 10 900; stroke-dashoffset: 10; animation: a-flowmove 2.6s linear infinite; }
+.a-flow--2 { animation-delay: 1.3s; }
+
+/* Generic motion */
+.a-pulse { transform-box: fill-box; transform-origin: center; animation: a-pulse 2.2s ease-in-out infinite; }
+.a-spin { transform-box: fill-box; transform-origin: center; animation: a-spin 10s linear infinite; }
+.a-orbit { animation: a-spin 8s linear infinite; }
+.a-blink { animation: a-blink 1.2s ease-in-out infinite; }
+.a-float, .a-bob { animation: a-float 3s ease-in-out infinite; }
+.a-slab { animation: a-float 4s ease-in-out infinite; }
+.a-caret { animation: a-blink 1s steps(1) infinite; }
+.a-bar { fill: var(--line-strong); transform-box: fill-box; transform-origin: left center; animation: a-type 3.6s ease-in-out infinite; }
+.a-bar--2 { animation-delay: 0.4s; }
+.a-bar--3 { animation-delay: 0.8s; }
+
+/* Scene specific */
+.a-ring { fill: none; stroke: var(--signal); stroke-width: 1.4; stroke-dasharray: 4 6; }
+.a-chip { fill: var(--signal); fill-opacity: 0.12; stroke: var(--signal); stroke-width: 1.2; animation: a-chip 3.3s ease-in-out infinite; }
+.a-box { fill: none; stroke: var(--signal); stroke-width: 1.8; stroke-dasharray: 5 3; }
+.a-scan { fill: var(--signal); opacity: 0.7; animation: a-scan 3s ease-in-out infinite alternate; }
+.a-corner { fill: none; stroke: var(--signal); stroke-width: 3; stroke-linecap: square; }
+.a-reveal { animation: a-reveal 6s ease-in-out infinite; }
+.a-spark { fill: var(--signal); transform-box: fill-box; transform-origin: center; animation: a-spark 2.2s ease-in-out infinite; }
+.a-grow, .a-rise { fill: var(--signal-tint); stroke: var(--ink); stroke-width: 1.4; transform-box: fill-box; transform-origin: bottom center; animation: a-grow 5s cubic-bezier(0.2, 0.7, 0.2, 1) infinite; }
+.a-grow--on, .a-rise--on { fill: var(--signal); stroke: var(--signal); }
+.a-needle { stroke: var(--signal); stroke-width: 3; stroke-linecap: round; transform-origin: 180px 170px; animation: a-needle 4s ease-in-out infinite; }
+.a-boundary { stroke: var(--signal); stroke-width: 2.4; stroke-dasharray: 8 5; transform-origin: 180px 128px; animation: a-boundary 5s ease-in-out infinite; }
+.a-wave { fill: none; stroke: var(--signal); stroke-width: 1.5; transform-box: fill-box; transform-origin: center; animation: a-wave 2.8s ease-out infinite; }
+.a-wave-flag { animation: a-flag 2.4s ease-in-out infinite; }
+.a-pick { fill: none; stroke: var(--signal); stroke-width: 2.6; animation: a-pick 9s ease-in-out infinite; }
+
+@keyframes a-in { to { opacity: 1; } }
+@keyframes a-draw { to { stroke-dashoffset: 0; } }
+@keyframes a-flowmove { 0% { stroke-dashoffset: 10; } 60%, 100% { stroke-dashoffset: -280; } }
+@keyframes a-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.22); } }
+@keyframes a-spin { to { transform: rotate(360deg); } }
+@keyframes a-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+@keyframes a-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes a-type { 0%, 8% { transform: scaleX(0); } 40%, 85% { transform: scaleX(1); } 100% { transform: scaleX(0); } }
+@keyframes a-chip { 0%, 100% { fill-opacity: 0.1; } 20%, 33% { fill-opacity: 0.45; } 50% { fill-opacity: 0.1; } }
+@keyframes a-scan { from { transform: translateY(0); } to { transform: translateY(184px); } }
+@keyframes a-reveal { 0%, 10% { opacity: 0; transform: translateY(10px); } 30%, 85% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes a-spark { 0%, 100% { opacity: 0.15; transform: scale(0.5) rotate(0); } 50% { opacity: 1; transform: scale(1.2) rotate(45deg); } }
+@keyframes a-grow { 0% { transform: scaleY(0); } 25%, 85% { transform: scaleY(1); } 100% { transform: scaleY(0); } }
+@keyframes a-needle { 0%, 100% { transform: rotate(-52deg); } 50% { transform: rotate(48deg); } }
+@keyframes a-boundary { 0%, 100% { transform: rotate(-28deg); } 55% { transform: rotate(7deg); } 75% { transform: rotate(0); } }
+@keyframes a-wave { 0% { opacity: 0.8; transform: scale(1); } 100% { opacity: 0; transform: scale(2.5); } }
+@keyframes a-flag { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
+@keyframes a-pick {
+  0%, 12% { transform: translate(0, 0); }
+  20%, 32% { transform: translate(100px, 0); }
+  40%, 52% { transform: translate(200px, 0); }
+  60%, 70% { transform: translate(0, 104px); }
+  78%, 100% { transform: translate(100px, 104px); }
+}
+@keyframes ax-tilt { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-8deg) scale(1.08); } }
+
+@media (max-width: 900px) { .ax { margin-left: 0; max-width: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .ax *, .ax-ico, .ax-live { animation: none !important; }
+  .a-line { opacity: 1; }
+  .a-trend { stroke-dashoffset: 0; }
+  .a-flow, .a-scan, .a-wave { display: none; }
+  .a-grow, .a-rise, .a-bar { transform: none; }
+  .a-reveal, .a-spark { opacity: 1; }
+}
+
+/* Extra shapes used by the industry scenes */
+.a-ecg { fill: none; stroke: var(--signal); stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 0.3 1; stroke-dashoffset: 0.3; animation: a-ecg 2.4s linear infinite; }
+.a-sway { animation: a-sway 4s ease-in-out infinite; }
+.a-drop { stroke: var(--signal); stroke-width: 2.4; stroke-linecap: round; opacity: 0; animation: a-drop 2s ease-in infinite; }
+.a-belt { stroke: var(--signal); stroke-width: 2; stroke-dasharray: 8 10; animation: a-belt 1s linear infinite; }
+.a-conveyor { animation: a-conveyor 3s linear infinite; }
+.a-rise-up { fill: var(--signal); opacity: 0; animation: a-riseup 2.7s ease-out infinite; }
+.a-scan--short { animation-name: a-scan-short; }
+.a-wave--big { animation-duration: 2.7s; }
+.a-bar--long { animation-duration: 8s; }
+
+@keyframes a-ecg { to { stroke-dashoffset: -1; } }
+@keyframes a-sway { 0%, 100% { transform: rotate(-7deg); } 50% { transform: rotate(7deg); } }
+@keyframes a-drop { 0% { opacity: 0; transform: translateY(0); } 15% { opacity: 1; } 55% { opacity: 1; transform: translateY(90px); } 70%, 100% { opacity: 0; transform: translateY(100px); } }
+@keyframes a-belt { to { stroke-dashoffset: -18; } }
+@keyframes a-conveyor { from { transform: translateX(0); } to { transform: translateX(80px); } }
+@keyframes a-riseup { 0% { opacity: 0; transform: translateY(0); } 20% { opacity: 1; } 100% { opacity: 0; transform: translateY(-70px); } }
+@keyframes a-scan-short { from { transform: translateY(0); } to { transform: translateY(100px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .a-motion { display: none; }
+  .a-ecg { stroke-dasharray: none; }
+  .a-drop, .a-rise-up { opacity: 1; }
+}

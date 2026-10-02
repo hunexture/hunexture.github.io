@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { aiData } from '../data/aiData'
 import { aiExtra } from '../data/aiExtra'
 import { aiGovernance } from '../data/insights'
+import AIArtifact from './AIArtifact'
 import './AIDetail.css'
 
 const AIDetail = () => {
@@ -52,20 +53,7 @@ const AIDetail = () => {
             </div>
           </div>
 
-          <figure className="aid-path">
-            <figcaption>How a project runs</figcaption>
-            <ol>
-              {extra.phases.map((ph, i) => (
-                <li key={ph.phase} style={{ animationDelay: `${i * 0.15}s` }}>
-                  <span className="aid-path-dot" aria-hidden="true" />
-                  <div>
-                    <strong>{ph.phase}<em>{ph.time}</em></strong>
-                    <span>{ph.text}</span>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </figure>
+          <AIArtifact slug={slug} Icon={Icon} name={ai.name} />
         </div>
       </header>
 

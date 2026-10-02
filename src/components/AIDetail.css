@@ -28,10 +28,26 @@
 .aid-path figcaption { margin-bottom: 16px; font-family: var(--font-annot); font-size: 0.82rem; color: var(--ink-muted); }
 .aid-path ol { list-style: none; margin: 0; padding: 0; position: relative; }
 .aid-path ol::before { content: ''; position: absolute; left: 6px; top: 8px; bottom: 8px; width: 2px; background: var(--line-strong); }
-.aid-path li { position: relative; display: flex; gap: 18px; padding: 0 0 20px; animation: aid-in 0.5s ease backwards; }
+.aid-path figcaption { display: flex; align-items: center; gap: 8px; }
+.aid-path figcaption em { margin-left: auto; font-style: normal; color: var(--signal-deep); }
+.aid-live { width: 8px; height: 8px; border-radius: 50%; background: #16A34A; animation: aid-blink 1.6s ease-in-out infinite; }
+.aid-path ol::before { left: 17px; top: 18px; bottom: 18px; }
+.aid-path ol::after { content: ''; position: absolute; left: 17px; top: 18px; bottom: 18px; width: 2px; background: var(--signal); transform-origin: top; animation: aid-draw 1.4s ease 0.2s backwards; }
+.aid-path li { position: relative; display: flex; gap: 16px; padding: 0 0 20px; animation: aid-in 0.5s ease backwards; }
 .aid-path li:last-child { padding-bottom: 0; }
-.aid-path-dot { flex: none; position: relative; z-index: 1; width: 14px; height: 14px; margin-top: 4px; background: var(--signal); box-shadow: 0 0 0 4px var(--paper-raised); }
-.aid-path li:first-child .aid-path-dot { animation: aid-ping 2.2s ease-out infinite; }
+.aid-path-ico { flex: none; position: relative; z-index: 1; display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; font-size: 0.95rem; background: var(--signal-tint); color: var(--signal-deep); border: 1.5px solid var(--signal); animation: aid-glow calc(var(--n) * 1.6s) ease-in-out calc(var(--i) * 1.6s) infinite; }
+.aid-path-ico svg { animation: aid-bob calc(var(--n) * 1.6s) ease-in-out calc(var(--i) * 1.6s) infinite; }
+.aid-path li:first-child .aid-path-ico::after { content: ''; position: absolute; inset: -1.5px; border: 1.5px solid var(--signal); animation: aid-ring 2.2s ease-out infinite; }
+.aid-path .aid-path-step { font: 600 0.74rem var(--font-annot); color: var(--ink-muted); }
+.aid-path li > div { padding-top: 2px; }
+@keyframes aid-draw { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes aid-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+@keyframes aid-ring { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.7); opacity: 0; } }
+@keyframes aid-glow { 0%, 25%, 100% { background: var(--signal-tint); color: var(--signal-deep); } 5%, 20% { background: var(--signal); color: #fff; } }
+@keyframes aid-bob { 0%, 25%, 100% { transform: none; } 6%, 12% { transform: translateY(-2px) scale(1.15); } }
+@media (prefers-reduced-motion: reduce) {
+  .aid-path ol::after, .aid-live, .aid-path-ico, .aid-path-ico svg, .aid-path-ico::after { animation: none !important; }
+}
 .aid-path strong { display: flex; align-items: baseline; gap: 10px; font-family: var(--font-display); font-size: 1.1rem; }
 .aid-path em { font: 500 0.78rem var(--font-annot); font-style: normal; color: var(--signal-deep); }
 .aid-path span { display: block; margin-top: 2px; font-size: 0.92rem; line-height: 1.5; color: var(--ink-muted); }

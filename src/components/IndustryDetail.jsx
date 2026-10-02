@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { getIndustryBySlug, industriesData, getTechIcon } from '../data/industriesData'
 import { industryMeta } from '../data/insights'
 import { industryExtra } from '../data/industryExtra'
+import IndustryArtifact from './IndustryArtifact'
 import './IndustryDetail.css'
 
 const IndustryDetail = () => {
@@ -56,18 +57,7 @@ const IndustryDetail = () => {
             </div>
           </div>
 
-          <figure className="idt-arch">
-            <figcaption className="idt-arch-title">Reference architecture</figcaption>
-            <ol className="idt-arch-flow">
-              {meta.pipeline.map(([label, desc], i) => (
-                <li key={label} style={{ animationDelay: `${i * 0.15}s` }}>
-                  <span className="idt-arch-n" aria-hidden="true">{i + 1}</span>
-                  <span><strong>{label}</strong><em>{desc}</em></span>
-                </li>
-              ))}
-            </ol>
-            <p className="idt-arch-note">Our starting point, adapted to the systems you already run.</p>
-          </figure>
+          <IndustryArtifact slug={slug} Icon={Icon} name={industry.name} />
         </div>
         <ul className="idt-stats">
           {industry.stats.map((s) => (
