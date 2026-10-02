@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './CoverArt.css'
 
 /* Cover illustrations for portfolio projects. One scene per category, coloured
@@ -114,9 +114,23 @@ const CoverArt = ({ category = 'web', seed = 1, className = '' }) => {
   const [dark, mid, light] = PALETTE[category] || PALETTE.web
   const Scene = SCENES[category] || Web
   const id = `ca-bg-${category}-${seed}`
+  const ref = useRef(null)
+  const [visible, setVisible] = useState(false)
+
+  // Only run the looping animations while the cover is on screen; many covers
+  // animating at once off-screen is wasted paint work and makes scrolling lag.
+  useEffect(() => {
+    const el = ref.current
+    if (!el || !('IntersectionObserver' in window)) { setVisible(true); return undefined }
+    const io = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { rootMargin: '50px' })
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
   return (
     <svg
-      className={`ca ${className}`}
+      ref={ref}
+      className={`ca ${visible ? '' : 'ca--idle'} ${className}`}
       viewBox="0 0 400 250"
       preserveAspectRatio="xMidYMid slice"
       role="presentation"

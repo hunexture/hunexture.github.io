@@ -18,7 +18,7 @@ const Footer = () => {
       }
     }
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
 
     // Check initial scroll position
     handleScroll()
