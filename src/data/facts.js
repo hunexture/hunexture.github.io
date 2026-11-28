@@ -77,7 +77,7 @@ export const buildOrganizationLd = () => {
     '@id': `${SITE_URL}/#organization`,
     name: f.name,
     url: SITE_URL,
-    logo: `${SITE_URL}/favicon.svg`,
+    logo: `${SITE_URL}/android-chrome-512x512.png`,
     image: `${SITE_URL}/og-image.png`,
     description: f.summary,
     email: f.contact.email,

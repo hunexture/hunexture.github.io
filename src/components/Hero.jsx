@@ -1,7 +1,12 @@
 import React from 'react'
 import { builtOnStack } from '../data/companyData'
 import HeroLiveDrawing from './HeroLiveDrawing'
+import HeroBackdrop from './HeroBackdrop'
 import './Hero.css'
+import './HeroMotion.css'
+
+// split so each word can animate in; the heading text stays unchanged
+const headline = ['AI', 'software,', 'engineered', 'to']
 
 // The delivery pipeline drawn as an engineering schematic.
 // Stages are a real sequence, so they are numbered.
@@ -14,11 +19,17 @@ const stages = [
 
 const Hero = () => (
   <section id="hero" className="bp-hero" aria-labelledby="hero-title">
+    <HeroBackdrop />
     <div className="bp-hero-inner">
       <div className="bp-hero-top">
         <div className="bp-hero-copy">
           <h1 id="hero-title" className="bp-hero-title">
-            AI software, engineered to <span className="hl-mark">spec.</span>
+            {headline.map((word, i) => (
+              <React.Fragment key={word}>
+                <span className="hm-word" style={{ '--w': i }}>{word}</span>{' '}
+              </React.Fragment>
+            ))}
+            <span className="hl-mark">spec.</span>
           </h1>
           <p className="bp-hero-lede">
             Hunexture designs, builds and runs AI-powered products for startups and growing
@@ -33,13 +44,20 @@ const Hero = () => (
           </p>
         </div>
 
-        <HeroLiveDrawing />
+        <div className="hm-visual">
+          <span className="hm-chip hm-chip--a" aria-hidden="true">Demo every 2 weeks</span>
+          <span className="hm-chip hm-chip--b" aria-hidden="true">You own the code</span>
+          <div className="hm-tilt">
+            <HeroLiveDrawing />
+          </div>
+        </div>
       </div>
 
       <figure className="bp-drawing" aria-label="How a project moves from discovery to delivery">
         <ol className="bp-stages">
           {stages.map((stage, i) => (
             <li key={stage.name} className="bp-stage" style={{ '--i': i }}>
+              <span className="bp-stage-glow" aria-hidden="true" />
               <span className="bp-stage-num" aria-hidden="true">{i + 1}</span>
               <span className="bp-stage-name">{stage.name}</span>
               <span className="bp-stage-note">{stage.note}</span>

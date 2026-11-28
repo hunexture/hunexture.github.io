@@ -79,7 +79,6 @@
 }
 
 /* staggered entrance */
-.bp-hero-title { animation: bp-fade-up 0.6s ease both; }
 .bp-hero-lede { animation: bp-fade-up 0.6s ease 0.08s both; }
 .bp-hero-actions { animation: bp-fade-up 0.6s ease 0.16s both; }
 .bp-hero-stack { animation: bp-fade-up 0.6s ease 0.24s both; }
@@ -389,7 +388,7 @@
     gap: 40px;
   }
 
-  .bp-hero-top .hl-figure {
+  .bp-hero-top .hm-visual {
     max-width: 560px;
   }
 

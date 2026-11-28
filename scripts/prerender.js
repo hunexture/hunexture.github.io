@@ -2,7 +2,8 @@
 //  1. Writes build/<route>/index.html for every route, with route-specific <head> tags,
 //     so crawlers get a 200 response and correct metadata without running JS
 //     (GitHub Pages otherwise serves the 404.html redirect for deep links).
-//  2. Generates sitemap.xml and points robots.txt at it.
+//  2. Generates sitemap.xml, robots.txt, llms.txt, llms-full.txt, per-route index.md
+//     and the Insights RSS feed.
 // Run automatically via the "postbuild" npm script.
 require('sucrase/register')
 
@@ -13,6 +14,7 @@ const buildDir = path.join(__dirname, '..', 'build')
 const { getAllSeoPages, getSeoForPath, buildJsonLd } = require('../src/seo/seoMeta')
 const { SITE_URL, contactDetails } = require('../src/data/companyData')
 const { getFacts, buildOrganizationLd } = require('../src/data/facts')
+const { articles } = require('../src/data/articles')
 const { buildDoc } = require('./siteContent')
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -24,7 +26,13 @@ const template = fs
 
 const setTag = (html, regex, replacement) => (regex.test(html) ? html.replace(regex, replacement) : html)
 
-const inline = (it) => (typeof it === 'string' ? esc(it) : `${it.b ? `<strong>${esc(it.b)}</strong>${it.t ? ': ' : ''}` : ''}${it.href ? `<a href="${esc(it.href)}">${esc(it.t || it.b)}</a>` : esc(it.t || '')}`)
+const inline = (it) => {
+  if (typeof it === 'string') return esc(it)
+  const a = (label) => `<a href="${esc(it.href)}">${esc(label)}</a>`
+  // the link text is the name when there is one, so crawlers see meaningful anchors
+  if (it.b) return `<strong>${it.href ? a(it.b) : esc(it.b)}</strong>${it.t ? `: ${esc(it.t)}` : ''}`
+  return it.href ? a(it.t) : esc(it.t || '')
+}
 const htmlBlocks = (blocks) =>
   blocks
     .map((b) => {
@@ -53,6 +61,8 @@ const mdBlocks = (blocks, shift = 0) =>
     .filter(Boolean)
     .join('\n\n')
 
+const markdownUrl = (route) => `${SITE_URL}${route === '/' ? '' : route}/index.md`
+
 const render = (seo, links) => {
   let html = template
   html = setTag(html, /<title>[\s\S]*?<\/title>/, `<title>${esc(seo.title)}</title>`)
@@ -65,18 +75,32 @@ const render = (seo, links) => {
   html = setTag(html, /<link rel="canonical" href="[^"]*"\s*\/?>/, `<link rel="canonical" href="${seo.url}" />`)
 
   const ld = `<script type="application/ld+json" data-route-ld>${JSON.stringify(buildJsonLd(seo))}</script>`
-  html = html.replace('</head>', `${ld}</head>`)
+  const alternates =
+    `<link rel="alternate" type="text/markdown" title="This page as Markdown" href="${markdownUrl(seo.path)}" />` +
+    `<link rel="alternate" type="text/plain" title="llms.txt" href="${SITE_URL}/llms.txt" />` +
+    `<link rel="alternate" type="application/rss+xml" title="Hunexture Insights" href="${SITE_URL}/feed.xml" />`
+  html = html.replace('</head>', () => `${alternates}${ld}</head>`)
 
   const nav = links
     .map((l) => `<li><a href="${l.path}">${esc(l.label)}</a></li>`)
     .join('')
-  const body = htmlBlocks(buildDoc(seo), 2)
-  const fallback =
-    `<noscript><main><h1>${esc(seo.h1)}</h1><p>${esc(seo.description)}</p>${body}` +
-    `<nav aria-label="Site"><ul>${nav}</ul></nav></main></noscript>`
+  const body = htmlBlocks(buildDoc(seo))
+  // The page text goes into #root as ordinary HTML (many crawlers and AI fetchers
+  // skip <noscript>). The loading screen covers it until React replaces it.
+  const content =
+    `<main class="prerender"><h1>${esc(seo.h1)}</h1><p>${esc(seo.description)}</p>${body}` +
+    `<nav aria-label="Site"><ul>${nav}</ul></nav></main>`
+  const root = '<div id="root">'
+  if (!html.includes(root)) throw new Error('prerender: #root not found in build/index.html')
   const bodyAt = html.indexOf('<body')
-  html = html.slice(0, bodyAt) + html.slice(bodyAt).replace(/<noscript>[\s\S]*?<\/noscript>/, fallback)
-  return html
+  // replacer functions: page text may contain "$", which replace() would expand
+  return (
+    html.slice(0, bodyAt) +
+    html
+      .slice(bodyAt)
+      .replace(/<noscript>[\s\S]*?<\/noscript>/, '')
+      .replace(root, () => root + content)
+  )
 }
 
 const mainLinks = [
@@ -119,7 +143,7 @@ fs.writeFileSync(
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`
 )
 
-const aiBots = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot-Extended', 'Bingbot', 'CCBot']
+const aiBots = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot-Extended', 'Applebot', 'Googlebot', 'Bingbot', 'CCBot', 'Amazonbot', 'meta-externalagent', 'MistralAI-User', 'DuckAssistBot']
 fs.writeFileSync(
   path.join(buildDir, 'robots.txt'),
   `# Hunexture welcomes search and AI crawlers.\n# Plain-language site summary for LLMs: ${SITE_URL}/llms.txt (full content: ${SITE_URL}/llms-full.txt)\n\nUser-agent: *\nAllow: /\n\n` +
@@ -128,7 +152,7 @@ fs.writeFileSync(
 )
 
 // llms.txt (llmstxt.org format): summary plus links to Markdown copies of each page.
-const md = (r) => `${SITE_URL}${r === '/' ? '' : r}/index.md`
+const md = markdownUrl
 const entry = (r) => `- [${pages[r].h1}](${md(r)}): ${pages[r].description}`
 const group = (title, prefix, extra = []) => {
   const rows = [...extra, ...routes.filter((r) => r.startsWith(prefix))]
@@ -153,4 +177,17 @@ const full =
   fullRoutes.map((r) => pageMarkdown(getSeoForPath(r), 1)).join('\n---\n\n')
 fs.writeFileSync(path.join(buildDir, 'llms-full.txt'), full)
 
-console.log(`SEO: prerendered ${routes.length} routes, wrote sitemap.xml, robots.txt, llms.txt, llms-full.txt and per-route index.md`)
+// feed.xml: RSS feed of the Insights articles, newest first.
+const items = [...articles]
+  .sort((a, b) => b.date.localeCompare(a.date))
+  .map((a) => {
+    const url = `${SITE_URL}/insights/${a.slug}/`
+    return `<item><title>${esc(a.title)}</title><link>${url}</link><guid>${url}</guid><pubDate>${new Date(`${a.date}T00:00:00Z`).toUTCString()}</pubDate><category>${esc(a.category)}</category><description>${esc(a.description)}</description></item>`
+  })
+  .join('\n')
+fs.writeFileSync(
+  path.join(buildDir, 'feed.xml'),
+  `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel>\n<title>Hunexture Insights</title>\n<link>${SITE_URL}/insights/</link>\n<description>${esc(pages['/insights'].description)}</description>\n<language>en</language>\n<atom:link href="${SITE_URL}/feed.xml" rel="self" type="application/rss+xml" />\n${items}\n</channel></rss>\n`
+)
+
+console.log(`SEO: prerendered ${routes.length} routes, wrote sitemap.xml, robots.txt, llms.txt, llms-full.txt, feed.xml and per-route index.md`)

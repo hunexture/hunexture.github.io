@@ -8,14 +8,17 @@ const Logo = ({ size = 'medium', variant = 'image', surface }) => {
 
   // If using image variant, render the logo image with theme-aware switching
   if (variant === 'image') {
-    // Use logo_for_white_back.png for white theme, logo_2.png for dark themes
+    // Web-sized copies of logo_for_white_back.png and logo_2.png
     const onLight = surface ? surface === 'light' : theme === 'white'
-    const logoSrc = `${process.env.PUBLIC_URL}/${onLight ? 'logo_for_white_back.png' : 'logo_2.png'}`
+    const file = onLight ? 'logo-on-light.webp' : 'logo-on-dark.webp'
 
     return (
       <div className={`hunexture-logo-image ${size}`}>
         <img
-          src={logoSrc}
+          src={`${process.env.PUBLIC_URL}/${file}`}
+          width="633"
+          height="120"
+          loading={onLight ? 'eager' : 'lazy'}
           alt="Hunexture"
           className="logo-img"
         />

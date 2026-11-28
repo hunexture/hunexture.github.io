@@ -14,7 +14,7 @@
   isolation: isolate;
 }
 
-/* soft breathing glow behind the illustration (indigo + mint) */
+/* soft static glow behind the illustration (indigo + mint) */
 .hl-figure::before {
   content: '';
   position: absolute;
@@ -22,16 +22,10 @@
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(circle at 30% 35%, var(--signal) 0%, transparent 60%),
-    radial-gradient(circle at 72% 70%, var(--accent) 0%, transparent 60%);
-  opacity: 0.25;
-  filter: blur(60px);
-  animation: hl-breathe 12s ease-in-out infinite;
-}
-
-@keyframes hl-breathe {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(2%, -2%) scale(1.06); }
+    /* each ellipse ends inside the box, so no hard edge shows without blur */
+    radial-gradient(30% 35% at 30% 35%, var(--signal) 0%, transparent 100%),
+    radial-gradient(28% 30% at 72% 70%, var(--accent) 0%, transparent 100%);
+  opacity: 0.2;
 }
 
 .hl-svg {

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useId, useRef, useState } from 'react'
 import './CoverArt.css'
 
 /* Cover illustrations for portfolio projects. One scene per category, coloured
@@ -113,7 +113,8 @@ const SCENES = { ai: Ai, web: Web, mobile: Mobile, cloud: Cloud, marketing: Mark
 const CoverArt = ({ category = 'web', seed = 1, className = '' }) => {
   const [dark, mid, light] = PALETTE[category] || PALETTE.web
   const Scene = SCENES[category] || Web
-  const id = `ca-bg-${category}-${seed}`
+  // unique per instance: the same artwork can appear twice on one page
+  const id = `ca-bg-${useId().replace(/:/g, '')}`
   const ref = useRef(null)
   const [visible, setVisible] = useState(false)
 

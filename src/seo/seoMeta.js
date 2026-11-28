@@ -190,6 +190,7 @@ export const buildJsonLd = (seo) => {
         description: seo.description,
         mainEntityOfPage: seo.url,
         image: seo.image,
+        ...(seo.datePublished && { datePublished: seo.datePublished }),
         author: { '@type': 'Organization', name: BRAND, url: SITE_URL },
         publisher: { '@type': 'Organization', name: BRAND, url: SITE_URL },
       })

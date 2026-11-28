@@ -59,3 +59,10 @@ jobs:
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
           commit_message: 'Deploy: ${{ github.event.head_commit.message }}'
+
+      # Ask search engines to re-read the pages. Only from the repo that serves
+      # hunexture.com, and never fails the deploy.
+      - name: Notify search engines (IndexNow)
+        if: github.repository == 'hunexture/hunexture.github.io'
+        continue-on-error: true
+        run: node scripts/indexnow.js

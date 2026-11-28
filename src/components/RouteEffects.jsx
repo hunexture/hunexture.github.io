@@ -22,7 +22,9 @@ export default function RouteEffects() {
       }
       tryScroll()
     } else {
-      window.scrollTo(0, 0)
+      // 'instant' overrides the global smooth scrolling, which would otherwise
+      // animate through the new page from wherever the old one was left
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
     }
   }, [pathname, hash])
 
@@ -112,14 +114,19 @@ export default function RouteEffects() {
           }
         })
       },
-      { rootMargin: '0px 0px -8% 0px', threshold: 0.08 }
+      // threshold must stay 0: with a ratio, blocks taller than the screen
+      // allows (long card grids on phones) never reach it and stay invisible
+      { rootMargin: '0px', threshold: 0 }
     )
 
+    // per effect run: a flag stored on the element would survive cleanup and
+    // leave it hidden because the next observer would skip it
+    const seen = new WeakSet()
     const sel = '[data-reveal],[data-reveal-stagger],[data-draw],[data-count]'
     const scan = () => {
       document.querySelectorAll(sel).forEach((el) => {
-        if (el.classList.contains('is-revealed') || el.__fxSeen) return
-        el.__fxSeen = true
+        if (el.classList.contains('is-revealed') || seen.has(el)) return
+        seen.add(el)
         if (el.hasAttribute('data-reveal-stagger')) stagger(el)
         if (el.hasAttribute('data-draw')) prepDraw(el)
         io.observe(el)

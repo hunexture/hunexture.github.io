@@ -56,7 +56,8 @@ const Portfolio = () => {
           ))}
         </div>
 
-        <ul className="pf-grid" data-reveal data-reveal-stagger>
+        {/* keyed so the cards animate in again after a filter change */}
+        <ul key={filter} className="pf-grid" data-reveal data-reveal-stagger>
           {shown.map((project) => (
             <li key={project.id}>
               <Link to={`/portfolio/${project.slug}`} className="pf-sheet" data-spotlight>

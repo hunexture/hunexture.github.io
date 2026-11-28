@@ -18,6 +18,7 @@ export const insightsDynamicPages = () => {
       h1: a.title,
       parent: { name: 'Insights', path: '/insights' },
       type: 'Article',
+      datePublished: a.date,
       body: [{ heading: 'In this article', items: a.sections.map((s) => s.heading) }],
     }
   })

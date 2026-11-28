@@ -1,5 +1,5 @@
-import React, { lazy, Suspense } from 'react'
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import React, { Suspense } from 'react'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import { ThemeProvider } from './context/ThemeContext'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -18,8 +18,13 @@ import RouteSeo from './components/RouteSeo'
 import RouteEffects from './components/RouteEffects'
 import ScrollProgress from './components/ScrollProgress'
 import BackToTop from './components/BackToTop'
+import ErrorBoundary from './components/ErrorBoundary'
+import TechMarquee from './components/TechMarquee'
+import NotFound from './components/NotFound'
+import lazy from './utils/lazyWithRetry'
 import './components/brand.css'
 import './App.css'
+import './components/HomeMotion.css'
 
 // Route-level code splitting (home, navbar, footer stay eager)
 const ServiceDetail = lazy(() => import('./components/ServiceDetail'))
@@ -40,12 +45,13 @@ const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'))
 const TermsOfService = lazy(() => import('./components/TermsOfService'))
 const CookiePolicy = lazy(() => import('./components/CookiePolicy'))
 
-const RouteFallback = () => <div aria-busy="true" style={{ minHeight: '70vh' }} />
+const RouteFallback = () => <div className="route-loading" aria-busy="true" aria-label="Loading page" />
 
 // Home page component
 const HomePage = () => (
-  <main id="main">
+  <main id="main" className="home">
     <Hero />
+    <TechMarquee />
     <About />
     <Services />
     <WorkingWithUs />
@@ -68,7 +74,9 @@ const Layout = ({ children }) => {
       <RouteEffects />
       <ScrollProgress />
       <Navbar />
-      <div key={location.pathname} className="page-enter">{children}</div>
+      <div key={location.pathname} className="page-enter">
+        <ErrorBoundary>{children}</ErrorBoundary>
+      </div>
       <Footer />
       <CookieBanner />
       <BackToTop />
@@ -79,39 +87,41 @@ const Layout = ({ children }) => {
 
 function App() {
   return (
-    <ThemeProvider>
-      <Router>
-        <Layout>
-          <Suspense fallback={<RouteFallback />}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/services" element={<ServicesList />} />
-            <Route path="/services/ai-solutions" element={<AISolutionsPage />} />
-            <Route path="/services/web-development" element={<WebDevelopmentPage />} />
-            <Route path="/services/app-development" element={<ServiceDetail serviceSlug="app-development" />} />
-            <Route path="/services/cloud-integration" element={<ServiceDetail serviceSlug="cloud-integration" />} />
-            <Route path="/services/uiux-design" element={<ServiceDetail serviceSlug="uiux-design" />} />
-            <Route path="/services/digital-marketing" element={<ServiceDetail serviceSlug="digital-marketing" />} />
-            <Route path="/services/:slug" element={<ServiceDetail />} />
-            <Route path="/portfolio" element={<PortfolioPage />} />
-            <Route path="/portfolio/:slug" element={<ProjectDetail />} />
-            <Route path="/industries" element={<IndustriesList />} />
-            <Route path="/industries/:slug" element={<IndustryDetail />} />
-            <Route path="/ai" element={<AIList />} />
-            <Route path="/ai/:slug" element={<AIDetail />} />
-            <Route path="/about/facts" element={<FactsPage />} />
-            <Route path="/business-profile" element={<BusinessProfile />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms-of-service" element={<TermsOfService />} />
-            <Route path="/cookie-policy" element={<CookiePolicy />} />
-            <Route path="/insights" element={<InsightsList />} />
-            <Route path="/insights/:slug" element={<InsightPost />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-          </Suspense>
-        </Layout>
-      </Router>
-    </ThemeProvider>
+    <ErrorBoundary>
+      <ThemeProvider>
+        <Router>
+          <Layout>
+            <Suspense fallback={<RouteFallback />}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/services" element={<ServicesList />} />
+              <Route path="/services/ai-solutions" element={<AISolutionsPage />} />
+              <Route path="/services/web-development" element={<WebDevelopmentPage />} />
+              <Route path="/services/app-development" element={<ServiceDetail serviceSlug="app-development" />} />
+              <Route path="/services/cloud-integration" element={<ServiceDetail serviceSlug="cloud-integration" />} />
+              <Route path="/services/uiux-design" element={<ServiceDetail serviceSlug="uiux-design" />} />
+              <Route path="/services/digital-marketing" element={<ServiceDetail serviceSlug="digital-marketing" />} />
+              <Route path="/services/:slug" element={<ServiceDetail />} />
+              <Route path="/portfolio" element={<PortfolioPage />} />
+              <Route path="/portfolio/:slug" element={<ProjectDetail />} />
+              <Route path="/industries" element={<IndustriesList />} />
+              <Route path="/industries/:slug" element={<IndustryDetail />} />
+              <Route path="/ai" element={<AIList />} />
+              <Route path="/ai/:slug" element={<AIDetail />} />
+              <Route path="/about/facts" element={<FactsPage />} />
+              <Route path="/business-profile" element={<BusinessProfile />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-of-service" element={<TermsOfService />} />
+              <Route path="/cookie-policy" element={<CookiePolicy />} />
+              <Route path="/insights" element={<InsightsList />} />
+              <Route path="/insights/:slug" element={<InsightPost />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            </Suspense>
+          </Layout>
+        </Router>
+      </ThemeProvider>
+    </ErrorBoundary>
   )
 }
 

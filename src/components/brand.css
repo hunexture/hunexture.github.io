@@ -101,7 +101,7 @@ h1.brand-title, h2.brand-title { line-height: 1.12; }
 .reveal-ready [data-reveal] {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: opacity 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
   will-change: opacity, transform;
 }
 .reveal-ready [data-reveal].is-revealed { opacity: 1; transform: none; will-change: auto; }
@@ -126,15 +126,17 @@ h1.brand-title, h2.brand-title { line-height: 1.12; }
 .reveal-ready [data-reveal="fade"] { transform: none; }
 .reveal-ready [data-reveal="wipe"] {
   opacity: 1; transform: none;
-  clip-path: inset(0 100% 0 0);
-  transition: clip-path 0.9s var(--ease-out);
+  /* keep a sliver unclipped: a fully clipped element never counts as
+     intersecting, so it would never be revealed */
+  clip-path: inset(0 99% 0 0);
+  transition: clip-path 0.7s var(--ease-out);
   will-change: clip-path;
 }
 .reveal-ready [data-reveal="wipe"].is-revealed { clip-path: inset(0 0 0 0); will-change: auto; }
 .reveal-ready [data-reveal-stagger] > * {
   opacity: 0; transform: translateY(16px);
-  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
-  transition-delay: calc(var(--i, 0) * 70ms);
+  transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 40ms);
 }
 .reveal-ready [data-reveal-stagger].is-revealed > * { opacity: 1; transform: none; }
 [data-count] { font-variant-numeric: tabular-nums; }
@@ -199,3 +201,16 @@ h1.brand-title, h2.brand-title { line-height: 1.12; }
   .back-to-top, .scroll-progress { transition: none; }
   .brand-link { transition: none; }
 }
+
+/* ── Loading + error states (never leave a blank screen) ─────────── */
+.route-loading { min-height: 70vh; display: flex; align-items: center; justify-content: center; }
+.route-loading::after {
+  content: ''; width: 36px; height: 36px; border-radius: 50%;
+  border: 3px solid var(--line); border-top-color: var(--signal);
+  opacity: 0; animation: route-spin 0.8s linear infinite, route-show 0.2s ease 0.2s forwards;
+}
+@keyframes route-spin { to { transform: rotate(360deg); } }
+@keyframes route-show { to { opacity: 1; } }
+.page-error { min-height: 70vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-4); padding: 96px 24px; text-align: center; color: var(--ink); }
+.page-error-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--space-4); }
+.page-error button { padding: 12px 24px; border: 0; border-radius: var(--radius-pill); background: var(--signal-deep); color: #fff; font: inherit; font-weight: 600; cursor: pointer; }

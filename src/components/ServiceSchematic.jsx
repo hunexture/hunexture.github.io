@@ -124,10 +124,13 @@ export const ServiceSchematic = ({ slug, className = '' }) => {
   useEffect(() => {
     const el = ref.current
     if (!el || typeof IntersectionObserver === 'undefined') { setSeen(true); return undefined }
+    // Inside a "wipe" panel the drawing starts out clipped, and a change of
+    // clip-path does not re-notify observers, so watch the panel itself.
+    const panel = el.closest('[data-reveal="wipe"]')
     const io = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) { setSeen(true); io.disconnect() }
-    }, { threshold: 0.35 })
-    io.observe(el)
+    }, { threshold: panel ? 0 : 0.35 })
+    io.observe(panel || el)
     return () => io.disconnect()
   }, [])
 
